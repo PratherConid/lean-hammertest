@@ -1,6 +1,7 @@
 import Auto.Tactic
 import Duper.Tactic
 
+set_option auto.duper true
 set_option auto.redMode "reducible"
 set_option trace.auto.lamReif.printResult true
 set_option trace.auto.lamReif.printValuation true
