@@ -1,4 +1,10 @@
-import Auto.Tactic
+import Hammertest.DuperInterface
+
+-- Standard Native Configs
+set_option trace.auto.native.printFormulas true
+set_option auto.native.solver.func "Auto.duperRaw"
+
+set_option auto.native true
 
 open Auto Embedding
 

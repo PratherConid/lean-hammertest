@@ -1,4 +1,10 @@
-import Auto.Tactic
+import Hammertest.DuperInterface
+
+-- Standard Native Configs
+set_option trace.auto.native.printFormulas true
+set_option auto.native.solver.func "Auto.duperRaw"
+
+set_option auto.native true
 
 open Auto Embedding
 
@@ -37,5 +43,5 @@ example
   (mul : ((α → α) → (α → α)) → ((α → α) → (α → α)) → ((α → α) → (α → α)))
   (Hmul : ∀ x y f, mul x y f = x (y f))
   (w₁ w₂ : ((α → α) → (α → α)) → ((α → α) → (α → α)) → ((α → α) → (α → α)))
-  (Hw₁₂ : (w₁ = w₂) = (w₂ = w₁)) : True := by 
+  (Hw₁₂ : (w₁ = w₂) = (w₂ = w₁)) : True := by
   auto [Hadd, Hmul, Hw₁₂]

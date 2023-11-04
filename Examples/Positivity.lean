@@ -15,11 +15,11 @@ This tactic proves goals of the form `0 ≤ a` and `0 < a`.
 -/
 
 open Function Nat NNReal ENNReal
+
 set_option auto.smt true
-set_option auto.smt.trust true
 set_option trace.auto.smt.printCommands true
 set_option trace.auto.smt.result true
-set_option auto.duper false
+set_option auto.smt.trust true
 
 variable {ι α β : Type _}
 

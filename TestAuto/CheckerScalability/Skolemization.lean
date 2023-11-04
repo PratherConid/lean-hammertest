@@ -1,10 +1,18 @@
 import Auto.Tactic
 import Duper.Tactic
 
+import Hammertest.DuperInterface
+
+-- Standard Native Configs
+set_option trace.auto.native.printFormulas true
+set_option auto.native.solver.func "Auto.duperRaw"
+
 set_option profiler true
 set_option auto.optimizeCheckerProof false
 set_option compiler.enableNew false
 set_option auto.checker.buildMode "indirectReduce_reflection"
+
+set_option auto.native true
 
 set_option trace.auto.lamReif.printProofs true
 theorem test

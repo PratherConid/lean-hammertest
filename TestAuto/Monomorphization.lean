@@ -7,19 +7,23 @@ import Mathlib.Data.Set.Function
 import Mathlib.Data.Polynomial.AlgebraMap
 import Mathlib.Order.Basic
 import Mathlib.RingTheory.Polynomial.Chebyshev
-import Auto.Tactic
+import Hammertest.DuperInterface
 
-
-set_option profiler true
+-- Standard TPTP Configs
 set_option trace.auto.tptp.printQuery true
 set_option trace.auto.tptp.result true
 set_option auto.tptp.solver.name "zeport"
 set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio/portfolio.fo.parallel.py"
+-- Standard SMT Configs
+set_option trace.auto.smt.printCommands true
+set_option trace.auto.smt.result true
+set_option auto.smt.solver.name "z3"
+-- Standard Native Configs
+set_option trace.auto.native.printFormulas true
+set_option auto.native.solver.func "Auto.duperRaw"
 
-set_option auto.duper true
+set_option auto.native true
 set_option auto.tptp true
-
-
 
 section SimpleClass
 
@@ -251,10 +255,8 @@ variable (square₁      : ∀ b, l (g₀ b) = g₁ (k b))
 
 open is_short_exact
 
-set_option auto.duper true
-set_option auto.redMode "reducible"
+set_option profiler true
 set_option trace.auto.lamReif.printProofs true
-set_option trace.auto.lamReif.printValuation true
 
 set_option auto.mono.saturationThreshold 500
 theorem short_five_mono (injh : Injective h) (injl : Injective l) :

@@ -1,8 +1,10 @@
 /-
 Problems in First Order Logic.
 -/
-import Auto.Tactic
-import Duper.Tactic
+import Hammertest.DuperInterface
+
+set_option auto.native true
+set_option auto.native.solver.func "Auto.duperRaw"
 
 -- From TPIL
 

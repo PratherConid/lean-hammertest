@@ -3,8 +3,10 @@ Examples in propositional logic.
 -/
 
 -- From TPIL
-import Auto.Tactic
-import Duper.Tactic
+import Hammertest.DuperInterface
+
+set_option auto.native true
+set_option auto.native.solver.func "Auto.duperRaw"
 
 section
 variable (P Q R S : Prop)

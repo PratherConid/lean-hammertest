@@ -1,8 +1,7 @@
 import Mathlib.Tactic
 import Mathlib.Data.Set.Lattice
 import Mathlib.Data.Set.Function
-import Auto.Tactic
-import Duper.Tactic
+import Hammertest.DuperInterface
 
 /-
 Taken from Mathematics in Lean. The solutions use definitional equality, so for a first-order
@@ -14,6 +13,8 @@ set_option trace.auto.tptp.result true
 set_option auto.tptp.solver.name "zeport"
 set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio/portfolio.fo.parallel.py"
 
+set_option auto.native true
+set_option auto.native.solver.func "Auto.duperRaw"
 
 section
 

@@ -1,9 +1,15 @@
-import Auto.Tactic
+import Hammertest.DuperInterface
+
+-- Standard Native Configs
+set_option trace.auto.native.printFormulas true
+set_option auto.native.solver.func "Auto.duperRaw"
+
+set_option auto.native true
 
 axiom Real : Type
-axiom dist : Real → Real → Real 
-axiom add : Real → Real → Real 
-axiom lt : Real → Real → Prop 
+axiom dist : Real → Real → Real
+axiom add : Real → Real → Real
+axiom lt : Real → Real → Prop
 axiom zero : Real
 axiom one : Real
 axiom dist_self (a : Real) : dist a a = zero

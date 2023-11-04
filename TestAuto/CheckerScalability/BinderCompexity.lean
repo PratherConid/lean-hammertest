@@ -1,9 +1,14 @@
-import Auto.Tactic
-import Duper.Tactic
+import Hammertest.DuperInterface
+
+-- Standard Native Configs
+set_option trace.auto.native.printFormulas true
+set_option auto.native.solver.func "Auto.duperRaw"
 
 set_option profiler true
 set_option trace.auto.buildChecker true
 set_option auto.optimizeCheckerProof false
+
+set_option auto.native true
 
 -- Testing whether binders can cause quadratic complexity
 

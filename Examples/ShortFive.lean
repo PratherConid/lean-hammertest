@@ -1,8 +1,13 @@
 import Mathlib.Tactic
 import Mathlib.Data.Set.Lattice
 import Mathlib.Data.Set.Function
-import Auto.Tactic
-import Duper.Tactic
+import Hammertest.DuperInterface
+
+-- Standard Native Configs
+set_option trace.auto.native.printFormulas true
+set_option auto.native.solver.func "Auto.duperRaw"
+
+set_option auto.native true
 
 /-
 It would be great if `short_five_mono` and `short_five_epi` could be proved fully automatically

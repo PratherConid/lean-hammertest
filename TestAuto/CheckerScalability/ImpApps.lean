@@ -1,8 +1,13 @@
-import Auto.Tactic
-import Duper.Tactic
+import Hammertest.DuperInterface
+
+-- Standard Native Configs
+set_option trace.auto.native.printFormulas true
+set_option auto.native.solver.func "Auto.duperRaw"
 
 set_option profiler true
 set_option compiler.enableNew false
+
+set_option auto.native true
 
 partial def chopList (s : List α) (n : Nat) : List (List α) :=
   if n == 0 then
