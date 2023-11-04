@@ -284,6 +284,13 @@ example (a b c : Nat) :
   a * (b + c) = b * a + a * c := by
   auto [Nat.add_comm, Nat.mul_comm, Nat.add_mul]
 
+set_option auto.tptp true in
+set_option auto.duper false in
+example (f : (Nat → Nat → Prop) → Prop)
+  (h : ∀ (p : Nat → Nat → Prop), (∀ x, p x x) → f p) : f (fun x y => x = y) := by
+  try auto [h]
+  apply h; intro; rfl
+
 -- Binders in the goal
 
 example : 2 = 3 → 2 = 3 := by auto
