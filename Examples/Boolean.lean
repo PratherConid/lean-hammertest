@@ -1,8 +1,10 @@
 /-
 Reasoning with Bool.
 -/
-import Auto.Tactic
-import Duper.Tactic
+import Hammertest.DuperInterface
+
+set_option auto.native true
+set_option auto.native.solver.func "Auto.duperRaw"
 
 example : ∀ b1 b2, (b1 && b2) = false ↔ (b1 = false ∨ b2 = false) := by auto
 example : ∀ b1 b2, (b1 && b2) = true ↔ (b1 = true ∧ b2 = true) := by auto

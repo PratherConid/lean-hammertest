@@ -5,12 +5,13 @@ that out.
 import Mathlib.Data.Set.Intervals.Basic
 import Mathlib.Data.Real.Basic
 import Mathlib.Data.Nat.Prime
-import Auto.Tactic
-import Duper.Tactic
+import Hammertest.DuperInterface
 
 open Set
 
-set_option auto.duper true
+set_option auto.native true
+set_option auto.native.solver.func "Auto.duperRaw"
+
 set_option auto.tptp true
 set_option trace.auto.tptp.printQuery true
 set_option trace.auto.tptp.result true

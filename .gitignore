@@ -3,3 +3,4 @@
 /lake-packages
 !/lean_packages/manifest.json
 /lakefile.olean
+/.zeport_ignore

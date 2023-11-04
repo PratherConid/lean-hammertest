@@ -1,15 +1,23 @@
-import Auto.Tactic
-import Duper.Tactic
+import Hammertest.DuperInterface
 
-set_option auto.duper true
+-- Standard Preprocessing Configs
 set_option auto.redMode "reducible"
-set_option trace.auto.lamReif.printResult true
-set_option trace.auto.lamReif.printValuation true
-
+-- Standard TPTP Configs
 set_option trace.auto.tptp.printQuery true
 set_option trace.auto.tptp.result true
 set_option auto.tptp.solver.name "zeport"
 set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio/portfolio.fo.parallel.py"
+-- Standard SMT Configs
+set_option trace.auto.smt.printCommands true
+set_option trace.auto.smt.result true
+set_option auto.smt.solver.name "z3"
+-- Standard Native Configs
+set_option trace.auto.native.printFormulas true
+set_option auto.native.solver.func "Auto.duperRaw"
+
+set_option auto.native true
+set_option trace.auto.lamReif.printResult true
+set_option trace.auto.lamReif.printValuation true
 
 -- Manual Check
 
@@ -285,7 +293,7 @@ example (a b c : Nat) :
   auto [Nat.add_comm, Nat.mul_comm, Nat.add_mul]
 
 set_option auto.tptp true in
-set_option auto.duper false in
+set_option auto.native false in
 example (f : (Nat → Nat → Prop) → Prop)
   (h : ∀ (p : Nat → Nat → Prop), (∀ x, p x x) → f p) : f (fun x y => x = y) := by
   try auto [h]

@@ -6,19 +6,25 @@ These are adapted from Mathematics in Lean. The relevant definitions are in the 
 -/
 import Mathlib.Data.Nat.Prime
 import Mathlib.Data.Set.Lattice
-import Auto.Tactic
-import Duper.Tactic
+import Hammertest.DuperInterface
 
 open Set
 
-set_option auto.smt true
-set_option trace.auto.smt.printCommands true
-set_option trace.auto.smt.result true
-
+-- Standard TPTP Configs
 set_option trace.auto.tptp.printQuery true
 set_option trace.auto.tptp.result true
 set_option auto.tptp.solver.name "zeport"
 set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio/portfolio.fo.parallel.py"
+-- Standard SMT Configs
+set_option trace.auto.smt.printCommands true
+set_option trace.auto.smt.result true
+set_option auto.smt.solver.name "z3"
+-- Standard Native Configs
+set_option trace.auto.native.printFormulas true
+set_option auto.native.solver.func "Auto.duperPort"
+
+set_option auto.tptp true
+set_option auto.native true
 
 variable {α β : Type _}
 
