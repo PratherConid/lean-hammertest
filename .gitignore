@@ -3,4 +3,3 @@
 /lake-packages
 !/lean_packages/manifest.json
 /lakefile.olean
-/lake-manifest.json

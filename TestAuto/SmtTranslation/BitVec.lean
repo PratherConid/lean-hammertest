@@ -30,6 +30,9 @@ example : (2 : BitVec 7).rotateRight 3 = (0x20 : BitVec 7) := by
 example (x : BitVec 15) : x.rotateLeft 3 = x.rotateRight 12 := by
   auto
 
+example : (extractLsb 127 64 a ++ extractLsb 63 0 a) = a := by
+  auto
+
 example :
   434#8 >>> 4 = 0x0b#8 ∧ 434#8 >>> 4#5 = 0x0b#8 ∧
   34#8 >>> 4 = 0x02#8 ∧ 34#8 >>> 4#12 = 0x02#8 ∧

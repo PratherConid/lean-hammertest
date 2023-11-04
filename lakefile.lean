@@ -5,14 +5,12 @@ package hammertest {
   -- add package configuration options here
 }
 
+require auto from "../lean-auto/"
+
+require Duper from "../duper/"
+
 require mathlib from git
   "https://github.com/leanprover-community/mathlib4.git"
-
-require Duper from git
-  "https://github.com/leanprover-community/duper.git"
-
-require auto from git
-  "https://github.com/avigad/lean-auto"
 
 lean_lib Hammertest {
   -- add library configuration options here
