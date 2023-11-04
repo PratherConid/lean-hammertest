@@ -36,35 +36,68 @@ variable (s t u : Set α)
 #check mem_union
 #check Set.ext
 
--- Blocking duper so that examples run faster
--- Duper succeeds on one of the following examples
-
+-- auto (raw duper)             : Success
+-- auto (portfolio duper)       : Success
+-- mononative (raw duper)       : Timeout
+-- mononative (portfolio duper) : Timeout
 example (h : s ⊆ t) : s ∩ u ⊆ t ∩ u := by
   auto [mem_inter_iff, subset_def, h]
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
+-- mononative (raw duper)       : Timeout
+-- mononative (portfolio duper) : Timeout
 example : s ∩ (t ∪ u) ⊆ s ∩ t ∪ s ∩ u := by
   auto [mem_inter_iff, mem_union, subset_def]
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
+-- mononative (raw duper)       : Timeout
+-- mononative (portfolio duper) : Timeout
 example : s ∩ t ∪ s ∩ u ⊆ s ∩ (t ∪ u) := by
   auto [mem_inter_iff, mem_union, subset_def]
 
 #check mem_diff
 
+-- auto (raw duper)             : Success
+-- auto (portfolio duper)       : Timeout
+-- mononative (raw duper)       : Timeout
+-- mononative (portfolio duper) : Timeout
 example : (s \ t) \ u ⊆ s \ (t ∪ u) := by
   auto [mem_diff, mem_union, subset_def]
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
+-- mononative (raw duper)       : Timeout
+-- mononative (portfolio duper) : Timeout
 example : s ∩ t = t ∩ s := by
   auto [Set.ext, mem_inter_iff]
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
+-- mononative (raw duper)       : Timeout
+-- mononative (portfolio duper) : Timeout
 example : s ∩ (s ∪ t) = s := by
   auto [Set.ext, mem_union, mem_inter_iff]
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
+-- mononative (raw duper)       : Timeout
+-- mononative (portfolio duper) : Timeout
 example : s ∪ s ∩ t = s := by
   auto [Set.ext, mem_union, mem_inter_iff]
 
+-- auto (raw duper)             : Success
+-- auto (portfolio duper)       : Success
+-- mononative (raw duper)       : Success
+-- mononative (portfolio duper) : Success
 example : s \ t ∪ t = s ∪ t := by
   apply Set.ext; auto [mem_union, mem_diff]
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
+-- mononative (raw duper)       : Timeout
+-- mononative (portfolio duper) : Timeout
 example : s \ t ∪ t \ s = (s ∪ t) \ (s ∩ t) := by
   apply Set.ext; auto [mem_union, mem_inter_iff, mem_diff]
 
@@ -76,6 +109,10 @@ def evens : Set ℕ :=
 def odds : Set ℕ :=
   { n | ¬Even n }
 
+-- auto (raw duper)             : Success
+-- auto (portfolio duper)       : Success
+-- mononative (raw duper)       : Timeout
+-- mononative (portfolio duper) : Timeout
 set_option auto.redMode "all" in
 example : evens ∪ odds = univ := by
   auto
@@ -83,10 +120,18 @@ example : evens ∪ odds = univ := by
 #check mem_empty_iff_false
 #check mem_univ
 
+-- auto (raw duper)             : Success
+-- auto (portfolio duper)       : Success
+-- mononative (raw duper)       : Success
+-- mononative (portfolio duper) : Success
 set_option auto.redMode "all" in
 example (x : ℕ) (h : x ∈ (∅ : Set ℕ)) : False := by
   auto
 
+-- auto (raw duper)             : Success
+-- auto (portfolio duper)       : Success
+-- mononative (raw duper)       : Success
+-- mononative (portfolio duper) : Success
 set_option auto.redMode "all" in
 example (x : ℕ) : x ∈ (univ : Set ℕ) := by
   auto
@@ -99,18 +144,34 @@ end
 section
 variable (s t : Set ℕ)
 
+-- auto (raw duper)             : Success
+-- auto (portfolio duper)       : Success
+-- mononative (raw duper)       : Success
+-- mononative (portfolio duper) : Success
 example (h₀ : ∀ x ∈ s, ¬Even x) (h₁ : ∀ x ∈ s, Prime x) : ∀ x ∈ s, ¬Even x ∧ Prime x := by
   auto [h₀, h₁]
 
+-- auto (raw duper)             : Success
+-- auto (portfolio duper)       : Success
+-- mononative (raw duper)       : Success
+-- mononative (portfolio duper) : Success
 example (h : ∃ x ∈ s, ¬Even x ∧ Prime x) : ∃ x ∈ s, Prime x := by
   auto [h]
 
 section
 variable (ssubt : s ⊆ t)
 
+-- auto (raw duper)             : Success
+-- auto (portfolio duper)       : Success
+-- mononative (raw duper)       : Success
+-- mononative (portfolio duper) : Success
 example (h₀ : ∀ x ∈ t, ¬Even x) (h₁ : ∀ x ∈ t, Prime x) : ∀ x ∈ s, ¬Even x ∧ Prime x := by
   auto [h₀, h₁, ssubt, subset_def]
 
+-- auto (raw duper)             : Success
+-- auto (portfolio duper)       : Success
+-- mononative (raw duper)       : Success
+-- mononative (portfolio duper) : Success
 example (h : ∃ x ∈ s, ¬Even x ∧ Prime x) : ∃ x ∈ t, Prime x := by
   auto [h, ssubt, subset_def]
 
@@ -128,20 +189,34 @@ open Set
 #check mem_iUnion
 #check mem_iInter
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
+-- mononative (raw duper)       : Timeout
+-- mononative (portfolio duper) : Timeout
 example : (s ∩ ⋃ i, A i) = ⋃ i, A i ∩ s := by
   apply Set.ext; auto [mem_inter_iff, mem_iUnion]
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
+-- mononative (raw duper)       : Timeout
+-- mononative (portfolio duper) : Timeout
 example : (⋂ i, A i ∩ B i) = (⋂ i, A i) ∩ ⋂ i, B i := by
   apply Set.ext; auto [mem_inter_iff, mem_iInter]
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
+-- mononative (raw duper)       : Timeout
+-- mononative (portfolio duper) : Timeout
 example : (s ∪ ⋂ i, A i) = ⋂ i, A i ∪ s := by
   apply Set.ext; auto [mem_union, mem_iInter]
 
 def primeset : Set ℕ :=
   { x | Nat.Prime x }
 
-set_option maxHeartbeats 10000 in
-set_option trace.auto.lamReif.printResult true in
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
+-- mononative (raw duper)       : Timeout
+-- mononative (portfolio duper) : Timeout
 example : (⋃ p ∈ primeset, { x | p ^ 2 ∣ x }) = { x | ∃ p ∈ primeset, p ^ 2 ∣ x } := by
   apply Set.ext; intro x
   rw [mem_iUnion]; conv => enter [1, 1, i]; rw [mem_iUnion]
