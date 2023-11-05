@@ -11,9 +11,8 @@ prover we need to add axioms to unfold the definitions.
 set_option auto.tptp true
 set_option trace.auto.tptp.result true
 set_option auto.tptp.solver.name "zeport"
-set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio/portfolio.fo.parallel.py"
+set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio/portfolio.lams.parallel.py"
 
-set_option auto.native true
 set_option auto.native.solver.func "Auto.duperRaw"
 
 section
@@ -156,7 +155,7 @@ example : (f '' ⋃ i, A i) = ⋃ i, f '' A i := by
   exact ⟨x, ⟨i, xAi⟩, fxeq⟩
 
 example : (f '' ⋃ i, A i) = ⋃ i, f '' A i := by
-  ext y; simp; apply Iff.intro <;> auto
+  ext y; simp; auto
 
 example : (f '' ⋂ i, A i) ⊆ ⋂ i, f '' A i := by
   intro y; simp

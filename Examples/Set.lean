@@ -14,7 +14,7 @@ open Set
 set_option trace.auto.tptp.printQuery true
 set_option trace.auto.tptp.result true
 set_option auto.tptp.solver.name "zeport"
-set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio/portfolio.fo.parallel.py"
+set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio/portfolio.lams.parallel.py"
 -- Standard SMT Configs
 set_option trace.auto.smt.printCommands true
 set_option trace.auto.smt.result true
@@ -230,7 +230,7 @@ example : (s ∪ ⋂ i, A i) = ⋂ i, A i ∪ s := by
 def primeset : Set ℕ :=
   { x | Nat.Prime x }
 
--- zipperposition               : Success
+-- zipperposition               : Timeout
 -- auto (raw duper)             : Timeout
 -- auto (portfolio duper)       : Timeout
 example : (⋃ p ∈ primeset, { x | p ^ 2 ∣ x }) = { x | ∃ p ∈ primeset, p ^ 2 ∣ x } := by

@@ -5,7 +5,7 @@ import Hammertest.DuperInterface
 set_option trace.auto.tptp.printQuery true
 set_option trace.auto.tptp.result true
 set_option auto.tptp.solver.name "zeport"
-set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio/portfolio.fo.parallel.py"
+set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio/portfolio.lams.parallel.py"
 -- Standard Native Configs
 set_option trace.auto.native.printFormulas true
 set_option auto.native.solver.func "Auto.duperRaw"
