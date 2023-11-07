@@ -292,6 +292,24 @@ example (a b c : Nat) :
   a * (b + c) = b * a + a * c := by
   auto [Nat.add_comm, Nat.mul_comm, Nat.add_mul]
 
+example
+  (iota : Type) (inh : iota)
+  (subset : iota → iota → Prop)
+  (empty_set: iota)
+  (hd10_xboole_0: ∀ (A B : iota), A = B ↔ subset A B ∧ subset B A)
+  (ht2_xboole_1: ∀ (A : iota), subset empty_set A)
+  (ht3_xboole_1: ¬∀ (A : iota), subset A empty_set → A = empty_set) :
+  False := by mononative [*]
+
+example
+  (iota : Type) (inh : iota)
+  (subset : iota → iota → Prop)
+  (empty_set: iota)
+  (hd10_xboole_0: ∀ (A B : iota), A = B ↔ subset A B ∧ subset B A)
+  (ht2_xboole_1: ∀ (A : iota), subset empty_set A)
+  (ht3_xboole_1: ¬∀ (A : iota), subset A empty_set → A = empty_set) :
+  False := by auto [*]
+
 set_option auto.tptp true in
 set_option auto.native false in
 example (f : (Nat → Nat → Prop) → Prop)
