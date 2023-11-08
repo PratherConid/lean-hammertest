@@ -12,8 +12,8 @@ import Hammertest.DuperInterface
 -- Standard TPTP Configs
 set_option trace.auto.tptp.printQuery true
 set_option trace.auto.tptp.result true
-set_option auto.tptp.solver.name "zeport"
-set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio/portfolio.lams.parallel.py"
+set_option auto.tptp.solver.name "zeport-fo"
+set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio"
 -- Standard SMT Configs
 set_option trace.auto.smt.printCommands true
 set_option trace.auto.smt.result true
@@ -68,27 +68,33 @@ example (a b : ℝ) (h1 : a < b) : (∃ c, a < c ∧ c < b) := by
 example (a e : ℝ) (h1 : a < e) : (∃ b c d, a < b ∧ b < c ∧ c < d ∧ d < e) := by
   auto [DenselyOrdered.dense, h1]
 
+set_option auto.native false in
 set_option trace.auto.printLemmas true in
 example (a b c d : ℝ) (h1 : a < b) :
   Set.Icc a b ⊆ Set.Ico c d ↔ c ≤ a ∧ b < d := by
   rw [Set.subset_def]
   auto [Set.mem_Icc, Set.mem_Ico, @le_trans, @le_total, @lt_iff_not_le, h1]
 
+set_option auto.native false in
 set_option trace.auto.smt.result true in
 example (a b c d : ℝ) (h1 : a < b) : Set.Icc a b ⊆ Set.Ico c d ↔ c ≤ a ∧ b < d := by
   rw [Set.subset_def]
   auto [Set.mem_Icc, Set.mem_Ico, @le_trans, @le_total, @lt_iff_not_le, h1]
 
+set_option auto.native false in
 set_option trace.auto.lamReif.printValuation true in
 example : f '' s ⊆ v ↔ s ⊆ f ⁻¹' v := by
   auto [Set.subset_def, Set.mem_image, Set.mem_preimage]
 
+set_option auto.native false in
 example (h : Function.Injective f) : f ⁻¹' (f '' s) ⊆ s := by
   auto [Set.subset_def, Set.mem_preimage, Function.Injective.mem_set_image, h]
 
+set_option auto.native false in
 example : f '' (f ⁻¹' u) ⊆ u := by
   auto [Set.subset_def, Set.mem_image, Set.mem_preimage]
 
+set_option auto.native false in
 example (h : Function.Surjective f) : u ⊆ f '' (f ⁻¹' u) := by
   auto [Set.subset_def, Set.mem_image, Set.mem_preimage, h] d[Function.Surjective]
 

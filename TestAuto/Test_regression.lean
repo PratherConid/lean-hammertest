@@ -1,12 +1,13 @@
 import Hammertest.DuperInterface
+import Duper.TPTP
 
 -- Standard Preprocessing Configs
 set_option auto.redMode "reducible"
 -- Standard TPTP Configs
 set_option trace.auto.tptp.printQuery true
 set_option trace.auto.tptp.result true
-set_option auto.tptp.solver.name "zeport"
-set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio/portfolio.lams.parallel.py"
+set_option auto.tptp.solver.name "zeport-fo"
+set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio"
 -- Standard SMT Configs
 set_option trace.auto.smt.printCommands true
 set_option trace.auto.smt.result true
@@ -292,23 +293,11 @@ example (a b c : Nat) :
   a * (b + c) = b * a + a * c := by
   auto [Nat.add_comm, Nat.mul_comm, Nat.add_mul]
 
-example
-  (iota : Type) (inh : iota)
-  (subset : iota → iota → Prop)
-  (empty_set: iota)
-  (hd10_xboole_0: ∀ (A B : iota), A = B ↔ subset A B ∧ subset B A)
-  (ht2_xboole_1: ∀ (A : iota), subset empty_set A)
-  (ht3_xboole_1: ¬∀ (A : iota), subset A empty_set → A = empty_set) :
-  False := by mononative [*]
+tptp SEU123_1 "../TPTP-v8.0.0/Problems/SEU/SEU123+1.p"
+  by auto [*]
 
-example
-  (iota : Type) (inh : iota)
-  (subset : iota → iota → Prop)
-  (empty_set: iota)
-  (hd10_xboole_0: ∀ (A B : iota), A = B ↔ subset A B ∧ subset B A)
-  (ht2_xboole_1: ∀ (A : iota), subset empty_set A)
-  (ht3_xboole_1: ¬∀ (A : iota), subset A empty_set → A = empty_set) :
-  False := by auto [*]
+tptp SEU123_2 "../TPTP-v8.0.0/Problems/SEU/SEU123+1.p"
+  by mononative [*]
 
 set_option auto.tptp true in
 set_option auto.native false in
