@@ -9,11 +9,15 @@ prover we need to add axioms to unfold the definitions.
 -/
 
 set_option auto.tptp true
-set_option trace.auto.tptp.result true
+set_option trace.auto.tptp.printProof true
+set_option trace.auto.tptp.printQuery true
 set_option auto.tptp.solver.name "zeport-fo"
 set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio"
 
 set_option auto.native.solver.func "Auto.duperRaw"
+
+set_option auto.native true
+set_option trace.auto.tptp.premiseSelection false
 
 section
 
@@ -35,6 +39,8 @@ example : f '' s ⊆ v ↔ s ⊆ f ⁻¹' v := by
   rw [← fxeq]
   apply h xs
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
 example : f '' s ⊆ v ↔ s ⊆ f ⁻¹' v := by
   auto [subset_def, mem_image, mem_preimage]
 
@@ -43,6 +49,8 @@ example (h : Injective f) : f ⁻¹' (f '' s) ⊆ s := by
   rw [← h fxeq]
   exact ys
 
+-- auto (raw duper)             : Succeed
+-- auto (portfolio duper)       : Succeed
 example (h : Injective f) : f ⁻¹' (f '' s) ⊆ s := by
   auto [subset_def, mem_preimage, Injective.mem_set_image, h]
 
@@ -50,6 +58,8 @@ example : f '' (f ⁻¹' u) ⊆ u := by
   rintro y ⟨x, xmem, rfl⟩
   exact xmem
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
 example : f '' (f ⁻¹' u) ⊆ u := by
   auto [subset_def, mem_image, mem_preimage]
 
@@ -63,6 +73,8 @@ example (h : Surjective f) : u ⊆ f '' (f ⁻¹' u) := by
     exact yu
   exact fxeq
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
 example (h : Surjective f) : u ⊆ f '' (f ⁻¹' u) := by
   auto [subset_def, mem_image, mem_preimage, h] d[Surjective]
 
@@ -70,17 +82,23 @@ example (h : s ⊆ t) : f '' s ⊆ f '' t := by
   rintro y ⟨x, xs, fxeq⟩
   use x, h xs
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
 example (h : s ⊆ t) : f '' s ⊆ f '' t := by
   auto [subset_def, mem_image, h]
 
 example (h : u ⊆ v) : f ⁻¹' u ⊆ f ⁻¹' v := by
   intro x; apply h
 
+-- auto (raw duper)             : Succeed
+-- auto (portfolio duper)       : Succeed
 example (h : u ⊆ v) : f ⁻¹' u ⊆ f ⁻¹' v := by
   auto [subset_def, mem_preimage, h]
 
 example : f ⁻¹' (u ∪ v) = f ⁻¹' u ∪ f ⁻¹' v := rfl
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
 example : f ⁻¹' (u ∪ v) = f ⁻¹' u ∪ f ⁻¹' v := by
   ext x; auto [mem_union, mem_preimage]
 
@@ -90,6 +108,8 @@ example : f '' (s ∩ t) ⊆ f '' s ∩ f '' t := by
   . use x, xs
   . use x, xt
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
 example : f '' (s ∩ t) ⊆ f '' s ∩ f '' t := by
   auto [mem_inter_iff, subset_def, mem_image]
 
@@ -102,12 +122,16 @@ example (h : Injective f) : f '' s ∩ f '' t ⊆ f '' (s ∩ t) := by
     exact x₂t
   . rfl
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
 example : f '' s \ f '' t ⊆ f '' (s \ t) := by
   intro x; auto [mem_image, mem_diff]
 
 example : f ⁻¹' u \ f ⁻¹' v ⊆ f ⁻¹' (u \ v) :=
   fun x ↦ id
 
+-- auto (raw duper)             : Succeed
+-- auto (portfolio duper)       : Succeed
 example : f ⁻¹' u \ f ⁻¹' v ⊆ f ⁻¹' (u \ v) := by
   intro x; auto [mem_preimage, mem_diff]
 
@@ -118,6 +142,8 @@ example : f '' s ∩ v = f '' (s ∩ f ⁻¹' v) := by
   rintro ⟨x, ⟨⟨xs, fxv⟩, rfl⟩⟩
   exact ⟨⟨x, xs, rfl⟩, fxv⟩
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
 example : f '' s ∩ v = f '' (s ∩ f ⁻¹' v) := by
   ext y; auto [mem_inter_iff, mem_image, mem_preimage]
 
@@ -125,6 +151,8 @@ example : f '' (s ∩ f ⁻¹' u) ⊆ f '' s ∩ u := by
   rintro y ⟨x, ⟨xs, fxu⟩, rfl⟩
   exact ⟨⟨x, xs, rfl⟩, fxu⟩
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
 example : f '' (s ∩ f ⁻¹' u) ⊆ f '' s ∩ u := by
   intro x; auto [mem_inter_iff, mem_image, mem_preimage]
 
@@ -132,6 +160,8 @@ example : s ∩ f ⁻¹' u ⊆ f ⁻¹' (f '' s ∩ u) := by
   rintro x ⟨xs, fxu⟩
   exact ⟨⟨x, xs, rfl⟩, fxu⟩
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Succeed
 example : s ∩ f ⁻¹' u ⊆ f ⁻¹' (f '' s ∩ u) := by
   intro x; auto [mem_inter_iff, mem_image, mem_preimage]
 
@@ -141,6 +171,8 @@ example : s ∪ f ⁻¹' u ⊆ f ⁻¹' (f '' s ∪ u) := by
     exact ⟨x, xs, rfl⟩
   right; exact fxu
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Succeed
 example : s ∪ f ⁻¹' u ⊆ f ⁻¹' (f '' s ∪ u) := by
   intro x; auto [mem_union, mem_image, mem_preimage]
 
@@ -154,6 +186,8 @@ example : (f '' ⋃ i, A i) = ⋃ i, f '' A i := by
   rintro ⟨i, x, xAi, fxeq⟩
   exact ⟨x, ⟨i, xAi⟩, fxeq⟩
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
 example : (f '' ⋃ i, A i) = ⋃ i, f '' A i := by
   ext y; simp; auto
 
@@ -163,6 +197,8 @@ example : (f '' ⋂ i, A i) ⊆ ⋂ i, f '' A i := by
   use x
   exact ⟨h i, fxeq⟩
 
+-- auto (raw duper)             : Succeed
+-- auto (portfolio duper)       : Succeed
 example : (f '' ⋂ i, A i) ⊆ ⋂ i, f '' A i := by
   intro y; simp; auto
 
@@ -179,6 +215,8 @@ example (i : I) (injf : Injective f) : (⋂ i, f '' A i) ⊆ f '' ⋂ i, A i := 
     exact x'Ai
   exact fxeq
 
+-- auto (raw duper)             : Succeed
+-- auto (portfolio duper)       : Succeed
 example (i : I) (injf : Injective f) : (⋂ i, f '' A i) ⊆ f '' ⋂ i, A i := by
   intro y; simp; auto [injf] d[Injective]
 
@@ -203,6 +241,8 @@ example : InjOn sqrt { x | x ≥ 0 } := by
     _ = sqrt y ^ 2 := by rw [e]
     _ = y := by rw [sq_sqrt ynonneg]
 
+-- auto (raw duper)             : Succeed
+-- auto (portfolio duper)       : Succeed
 example : InjOn sqrt { x | x ≥ 0 } := by
   intro x xnonneg y ynonneg; dsimp at *
   auto [xnonneg, ynonneg, sq_sqrt]
@@ -215,7 +255,8 @@ example : InjOn (fun x ↦ x ^ 2) { x : ℝ | x ≥ 0 } := by
     _ = sqrt (y ^ 2) := by rw [e]
     _ = y := by rw [sqrt_sq ynonneg]
 
-set_option trace.auto.lamReif.printResult true in
+-- auto (raw duper)             : Succeed
+-- auto (portfolio duper)       : Succeed
 example : InjOn (fun x ↦ x ^ 2) { x : ℝ | x ≥ 0 } := by
   intro x xnonneg y ynonneg; dsimp at *
   auto [xnonneg, ynonneg, sqrt_sq]
@@ -232,6 +273,8 @@ example : sqrt '' { x | x ≥ 0 } = { y | y ≥ 0 } := by
   apply sqrt_sq
   assumption
 
+-- auto (raw duper)             : Succeed
+-- auto (portfolio duper)       : Succeed
 example : sqrt '' { x | x ≥ 0 } = { y | y ≥ 0 } := by
   ext y; rw [mem_image]; dsimp
   auto [sqrt_sq, sqrt_nonneg, pow_nonneg]
@@ -246,6 +289,8 @@ example : (range fun x ↦ x ^ 2) = { y : ℝ | y ≥ 0 } := by
   use sqrt y
   exact sq_sqrt ynonneg
 
+-- auto (raw duper)             : Succeed
+-- auto (portfolio duper)       : Succeed
 example : (range fun x ↦ x ^ 2) = { y : ℝ | y ≥ 0 } := by
   ext y; rw [mem_range]; dsimp
   auto [pow_two_nonneg, sq_sqrt]
@@ -273,6 +318,8 @@ open Function
 example : Injective f ↔ LeftInverse (inverse f) f :=
   ⟨fun h y ↦ h (inverse_spec _ ⟨y, rfl⟩), fun h x1 x2 e ↦ by rw [← h x1, ← h x2, e]⟩
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
 example : Injective f ↔ LeftInverse (inverse f) f := by
   dsimp [Injective, LeftInverse]
   auto [inverse_spec]
@@ -280,6 +327,8 @@ example : Injective f ↔ LeftInverse (inverse f) f := by
 example : Surjective f ↔ RightInverse (inverse f) f :=
   ⟨fun h y ↦ inverse_spec _ (h _), fun h y ↦ ⟨inverse f y, h _⟩⟩
 
+-- auto (raw duper)             : Timeout
+-- auto (portfolio duper)       : Timeout
 example : Surjective f ↔ RightInverse (inverse f) f := by
   dsimp [Surjective, Function.RightInverse, LeftInverse]
   auto [inverse_spec]
@@ -302,6 +351,7 @@ theorem Cantor : ∀ f : α → Set α, ¬Surjective f := by
   have h₃ : j ∉ S := by rwa [h] at h₁
   contradiction
 
+-- auto (raw duper)             : Succeed
 theorem Cantor' : ∀ f : α → Set α, ¬Surjective f := by
   intro f surjf
   let S := { i | i ∉ f i }

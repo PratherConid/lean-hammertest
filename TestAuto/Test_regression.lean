@@ -20,6 +20,9 @@ set_option auto.native true
 set_option trace.auto.lamReif.printResult true
 set_option trace.auto.lamReif.printValuation true
 
+set_option auto.tptp true
+set_option trace.auto.tptp.premiseSelection true
+
 -- Manual Check
 
 section ManualCheck
