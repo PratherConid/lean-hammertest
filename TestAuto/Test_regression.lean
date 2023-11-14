@@ -151,8 +151,10 @@ end DSRobust
 
 -- Tactic elaboration
 
+example : True := by auto []
 example : True := by auto d[]
 example : True := by auto u[]
+example : True := by auto [] d[] u[]
 example : True := by auto [] u[] d[]
 example : True := by first | auto 👍| exact True.intro
 example : True := by auto 👎
@@ -239,7 +241,8 @@ section UnfoldConst
 
   example : c₁ = 2 := by auto u[c₁]
   example : c₂ = 2 := by
-    try auto u[c₁, c₂]
+    auto u[c₁, c₂]
+  example : c₂ = 2 := by
     auto u[c₂, c₁]
   example : c₂ = 2 := by auto u[c₁] d[c₂]
   example : c₂ = 2 := by auto u[c₂] d[c₁]
@@ -588,6 +591,10 @@ section Issues
   example (x : Nat) (primeset : Nat → Prop) (dvd : Nat → Nat → Prop) :
     ((∃ (i : _) (i_1 : primeset i), dvd i x) ↔ (∃ p, primeset p ∧ dvd p x)) := by
     auto
+
+  -- Appbuilder error (in addRecAsLemma)
+  example (x : α) : List.head? [x] = .some x := by
+    auto u[List.head?, List.head!.match_1] d[List.rec]
 
   -- Brute force example
   -- This must be fixed
