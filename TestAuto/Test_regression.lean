@@ -80,7 +80,6 @@ section Inhabitation
   example (a : α) (p : α → Prop) : (∃ x, p x → r) ↔ ((∀ x, p x) → r) := by
     auto
 
-  set_option trace.auto.lamReif.printProofs true in
   example (a : α) (p : α → Prop) : (∃ x, r → p x) ↔ (r → ∃ x, p x) := by
     auto
 
@@ -260,6 +259,9 @@ section UnfoldConst
 
   example : ∀ b, (not' b) = true ↔ b = false := by
     auto u[not', not'.match_1] d[Bool.rec]
+
+  example (x : α) : List.head? [x] = .some x := by
+    auto u[List.head?, List.head!.match_1] d[List.rec]
 
 end UnfoldConst
 
@@ -591,10 +593,6 @@ section Issues
   example (x : Nat) (primeset : Nat → Prop) (dvd : Nat → Nat → Prop) :
     ((∃ (i : _) (i_1 : primeset i), dvd i x) ↔ (∃ p, primeset p ∧ dvd p x)) := by
     auto
-
-  -- Appbuilder error (in addRecAsLemma)
-  example (x : α) : List.head? [x] = .some x := by
-    auto u[List.head?, List.head!.match_1] d[List.rec]
 
   -- Brute force example
   -- This must be fixed
