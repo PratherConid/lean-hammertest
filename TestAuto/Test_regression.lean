@@ -112,6 +112,9 @@ example
   {α : Type u} (as bs cs : List α) : (as ++ bs) ++ cs = as ++ (bs ++ cs) := by
   auto
 
+example (h1 : ∀ x : Nat, x > 0 → ∃ y : Fin x, y.1 = 0) (h2 : 3 > 0) : ∃ z : Fin 3, z.1 = 0 := by
+  auto
+
 section MonomorphizationWierdExample
 
   def List.directZip : {α : Type u} → List α → {β : Type v} → List β → List (α × β)
@@ -268,7 +271,7 @@ end UnfoldConst
 -- First Order
 
 example : True := by
-  auto [True.intro];
+  auto [True.intro]
 
 example (a b : Prop) : a ∨ b ∨ ¬ a := by
   auto
