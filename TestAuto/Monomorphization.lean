@@ -68,6 +68,10 @@ example (a b : ℝ) (h1 : a < b) : (∃ c, a < c ∧ c < b) := by
 example (a e : ℝ) (h1 : a < e) : (∃ b c d, a < b ∧ b < c ∧ c < d ∧ d < e) := by
   auto [DenselyOrdered.dense, h1]
 
+-- Testing `collectConstInst` correctness
+example (m n : Nat) (mlt : m < n) (heq : n = m * (n / m)) : m * 1 < m * (n / m) := by
+  duper [mul_one, heq, mlt, lt_of_mul_lt_mul_left] {portfolioInstance := 1}
+
 set_option auto.native false in
 set_option trace.auto.printLemmas true in
 example (a b c d : ℝ) (h1 : a < b) :
