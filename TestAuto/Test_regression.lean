@@ -229,6 +229,9 @@ section Extensionalization
   example (f g : α → α → α → α → α → α → α → α → α → α → α → α → α → α → α → α → α) :
     (f = g) = (g = f) := by auto
 
+  #check 2
+
+  set_option trace.auto.lam2D.printHyps true in
   example : (fun f g => @Eq (α → α → α) f g) = (fun f g => ∀ x, f x = g x) :=
     by auto
 
