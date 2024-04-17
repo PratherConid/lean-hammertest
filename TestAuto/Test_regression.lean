@@ -582,6 +582,12 @@ section Adhoc
   example (f : ((Empty → Prop) → Prop) → Prop) :
     f Exists = f Exists := by auto
 
+  -- SMT attributes
+  open Auto.SMT.Attribute in
+  set_option auto.tptp false in
+  example : trigger (fun (x : Nat) => x) True = True := by
+    auto
+
 end Adhoc
 
 -- Issues
