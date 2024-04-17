@@ -5,7 +5,7 @@ package hammertest {
   -- add package configuration options here
 }
 
-require auto from git "https://github.com/leanprover-community/lean-auto"@"main"
+require auto from "../lean-auto/"
 
 require Duper from "../duper/"
 
