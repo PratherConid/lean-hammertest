@@ -112,9 +112,6 @@ example
   {α : Type u} (as bs cs : List α) : (as ++ bs) ++ cs = as ++ (bs ++ cs) := by
   auto
 
-example (h1 : ∀ x : Nat, x > 0 → ∃ y : Fin x, y.1 = 0) (h2 : 3 > 0) : ∃ z : Fin 3, z.1 = 0 := by
-  auto
-
 section MonomorphizationWierdExample
 
   def List.directZip : {α : Type u} → List α → {β : Type v} → List β → List (α × β)
@@ -214,6 +211,24 @@ section Skolemization
 
 end Skolemization
 
+-- Abstract complicated dependent types to free variables
+
+section DepAbst
+
+  example (f : ∀ (α : Type), α → α) : f = f :=
+    by auto
+
+  example (f₁ f₂ : ∀ (α : Type), α → α) : f₁ = f₂ → f₂ = f₁ :=
+    by auto
+
+  example (g : Type → Type) (f : ∀ (α : Type), g α) : f = f :=
+    by auto
+
+  example : @HAdd.hAdd = @HAdd.hAdd :=
+    by auto
+
+end DepAbst
+
 -- Extensionalization
 
 section Extensionalization
@@ -225,12 +240,6 @@ section Extensionalization
 
   example (f g : (α → α) → β → α) (H : ∀ x, f x = g x) : f = g := by
     auto
-
-  example (f g : α → α → α → α → α → α → α → α → α → α → α → α → α → α → α → α → α) :
-    (f = g) = (g = f) := by auto
-
-  example : (fun f g => @Eq (α → α → α) f g) = (fun f g => ∀ x, f x = g x) :=
-    by auto
 
 end Extensionalization
 
@@ -423,9 +432,9 @@ section TypeDefeq
 
 end TypeDefeq
 
--- Definition Recognition
+-- Definition Recognization
 
-section DefinitionRecognition
+section DefinitionRecognization
 
   set_option trace.auto.lamReif.prep.def true
 
@@ -471,7 +480,7 @@ section DefinitionRecognition
   example {α : Type} (f : α → Nat → Nat → α → Nat) :
     ∀ a b c, f a 1 b c = f a 1 b c := by auto
 
-end DefinitionRecognition
+end DefinitionRecognization
 
 -- Ad-hoc support
 
@@ -596,6 +605,18 @@ section Issues
   set_option trace.auto.mono true
   set_option trace.auto.mono.printConstInst true
   set_option trace.auto.lamReif.printResult true
+
+  -- duper's issue
+  example (f g : α → α → α → α → α → α → α → α → α → α → α → α → α → α → α → α → α) :
+    (f = g) = (g = f) := by auto
+
+  -- duper's issue
+  example : (fun f g => @Eq (α → α → α) f g) = (fun f g => ∀ x, f x = g x) :=
+    by auto
+
+  -- Can succeed if auto ignores the un-monomorphizable formulas
+  example (h1 : ∀ x : Nat, x > 0 → ∃ y : Fin x, y.1 = 0) (h2 : 3 > 0) : ∃ z : Fin 3, z.1 = 0 := by
+    auto
 
   -- Do not know how to deal with expression ∃ i_1, dvd i x
   -- Non-dependent ∃, but whose domain type is a `Prop`
