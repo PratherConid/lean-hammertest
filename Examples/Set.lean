@@ -35,7 +35,7 @@ variable (s t u : Set α)
 #check mem_inter_iff
 #check mem_union
 #check Set.ext
-
+/-
 -- zipperposition               : Succeed
 -- auto (raw duper)             : Succeed
 -- auto (portfolio duper)       : Succeed

@@ -25,6 +25,18 @@ set_option auto.native.solver.func "Auto.duperRaw"
 set_option auto.native true
 set_option auto.tptp true
 
+section Bug
+
+  open Set
+
+  theorem thm14.auto : { n | Nat.Prime n } ∩ { n | n > 2 } ⊆ { n | ¬Even n } := by
+    intro n
+    rw [mem_inter_iff]
+    have h₂ : ¬ 2 < 2 := by linarith
+    auto [mem_inter_iff,mem_setOf, Nat.Prime.eq_two_or_odd, Nat.even_iff, *]
+
+end Bug
+
 section SimpleClass
 
 set_option auto.redMode "instances"
