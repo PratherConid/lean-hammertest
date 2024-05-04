@@ -197,7 +197,7 @@ namespace Basics
   theorem neg_add_cancel_left (a b : R) : -a + (a + b) = b := by
     rw [← add_assoc, add_left_neg, zero_add]
 
-  theorem auto.neg_add_cancel_left (a b : R) : -a + (a + b) = b := by
+  theorem neg_add_cancel_left.auto (a b : R) : -a + (a + b) = b := by
     auto [add_assoc, add_left_neg, zero_add]
 
   theorem add_neg_cancel_right (a b : R) : a + b + -b = a := by
@@ -223,7 +223,7 @@ namespace Basics
       rw [← mul_add, add_zero, add_zero]
     rw [add_left_cancel h]
 
-  theorem mul_zero.autp (a : R) : a * 0 = 0 := by
+  theorem mul_zero.auto (a : R) : a * 0 = 0 := by
     auto [add_left_cancel, mul_add, add_zero]
 
   theorem zero_mul (a : R) : 0 * a = 0 := by
@@ -445,7 +445,7 @@ namespace Basics
     apply add_le_add_right
     apply min_le_right
 
-  theorem aux.aut : min a b + c ≤ min (a + c) (b + c) := by
+  theorem aux.auto : min a b + c ≤ min (a + c) (b + c) := by
     auto [le_min, add_le_add_right, min_le_left, min_le_right]
 
   theorem thm25 : min a b + c = min (a + c) (b + c) := by
@@ -1037,7 +1037,7 @@ namespace Logic
     have : f x ≤ a := fnuba x
     linarith
 
-  theorem thhm27.auto (h : ∀ a, ∃ x, f x > a) : ¬FnHasUb f := by
+  theorem thm27.auto (h : ∀ a, ∃ x, f x > a) : ¬FnHasUb f := by
     auto [h, not_le] d[FnHasUb, FnUb]
 
   theorem thm28 (h : ∀ a, ∃ x, f x < a) : ¬FnHasLb f := by
@@ -1259,7 +1259,7 @@ namespace Logic
     use h₀
     exact fun h' ↦ h₁ (le_antisymm h₀ h')
 
-  theorem thm53.def {x y : ℝ} : x ≤ y ∧ x ≠ y → x ≤ y ∧ ¬y ≤ x := by
+  theorem thm53.auto {x y : ℝ} : x ≤ y ∧ x ≠ y → x ≤ y ∧ ¬y ≤ x := by
     auto [le_antisymm]
 
   theorem thm54 {x y : ℝ} (h : x ≤ y) : ¬y ≤ x ↔ x ≠ y := by
