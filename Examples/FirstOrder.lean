@@ -4,7 +4,7 @@ Problems in First Order Logic.
 import Hammertest.DuperInterface
 
 set_option auto.native true
-set_option auto.native.solver.func "Auto.duperRaw"
+attribute [rebind Auto.Native.solverFunc] Auto.duperRaw
 
 -- From TPIL
 

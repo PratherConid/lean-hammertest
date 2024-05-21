@@ -10,7 +10,7 @@ import Hammertest.DuperInterface
 open Set
 
 set_option auto.native true
-set_option auto.native.solver.func "Auto.duperRaw"
+attribute [rebind Auto.Native.solverFunc] Auto.duperRaw
 
 set_option auto.tptp true
 set_option trace.auto.tptp.printQuery true

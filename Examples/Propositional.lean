@@ -6,7 +6,7 @@ Examples in propositional logic.
 import Hammertest.DuperInterface
 
 set_option auto.native true
-set_option auto.native.solver.func "Auto.duperRaw"
+attribute [rebind Auto.Native.solverFunc] Auto.duperRaw
 
 section
 variable (P Q R S : Prop)

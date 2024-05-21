@@ -5,7 +5,7 @@ import Hammertest.DuperInterface
 
 -- Standard Native Configs
 set_option trace.auto.native.printFormulas true
-set_option auto.native.solver.func "Auto.duperRaw"
+attribute [rebind Auto.Native.solverFunc] Auto.duperRaw
 
 set_option auto.native true
 
