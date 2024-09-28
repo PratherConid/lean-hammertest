@@ -22,7 +22,7 @@ attribute [rebind Auto.Native.solverFunc] Auto.duperRaw
 
 set_option auto.native true
 set_option auto.tptp true
-/-
+
 section Bug
 
   open Set
@@ -198,7 +198,8 @@ end Complex
 end Polynomial.Chebyshev
 
 end Chebyshev
--/
+
+
 
 section ShortFive
 
