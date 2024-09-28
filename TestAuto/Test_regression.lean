@@ -7,11 +7,11 @@ set_option auto.redMode "reducible"
 set_option trace.auto.tptp.printQuery true
 set_option trace.auto.tptp.result true
 set_option auto.tptp.solver.name "zeport-fo"
-set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio"
+set_option auto.tptp.zeport.path "/home/indprinciples/Programs/zipperposition/portfolio"
 -- Standard SMT Configs
 set_option trace.auto.smt.printCommands true
 set_option trace.auto.smt.result true
-set_option auto.smt.solver.name "z3"
+set_option auto.smt.solver.name "cvc5"
 -- Standard Native Configs
 set_option trace.auto.native.printFormulas true
 attribute [rebind Auto.Native.solverFunc] Auto.duperRaw
@@ -273,7 +273,10 @@ section UnfoldConst
     auto u[not', not'.match_1] d[Bool.rec]
 
   example (x : α) : List.head? [x] = .some x := by
-    auto u[List.head?, List.head!.match_1] d[List.rec]
+    have list_head_unfold : @List.head? α = (fun x =>
+      @List.casesOn α (fun x => (fun x => Option α) x) x ((fun _ => @none α) Unit.unit) fun head tail =>
+        (fun a tail => @some α a) head tail) := by sorry
+    auto [list_head_unfold] d[List.rec]
 
 end UnfoldConst
 
@@ -312,12 +315,6 @@ example (a b c d : Nat) :
 example (a b c : Nat) :
   a * (b + c) = b * a + a * c := by
   auto [Nat.add_comm, Nat.mul_comm, Nat.add_mul]
-
-tptp SEU123_1 "../TPTP-v8.0.0/Problems/SEU/SEU123+1.p"
-  by auto [*]
-
-tptp SEU123_2 "../TPTP-v8.0.0/Problems/SEU/SEU123+1.p"
-  by mononative [*]
 
 set_option auto.tptp true in
 set_option auto.native false in
@@ -376,7 +373,8 @@ example
   auto [ap_assoc]
 
 example
-  (hap : ∀ {α β γ : Type u} [self : HAppend α β γ], α → β → γ)
+  (instHAppend : ∀ {α}, HAppend (List α) (List α) (List α))
+  (hap : ∀ {α β γ : Type u} [HAppend α β γ], α → β → γ)
   (ap_assoc : ∀ (α : Type u) (as bs cs : List α),
     @hap (List α) (List α) (List α) instHAppend (@hap (List α) (List α) (List α) instHAppend as bs) cs =
     @hap (List α) (List α) (List α) instHAppend as (@hap (List α) (List α) (List α) instHAppend bs cs)) :
@@ -576,13 +574,12 @@ section Adhoc
   example (a : BitVec u) (b : BitVec v) (c : BitVec 2) :
     a ++ b = a ++ b ∧ b ++ c = b ++ c := by auto
 
-  open BitVec in
   example :
     0b10#3 + 0b101#3 = 0b10#3 + 0b101#3 ∧
     0b10#(3+0) * 0b101#(1+2) = 0b10#3 * 0b101#3 := by auto
 
-  open BitVec in
-  example (a b : Nat) : (a + b)#16 = a#16 + b#16 ∧ (a * b)#16 = a#16 * b#16 := by auto
+  example (a b : Nat) :
+    let f := BitVec.ofNat 16; f (a + b) = f a + f b ∧ f (a * b) = f a * f b := by auto
 
   example (a b : BitVec 3) :
     (a < b) = (b > a) ∧ (a ≤ b) = (b ≥ a) := by auto

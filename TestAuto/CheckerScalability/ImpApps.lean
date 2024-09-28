@@ -1,7 +1,7 @@
 import Hammertest.DuperInterface
 
--- Standard Native Configs
-set_option trace.auto.native.printFormulas true
+-- Do not print formulas
+set_option trace.auto.native.printFormulas false
 attribute [rebind Auto.Native.solverFunc] Auto.duperRaw
 
 set_option profiler true
@@ -489,8 +489,6 @@ example
   (H510 : α510 → α511) (H511 : α511 → α512) : α512 := by auto
 
 #eval IO.println (test₁ 1024)
-
-set_option auto.checker.buildMode "indirectReduce_reflection"
 
 set_option maxHeartbeats 2000000 in
 set_option maxRecDepth 10000 in

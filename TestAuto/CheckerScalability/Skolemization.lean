@@ -10,7 +10,6 @@ attribute [rebind Auto.Native.solverFunc] Auto.duperRaw
 set_option profiler true
 set_option auto.optimizeCheckerProof false
 set_option compiler.enableNew false
-set_option auto.checker.buildMode "indirectReduce_reflection"
 
 set_option auto.native true
 
@@ -72,6 +71,9 @@ theorem test
   (G₃ : ∀ x y, g₃ x y = a₃)
   (G₄ : ∀ x y, g₃ x y = a₄) : a₁ = a₄ := by auto
 
+#check 0
+
+set_option auto.checker.buildMode "indirectReduce_reflection" in
 theorem test₁ (f₁ f₂ f₃ f₄ f₅ f₆ f₇ f₈ f₉ f₁₀ f₁₁ : Nat → Nat → Nat)
   (H₁ : ∀ x₁, ∃ x₂, ∀ x₃, ∃ x₄, ∀ x₅, ∃ x₆, ∀ x₇, ∃ x₈,
        ∀ x₉, ∃ x₁₀, ∀ x₁₁, ∃ x₁₂, ∀ x₁₃, ∃ x₁₄, ∀ x₁₅, ∃ x₁₆,
@@ -219,7 +221,7 @@ theorem test₁ (f₁ f₂ f₃ f₄ f₅ f₆ f₇ f₈ f₉ f₁₀ f₁₁ : 
       f₁₁ (f₁ (f₂ x₁₆ x₁₅) (f₃ x₁₄ x₁₃)) (f₄ (f₅ x₁₂ x₁₁) (f₆ x₁₀ x₉)))) :
   True := by auto
 
-#check 2
+#check 0
 
 set_option trace.auto.buildChecker true in
 theorem test₂ (f₁ f₂ f₃ f₄ f₅ f₆ f₇ f₈ f₉ f₁₀ f₁₁ : Nat → Nat → Nat)
@@ -346,7 +348,7 @@ theorem test₂ (f₁ f₂ f₃ f₄ f₅ f₆ f₇ f₈ f₉ f₁₀ f₁₁ : 
       f₁₁ (f₁ (f₂ x₁₆ x₁₅) (f₃ x₁₄ x₁₃)) (f₄ (f₅ x₁₂ x₁₁) (f₆ x₁₀ x₉)))) :
   True := by auto
 
-#check 2
+#check 0
 
 set_option trace.auto.buildChecker true in
 theorem test₃ (f₁ f₂ f₃ f₄ f₅ f₆ f₇ f₈ f₉ f₁₀ f₁₁ : Nat → Nat → Nat)
@@ -413,4 +415,4 @@ theorem test₃ (f₁ f₂ f₃ f₄ f₅ f₆ f₇ f₈ f₉ f₁₀ f₁₁ : 
       f₁₁ (f₁ (f₂ x₁₆ x₁₅) (f₃ x₁₄ x₁₃)) (f₄ (f₅ x₁₂ x₁₁) (f₆ x₁₀ x₉)))) :
   True := by auto
 
-#check 2
+#check 0

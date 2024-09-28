@@ -1,10 +1,8 @@
 import Mathlib.Data.Complex.Exponential
 import Mathlib.Data.Complex.Module
 import Mathlib.Data.Real.Basic
-import Mathlib.Data.Set.Intervals.Basic
 import Mathlib.Data.Set.Lattice
 import Mathlib.Data.Set.Function
-import Mathlib.Data.Polynomial.AlgebraMap
 import Mathlib.Order.Basic
 import Mathlib.RingTheory.Polynomial.Chebyshev
 import Hammertest.DuperInterface
@@ -13,7 +11,7 @@ import Hammertest.DuperInterface
 set_option trace.auto.tptp.printQuery true
 set_option trace.auto.tptp.result true
 set_option auto.tptp.solver.name "zeport-fo"
-set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio"
+set_option auto.tptp.zeport.path "/home/indprinciples/Programs/zipperposition/portfolio"
 -- Standard SMT Configs
 set_option trace.auto.smt.printCommands true
 set_option trace.auto.smt.result true
@@ -24,7 +22,7 @@ attribute [rebind Auto.Native.solverFunc] Auto.duperRaw
 
 set_option auto.native true
 set_option auto.tptp true
-
+/-
 section Bug
 
   open Set
@@ -127,44 +125,13 @@ This file gives the trigonometric characterizations of Chebyshev polynomials, fo
 (`Real.cos`) and complex (`Complex.cos`) cosine.
 -/
 
-set_option linter.uppercaseLean3 false
-
 namespace Polynomial.Chebyshev
 
 open Polynomial
 
 variable {R A : Type*} [CommRing R] [CommRing A] [Algebra R A]
 
-@[simp]
-theorem aeval_T (x : A) (n : ℕ) : aeval x (T R n) = (T A n).eval x := by
-  rw [aeval_def, eval₂_eq_eval_map, map_T]
-
-@[simp]
-theorem aeval_U (x : A) (n : ℕ) : aeval x (U R n) = (U A n).eval x := by
-  rw [aeval_def, eval₂_eq_eval_map, map_U]
-
-@[simp]
-theorem algebraMap_eval_T (x : R) (n : ℕ) :
-    algebraMap R A ((T R n).eval x) = (T A n).eval (algebraMap R A x) := by
-  rw [← aeval_algebraMap_apply_eq_algebraMap_eval, aeval_T]
-
-@[simp]
-theorem algebraMap_eval_U (x : R) (n : ℕ) :
-    algebraMap R A ((U R n).eval x) = (U A n).eval (algebraMap R A x) := by
-  rw [← aeval_algebraMap_apply_eq_algebraMap_eval, aeval_U]
-
--- Porting note: added type ascriptions to the statement
-@[simp, norm_cast]
-theorem complex_ofReal_eval_T : ∀ (x : ℝ) n, (((T ℝ n).eval x : ℝ) : ℂ) = (T ℂ n).eval (x : ℂ) :=
-  @algebraMap_eval_T ℝ ℂ _ _ _
-
--- Porting note: added type ascriptions to the statement
-@[simp, norm_cast]
-theorem complex_ofReal_eval_U : ∀ (x : ℝ) n, (((U ℝ n).eval x : ℝ) : ℂ) = (U ℂ n).eval (x : ℂ) :=
-  @algebraMap_eval_U ℝ ℂ _ _ _
-
 /-! ### Complex versions -/
-
 
 section Complex
 
@@ -179,36 +146,35 @@ set_option trace.auto.tptp.result true
 /-- The `n`-th Chebyshev polynomial of the first kind evaluates on `cos θ` to the
 value `cos (n * θ)`. -/
 @[simp]
-theorem T_complex_cos : ∀ n, (T ℂ n).eval (cos θ) = cos (n * θ)
+theorem T_complex_cos : ∀ (n : ℕ), (T ℂ n).eval (cos θ) = cos (n * θ)
   | 0 => by auto [T_zero, eval_one, Nat.cast_zero, zero_mul, cos_zero]
   | 1 => by auto [eval_X, one_mul, T_one, Nat.cast_one]
   | n + 2 => by
-    -- Porting note: partially rewrote proof for lean4 numerals.
-    have : (2 : ℂ[X]) = (2 : ℕ) := by norm_num
-    simp only [this, eval_X, eval_one, T_add_two, eval_sub, eval_mul, eval_nat_cast]
-    simp only [Nat.cast_ofNat, Nat.cast_add]
-    rw [T_complex_cos (n + 1), T_complex_cos n]
-    simp only [Nat.cast_add, Nat.cast_one, add_mul, cos_add, one_mul, mul_assoc, sin_two_mul,
-      cos_two_mul]
-    simp [mul_sub, pow_two]
+    rw [Nat.cast_add, Nat.cast_two, T_add_two];
+    have eval_two : eval (cos θ) 2 = (2 : ℕ) := by norm_num
+    simp only [eval_sub, eval_mul, eval_X, eval_two]
+    have norm_n_plus_one : (↑n : Int) + 1 = ↑(n + 1) := rfl
+    rw [norm_n_plus_one, T_complex_cos n, T_complex_cos (n + 1)]
+    simp only [Nat.cast_add, Nat.cast_one, Nat.cast_two, add_mul,
+      cos_add, one_mul, mul_assoc, sin_two_mul, cos_two_mul]
+    simp only [mul_sub, pow_two, mul_one]
     auto [sub_right_comm, mul_comm, mul_assoc]
 
-/--
-  Zipperposition portfolio mode times out, but duper succeeds
--/
-theorem T_complex_cos' : ∀ n, (T ℂ n).eval (cos θ) = cos (n * θ)
+theorem T_complex_cos' : ∀ (n : ℕ), (T ℂ n).eval (cos θ) = cos (n * θ)
   | 0 => by auto [T_zero, eval_one, Nat.cast_zero, zero_mul, cos_zero]
   | 1 => by auto [eval_X, one_mul, T_one, Nat.cast_one]
   | n + 2 => by
-    -- Porting note: partially rewrote proof for lean4 numerals.
-    have : (2 : ℂ[X]) = (2 : ℕ) := by norm_num
-    simp only [this, eval_X, eval_one, T_add_two, eval_sub, eval_mul, eval_nat_cast]
-    simp only [Nat.cast_ofNat, Nat.cast_add]
-    rw [T_complex_cos' (n + 1), T_complex_cos' n]
-    simp only [Nat.cast_add, Nat.cast_one, add_mul, cos_add, one_mul, mul_assoc, sin_two_mul,
-      cos_two_mul]
-    simp [mul_sub, sub_right_comm]
+    rw [Nat.cast_add, Nat.cast_two, T_add_two];
+    have eval_two : eval (cos θ) 2 = (2 : ℕ) := by norm_num
+    simp only [eval_sub, eval_mul, eval_X, eval_two]
+    have norm_n_plus_one : (↑n : Int) + 1 = ↑(n + 1) := rfl
+    rw [norm_n_plus_one, T_complex_cos' n, T_complex_cos' (n + 1)]
+    simp only [Nat.cast_add, Nat.cast_one, Nat.cast_two, add_mul,
+      cos_add, one_mul, mul_assoc, sin_two_mul, cos_two_mul]
+    simp only [mul_sub, sub_right_comm, mul_one]
     auto [pow_two, mul_comm, mul_assoc]
+
+set_option auto.tptp false
 
 /-- The `n`-th Chebyshev polynomial of the second kind evaluates on `cos θ` to the
 value `sin ((n + 1) * θ) / sin θ`. -/
@@ -217,39 +183,22 @@ theorem U_complex_cos (n : ℕ) : (U ℂ n).eval (cos θ) * sin θ = sin ((n + 1
   induction' n with d hd
   -- `auto` fails if we provide `CharP.cast_eq_zero` instead of `CharP.cast_eq_zero _ Nat.zero`
   · auto [U_zero, eval_one, zero_add, one_mul, Nat.zero_eq, CharP.cast_eq_zero _ Nat.zero]
-  · rw [U_eq_X_mul_U_add_T]
-    simp only [eval_add, eval_mul, eval_X, T_complex_cos, add_mul, mul_assoc, hd, one_mul]
-    -- Porting note: added `trans` to prevent `rw` from going on a wild goose chase applying `rfl`
-    push_cast; rw [sin_add ((↑d + 1) * θ)]
+  · have u_norm : U ℂ ↑(d + 1) = U ℂ (↑d + 1) := rfl
+    rw [u_norm, U_eq_X_mul_U_add_T]
+    have t_norm : T ℂ (↑d + 1) = T ℂ ↑(d + 1) := rfl
+    simp only [t_norm, eval_add, T_complex_cos, eval_mul, eval_X,
+      add_mul _ _ (sin θ), mul_assoc, hd]
+    have add_one_one_norm : (↑(d + 1) + 1) * θ = ↑(d + 1) * θ + θ := by
+      simp only [add_mul, one_mul]
+    rw [add_one_one_norm, sin_add (↑(d + 1) * θ)]; push_cast
     auto [add_mul, one_mul, mul_comm]
 
 end Complex
 
--- ### Real versions
-section Real
-
-open Real
-
-variable (θ : ℝ) (n : ℕ)
-
-/-- The `n`-th Chebyshev polynomial of the first kind evaluates on `cos θ` to the
-value `cos (n * θ)`. -/
-@[simp]
-theorem T_real_cos : (T ℝ n).eval (cos θ) = cos (n * θ) := by exact_mod_cast T_complex_cos θ n
-
-/-- The `n`-th Chebyshev polynomial of the second kind evaluates on `cos θ` to the
-value `sin ((n + 1) * θ) / sin θ`. -/
-@[simp]
-theorem U_real_cos : (U ℝ n).eval (cos θ) * sin θ = sin ((n + 1) * θ) := by
-  exact_mod_cast U_complex_cos θ n
-
-end Real
-
 end Polynomial.Chebyshev
 
 end Chebyshev
-
-
+-/
 
 section ShortFive
 
@@ -281,12 +230,12 @@ set_option profiler true
 set_option trace.auto.lamReif.printProofs true
 
 set_option auto.mono.saturationThreshold 500
-theorem short_five_mono (injh : Injective h) (injl : Injective l) :
+def short_five_mono (injh : Injective h) (injl : Injective l) :
     Injective k := by
   auto [injective_iff_map_eq_zero, injl, injh, short_exact₁.inj,
        square₀, square₁, short_exact₀.ker_in_im, map_zero] u[Injective]
 
-theorem short_five_epi (surjh : Surjective h) (surjl : Surjective l) :
+def short_five_epi (surjh : Surjective h) (surjl : Surjective l) :
     Surjective k := by
   intro b₁
   rcases surjl (g₁ b₁) with ⟨c₀, hlc₀⟩
