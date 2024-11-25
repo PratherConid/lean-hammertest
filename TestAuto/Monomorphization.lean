@@ -31,7 +31,7 @@ section Bug
     intro n
     rw [mem_inter_iff]
     have h₂ : ¬ 2 < 2 := by linarith
-    auto [mem_inter_iff,mem_setOf, Nat.Prime.eq_two_or_odd, Nat.even_iff, *]
+    auto [mem_inter_iff, mem_setOf, Nat.Prime.eq_two_or_odd, Nat.even_iff, *]
 
 end Bug
 
@@ -80,7 +80,7 @@ example (a e : ℝ) (h1 : a < e) : (∃ b c d, a < b ∧ b < c ∧ c < d ∧ d <
 
 -- Testing `collectConstInst` correctness
 example (m n : Nat) (mlt : m < n) (heq : n = m * (n / m)) : m * 1 < m * (n / m) := by
-  duper [mul_one, heq, mlt, lt_of_mul_lt_mul_left] {portfolioInstance := 1}
+  auto [mul_one, heq, mlt, lt_of_mul_lt_mul_left]
 
 set_option auto.native false in
 set_option trace.auto.printLemmas true in
