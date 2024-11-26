@@ -1,5 +1,4 @@
-import Mathlib.Data.Complex.Exponential
-import Mathlib.Data.Complex.Module
+import Auto.Tactic
 
 open Lean
 
@@ -35,6 +34,11 @@ def Name.isTheorem (name : Name) : CoreM Bool := do
     | return false
   return true
 
+/--
+  A constant is a human theorem iff it is a theorem and has a
+  declaration range. Roughly speaking, a constant have a declaration
+  range iff it is defined (presumably by a human) in a `.lean` file
+-/
 def Name.isHumanTheorem (name : Name) : CoreM Bool :=
   return (← Lean.findDeclarationRanges? name).isSome && (← Name.isTheorem name)
 
@@ -67,12 +71,14 @@ def Name.onlyUsesConstsInType (name : Name) (names : Array Name) : CoreM Bool :=
   let ci ← Name.getCi name "Name.onlyUsesConsts"
   return Expr.onlyUsesConsts ci.type names
 
+/-- Used to filter out theorems known to SMT solvers and native provers-/
 def logicConsts : Array Name := #[
     ``True, ``False,
     ``Not, ``And, ``Or, ``Iff,
     ``Eq
   ]
 
+/-- Used to filter out theorems known to SMT solvers -/
 def boolConsts : Array Name := #[
     ``Bool,
     ``true, ``false,
@@ -82,27 +88,76 @@ def boolConsts : Array Name := #[
     ``Decidable, ``Decidable.decide
   ]
 
+/-- Used to filter out theorems known to SMT solvers -/
+def natConsts : Array Name := #[
+    ``Nat,
+    ``OfNat.ofNat, ``instOfNatNat,
+    ``Nat.add, ``Nat.sub, ``Nat.mul, ``Nat.div, ``Nat.mod,
+    ``HAdd, ``HAdd.hAdd, ``instHAdd, ``instAddNat,
+    ``HSub, ``HSub.hSub, ``instHSub, ``instSubNat,
+    ``HMul, ``HMul.hMul, ``instHMul, ``instMulNat,
+    ``HDiv, ``HDiv.hDiv, ``instHDiv, ``Nat.instDiv,
+    ``HMod, ``HMod.hMod, ``instHMod, ``Nat.instMod,
+    ``LE, ``LE.le, ``instLENat,
+    ``LT, ``LT.lt, ``instLTNat,
+    ``GE.ge, ``GT.gt
+  ]
+
+/- **TODO:** Int theorems -/
+
 def Name.onlyLogicInType (name : Name) :=
   Name.onlyUsesConstsInType name logicConsts
 
 def Name.onlyBoolLogicInType (name : Name) :=
   Name.onlyUsesConstsInType name (logicConsts ++ boolConsts)
 
-def analyze : CoreM Unit := do
-  let a ← allHumanTheorems
-  IO.println (← a.filterM Name.onlyLogicInType)
-  IO.println (← a.filterM (fun name =>
-    return (!(← Name.onlyLogicInType name)) && (← Name.onlyBoolLogicInType name)))
+def Name.onlyNatBoolLogicInType (name : Name) :=
+  Name.onlyUsesConstsInType name (logicConsts ++ boolConsts ++ natConsts)
 
-#eval analyze
+/-- Obtain Logic, Bool and Nat theorems -/
+def analyze : CoreM (Array (Array Name)) := do
+  let a ← allHumanTheorems
+  let logicThms ← a.filterM Name.onlyLogicInType
+  let boolThms ← a.filterM (fun name =>
+    return (!(← Name.onlyLogicInType name)) && (← Name.onlyBoolLogicInType name))
+  let natThms ← a.filterM (fun name =>
+    return (!(← Name.onlyBoolLogicInType name)) && (← Name.onlyNatBoolLogicInType name))
+  return #[logicThms, boolThms, natThms]
 
 def mathlibModules : CoreM (Array Name) := do
   let u := (← getEnv).header.moduleNames
   return u.filter (fun name => name.components[0]? == .some `Mathlib)
 
-#eval mathlibModules
-#eval do
-  let a ← Name.getConstsOfModule `Mathlib.Data.Finset.Density
-  a.filterM Name.isHumanTheorem
+inductive Result
+  | success
+  | fail
+  | nonProp
+  | typeCheckFail
+  | typeUnequal
+
+def runAutoOn (name : Name) : MetaM Result := do
+  if !(← Name.isHumanTheorem name) then throwError "runAutoOn :: {name} is not a human-written theorem"
+  let ci ← Name.getCi name "runAutoOn"
+  let .thmInfo ti := ci
+    | throwError "runAutoOn :: Unexpected error"
+  if !(← Meta.isProp ci.type) then
+    return .nonProp
+  let usedThmNames ← Expr.getUsedTheorems ti.value
+  let usedThms ← usedThmNames.mapM (fun n => Auto.Lemma.ofConst n (.leaf "collected by hammertest"))
+  let autoProof : Expr ← Meta.forallTelescope ti.type fun bs body => do
+    let negGoal := Expr.app (.const ``Not []) body
+    let negGoalImpFalse ← Meta.withLocalDeclD `negGoal negGoal fun negGoalFVar => do
+      let inhLemmas ← Auto.Inhabitation.getInhFactsFromLCtx
+      let lctxLemmas ← Auto.collectLctxLemmas true #[]
+      let proofOfFalse ← Auto.runAuto (.some name) (lctxLemmas ++ usedThms) inhLemmas
+      Meta.mkLambdaFVars #[negGoalFVar] proofOfFalse
+    let goal := Expr.app (.const ``Classical.byContradiction []) negGoalImpFalse
+    Meta.mkLambdaFVars bs goal
+  match Kernel.check (← getEnv) {} autoProof with
+  | Except.ok autoProofType =>
+    match Kernel.isDefEq (← getEnv) {} autoProofType ti.type with
+    | Except.ok true => return .success
+    | _ => return .typeUnequal
+  | Except.error _ => return .typeCheckFail
 
 end HammerTest
