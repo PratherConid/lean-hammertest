@@ -3,7 +3,7 @@ import Mathlib.Data.Complex.Module
 import Hammertest.DuperInterface
 import Auto.EvaluateAuto.TestCode
 
-open Lean Meta Elab Auto
+open Lean Meta Elab Auto EvalAuto
 
 #eval do
   let a ← analyze
@@ -18,22 +18,13 @@ open Lean Meta Elab Auto
   let a ← allHumanTheorems
   IO.println a.size
 
-#check 2
-#check initializing
-#check Environment
-#check Lean.PersistentEnvExtension.toEnvExtension
-
-set_option trace.auto.tactic true
-set_option trace.auto.runAuto.printLemmas true
 attribute [rebind Auto.Native.solverFunc] Auto.duperRaw
-set_option auto.native true
-set_option maxHeartbeats 50000
+set_option trace.auto.tactic true
+--set_option trace.auto.runAuto.printLemmas true
+set_option trace.auto.eval.printResult true
+--set_option trace.auto.tptp.printProof true
 
--- bug
-#eval do
-  let m ← runAutoOnConst ``Nat.sub_one_lt_of_lt
-  trace[auto.tactic] m!"{m}"
-
-#eval do
-  let m ← runAutoOnConst ``Nat.sub_add_cancel
-  trace[auto.tactic] m!"{m}"
+--set_option maxHeartbeats 200000000
+--#eval randEval
+--  { solverConfig := .native, logFile := "evalOut.txt" }
+--  64

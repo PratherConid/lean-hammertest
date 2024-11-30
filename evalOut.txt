@@ -1,0 +1,727 @@
+Config = {maxHeartbeats := 65536, timeout := 10, solverConfig = tptp zeport-lams /home/indprinciples/Programs/zipperposition/portfolio, logFile := evalOut.txt}
+
+Testing || CategoryTheory.ComposableArrows.ext₃ : ∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_2, u_1} C] {f g : CategoryTheory.ComposableArrows C 3}
+  (h₀ : f.obj' 0 ⋯ = g.obj' 0 ⋯) (h₁ : f.obj' 1 ⋯ = g.obj' 1 ⋯) (h₂ : f.obj' 2 ⋯ = g.obj' 2 ⋯)
+  (h₃ : f.obj' 3 ⋯ = g.obj' 3 ⋯),
+  f.map' 0 1 ⋯ ⋯ =
+      CategoryTheory.CategoryStruct.comp (CategoryTheory.eqToHom h₀)
+        (CategoryTheory.CategoryStruct.comp (g.map' 0 1 ⋯ ⋯) (CategoryTheory.eqToHom ⋯)) →
+    f.map' 1 2 ⋯ ⋯ =
+        CategoryTheory.CategoryStruct.comp (CategoryTheory.eqToHom h₁)
+          (CategoryTheory.CategoryStruct.comp (g.map' 1 2 ⋯ ⋯) (CategoryTheory.eqToHom ⋯)) →
+      f.map' 2 3 ⋯ ⋯ =
+          CategoryTheory.CategoryStruct.comp (CategoryTheory.eqToHom h₂)
+            (CategoryTheory.CategoryStruct.comp (g.map' 2 3 ⋯ ⋯) (CategoryTheory.eqToHom ⋯)) →
+        f = g
+Result.autoException ::
+Auto.Lemma.rewriteUMonoRigid? :: Motive fun _a => f.obj ⟨0, ⋯⟩ = g.obj ⟨0, ⋯⟩ is not type correct
+
+Testing || OrderAddMonoidHom.monotone' : ∀ {α : Type u_6} {β : Type u_7} [inst : Preorder α] [inst_1 : Preorder β] [inst_2 : AddZeroClass α]
+  [inst_3 : AddZeroClass β] (self : α →+o β), Monotone (↑self.toAddMonoidHom).toFun
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Matroid.Indep.restrict_eq_freeOn : ∀ {α : Type u_1} {M : Matroid α} {I : Set α}, M.Indep I → M.restrict I = Matroid.freeOn I
+Result.success
+
+Testing || WithTop.coe_top_lt : ∀ {α : Type u_1} [inst : Preorder α] [inst_1 : OrderTop α] {x : WithTop α}, ↑⊤ < x ↔ x = ⊤
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Rat.zero_add : ∀ (a : ℚ), 0 + a = a
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `x_0.den_nz`.
+This is because it contains free variables and has subterms possessing at least one of the following features
+· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
+· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
+· (TODO)
+
+Testing || MeasureTheory.Measure.bind_zero_right' : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β] (m : MeasureTheory.Measure α),
+  (m.bind fun x => 0) = 0
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Dynamics.coverEntropyEntourage_univ : ∀ {X : Type u_1} (T : X → X) {F : Set X}, F.Nonempty → Dynamics.coverEntropyEntourage T F Set.univ = 0
+Result.autoException ::
+Auto failed to find proof
+
+Testing || CategoryTheory.LaxMonoidalFunctor.mapMon_map_hom : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}
+  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]
+  (F : CategoryTheory.LaxMonoidalFunctor C D) {X Y : Mon_ C} (f : X ⟶ Y), (F.mapMon.map f).hom = F.map f.hom
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `CategoryTheory.MonoidalCategory.leftUnitor
+  (cifvar_10 (cifvar_11 (cifvar_12 x_0)) x_1)`.
+This is because it contains free variables and has subterms possessing at least one of the following features
+· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
+· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
+· (TODO)
+
+Testing || Real.lt_sin : ∀ {x : ℝ}, x < 0 → x < Real.sin x
+Result.success
+
+Testing || Prod.instSubtractionMonoid.proof_3 : ∀ {G : Type u_1} {H : Type u_2} [inst : SubtractionMonoid G] [inst_1 : SubtractionMonoid H] (x x_1 : G × H),
+  x + x_1 = 0 → -x = x_1
+Result.success
+
+Testing || MeasureTheory.tendsto_integral_of_L1 : ∀ {α : Type u_1} {G : Type u_5} [inst : NormedAddCommGroup G] [inst_1 : NormedSpace ℝ G] {m : MeasurableSpace α}
+  {μ : MeasureTheory.Measure α} {ι : Type u_6} (f : α → G),
+  MeasureTheory.Integrable f μ →
+    ∀ {F : ι → α → G} {l : Filter ι},
+      (∀ᶠ (i : ι) in l, MeasureTheory.Integrable (F i) μ) →
+        Filter.Tendsto (fun i => ∫⁻ (x : α), ↑‖F i x - f x‖₊ ∂μ) l (nhds 0) →
+          Filter.Tendsto (fun i => ∫ (x : α), F i x ∂μ) l (nhds (∫ (x : α), f x ∂μ))
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `Classical.propDecidable
+  (cifvar_0 x_1 x_0)`.
+This is because it contains free variables and has subterms possessing at least one of the following features
+· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
+· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
+· (TODO)
+
+Testing || CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)
+  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G ↑(F.obj X)]
+  [inst_3 : CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]
+  [inst_5 : CategoryTheory.PreGaloisCategory.FiberFunctor F] [inst_6 : TopologicalSpace G] [inst_7 : TopologicalGroup G]
+  [inst_8 : CompactSpace G] [inst_9 : ∀ (X : C), ContinuousSMul G ↑(F.obj X)],
+  (∀ (X : C) [inst_10 : CategoryTheory.PreGaloisCategory.IsGalois X], MulAction.IsPretransitive G ↑(F.obj X)) →
+    Function.Surjective ⇑(CategoryTheory.PreGaloisCategory.toAut F G)
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `inst✝⁷ x_0`.
+This is because it contains free variables and has subterms possessing at least one of the following features
+· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
+· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
+· (TODO)
+
+Testing || AddSubgroup.addUnits_ofAddUnits_eq : ∀ {M : Type u_1} [inst : AddMonoid M] (S : AddSubgroup (AddUnits M)), S.ofAddUnits.addUnits = S
+Result.autoException ::
+Auto failed to find proof
+
+Testing || MvPolynomial.IsSymmetric.sub : ∀ {σ : Type u_1} {R : Type u_3} [inst : CommRing R] {φ ψ : MvPolynomial σ R},
+  φ.IsSymmetric → ψ.IsSymmetric → (φ - ψ).IsSymmetric
+Result.autoException ::
+Auto failed to find proof
+
+Testing || List.cons_head?_tail : ∀ {α : Type u} {l : List α} {a : α}, a ∈ l.head? → a :: l.tail = l
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Subring.center_toSubsemiring : ∀ (R : Type u) [inst : Ring R], (Subring.center R).toSubsemiring = Subsemiring.center R
+Result.autoException ::
+Auto failed to find proof
+
+Testing || FreeAddGroup.join_red_of_step : ∀ {α : Type u} {L₁ L₂ : List (α × Bool)}, FreeAddGroup.Red.Step L₁ L₂ → Relation.Join FreeAddGroup.Red L₁ L₂
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Order.IsSuccLimit.succ_ne : ∀ {α : Type u_1} {a : α} [inst : Preorder α] [inst_1 : SuccOrder α] [inst_2 : NoMaxOrder α],
+  Order.IsSuccLimit a → ∀ (b : α), Order.succ b ≠ a
+Result.success
+
+Testing || dite_pow : ∀ {α : Type u_1} {β : Type u_2} [inst : Pow α β] (p : Prop) [inst_1 : Decidable p] (a : p → α) (b : ¬p → α) (c : β),
+  (if h : p then a h else b h) ^ c = if h : p then a h ^ c else b h ^ c
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Set.MapsTo.nonempty : ∀ {α : Type u_1} {β : Type u_2} {s : Set α} {t : Set β} {f : α → β}, Set.MapsTo f s t → s.Nonempty → t.Nonempty
+Result.success
+
+Testing || Finset.inter_insert_of_not_mem : ∀ {α : Type u_1} [inst : DecidableEq α] {s₁ s₂ : Finset α} {a : α}, a ∉ s₁ → s₁ ∩ insert a s₂ = s₁ ∩ s₂
+Result.success
+
+Testing || FirstOrder.Language.BoundedFormula.realize_liftAt_one_self : ∀ {L : FirstOrder.Language} {M : Type w} [inst : L.Structure M] {α : Type u'} {n : ℕ} {φ : L.BoundedFormula α n}
+  {v : α → M} {xs : Fin (n + 1) → M},
+  (FirstOrder.Language.BoundedFormula.liftAt 1 n φ).Realize v xs ↔ φ.Realize v (xs ∘ Fin.castSucc)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Option.join_eq_some : ∀ {α : Type u_1} {a : α} {x : Option (Option α)}, x.join = some a ↔ x = some (some a)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || min_eq_iff : ∀ {α : Type u} [inst : LinearOrder α] {a b c : α}, min a b = c ↔ a = c ∧ a ≤ b ∨ b = c ∧ b ≤ a
+Result.success
+
+Testing || Auto.Embedding.Lam.LamTerm.maxEVarSucc_etaExpandWith : ∀ {l : List Auto.Embedding.Lam.LamSort} {t : Auto.Embedding.Lam.LamTerm},
+  (Auto.Embedding.Lam.LamTerm.etaExpandWith l t).maxEVarSucc = t.maxEVarSucc
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Nat.sInf_def : ∀ {s : Set ℕ} (h : s.Nonempty), sInf s = Nat.find h
+Result.autoException ::
+Auto failed to find proof
+
+Testing || CategoryTheory.Meq.pullback_refine : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type w}
+  [inst_1 : CategoryTheory.Category.{max v u, w} D] [inst_2 : CategoryTheory.ConcreteCategory D] {Y X : C}
+  {P : CategoryTheory.Functor Cᵒᵖ D} {S T : J.Cover X} (h : S ⟶ T) (f : Y ⟶ X) (x : CategoryTheory.Meq P T),
+  (x.pullback f).refine ((J.pullback f).map h) = (x.refine h).pullback f
+Result.autoException ::
+Auto failed to find proof
+
+Testing || OrderHom.gfp_le : ∀ {α : Type u} [inst : CompleteLattice α] (f : α →o α) {a : α}, (∀ b ≤ f b, b ≤ a) → OrderHom.gfp f ≤ a
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Sum.elim_mul_mul : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} (a a' : α → γ) (b b' : β → γ) [inst : Mul γ],
+  Sum.elim (a * a') (b * b') = Sum.elim a b * Sum.elim a' b'
+Result.autoException ::
+Auto failed to find proof
+
+Testing || LinearMap.BilinForm.nondegenerate_congr_iff : ∀ {R : Type u_1} {M : Type u_2} [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {M' : Type u_9}
+  [inst_3 : AddCommMonoid M'] [inst_4 : Module R M'] {B : LinearMap.BilinForm R M} (e : M ≃ₗ[R] M'),
+  ((LinearMap.BilinForm.congr e) B).Nondegenerate ↔ B.Nondegenerate
+Result.autoException ::
+Auto failed to find proof
+
+Testing || CategoryTheory.Functor.punitExt_inv_app_down_down : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]
+  (F G : CategoryTheory.Functor C (CategoryTheory.Discrete PUnit.{w + 1})) (X : C), ⋯ = ⋯
+Result.autoException ::
+Auto failed to find proof
+
+Testing || List.isSuffix_iff : ∀ {α : Type u_1} {l₁ l₂ : List α},
+  l₁ <:+ l₂ ↔ l₁.length ≤ l₂.length ∧ ∀ (i : ℕ) (h : i < l₁.length), l₂[i + l₂.length - l₁.length]? = some l₁[i]
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `cifvar_3[i✝]`.
+This is because it contains free variables and has subterms possessing at least one of the following features
+· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
+· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
+· (TODO)
+
+Testing || SubMulAction.coe_copy : ∀ {R : Type u} {M : Type v} [inst : SMul R M] (p : SubMulAction R M) (s : Set M) (hs : s = ↑p), ↑(p.copy s hs) = s
+Result.autoException ::
+Auto failed to find proof
+
+Testing || UInt8.toNat_mul : ∀ (x y : UInt8), (x * y).toNat = x.toNat * y.toNat % UInt8.size
+Result.autoException ::
+Auto failed to find proof
+
+Testing || StieltjesFunction.const_apply : ∀ (c x : ℝ), ↑(StieltjesFunction.const c) x = c
+Result.autoException ::
+Auto failed to find proof
+
+Testing || HomologicalComplex.homologyFunctor_map : ∀ (C : Type u_1) [inst : CategoryTheory.Category.{u_3, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]
+  {ι : Type u_2} (c : ComplexShape ι) (i : ι) [inst_2 : CategoryTheory.CategoryWithHomology C]
+  {X Y : HomologicalComplex C c} (f : X ⟶ Y),
+  (HomologicalComplex.homologyFunctor C c i).map f = HomologicalComplex.homologyMap f i
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Multiset.count_union : ∀ {α : Type u_1} [inst : DecidableEq α] (a : α) (s t : Multiset α),
+  Multiset.count a (s ∪ t) = max (Multiset.count a s) (Multiset.count a t)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Commute.ofNat_left : ∀ {α : Type u_1} [inst : NonAssocSemiring α] (n : ℕ) [inst_1 : n.AtLeastTwo] (x : α), Commute (OfNat.ofNat n) x
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Std.Sat.AIG.toCNF_equisat : ∀ (entry : Std.Sat.AIG.Entrypoint ℕ), (Std.Sat.AIG.toCNF entry).Unsat ↔ entry.Unsat
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `x_0.ref`.
+This is because it contains free variables and has subterms possessing at least one of the following features
+· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
+· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
+· (TODO)
+
+Testing || Finsupp.lapply_comp_lsingle_same : ∀ {α : Type u_1} {M : Type u_2} {R : Type u_5} [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M]
+  (a : α), Finsupp.lapply a ∘ₗ Finsupp.lsingle a = LinearMap.id
+Result.autoException ::
+Auto failed to find proof
+
+Testing || CategoryTheory.MonoidalCategory.leftUnitor_whiskerRight_assoc : ∀ {C : Type u} [𝒞 : CategoryTheory.Category.{v, u} C] [inst : CategoryTheory.MonoidalCategory C] (X Y : C) {Z : C}
+  (h : CategoryTheory.MonoidalCategory.tensorObj X Y ⟶ Z),
+  CategoryTheory.CategoryStruct.comp
+      (CategoryTheory.MonoidalCategory.whiskerRight (CategoryTheory.MonoidalCategory.leftUnitor X).hom Y) h =
+    CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategory.associator (𝟙_ C) X Y).hom
+      (CategoryTheory.CategoryStruct.comp
+        (CategoryTheory.MonoidalCategory.leftUnitor (CategoryTheory.MonoidalCategory.tensorObj X Y)).hom h)
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `CategoryTheory.MonoidalCategory.associator
+  x_0 cifvar_17 x_1`.
+This is because it contains free variables and has subterms possessing at least one of the following features
+· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
+· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
+· (TODO)
+
+Testing || IsLocalization.mem_localizationLocalizationSubmodule : ∀ {R : Type u_1} [inst : CommSemiring R] {M : Submonoid R} {S : Type u_2} [inst_1 : CommSemiring S]
+  [inst_2 : Algebra R S] {N : Submonoid S} {x : R},
+  x ∈ IsLocalization.localizationLocalizationSubmodule M N ↔ ∃ y z, (algebraMap R S) x = ↑y * (algebraMap R S) ↑z
+Result.autoException ::
+Auto failed to find proof
+
+Testing || MulAction.isPeriodicPt_smul_iff : ∀ {α : Type v} {M : Type u} [inst : Monoid M] [inst_1 : MulAction M α] {m : M} {a : α} {n : ℕ},
+  Function.IsPeriodicPt (fun x => m • x) n a ↔ m ^ n • a = a
+Result.success
+
+Testing || IsometryEquiv.piCongrLeft'_invFun : ∀ {ι : Type u_1} {ι' : Type u_2} [inst : Fintype ι] [inst_1 : Fintype ι'] {Y : ι → Type u_3}
+  [inst_2 : (j : ι) → PseudoEMetricSpace (Y j)] (e : ι ≃ ι') (f : (b : ι') → Y (e.symm b)) (x : ι),
+  (IsometryEquiv.piCongrLeft' e).invFun f x = ⋯ ▸ f (e x)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Monoid.subset_closure : ∀ {M : Type u_1} [inst : Monoid M] {s : Set M}, s ⊆ Monoid.Closure s
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Set.Iic_diff_Iio : ∀ {α : Type u_1} [inst : LinearOrder α] {a b : α}, Set.Iic b \ Set.Iio a = Set.Icc a b
+Result.success
+
+Testing || Finset.insert_inj : ∀ {α : Type u_1} [inst : DecidableEq α] {s : Finset α} {a b : α}, a ∉ s → (insert a s = insert b s ↔ a = b)
+Result.success
+
+Testing || inf_covBy_of_covBy_sup_of_covBy_sup_right : ∀ {α : Type u_1} [inst : Lattice α] [inst_1 : IsWeakLowerModularLattice α] {a b : α}, a ⋖ a ⊔ b → b ⋖ a ⊔ b → a ⊓ b ⋖ b
+Result.success
+
+Testing || Interval.bot_div : ∀ {α : Type u_2} [inst : Preorder α] [inst_1 : CommGroup α] [inst_2 : MulLeftMono α] (t : Interval α), ⊥ / t = ⊥
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Ordinal.principal_add_opow_of_principal_add : ∀ {a : Ordinal.{u_1}},
+  Ordinal.Principal (fun x1 x2 => x1 + x2) a → ∀ (b : Ordinal.{u_1}), Ordinal.Principal (fun x1 x2 => x1 + x2) (a ^ b)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || LieModuleHom.map_lie₂ : ∀ {R : Type u} {L : Type v} {M : Type w} {N : Type w₁} {P : Type w₂} [inst : CommRing R] [inst_1 : LieRing L]
+  [inst_2 : AddCommGroup M] [inst_3 : AddCommGroup N] [inst_4 : AddCommGroup P] [inst_5 : Module R M]
+  [inst_6 : Module R N] [inst_7 : Module R P] [inst_8 : LieRingModule L M] [inst_9 : LieRingModule L N]
+  [inst_10 : LieRingModule L P] [inst_11 : LieAlgebra R L] [inst_12 : LieModule R L N] [inst_13 : LieModule R L P]
+  (f : M →ₗ⁅R,L⁆ N →ₗ[R] P) (x : L) (m : M) (n : N), ⁅x, (f m) n⁆ = (f ⁅x, m⁆) n + (f m) ⁅x, n⁆
+Result.autoException ::
+Auto failed to find proof
+
+Testing || MeasureTheory.lintegral_add_mul_meas_add_le_le_lintegral : ∀ {α : Type u_1} {m : MeasurableSpace α} {μ : MeasureTheory.Measure α} {f g : α → ENNReal},
+  f ≤ᵐ[μ] g → AEMeasurable g μ → ∀ (ε : ENNReal), ∫⁻ (a : α), f a ∂μ + ε * μ {x | f x + ε ≤ g x} ≤ ∫⁻ (a : α), g a ∂μ
+Result.autoException ::
+Auto failed to find proof
+
+Testing || isProperMap_iff_isClosedMap_and_compact_fibers : ∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : X → Y},
+  IsProperMap f ↔ Continuous f ∧ IsClosedMap f ∧ ∀ (y : Y), IsCompact (f ⁻¹' {y})
+Result.autoException ::
+Auto failed to find proof
+
+Testing || CategoryTheory.HomOrthogonal.eq_zero : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {ι : Type u_1} {s : ι → C}
+  [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C],
+  CategoryTheory.HomOrthogonal s → ∀ {i j : ι}, i ≠ j → ∀ (f : s i ⟶ s j), f = 0
+Result.autoException ::
+Auto failed to find proof
+
+Testing || CategoryTheory.Functor.CommShift.ofIso_compatibility : ∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{u_5, u_1} C]
+  [inst_1 : CategoryTheory.Category.{u_6, u_2} D] {F G : CategoryTheory.Functor C D} (e : F ≅ G) (A : Type u_4)
+  [inst_2 : AddMonoid A] [inst_3 : CategoryTheory.HasShift C A] [inst_4 : CategoryTheory.HasShift D A]
+  [inst_5 : F.CommShift A], CategoryTheory.NatTrans.CommShift e.hom A
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `CategoryTheory.CategoryStruct.id
+  x_1`.
+This is because it contains free variables and has subterms possessing at least one of the following features
+· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
+· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
+· (TODO)
+
+Testing || MvPolynomial.bind₁_monomial : ∀ {σ : Type u_1} {τ : Type u_2} {R : Type u_3} [inst : CommSemiring R] (f : σ → MvPolynomial τ R) (d : σ →₀ ℕ) (r : R),
+  (MvPolynomial.bind₁ f) ((MvPolynomial.monomial d) r) = MvPolynomial.C r * ∏ i ∈ d.support, f i ^ d i
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Trunc.finChoice_eq : ∀ {ι : Type u_1} [inst : DecidableEq ι] [inst_1 : Fintype ι] {α : ι → Type u_2} (f : (i : ι) → α i),
+  (Trunc.finChoice fun i => Trunc.mk (f i)) = Trunc.mk f
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `f i`.
+This is because it contains free variables and has subterms possessing at least one of the following features
+· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
+· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
+· (TODO)
+
+Testing || Real.sqrt_lt : ∀ {x y : ℝ}, 0 ≤ x → 0 ≤ y → (√x < y ↔ x < y ^ 2)
+Result.success
+
+Testing || WithBot.coe_addHom : ∀ {α : Type u} [inst : AddMonoid α], ⇑WithBot.addHom = WithBot.some
+Result.autoException ::
+Auto failed to find proof
+
+Testing || MemHolder.nnHolderNorm_add_le : ∀ {X : Type u_1} {Y : Type u_2} [inst : MetricSpace X] [inst_1 : NormedAddCommGroup Y] {r : NNReal} {f g : X → Y},
+  MemHolder r f → MemHolder r g → nnHolderNorm r (f + g) ≤ nnHolderNorm r f + nnHolderNorm r g
+Result.success
+
+Testing || tsum_mul_tsum_eq_tsum_sum_antidiagonal : ∀ {α : Type u_4} {A : Type u_5} [inst : AddCommMonoid A] [inst_1 : Finset.HasAntidiagonal A]
+  [inst_2 : TopologicalSpace α] [inst_3 : NonUnitalNonAssocSemiring α] {f g : A → α} [inst_4 : T3Space α]
+  [inst_5 : TopologicalSemiring α],
+  Summable f →
+    Summable g →
+      (Summable fun x => f x.1 * g x.2) →
+        (∑' (n : A), f n) * ∑' (n : A), g n = ∑' (n : A), ∑ kl ∈ Finset.antidiagonal n, f kl.1 * g kl.2
+Result.autoException ::
+Auto failed to find proof
+
+Testing || ProbabilityTheory.Kernel.iIndepFun.indepFun_finset_sum_of_not_mem : ∀ {α : Type u_1} {Ω : Type u_2} {ι : Type u_3} {_mα : MeasurableSpace α} {_mΩ : MeasurableSpace Ω}
+  {κ : ProbabilityTheory.Kernel α Ω} {μ : MeasureTheory.Measure α} {β : Type u_8} {m : MeasurableSpace β}
+  [inst : AddCommMonoid β] [inst_1 : MeasurableAdd₂ β] {f : ι → Ω → β},
+  ProbabilityTheory.Kernel.iIndepFun (fun x => m) f κ μ →
+    (∀ (i : ι), Measurable (f i)) →
+      ∀ {s : Finset ι} {i : ι}, i ∉ s → ProbabilityTheory.Kernel.IndepFun (∑ j ∈ s, f j) (f i) κ μ
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `Finset.Subtype.fintype x_0`.
+This is because it contains free variables and has subterms possessing at least one of the following features
+· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
+· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
+· (TODO)
+
+Testing || smooth_mul_left : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}
+  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}
+  [inst_4 : Mul G] [inst_5 : TopologicalSpace G] [inst_6 : ChartedSpace H G] [inst_7 : SmoothMul I G] {a : G},
+  Smooth I I fun b => a * b
+Result.autoException ::
+Auto failed to find proof
+
+Testing || CompHausLike.precoherent : ∀ {P : TopCat → Prop} [inst : CompHausLike.HasExplicitPullbacks P] [inst : CompHausLike.HasExplicitFiniteCoproducts P],
+  (∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y), CategoryTheory.EffectiveEpi f → Function.Surjective ⇑f) →
+    CategoryTheory.Precoherent (CompHausLike P)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || smul_ne_zero_iff_ne : ∀ {α : Type u_5} {β : Type u_6} [inst : Group α] [inst_1 : AddMonoid β] [inst_2 : DistribMulAction α β] (a : α) {x : β},
+  a • x ≠ 0 ↔ x ≠ 0
+Result.success
+
+Testing || Basis.flag_succ : ∀ {R : Type u_1} {M : Type u_2} [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {n : ℕ}
+  (b : Basis (Fin n) R M) (k : Fin n), b.flag k.succ = Submodule.span R {b k} ⊔ b.flag k.castSucc
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Nat.cast_pow : ∀ {α : Type u_1} [inst : Semiring α] (m n : ℕ), ↑(m ^ n) = ↑m ^ n
+Result.autoException ::
+Auto failed to find proof
+
+Testing || IsRegular.subsingleton : ∀ {R : Type u_1} [inst : MulZeroClass R], IsRegular 0 → Subsingleton R
+Result.success
+
+Testing || HasSum.int_rec : ∀ {M : Type u_1} [inst : AddCommMonoid M] [inst_1 : TopologicalSpace M] {m m' : M} [inst_2 : ContinuousAdd M]
+  {f g : ℕ → M}, HasSum f m → HasSum g m' → HasSum (fun t => Int.rec f g t) (m + m')
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Polynomial.degree_cyclotomic : ∀ (n : ℕ) (R : Type u_1) [inst : Ring R] [inst_1 : Nontrivial R], (Polynomial.cyclotomic n R).degree = ↑n.totient
+Result.autoException ::
+Auto failed to find proof
+
+Testing || LocallyBoundedVariationOn.exists_monotoneOn_sub_monotoneOn : ∀ {α : Type u_1} [inst : LinearOrder α] {f : α → ℝ} {s : Set α},
+  LocallyBoundedVariationOn f s → ∃ p q, MonotoneOn p s ∧ MonotoneOn q s ∧ f = p - q
+Result.autoException ::
+Auto failed to find proof
+
+Testing || TopCat.Presheaf.stalkFunctor_map_germ_apply : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X : TopCat}
+  [inst_2 : CategoryTheory.ConcreteCategory C] {F G : TopCat.Presheaf C X} (U : TopologicalSpace.Opens ↑X) (x : ↑X)
+  (hx : x ∈ U) (f : F ⟶ G) (s : (CategoryTheory.forget C).obj (F.obj (Opposite.op U))),
+  ((TopCat.Presheaf.stalkFunctor C x).map f) ((F.germ U x hx) s) = (G.germ U x hx) ((f.app (Opposite.op U)) s)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || ENNReal.inv_three_add_inv_three : 3⁻¹ + 3⁻¹ + 3⁻¹ = 1
+Result.autoException ::
+Auto failed to find proof
+
+Testing || connectedComponents_preimage_image : ∀ {α : Type u} [inst : TopologicalSpace α] (U : Set α),
+  ConnectedComponents.mk ⁻¹' (ConnectedComponents.mk '' U) = ⋃ x ∈ U, connectedComponent x
+Result.autoException ::
+Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type x ∈ U of λ binder contains bound variables
+
+Testing || differentiable_add_const_iff : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]
+  [inst_2 : NormedSpace 𝕜 E] {F : Type u_3} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {f : E → F}
+  (c : F), (Differentiable 𝕜 fun y => f y + c) ↔ Differentiable 𝕜 f
+Result.success
+
+Testing || Filter.Tendsto.isBoundedUnder_le : ∀ {ι : Type u_1} {α : Type u_2} [inst : Preorder α] [inst_1 : TopologicalSpace α] [inst_2 : BoundedLENhdsClass α]
+  {f : Filter ι} {u : ι → α} {a : α}, Filter.Tendsto u f (nhds a) → Filter.IsBoundedUnder (fun x1 x2 => x1 ≤ x2) f u
+Result.autoException ::
+Auto failed to find proof
+
+Testing || MeasureTheory.Measure.ae_pi_le_pi : ∀ {ι : Type u_1} {α : ι → Type u_3} [inst : Fintype ι] [inst_1 : (i : ι) → MeasurableSpace (α i)]
+  {μ : (i : ι) → MeasureTheory.Measure (α i)} [inst_2 : ∀ (i : ι), MeasureTheory.SigmaFinite (μ i)],
+  MeasureTheory.ae (MeasureTheory.Measure.pi μ) ≤ Filter.pi fun i => MeasureTheory.ae (μ i)
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `inst✝¹ x_0`.
+This is because it contains free variables and has subterms possessing at least one of the following features
+· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
+· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
+· (TODO)
+
+Testing || RatFunc.coe_div : ∀ {F : Type u} [inst : Field F] (f g : RatFunc F), ↑(f / g) = ↑f / ↑g
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Lagrange.nodal_eq_mul_nodal_erase : ∀ {R : Type u_1} [inst : CommRing R] {ι : Type u_2} {s : Finset ι} {v : ι → R} [inst_1 : DecidableEq ι] {i : ι},
+  i ∈ s → Lagrange.nodal s v = (Polynomial.X - Polynomial.C (v i)) * Lagrange.nodal (s.erase i) v
+Result.autoException ::
+Auto failed to find proof
+
+Testing || HomologicalComplex.mapBifunctor₁₂.ι_D₃ : ∀ {C₁ : Type u_1} {C₂ : Type u_2} {C₁₂ : Type u_3} {C₃ : Type u_5} {C₄ : Type u_6}
+  [inst : CategoryTheory.Category.{u_17, u_1} C₁] [inst_1 : CategoryTheory.Category.{u_16, u_2} C₂]
+  [inst_2 : CategoryTheory.Category.{u_14, u_5} C₃] [inst_3 : CategoryTheory.Category.{u_13, u_6} C₄]
+  [inst_4 : CategoryTheory.Category.{u_15, u_3} C₁₂] [inst_5 : CategoryTheory.Limits.HasZeroMorphisms C₁]
+  [inst_6 : CategoryTheory.Limits.HasZeroMorphisms C₂] [inst_7 : CategoryTheory.Limits.HasZeroMorphisms C₃]
+  [inst_8 : CategoryTheory.Preadditive C₁₂] [inst_9 : CategoryTheory.Preadditive C₄]
+  (F₁₂ : CategoryTheory.Functor C₁ (CategoryTheory.Functor C₂ C₁₂))
+  (G : CategoryTheory.Functor C₁₂ (CategoryTheory.Functor C₃ C₄)) [inst_10 : F₁₂.PreservesZeroMorphisms]
+  [inst_11 : ∀ (X₁ : C₁), (F₁₂.obj X₁).PreservesZeroMorphisms] [inst_12 : G.Additive]
+  [inst_13 : ∀ (X₁₂ : C₁₂), (G.obj X₁₂).PreservesZeroMorphisms] {ι₁ : Type u_7} {ι₂ : Type u_8} {ι₃ : Type u_9}
+  {ι₁₂ : Type u_10} {ι₄ : Type u_12} [inst_14 : DecidableEq ι₁₂] [inst_15 : DecidableEq ι₄] {c₁ : ComplexShape ι₁}
+  {c₂ : ComplexShape ι₂} {c₃ : ComplexShape ι₃} (K₁ : HomologicalComplex C₁ c₁) (K₂ : HomologicalComplex C₂ c₂)
+  (K₃ : HomologicalComplex C₃ c₃) (c₁₂ : ComplexShape ι₁₂) (c₄ : ComplexShape ι₄)
+  [inst_16 : TotalComplexShape c₁ c₂ c₁₂] [inst_17 : TotalComplexShape c₁₂ c₃ c₄]
+  [inst_18 : K₁.HasMapBifunctor K₂ F₁₂ c₁₂] [inst_19 : (K₁.mapBifunctor K₂ F₁₂ c₁₂).HasMapBifunctor K₃ G c₄] (i₁ : ι₁)
+  (i₂ : ι₂) (i₃ : ι₃) (j j' : ι₄) (h : c₁.r c₂ c₃ c₁₂ c₄ (i₁, i₂, i₃) = j),
+  CategoryTheory.CategoryStruct.comp (HomologicalComplex.mapBifunctor₁₂.ι F₁₂ G K₁ K₂ K₃ c₁₂ c₄ i₁ i₂ i₃ j h)
+      (HomologicalComplex.mapBifunctor₁₂.D₃ F₁₂ G K₁ K₂ K₃ c₁₂ c₄ j j') =
+    HomologicalComplex.mapBifunctor₁₂.d₃ F₁₂ G K₁ K₂ K₃ c₁₂ c₄ i₁ i₂ i₃ j'
+Result.autoException ::
+Auto.Monomorphization.ConstInst.ofExpr? :: CategoryTheory.GradedObject (ι₁ × ι₂) C₁₂ is not a `∀`
+
+Testing || CategoryTheory.evalEquiv_symm_apply : ∀ (S : CategoryTheory.Functor Type uᵒᵖ (Type u))
+  (hs : CategoryTheory.Presieve.IsSheaf CategoryTheory.typesGrothendieckTopology S) (α : Type u)
+  (f : α → S.obj (Opposite.op PUnit.{u + 1})),
+  (CategoryTheory.evalEquiv S hs α).symm f = CategoryTheory.typesGlue S hs α f
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Metric.mem_thickening_iff_exists_edist_lt : ∀ {α : Type u} [inst : PseudoEMetricSpace α] {δ : ℝ} (E : Set α) (x : α),
+  x ∈ Metric.thickening δ E ↔ ∃ z ∈ E, edist x z < ENNReal.ofReal δ
+Result.autoException ::
+Auto failed to find proof
+
+Testing || List.get_take' : ∀ {α : Type u_1} (L : List α) {j : ℕ} {i : Fin (List.take j L).length}, (List.take j L).get i = L.get ⟨↑i, ⋯⟩
+Result.autoException ::
+Auto failed to find proof
+
+Testing || FermatLastTheoremForThreeGen.Solution.associated_of_dvd_a_add_b_of_dvd_a_add_eta_mul_b : ∀ {K : Type u_1} [inst : Field K] {ζ : K} {hζ : IsPrimitiveRoot ζ ↑3} (S : FermatLastTheoremForThreeGen.Solution hζ)
+  [inst_1 : NumberField K] [inst_2 : IsCyclotomicExtension {3} ℚ K] {p : NumberField.RingOfIntegers K},
+  Prime p → p ∣ S.a + S.b → p ∣ S.a + ↑⋯.unit * S.b → Associated p (hζ.toInteger - 1)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Set.bounded_le_Ioc : ∀ {α : Type u_1} [inst : Preorder α] (a b : α), Set.Bounded (fun x1 x2 => x1 ≤ x2) (Set.Ioc a b)
+Result.success
+
+Testing || ciInf_sub : ∀ {ι : Type u_1} {G : Type u_2} [inst : AddGroup G] [inst_1 : ConditionallyCompleteLattice G] [inst_2 : Nonempty ι]
+  {f : ι → G} [inst_3 : AddRightMono G], BddBelow (Set.range f) → ∀ (a : G), (⨅ i, f i) - a = ⨅ i, f i - a
+Result.success
+
+Testing || Matrix.trace_transpose : ∀ {n : Type u_3} {R : Type u_6} [inst : Fintype n] [inst_1 : AddCommMonoid R] (A : Matrix n n R),
+  A.transpose.trace = A.trace
+Result.autoException ::
+Auto failed to find proof
+
+Testing || EReal.inv_nonneg_of_nonneg : ∀ {a : EReal}, 0 ≤ a → 0 ≤ a⁻¹
+Result.autoException ::
+Auto failed to find proof
+
+Testing || symmDiff_le : ∀ {α : Type u_2} [inst : GeneralizedCoheytingAlgebra α] {a b c : α}, a ≤ b ⊔ c → b ≤ a ⊔ c → symmDiff a b ≤ c
+Result.autoException ::
+Auto failed to find proof
+
+Testing || InnerProductSpace.volume_closedBall : ∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : InnerProductSpace ℝ E] [inst_2 : FiniteDimensional ℝ E]
+  [inst_3 : MeasurableSpace E] [inst_4 : BorelSpace E] [inst_5 : Nontrivial E] (x : E) (r : ℝ),
+  MeasureTheory.volume (Metric.closedBall x r) =
+    ENNReal.ofReal r ^ Module.finrank ℝ E *
+      ENNReal.ofReal (√Real.pi ^ Module.finrank ℝ E / Real.Gamma (↑(Module.finrank ℝ E) / 2 + 1))
+Result.autoException ::
+Auto failed to find proof
+
+Testing || SimpleGraph.card_edgeFinset_sup_edge : ∀ {V : Type u_1} (G : SimpleGraph V) {s t : V} [inst : Fintype V] [inst_1 : DecidableRel G.Adj]
+  [inst_2 : Fintype ↑(G ⊔ SimpleGraph.edge s t).edgeSet],
+  ¬G.Adj s t → s ≠ t → (G ⊔ SimpleGraph.edge s t).edgeFinset.card = G.edgeFinset.card + 1
+Result.autoException ::
+Auto failed to find proof
+
+Testing || OrderedSemiring.zero_le_one : ∀ {α : Type u} [self : OrderedSemiring α], 0 ≤ 1
+Result.autoException ::
+Auto failed to find proof
+
+Testing || List.mem_pure : ∀ {α : Type u} (x y : α), x ∈ pure y ↔ x = y
+Result.autoException ::
+Auto failed to find proof
+
+Testing || LinearMap.range_mkQ_comp : ∀ {R : Type u_1} {M : Type u_2} {R₂ : Type u_3} {M₂ : Type u_4} [inst : Ring R] [inst_1 : Ring R₂]
+  [inst_2 : AddCommMonoid M] [inst_3 : AddCommGroup M₂] [inst_4 : Module R M] [inst_5 : Module R₂ M₂] {τ₁₂ : R →+* R₂}
+  [inst_6 : RingHomSurjective τ₁₂] (f : M →ₛₗ[τ₁₂] M₂), (LinearMap.range f).mkQ.comp f = 0
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `Submodule.Quotient.mk x_0`.
+This is because it contains free variables and has subterms possessing at least one of the following features
+· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
+· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
+· (TODO)
+
+Testing || List.foldr_ext : ∀ {α : Type u} {β : Type v} (f g : α → β → β) (b : β) {l : List α},
+  (∀ a ∈ l, ∀ (b : β), f a b = g a b) → List.foldr f b l = List.foldr g b l
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Nat.div_le_of_le_mul' : ∀ {m n k : ℕ}, m ≤ k * n → m / k ≤ n
+Result.autoException ::
+Auto failed to find proof
+
+Testing || CategoryTheory.Functor.Final.colimitCoconeOfComp_cocone : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]
+  (F : CategoryTheory.Functor C D) [inst_2 : F.Final] {E : Type u₃} [inst_3 : CategoryTheory.Category.{v₃, u₃} E]
+  {G : CategoryTheory.Functor D E} (t : CategoryTheory.Limits.ColimitCocone (F.comp G)),
+  (CategoryTheory.Functor.Final.colimitCoconeOfComp F t).cocone = CategoryTheory.Functor.Final.extendCocone.obj t.cocone
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Pi.addAction.proof_2 : ∀ {ι : Type u_1} {α : ι → Type u_2} (M : Type u_3) {m : AddMonoid M} [inst : (i : ι) → AddAction M (α i)] (x x_1 : M)
+  (x_2 : (i : ι) → α i), x + x_1 +ᵥ x_2 = x +ᵥ (x_1 +ᵥ x_2)
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `inst✝ i`.
+This is because it contains free variables and has subterms possessing at least one of the following features
+· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
+· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
+· (TODO)
+
+Testing || Multiset.powerset_aux'_perm : ∀ {α : Type u_1} {l₁ l₂ : List α}, l₁.Perm l₂ → (Multiset.powersetAux' l₁).Perm (Multiset.powersetAux' l₂)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || smul_mul' : ∀ {M : Type u_1} {A : Type u_3} [inst : Monoid M] [inst_1 : Monoid A] [inst_2 : MulDistribMulAction M A] (a : M)
+  (b₁ b₂ : A), a • (b₁ * b₂) = a • b₁ * a • b₂
+Result.success
+
+Testing || Finmap.lookup_insert : ∀ {α : Type u} {β : α → Type v} [inst : DecidableEq α] {a : α} {b : β a} (s : Finmap β),
+  Finmap.lookup a (Finmap.insert a b s) = some b
+Result.autoException ::
+Auto failed to find proof
+
+Testing || MeasureTheory.OuterMeasureClass.measure_empty : ∀ {F : Type u_2} {α : outParam (Type u_3)} {inst : FunLike F (Set α) ENNReal}
+  [self : MeasureTheory.OuterMeasureClass F α] (f : F), f ∅ = 0
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Filter.rtendsto_def : ∀ {α : Type u} {β : Type v} (r : Rel α β) (l₁ : Filter α) (l₂ : Filter β),
+  Filter.RTendsto r l₁ l₂ ↔ ∀ s ∈ l₂, r.core s ∈ l₁
+Result.autoException ::
+Auto failed to find proof
+
+Testing || zpow_strictMono : ∀ {α : Type u_1} [inst : LinearOrderedSemifield α] {a : α}, 1 < a → StrictMono fun x => a ^ x
+Result.success
+
+Testing || Order.pred_eq_pred_iff : ∀ {α : Type u_1} [inst : LinearOrder α] [inst_1 : PredOrder α] {a b : α} [inst_2 : NoMinOrder α],
+  Order.pred a = Order.pred b ↔ a = b
+Result.success
+
+Testing || AddCommute.prod : ∀ {M : Type u_3} {N : Type u_4} [inst : Add M] [inst_1 : Add N] {x y : M × N},
+  AddCommute x.1 y.1 → AddCommute x.2 y.2 → AddCommute x y
+Result.autoException ::
+Auto failed to find proof
+
+Testing || MeasureTheory.regular_inv_iff : ∀ {G : Type u_1} [inst : MeasurableSpace G] [inst_1 : TopologicalSpace G] [inst_2 : BorelSpace G]
+  {μ : MeasureTheory.Measure G} [inst_3 : Group G] [inst_4 : TopologicalGroup G], μ.inv.Regular ↔ μ.Regular
+Result.autoException ::
+Auto failed to find proof
+
+Testing || mul_div_cancel_of_invertible : ∀ {α : Type u} [inst : GroupWithZero α] (a b : α) [inst_1 : Invertible b], a * b / b = a
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Real.logb_pos : ∀ {b x : ℝ}, 1 < b → 1 < x → 0 < Real.logb b x
+Result.success
+
+Testing || continuousWithinAt_update_same : ∀ {α : Type u_1} {β : Type u_2} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β] {f : α → β} {s : Set α}
+  {x : α} [inst_2 : DecidableEq α] {y : β},
+  ContinuousWithinAt (Function.update f x y) s x ↔ Filter.Tendsto f (nhdsWithin x (s \ {x})) (nhds y)
+Result.autoException ::
+Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #0, (∀ x1 : #2, (∀ x2 : (#0 → Prop), ((!12 (λx3 : #0, (x2 x3)) (!7 x0 x1)) ↔ (!12 (λx3 : #0, ((!13 x1 x3) → (x2 x3))) (!14 x0)))))) is not type correct
+
+Testing || CategoryTheory.prod.rightUnitor_obj : ∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] (X : C × CategoryTheory.Discrete PUnit.{w + 1}),
+  (CategoryTheory.prod.rightUnitor C).obj X = X.1
+Result.autoException ::
+Auto failed to find proof
+
+Testing || PowerSeries.ext : ∀ {R : Type u_1} [inst : Semiring R] {φ ψ : PowerSeries R},
+  (∀ (n : ℕ), (PowerSeries.coeff R n) φ = (PowerSeries.coeff R n) ψ) → φ = ψ
+Result.success
+
+Testing || AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val : ∀ (D : AlgebraicGeometry.Scheme.GlueData) {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type v)}
+  (s : (j : D.J) → F.val.obj (Opposite.op (D.U j)))
+  (h :
+    ∀ (i j : D.J),
+      F.val.map (D.f i j).op (s i) = F.val.map (CategoryTheory.CategoryStruct.comp (D.f j i).op (D.t i j).op) (s j))
+  (j : D.J), F.val.map (D.ι j).op (D.sheafValGluedMk s h) = s j
+Result.autoException ::
+Auto.Monomorphization.ConstInst.ofExpr? :: F.val.obj (Opposite.op D.glued) ⟶
+  F.val.obj (Opposite.op (D.U j)) is not a `∀`
+
+Testing || Filter.disjoint_atBot_principal_Ici : ∀ {α : Type u_3} [inst : Preorder α] [inst_1 : NoMinOrder α] (x : α),
+  Disjoint Filter.atBot (Filter.principal (Set.Ici x))
+Result.autoException ::
+Auto failed to find proof
+
+Testing || LinearAlgebra.FreeProduct.of_def : ∀ {I : Type u_1} [inst : DecidableEq I] (R : Type u_2) [inst_1 : CommSemiring R] (A : I → Type u_3)
+  [inst_2 : (i : I) → Semiring (A i)] [inst_3 : (i : I) → Algebra R (A i)] {i : I},
+  LinearAlgebra.FreeProduct.of R A = LinearAlgebra.FreeProduct.ι R A i
+Result.autoException ::
+Auto failed to find proof
+
+Testing || differentiableOn_id' : ∀ {K : Type u_1} [inst : NontriviallyNormedField K] {E : Type u_2} [inst_1 : NormedAddCommGroup E]
+  [inst_2 : NormedSpace K E] {s : Set E}, DifferentiableOn K (fun x => x) s
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Order.not_isMax_pred : ∀ {α : Type u_1} [inst : LinearOrder α] [inst_1 : PredOrder α] [inst_2 : Nontrivial α] (a : α), ¬IsMax (Order.pred a)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || CategoryTheory.Functor.limitIsoOfIsRightKanExtension_hom_π : ∀ {C : Type u_1} {H : Type u_3} {D : Type u_4} [inst : CategoryTheory.Category.{u_8, u_1} C]
+  [inst_1 : CategoryTheory.Category.{u_6, u_3} H] [inst_2 : CategoryTheory.Category.{u_7, u_4} D]
+  (F' : CategoryTheory.Functor D H) {L : CategoryTheory.Functor C D} {F : CategoryTheory.Functor C H}
+  (α : L.comp F' ⟶ F) [inst_3 : F'.IsRightKanExtension α] [inst_4 : CategoryTheory.Limits.HasLimit F]
+  [inst_5 : CategoryTheory.Limits.HasLimit F'] (i : C),
+  CategoryTheory.CategoryStruct.comp (F'.limitIsoOfIsRightKanExtension α).hom (CategoryTheory.Limits.limit.π F i) =
+    CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.limit.π F' (L.obj i)) (α.app i)
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `CategoryTheory.Limits.limit.π
+  cifvar_5 (cifvar_24 (cifvar_25 cifvar_26) x_0)`.
+This is because it contains free variables and has subterms possessing at least one of the following features
+· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
+· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
+· (TODO)
+
+Testing || continuous_coe_real_ereal : Continuous Real.toEReal
+Result.success
+
+Testing || SetTheory.PGame.LF.not_equiv : ∀ {x y : SetTheory.PGame}, x.LF y → ¬x ≈ y
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Quot.lift₂_mk : ∀ {α : Sort u_1} {β : Sort u_2} {γ : Sort u_4} {r : α → α → Prop} {s : β → β → Prop} (f : α → β → γ)
+  (hr : ∀ (a : α) (b₁ b₂ : β), s b₁ b₂ → f a b₁ = f a b₂) (hs : ∀ (a₁ a₂ : α) (b : β), r a₁ a₂ → f a₁ b = f a₂ b)
+  (a : α) (b : β), Quot.lift₂ f hr hs (Quot.mk r a) (Quot.mk s b) = f a b
+Result.autoException ::
+Auto failed to find proof
+
+Testing || BialgHom.coe_toAlgHom : ∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : Algebra R A]
+  [inst_3 : Semiring B] [inst_4 : Algebra R B] [inst_5 : CoalgebraStruct R A] [inst_6 : CoalgebraStruct R B]
+  (f : A →ₐc[R] B), ⇑↑f = ⇑f
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Finset.image_add_left_Ioc : ∀ {α : Type u_2} [inst : OrderedCancelAddCommMonoid α] [inst_1 : ExistsAddOfLE α] [inst_2 : LocallyFiniteOrder α]
+  [inst_3 : DecidableEq α] (a b c : α), Finset.image (fun x => c + x) (Finset.Ioc a b) = Finset.Ioc (c + a) (c + b)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Int.dist_eq : ∀ (x y : ℤ), dist x y = |↑x - ↑y|
+Result.autoException ::
+Auto failed to find proof
+
+Testing || FiniteDimensional.of_locallyCompactSpace : ∀ (𝕜 : Type u) [inst : NontriviallyNormedField 𝕜] {E : Type v} [inst_1 : NormedAddCommGroup E]
+  [inst_2 : NormedSpace 𝕜 E] [inst_3 : CompleteSpace 𝕜] [inst_4 : LocallyCompactSpace E], FiniteDimensional 𝕜 E
+Result.success
+
+Testing || WithZero.unzero_mul : ∀ {α : Type u_1} [inst : Mul α] {x y : WithZero α} (hxy : x * y ≠ 0),
+  WithZero.unzero hxy = WithZero.unzero ⋯ * WithZero.unzero ⋯
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Subgroup.smul_normal : ∀ {G : Type u_2} [inst : Group G] (g : G) (H : Subgroup G) [h : H.Normal], MulAut.conj g • H = H
+Result.autoException ::
+Auto failed to find proof
+
+Testing || _private.Mathlib.Topology.MetricSpace.GromovHausdorffRealized.0.GromovHausdorff.candidates_lipschitz : ∀ {X : Type u} {Y : Type v} [inst : MetricSpace X] [inst_1 : MetricSpace Y] {f : GromovHausdorff.ProdSpaceFun X Y},
+  f ∈ GromovHausdorff.candidates X Y → LipschitzWith (2 * GromovHausdorff.maxVar X Y) f
+Result.autoException ::
+Auto failed to find proof

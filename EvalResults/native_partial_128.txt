@@ -1,0 +1,543 @@
+Config = {maxHeartbeats := 65536, timeout := 10, solverConfig = native, logFile := evalOut.txt}
+
+Testing || SupClosed.image : ∀ {F : Type u_1} {α : Type u_2} {β : Type u_3} [inst : SemilatticeSup α] [inst_1 : SemilatticeSup β] {s : Set α}
+  [inst_2 : FunLike F α β] [inst_3 : SupHomClass F α β], SupClosed s → ∀ (f : F), SupClosed (⇑f '' s)
+Result.autoException ::
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.
+Additional diagnostic information may be available using the `set_option diagnostics true` command.
+
+Testing || EquivLike.injective : ∀ {E : Sort u_1} {α : Sort u_3} {β : Sort u_4} [inst : EquivLike E α β] (e : E), Function.Injective ⇑e
+Result.success
+
+Testing || Nat.mul_pow : ∀ (a b n : ℕ), (a * b) ^ n = a ^ n * b ^ n
+Result.autoException ::
+(deterministic) timeout at `match`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.
+Additional diagnostic information may be available using the `set_option diagnostics true` command.
+
+Testing || List.subset_cons_of_subset : ∀ {α : Type u_1} (a : α) {l₁ l₂ : List α}, l₁ ⊆ l₂ → l₁ ⊆ a :: l₂
+Result.autoException ::
+Duper saturated
+
+Testing || Cardinal.le_mk_iff_exists_set : ∀ {c : Cardinal.{u}} {α : Type u}, c ≤ Cardinal.mk α ↔ ∃ p, Cardinal.mk ↑p = c
+Result.autoException ::
+Duper saturated
+
+Testing || addMonoidHomEquivAddActionIsScalarTower.proof_1 : ∀ (M : Type u_1) (N : Type u_2) [inst : AddMonoid M] [inst_1 : AddMonoid N] (f : M →+ N), VAddAssocClass M N N
+Result.success
+
+Testing || Nat.mul_ne_mul_left : ∀ {a b c : ℕ}, a ≠ 0 → (b * a ≠ c * a ↔ b ≠ c)
+Result.success
+
+Testing || AddMonoidHom.fiberEquivKerOfSurjective.proof_1 : ∀ {α : Type u_2} [inst : AddGroup α] {H : Type u_1} [inst_1 : AddGroup H] {f : α →+ H} (hf : Function.Surjective ⇑f)
+  (h : H), f ⋯.choose = h
+Result.autoException ::
+Auto.Monomorphization.ConstInst.ofExpr? :: Function.Surjective ⇑f is not a `∀`
+
+Testing || Even.add_odd : ∀ {α : Type u_2} [inst : Semiring α] {a b : α}, Even a → Odd b → Odd (a + b)
+Result.autoException ::
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.
+Additional diagnostic information may be available using the `set_option diagnostics true` command.
+
+Testing || HasSum.of_nat_of_neg_add_one : ∀ {M : Type u_1} [inst : AddCommMonoid M] [inst_1 : TopologicalSpace M] {m m' : M} [inst_2 : ContinuousAdd M]
+  {f : ℤ → M}, HasSum (fun n => f ↑n) m → HasSum (fun n => f (-(↑n + 1))) m' → HasSum f (m + m')
+Result.autoException ::
+Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type { x // x ∈ x_4 } of λ binder contains bound variables
+
+Testing || AddSubgroup.quotientEquivSumOfLE_apply : ∀ {α : Type u_1} [inst : AddGroup α] {s t : AddSubgroup α} (h_le : s ≤ t) (a : α ⧸ s),
+  (AddSubgroup.quotientEquivSumOfLE h_le) a =
+    (Quotient.map' id ⋯ a, Quotient.map' (fun g => ⟨-(Quotient.mk'' g).out' + g, ⋯⟩) ⋯ a)
+Result.autoException ::
+Duper saturated
+
+Testing || Option.map_pbind : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} {o : Option α} {f : (a : α) → a ∈ o → Option β} {g : β → γ},
+  Option.map g (o.pbind f) = o.pbind fun a h => Option.map g (f a h)
+Result.autoException ::
+Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type a ∈ o of λ binder contains bound variables
+
+Testing || Set.image2_inter_right : ∀ {α : Type u_1} {β : Type u_3} {γ : Type u_5} {f : α → β → γ} {s : Set α} {t t' : Set β},
+  Function.Injective2 f → Set.image2 f s (t ∩ t') = Set.image2 f s t ∩ Set.image2 f s t'
+Result.success
+
+Testing || Lean.Omega.tidy_sat : ∀ {s : Lean.Omega.Constraint} {x v : Lean.Omega.Coeffs},
+  s.sat' x v = true → (Lean.Omega.tidyConstraint s x).sat' (Lean.Omega.tidyCoeffs s x) v = true
+Result.autoException ::
+(deterministic) timeout at `isDefEq`, maximum number of he: Type u_2} {f : α → β} {c x : α} [inst : Ring α] [inst_1 : Ring β],
+  Function.Antiperiodic f c → ∀ (n : ℤ), f (↑n * c - x) = ↑↑n.negOnePow * f (-x)
+Result.success
+
+Testing || Finset.sdiff_union_of_subset : ∀ {α : Type u_1} [inst : DecidableEq α] {s₁ s₂ : Finset α}, s₁ ⊆ s₂ → s₂ \ s₁ ∪ s₁ = s₂
+Result.success
+
+Testing || finsuppAddEquivDFinsupp_apply : ∀ {ι : Type u_1} {M : Type u_3} [inst : DecidableEq ι] [inst_1 : AddZeroClass M] [inst_2 : (m : M) → Decidable (m ≠ 0)],
+  ⇑finsuppAddEquivDFinsupp = Finsupp.toDFinsupp
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Nat.mul_pred : ∀ (n m : ℕ), n * m.pred = n * m - n
+Result.success
+
+Testing || Classical.and_or_imp : ∀ {a b c : Prop}, a ∧ b ∨ (a → c) ↔ a → b ∨ c
+Result.success
+
+Testing || Finset.subset_mul_right : ∀ {α : Type u_2} [inst : DecidableEq α] [inst_1 : MulOneClass α] {s : Finset α} (t : Finset α), 1 ∈ s → t ⊆ s * t
+Result.autoException ::
+Auto failed to find proof
+
+Testing || exists₂_congr : ∀ {α : Sort u_1} {β : α → Sort u_2} {p q : (a : α) → β a → Prop},
+  (∀ (a : α) (b : β a), p a b ↔ q a b) → ((∃ a b, p a b) ↔ ∃ a b, q a b)
+Result.autoException ::
+Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type β a✝ of λ binder contains bound variables
+
+Testing || Filter.subtractionMonoid.proof_3 : ∀ {α : Type u_1} [inst : SubtractionMonoid α] (n : ℕ) (a : Filter α), zsmulRec (↑n.succ) a = zsmulRec (↑n.succ) a
+Result.success
+
+Testing || Int.cast_ite : ∀ {α : Type u_3} [inst : AddGroupWithOne α] (P : Prop) [inst_1 : Decidable P] (m n : ℤ),
+  ↑(if P then m else n) = if P then ↑m else ↑n
+Result.success
+
+Testing || Left.pow_nonneg : ∀ {M : Type u_3} [inst : AddMonoid M] [inst_1 : Preorder M] [inst_2 : AddLeftMono M] {a : M},
+  0 ≤ a → ∀ (n : ℕ), 0 ≤ n • a
+Result.success
+
+Testing || Option.choice_eq_none : ∀ (α : Type u_5) [inst : IsEmpty α], Option.choice α = none
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Encodable.decode_unit_succ : ∀ (n : ℕ), Encodable.decode n.succ = none
+Result.autoException ::
+Auto failed to find proof
+
+Testing || subset_mulTSupport : ∀ {X : Type u_1} {α : Type u_2} [inst : One α] [inst_1 : TopologicalSpace X] (f : X → α),
+  Function.mulSupport f ⊆ mulTSupport f
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Units.inv_mul_of_eq : ∀ {α : Type u} [inst : Monoid α] {u : αˣ} {a : α}, ↑u = a → ↑u⁻¹ * a = 1
+Result.success
+
+Testing || IsClosedEmbedding.tendsto_coLindelof : ∀ {X : Type u} {Y : Type v} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : X → Y},
+  IsClosedEmbedding f → Filter.Tendsto f (Filter.coLindelof X) (Filter.coLindelof Y)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Std.HashMap.getKey?_emptyc : ∀ {α : Type u} {β : Type v} {x : BEq α} {x_1 : Hashable α} {a : α}, ∅.getKey? a = none
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Equiv.zpow_addRight : ∀ {α : Type u} [inst : AddGroup α] (a : α) (n : ℤ), Equiv.addRight a ^ n = Equiv.addRight (n • a)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || or_self_iff : ∀ {a : Prop}, a ∨ a ↔ a
+Result.success
+
+Testing || RingEquiv.coe_prodComm_symm : ∀ {R : Type u_1} {S : Type u_3} [inst : NonAssocSemiring R] [inst_1 : NonAssocSemiring S],
+  ⇑RingEquiv.prodComm.symm = Prod.swap
+Result.autoException ::
+Auto failed to find proof
+
+Testing || small_single : ∀ {α : Type u1} (x : α), Small.{u, u1} ↑{x}
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Dense.nonempty : ∀ {X : Type u} {s : Set X} [inst : TopologicalSpace X] [h : Nonempty X], Dense s → s.Nonempty
+Result.autoException ::
+Auto failed to find proof
+
+Testing || inv_le_inv_of_le : ∀ {α : Type u_2} [inst : LinearOrderedSemifield α] {a b : α}, 0 < a → a ≤ b → b⁻¹ ≤ a⁻¹
+Result.success
+
+Testing || Multiset.prod_replicate : ∀ {α : Type u_3} [inst : CommMonoid α] (n : ℕ) (a : α), (Multiset.replicate n a).prod = a ^ n
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Nonneg.coe_pow : ∀ {α : Type u_1} [inst : MonoidWithZero α] [inst_1 : Preorder α] [inst_2 : ZeroLEOneClass α] [inst_3 : PosMulMono α]
+  (a : { x // 0 ≤ x }) (n : ℕ), ↑(a ^ n) = ↑a ^ n
+Result.autoException ::
+Auto failed to find proof
+
+Testing || sub_lt_sub_left : ∀ {α : Type u} [inst : AddGroup α] [inst_1 : LT α] [inst_2 : AddLeftStrictMono α] [inst_3 : AddRightStrictMono α]
+  {a b : α}, a < b → ∀ (c : α), c - b < c - a
+Result.success
+
+Testing || Subring.map_sup : ∀ {R : Type u} {S : Type v} [inst : Ring R] [inst_1 : Ring S] (s t : Subring R) (f : R →+* S),
+  Subring.map f (s ⊔ t) = Subring.map f s ⊔ Subring.map f t
+Result.success
+
+Testing || Nat.card_Iio : ∀ (b : ℕ), (Finset.Iio b).card = b
+Result.success
+
+Testing || Nat.coprime_pow_primes : ∀ {p q : ℕ} (n m : ℕ), Nat.Prime p → Nat.Prime q → p ≠ q → (p ^ n).Coprime (q ^ m)
+Result.success
+
+Testing || WithTop.top_mul : ∀ {α : Type u_1} [inst : DecidableEq α] [inst_1 : MulZeroClass α] {b : WithTop α}, b ≠ 0 → ⊤ * b = ⊤
+Result.success
+
+Testing || List.mem_of_mem_filter : ∀ {α : Type u} {p : α → Bool} {a : α} {l : List α}, a ∈ List.filter p l → a ∈ l
+Result.autoException ::
+Auto failed to find proof
+
+Testing || AddMonoidHom.map_inv₂ : ∀ {M : Type uM} {N : Type uN} {P : Type uP} {x : AddGroup M} {x_1 : AddZeroClass N} {x_2 : AddCommGroup P}
+  (f : M →+ N →+ P) (m : M) (n : N), (f (-m)) n = -(f m) n
+Result.autoException ::
+Auto failed to find proof
+
+Testing || subset_interior_mul' : ∀ {α : Type u} [inst : TopologicalSpace α] [inst_1 : Group α] [inst_2 : ContinuousConstSMul αᵐᵒᵖ α] {s t : Set α},
+  interior s * interior t ⊆ interior (s * t)
+Result.success
+
+Testing || Continuous.connectedComponentsLift_unique : ∀ {α : Type u} {β : Type v} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β]
+  [inst_2 : TotallyDisconnectedSpace β] {f : α → β} (h : Continuous f) (g : ConnectedComponents α → β),
+  g ∘ ConnectedComponents.mk = f → g = h.connectedComponentsLift
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Nat.ModEq.add_right : ∀ {n a b : ℕ} (c : ℕ), a ≡ b [MOD n] → a + c ≡ b + c [MOD n]
+Result.success
+
+Testing || Set.vsub_iInter₂_subset : ∀ {α : Type u_2} {β : Type u_3} {ι : Sort u_5} {κ : ι → Sort u_6} [inst : VSub α β] (s : Set β)
+  (t : (i : ι) → κ i → Set β), s -ᵥ ⋂ i, ⋂ j, t i j ⊆ ⋂ i, ⋂ j, s -ᵥ t i j
+Result.autoException ::
+Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type κ i✝ of λ binder contains bound variables
+
+Testing || SMulCommClass.toMulActionHom_apply : ∀ {M : Type u_11} (N : Type u_9) (α : Type u_10) [inst : SMul M α] [inst_1 : SMul N α] [inst_2 : SMulCommClass M N α]
+  (c : M) (x : α), (SMulCommClass.toMulActionHom N α c) x = c • x
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Finset.toLeft_monotone : ∀ {α : Type u_1} {β : Type u_2}, Monotone Finset.toLeft
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Nat.div_div_self : ∀ {m n : ℕ}, n ∣ m → m ≠ 0 → m / (m / n) = n
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Auto.Embedding.Lam.LamTerm.maxEVarSucc_not_and_equiv_not_or_not? : ∀ {t t' : Auto.Embedding.Lam.LamTerm}, t.not_and_equiv_not_or_not? = some t' → t'.maxEVarSucc = t.maxEVarSucc
+Result.autoException ::
+Auto failed to find proof
+
+Testing || LinearMap.mem_range_self : ∀ {R : Type u_1} {R₂ : Type u_2} {M : Type u_5} {M₂ : Type u_6} [inst : Semiring R] [inst_1 : Semiring R₂]
+  [inst_2 : AddCommMonoid M] [inst_3 : AddCommMonoid M₂] [inst_4 : Module R M] [inst_5 : Module R₂ M₂] {τ₁₂ : R →+* R₂}
+  {F : Type u_10} [inst_6 : FunLike F M M₂] [inst_7 : SemilinearMapClass F τ₁₂ M M₂] [inst_8 : RingHomSurjective τ₁₂]
+  (f : F) (x : M), f x ∈ LinearMap.range f
+Result.autoException ::
+Auto failed to find proof
+
+Testing || SMulCommClass.symm : ∀ (M : Type u_9) (N : Type u_10) (α : Type u_11) [inst : SMul M α] [inst_1 : SMul N α] [inst_2 : SMulCommClass M N α],
+  SMulCommClass N M α
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Rat.ofScientific_ofNat_ofNat : ∀ {m : ℕ} {s : Bool} {e : ℕ}, Rat.ofScientific (OfNat.ofNat m) s (OfNat.ofNat e) = OfScientific.ofScientific m s e
+Result.autoException ::
+Auto.LamReif.processLam0Arg3 :: OfNat.ofNat instance is not based on a nat literal
+
+Testing || Subalgebra.map_comap_eq_self : ∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : Algebra R A]
+  [inst_3 : Semiring B] [inst_4 : Algebra R B] {f : A →ₐ[R] B} {S : Subalgebra R B},
+  S ≤ f.range → Subalgebra.map f (Subalgebra.comap f S) = S
+Result.success
+
+Testing || List.get_cons_length : ∀ {α : Type u_1} (x : α) (xs : List α) (n : ℕ) (h : n = xs.length), (x :: xs).get ⟨n, ⋯⟩ = (x :: xs).getLast ⋯
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Array.getElem_setD : ∀ {α : Type u_1} (a : Array α) (i : ℕ) (v : α) (h : i < (a.setD i v).size), (a.setD i v)[i] = v
+Result.autoException ::
+Auto failed to find proof
+
+Testing || PartENat.coe_succ_le_iff : ∀ {n : ℕ} {e : PartENat}, ↑n.succ ≤ e ↔ ↑n < e
+Result.success
+
+Testing || AddSubmonoid.instCompleteLattice.proof_7 : ∀ {M : Type u_1} [inst : AddZeroClass M] (a b : AddSubmonoid M), b ≤ a ⊔ b
+Result.success
+
+Testing || _private.Mathlib.Tactic.CongrExclamation.0.heq_imp_of_eq_imp : ∀ {α : Sort u_1} {x y : α} {p : HEq x y → Prop}, (∀ (he : x = y), p ⋯) → ∀ (he : HEq x y), p he
+Result.autoException ::
+Auto failed to find proof
+
+Testing || le_mul_div_mul_right : ∀ {α : Type u_1} [inst : LinearOrderedSemifield α] {a b c : α}, a / b ≤ 0 → a / b ≤ a * c / (b * c)
+Result.success
+
+Testing || Nat.lt_mul_iff_one_lt_left : ∀ {a b : ℕ}, 0 < b → (b < a * b ↔ 1 < a)
+Result.success
+
+Testing || Order.pred_succ_of_not_isMax : ∀ {α : Type u_1} [inst : PartialOrder α] [inst_1 : SuccOrder α] [inst_2 : PredOrder α] {a : α},
+  ¬IsMax a → Order.pred (Order.succ a) = a
+Result.success
+
+Testing || LinearMap.mulRight_injective : ∀ {R : Type u_1} {A : Type u_2} [inst : CommSemiring R] [inst_1 : Ring A] [inst_2 : Algebra R A]
+  [inst_3 : NoZeroDivisors A] {x : A}, x ≠ 0 → Function.Injective ⇑(LinearMap.mulRight R x)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || ENNReal.mul_lt_top_iff : ∀ {a b : ENNReal}, a * b < ⊤ ↔ a < ⊤ ∧ b < ⊤ ∨ a = 0 ∨ b = 0
+Result.success
+
+Testing || Array.ext : ∀ {α : Type u} (a b : Array α), a.size = b.size → (∀ (i : ℕ) (hi₁ : i < a.size) (hi₂ : i < b.size), a[i] = b[i]) → a = b
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Matrix.cons_val_zero : ∀ {α : Type u} {m : ℕ} (x : α) (u : Fin m → α), Matrix.vecCons x u 0 = x
+Result.autoException ::
+Auto failed to find proof
+
+Testing || SeparationQuotient.map_mk : ∀ {α : Type u} {β : Type v} [inst : UniformSpace α] [inst_1 : UniformSpace β] {f : α → β},
+  UniformContinuous f → ∀ (a : α), SeparationQuotient.map f (SeparationQuotient.mk a) = SeparationQuotient.mk (f a)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Finset.product_subset_product : ∀ {α : Type u_1} {β : Type u_2} {s s' : Finset α} {t t' : Finset β}, s ⊆ s' → t ⊆ t' → s ×ˢ t ⊆ s' ×ˢ t'
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Fin.predAbove_castSucc_of_le : ∀ {n : ℕ} (p i : Fin n), i ≤ p → p.predAbove i.castSucc = i
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Finsupp.linearCombination_eq_fintype_linearCombination_apply : ∀ {α : Type u_1} {M : Type u_2} (R : Type u_3) [inst : Fintype α] [inst_1 : Semiring R] [inst_2 : AddCommMonoid M]
+  [inst_3 : Module R M] (S : Type u_4) [inst_4 : Semiring S] [inst_5 : Module S M] [inst_6 : SMulCommClass R S M]
+  (v : α → M) (x : α → R),
+  (Finsupp.linearCombination R v) ((Finsupp.linearEquivFunOnFinite R R α).symm x) =
+    ((Fintype.linearCombination R S) v) x
+Result.autoException ::
+Auto failed to find proof
+
+Testing || CancelDenoms.cancel_factors_eq : ∀ {α : Type u_1} [inst : Field α] {a b ad bd a' b' gcd : α},
+  ad * a = a' → bd * b = b' → ad ≠ 0 → bd ≠ 0 → gcd ≠ 0 → (a = b) = (1 / gcd * (bd * a') = 1 / gcd * (ad * b'))
+Result.success
+
+Testing || MulAction.mapsTo_smul_orbit : ∀ {M : Type u} [inst : Monoid M] {α : Type v} [inst_1 : MulAction M α] (m : M) (a : α),
+  Set.MapsTo (fun x => m • x) (MulAction.orbit M a) (MulAction.orbit M a)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || IsSelfAdjoint.zpow : ∀ {R : Type u_1} [inst : DivisionSemiring R] [inst_1 : StarRing R] {x : R},
+  IsSelfAdjoint x → ∀ (n : ℤ), IsSelfAdjoint (x ^ n)
+Result.success
+
+Testing || Int.tdiv_nonpos : ∀ {a b : ℤ}, 0 ≤ a → b ≤ 0 → a.tdiv b ≤ 0
+Result.success
+
+Testing || OrderIso.addRight_toEquiv : ∀ {α : Type u} [inst : AddGroup α] [inst_1 : LE α] [inst_2 : AddRightMono α] (a : α),
+  (OrderIso.addRight a).toEquiv = Equiv.addRight a
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Nat.succ_iterate : ∀ (a n : ℕ), Nat.succ^[n] a = a + n
+Result.autoException ::
+Auto failed to find proof
+
+Testing || IsSMulRegular.mul_iff_right : ∀ {R : Type u_1} {M : Type u_3} {a b : R} [inst : SMul R M] [inst_1 : Mul R] [inst_2 : IsScalarTower R R M],
+  IsSMulRegular M a → (IsSMulRegular M (a * b) ↔ IsSMulRegular M b)
+Result.success
+
+Testing || IsEmbedding.Embedding.closure_eq_preimage_closure_image : ∀ {X : Type u_1} {Y : Type u_2} {f : X → Y} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y],
+  IsEmbedding f → ∀ (s : Set X), closure s = f ⁻¹' closure (f '' s)
+Result.success
+
+Testing || SupHom.coe_sup : ∀ {α : Type u_3} {β : Type u_4} [inst : Sup α] [inst_1 : SemilatticeSup β] (f g : SupHom α β), ⇑(f ⊔ g) = ⇑(f ⊔ g)
+Result.success
+
+Testing || Int.even_xor'_odd' : ∀ (n : ℤ), ∃ k, Xor' (n = 2 * k) (n = 2 * k + 1)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Submodule.span_zero_singleton : ∀ (R : Type u_1) {M : Type u_4} [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M],
+  Submodule.span R {0} = ⊥
+Result.success
+
+Testing || charZero_of_expChar_one' : ∀ (R : Type u_1) [inst : NonAssocSemiring R] [inst_1 : Nontrivial R] [hq : ExpChar R 1], CharZero R
+Result.autoException ::
+Auto failed to find proof
+
+Testing || NNRat.ne_iff : ∀ {x y : ℚ≥0}, ↑x ≠ ↑y ↔ x ≠ y
+Result.success
+
+Testing || IsPreconnected.subset_isClopen : ∀ {α : Type u} [inst : TopologicalSpace α] {s t : Set α}, IsPreconnected s → IsClopen t → (s ∩ t).Nonempty → s ⊆ t
+Result.success
+
+Testing || WithZero.addZeroClass.proof_1 : ∀ {α : Type u_1} [inst : Add α] (a : Option α), Option.liftOrGet (fun x1 x2 => x1 + x2) none a = a
+Result.autoException ::
+Auto failed to find proof
+
+Testing || mul_le_of_nonneg_of_le_div : ∀ {α : Type u_2} [inst : LinearOrderedSemifield α] {a b c : α}, 0 ≤ b → 0 ≤ c → a ≤ b / c → a * c ≤ b
+Result.success
+
+Testing || prodEquivPiFinTwo_symm_apply : ∀ (α β : Type u), ⇑(prodEquivPiFinTwo α β).symm = fun f => (f 0, f 1)
+Result.autoException ::
+Auto.Reif.resolveTy :: Unable to resolve Fin.cons α (Fin.cons β finZeroElim) 0
+
+Testing || Relation.fibration_iff_image_Iic : ∀ {α : Type u_1} {β : Type u_2} {f : α → β} [inst : Preorder α] [inst_1 : Preorder β],
+  Monotone f →
+    (Relation.Fibration (fun x1 x2 => x1 ≤ x2) (fun x1 x2 => x1 ≤ x2) f ↔ ∀ (x : α), f '' Set.Iic x = Set.Iic (f x))
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Auto.Embedding.Lam.LamTerm.maxEVarSucc_flip : ∀ {argTy₁ argTy₂ resTy : Auto.Embedding.Lam.LamSort},
+  (Auto.Embedding.Lam.LamTerm.flip argTy₁ argTy₂ resTy).maxEVarSucc = 0
+Result.autoException ::
+Auto failed to find proof
+
+Testing || CauSeq.Completion.ofRat_intCast : ∀ {α : Type u_1} [inst : LinearOrderedField α] {β : Type u_2} [inst_1 : Ring β] {abv : β → α}
+  [inst_2 : IsAbsoluteValue abv] (z : ℤ), CauSeq.Completion.ofRat ↑z = ↑z
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Std.DHashMap.Internal.List.getValue_cons_self : ∀ {α : Type u} {β : Type v} [inst : BEq α] [inst_1 : ReflBEq α] {l : List ((_ : α) × β)} {k : α} {v : β},
+  Std.DHashMap.Internal.List.getValue k (⟨k, v⟩ :: l) ⋯ = v
+Result.autoException ::
+Auto failed to find proof
+
+Testing || OrderHom.ext : ∀ {α : Type u_2} {β : Type u_3} [inst : Preorder α] [inst_1 : Preorder β] (f g : α →o β), ⇑f = ⇑g → f = g
+Result.autoException ::
+Auto failed to find proof
+
+Testing || MonoidWithZeroHomClass.ext_rat : ∀ {M₀ : Type u_5} [inst : MonoidWithZero M₀] {f g : ℚ →*₀ M₀},
+  f.comp ↑(Int.castRingHom ℚ) = g.comp ↑(Int.castRingHom ℚ) → f = g
+Result.autoException ::
+Auto failed to find proof
+
+Testing || BitVec.getMsbD_setWidth_add : ∀ {w k i : ℕ} {x : BitVec w}, k ≤ i → (BitVec.setWidth (w + k) x).getMsbD i = x.getMsbD (i - k)
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `BitVec.ofNat x_1 cifvar_12`.
+This is because it contains free variables and has subterms possessing at least one of the following features
+· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
+· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
+· (TODO)
+
+Testing || ssubset_of_eq_of_ssubset : ∀ {α : Type u} [inst : HasSSubset α] {a b c : α}, a = b → b ⊂ c → a ⊂ c
+Result.success
+
+Testing || BitVec.toInt_eq_toNat_cond : ∀ {n : ℕ} (x : BitVec n), x.toInt = if 2 * x.toNat < 2 ^ n then ↑x.toNat else ↑x.toNat - ↑(2 ^ n)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Filter.Tendsto.const_mul_atBot_of_neg : ∀ {α : Type u_1} {β : Type u_2} [inst : LinearOrderedField α] {l : Filter β} {f : β → α} {r : α},
+  r < 0 → Filter.Tendsto f l Filter.atBot → Filter.Tendsto (fun x => r * f x) l Filter.atTop
+Result.success
+
+Testing || Finset.card_filter_le : ∀ {α : Type u_1} (s : Finset α) (p : α → Prop) [inst : DecidablePred p], (Finset.filter p s).card ≤ s.card
+Result.success
+
+Testing || Ultrafilter.coe_inj : ∀ {α : Type u} {f g : Ultrafilter α}, ↑f = ↑g ↔ f = g
+Result.success
+
+Testing || GaloisCoinsertion.isGLB_of_l_image : ∀ {α : Type u} {β : Type v} {l : α → β} {u : β → α} [inst : Preorder α] [inst_1 : Preorder β],
+  GaloisCoinsertion l u → ∀ {s : Set α} {a : β}, IsGLB (l '' s) a → IsGLB s (u a)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Set.image_subtype_val_Ico_Ioi : ∀ {α : Type u_1} [inst : Preorder α] {a b : α} (c : ↑(Set.Ico a b)), Subtype.val '' Set.Ioi c = Set.Ioo (↑c) b
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Auto.Embedding.Lam.LamTerm.bvarLifts_zero : ∀ {t : Auto.Embedding.Lam.LamTerm}, Auto.Embedding.Lam.LamTerm.bvarLifts 0 t = t
+Result.success
+
+Testing || Cardinal.exists_finset_le_card : ∀ (α : Type u_1) (n : ℕ), ↑n ≤ Cardinal.mk α → ∃ s, n ≤ s.card
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Fin.succAbove_pred_of_lt : ∀ {n : ℕ} (p i : Fin (n + 1)) (h : p < i) (hi : optParam (i ≠ 0) ⋯), p.succAbove (i.pred hi) = i
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Set.toFinset_Ioo : ∀ {α : Type u_3} [inst : Preorder α] [inst_1 : LocallyFiniteOrder α] (a b : α) [inst_2 : Fintype ↑(Set.Ioo a b)],
+  (Set.Ioo a b).toFinset = Finset.Ioo a b
+Result.success
+
+Testing || Set.iUnion_smul_eq_setOf_exists : ∀ {α : Type u_2} {β : Type u_3} [inst : Group α] [inst_1 : MulAction α β] {s : Set β}, ⋃ g, g • s = {a | ∃ g, g • a ∈ s}
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Ultrafilter.coe_injective : ∀ {α : Type u}, Function.Injective Ultrafilter.toFilter
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Nat.descFactorial_zero : ∀ (n : ℕ), n.descFactorial 0 = 1
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Finset.prod_min_le : ∀ {ι : Type u_1} {M : Type u_4} [inst : LinearOrderedCommMonoid M] {f g : ι → M} {s : Finset ι},
+  ∏ i ∈ s, min (f i) (g i) ≤ min (s.prod f) (s.prod g)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || inf_inf_sdiff : ∀ {α : Type u} [inst : GeneralizedBooleanAlgebra α] (x y : α), x ⊓ y ⊓ x \ y = ⊥
+Result.success
+
+Testing || IsAddUnit.add_neg_cancel : ∀ {α : Type u} [inst : SubtractionMonoid α] {a : α}, IsAddUnit a → a + -a = 0
+Result.autoException ::
+Auto failed to find proof
+
+Testing || AddOpposite.uniformContinuous_unop : ∀ {α : Type ua} [inst : UniformSpace α], UniformContinuous AddOpposite.unop
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Prod.range_snd : ∀ {α : Type u_1} {β : Type u_2} [inst : Nonempty α], Set.range Prod.snd = Set.univ
+Result.success
+
+Testing || Int.gcd_comm : ∀ (i j : ℤ), i.gcd j = j.gcd i
+Result.autoException ::
+Auto failed to find proof
+
+Testing || zero_le : ∀ {α : Type u} [inst : CanonicallyOrderedAddCommMonoid α] (a : α), 0 ≤ a
+Result.success
+
+Testing || WithTop.map_comm : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} {δ : Type u_4} {f₁ : α → β} {f₂ : α → γ} {g₁ : β → δ} {g₂ : γ → δ},
+  g₁ ∘ f₁ = g₂ ∘ f₂ → ∀ (a : α), WithTop.map g₁ (WithTop.map f₁ ↑a) = WithTop.map g₂ (WithTop.map f₂ ↑a)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Function.extend_injective : ∀ {α : Sort u_1} {β : Sort u_2} {γ : Sort u_3} {f : α → β},
+  Function.Injective f → ∀ (e' : β → γ), Function.Injective fun g => Function.extend f g e'
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Subarray.start_le_stop : ∀ {α : Type u} (self : Subarray α), self.start ≤ self.stop
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Auto.Embedding.Lam.LamValid.imp_self : ∀ {lctx : ℕ → Auto.Embedding.Lam.LamSort} {t : Auto.Embedding.Lam.LamTerm} {lval : Auto.Embedding.Lam.LamValuation},
+  Auto.Embedding.Lam.LamWF lval.toLamTyVal
+      { lctx := lctx, rterm := t, rty := Auto.Embedding.Lam.LamSort.base Auto.Embedding.Lam.LamBaseSort.prop } →
+    Auto.Embedding.Lam.LamValid lval lctx (t.mkImp t)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || BitVec.rotateLeft_mod_eq_rotateLeft : ∀ {w : ℕ} {x : BitVec w} {r : ℕ}, x.rotateLeft (r % w) = x.rotateLeft r
+Result.autoException ::
+Auto failed to find proof
+
+Testing || IsLowerSet.not_bot_mem : ∀ {α : Type u_1} [inst : Preorder α] {s : Set α} [inst_1 : OrderBot α], IsLowerSet s → (⊥ ∉ s ↔ s = ∅)
+Result.success
+
+Testing || ENNReal.sum_eq_top : ∀ {α : Type u_1} {s : Finset α} {f : α → ENNReal}, ∑ x ∈ s, f x = ⊤ ↔ ∃ a ∈ s, f a = ⊤
+Result.success
+
+Testing || ZMod.val_mul' : ∀ {m n : ZMod 0}, (m * n).val = m.val * n.val
+Result.autoException ::
+Auto failed to find proof
+
+Testing || AddSubsemigroup.map_bot : ∀ {M : Type u_1} {N : Type u_2} [inst : Add M] [inst_1 : Add N] (f : AddHom M N), AddSubsemigroup.map f ⊥ = ⊥
+Result.success
+
+Testing || Array.mapM_map_eq_foldl : ∀ {α : Type u_1} {β : Type u_2} {b : Array β} (as : Array α) (f : α → β) (i : ℕ),
+  Array.mapM.map f as i b = Array.foldl (fun r a => r.push (f a)) b as i
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `Array.foldl
+  (fun r a => cifvar_8 r (cifvar_11 (cifvar_12 (cifvar_13 x_0)) a)) (cifvar_16 x_0) (cifvar_14 (cifvar_13 x_0))
+  (cifvar_15 (cifvar_12 (cifvar_13 x_0))) (cifvar_9 (cifvar_10 (cifvar_14 (cifvar_13 x_0))))`.
+This is because it contains free variables and has subterms possessing at least one of the following features
+· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
+· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
+· (TODO)
+
+Testing || GaloisConnection.u_csInf : ∀ {α : Type u_1} {β : Type u_2} [inst : ConditionallyCompleteLattice α] [inst_1 : ConditionallyCompleteLattice β]
+  {l : α → β} {u : β → α}, GaloisConnection l u → ∀ {s : Set β}, s.Nonempty → BddBelow s → u (sInf s) = ⨅ x, u ↑x
+Result.autoException ::
+Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type { x // x ∈ s } of λ binder contains bound variables
