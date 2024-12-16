@@ -1,1252 +1,988 @@
 Config = {maxHeartbeats := 65536, timeout := 10, solverConfig = smt cvc5, logFile := evalOut.txt}
 
-Testing || AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ_apply : ∀ {U : TopCat} (X : AlgebraicGeometry.LocallyRingedSpace) {f : U ⟶ X.toTopCat} (h : IsOpenEmbedding ⇑f)
-  (V : TopologicalSpace.Opens ↑U) (x : ↑U) (hx : x ∈ V) (y : ↑((X.restrict h).presheaf.obj (Opposite.op V))),
-  (X.restrictStalkIso h x).hom (((X.restrict h).presheaf.germ V x hx) y) = (X.presheaf.germ (⋯.functor.obj V) (f x) ⋯) y
+Testing || Int.natAbs_one : Int.natAbs 1 = 1
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+Auto failed to find proof
+
+Testing || HNNExtension.NormalWord.group_smul_def : ∀ {G : Type u_1} [inst : Group G] {A B : Subgroup G} {d : HNNExtension.NormalWord.TransversalPair G A B} (g : G)
+  (w : HNNExtension.NormalWord d), g • w = { head := g * w.head, toList := w.toList, chain := ⋯, mem_set := ⋯ }
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Batteries.RBNode.balance2_eq : ∀ {α : Type u_1} {c : Batteries.RBColor} {n : ℕ} {l : Batteries.RBNode α} {v : α} {r : Batteries.RBNode α},
+  r.Balanced c n → l.balance2 v r = Batteries.RBNode.node Batteries.RBColor.black l v r
+Result.autoException ::
+Auto.Solver.SMT.getSexp :: Incomplete input 
+
+Testing || PMF.toOuterMeasure_bind_apply : ∀ {α : Type u_1} {β : Type u_2} (p : PMF α) (f : α → PMF β) (s : Set β),
+  (p.bind f).toOuterMeasure s = ∑' (a : α), p a * (f a).toOuterMeasure s
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `x_1.indicator (cifvar_10 x_0) x`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || PEquiv.single_trans_single_of_ne : ∀ {α : Type u} {β : Type v} {γ : Type w} [inst : DecidableEq α] [inst_1 : DecidableEq β] [inst_2 : DecidableEq γ]
+  {b₁ b₂ : β}, b₁ ≠ b₂ → ∀ (a : α) (c : γ), (PEquiv.single a b₁).trans (PEquiv.single b₂ c) = ⊥
+Result.success
+
+Testing || Equiv.bijOn_swap : ∀ {α : Type u_1} {s : Set α} [inst : DecidableEq α] {a b : α}, a ∈ s → b ∈ s → Set.BijOn (⇑(Equiv.swap a b)) s s
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `Set.BijOn (cifvar_7 x_0) x_1 x_2`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || Matrix.kroneckerMap_zero_right : ∀ {α : Type u_2} {β : Type u_4} {γ : Type u_6} {l : Type u_8} {m : Type u_9} {n : Type u_10} {p : Type u_11}
+  [inst : Zero β] [inst_1 : Zero γ] (f : α → β → γ),
+  (∀ (a : α), f a 0 = 0) → ∀ (A : Matrix l m α), Matrix.kroneckerMap f A 0 = 0
+Result.autoException ::
+Auto failed to find proof
+
+Testing || HomogeneousIdeal.toIdeal_add : ∀ {ι : Type u_1} {σ : Type u_2} {A : Type u_3} [inst : Semiring A] [inst_1 : DecidableEq ι] [inst_2 : AddMonoid ι]
+  [inst_3 : SetLike σ A] [inst_4 : AddSubmonoidClass σ A] {𝒜 : ι → σ} [inst_5 : GradedRing 𝒜]
+  (I J : HomogeneousIdeal 𝒜), (I + J).toIdeal = I.toIdeal + J.toIdeal
+Result.autoException ::
+Auto failed to find proof
+
+Testing || List.nodup_rotate : ∀ {α : Type u} {l : List α} {n : ℕ}, (l.rotate n).Nodup ↔ l.Nodup
+Result.success
+
+Testing || Submodule.le_comap_pow_of_le_comap : ∀ {R : Type u_1} {M : Type u_5} [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M] (p : Submodule R M)
+  {f : M →ₗ[R] M}, p ≤ Submodule.comap f p → ∀ (k : ℕ), p ≤ Submodule.comap (f ^ k) p
+Result.autoException ::
+Auto.Solver.SMT.getSexp :: Incomplete input 
+
+Testing || FiniteField.isSquare_neg_two_iff : ∀ {F : Type u_1} [inst : Field F] [inst_1 : Fintype F], IsSquare (-2) ↔ Fintype.card F % 8 ≠ 5 ∧ Fintype.card F % 8 ≠ 7
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `quadraticChar cifvar_54`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || HasSum.hasSum_at_zero : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]
+  [inst_2 : NormedSpace 𝕜 E] (a : ℕ → E), HasSum (fun n => 0 ^ n • a n) (a 0)
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `SMulWithZero.toSMulZeroClass`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || AddOreLocalization.oreSub_add_oreSub : ∀ {R : Type u_1} [inst : AddMonoid R] {S : AddSubmonoid R} [inst_1 : AddOreLocalization.AddOreSet S] {r₁ r₂ : R}
+  {s₁ s₂ : ↥S},
+  r₁ -ₒ s₁ + (r₂ -ₒ s₂) = AddOreLocalization.oreMin r₁ s₂ + r₂ -ₒ (AddOreLocalization.oreSubtra r₁ s₂ + s₁)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || sectionOfRetractionKerToTensor_algebraMap : ∀ {R P S : Type u} [inst : CommRing R] [inst_1 : CommRing P] [inst_2 : CommRing S] [inst_3 : Algebra R P]
+  [inst_4 : Algebra P S] (l : TensorProduct P S (Ω[P⁄R]) →ₗ[P] ↥(RingHom.ker (algebraMap P S)))
+  (hl : l ∘ₗ KaehlerDifferential.kerToTensor R P S = LinearMap.id) [inst_5 : Algebra R S] [inst_6 : IsScalarTower R P S]
+  (hf' : RingHom.ker (algebraMap P S) ^ 2 = ⊥) (hf : Function.Surjective ⇑(algebraMap P S)) (x : P),
+  (sectionOfRetractionKerToTensor l hl hf' hf) ((algebraMap P S) x) = x - ↑(l (1 ⊗ₜ[P] (KaehlerDifferential.D R P) x))
+Result.autoException ::
+Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
+; cardinality of Empty is 1
+; rep: (as @Empty_0 Empty)
+; cardinality of _l____KaehlerDifferential.kerToTensor_R_P_S_=_LinearMap.id is 1
+; rep: (as @_l____KaehlerDifferential.kerToTensor_R_P_S_=_LinearMap.id_0 _l____KaehlerDifferential.kerToTensor_R_P_S_=_LinearMap.id)
+; cardinality of _RingHom.ker_algebraMap_P_S_^_2_=__ is 1
+; rep: (as @_RingHom.ker_algebraMap_P_S_^_2_=___0 _RingHom.ker_algebraMap_P_S_^_2_=__)
+; cardinality of _Function.Surjective__algebraMap_P_S_0 is 1
+; rep: (as @_Function.Surjective__algebraMap_P_S_0_0 _Function.Surjective__algebraMap_P_S_0)
+; cardinality of _S____R__P is 1
+; rep: (as @_S____R__P_0 _S____R__P)
+; cardinality of _P__+*_S is 1
+; rep: (as @_P__+*_S_0 _P__+*_S)
+; cardinality of _P is 4
+; rep: (as @_P_0 _P)
+; rep: (as @_P_1 _P)
+; rep: (as @_P_2 _P)
+; rep: (as @_P_3 _P)
+; cardinality of _S is 2
+; rep: (as @_S_0 _S)
+; rep: (as @_S_1 _S)
+; cardinality of |_TensorProduct_P_S_Ω_P_R_____P___RingHom.ker_algebraMap_P_S| is 1
+; rep: (as @|_TensorProduct_P_S_Ω_P_R_____P___RingHom.ker_algebraMap_P_S|_0 |_TensorProduct_P_S_Ω_P_R_____P___RingHom.ker_algebraMap_P_S|)
+; cardinality of |_Derivation_R_P_Ω_P_R_| is 1
+; rep: (as @|_Derivation_R_P_Ω_P_R_|_0 |_Derivation_R_P_Ω_P_R_|)
+; cardinality of |_Ω_P_R_| is 1
+; rep: (as @|_Ω_P_R_|_0 |_Ω_P_R_|)
+; cardinality of |_TensorProduct_P_S_Ω_P_R_| is 1
+; rep: (as @|_TensorProduct_P_S_Ω_P_R_|_0 |_TensorProduct_P_S_Ω_P_R_|)
+; cardinality of __RingHom.ker_algebraMap_P_S is 1
+; rep: (as @__RingHom.ker_algebraMap_P_S_0 __RingHom.ker_algebraMap_P_S)
+(define-fun _IsScalarTower_R_P_S () Bool true)
+(define-fun _Function.Surjective__algebraMap_P_S () Bool true)
+(define-fun _hl () _l____KaehlerDifferential.kerToTensor_R_P_S_=_LinearMap.id (as @_l____KaehlerDifferential.kerToTensor_R_P_S_=_LinearMap.id_0 _l____KaehlerDifferential.kerToTensor_R_P_S_=_LinearMap.id))
+(define-fun _hf_ () _RingHom.ker_algebraMap_P_S_^_2_=__ (as @_RingHom.ker_algebraMap_P_S_^_2_=___0 _RingHom.ker_algebraMap_P_S_^_2_=__))
+(define-fun _hf () _Function.Surjective__algebraMap_P_S_0 (as @_Function.Surjective__algebraMap_P_S_0_0 _Function.Surjective__algebraMap_P_S_0))
+(define-fun _fun_hl_=>_sectionOfRetractionKerToTensor_l_hl ((_arg_1 _l____KaehlerDifferential.kerToTensor_R_P_S_=_LinearMap.id) (_arg_2 _RingHom.ker_algebraMap_P_S_^_2_=__) (_arg_3 _Function.Surjective__algebraMap_P_S_0)) _S____R__P (as @_S____R__P_0 _S____R__P))
+(define-fun _algebraMap_P_S () _P__+*_S (as @_P__+*_S_0 _P__+*_S))
+(define-fun _x () _P (as @_P_0 _P))
+(define-fun _DFunLike.coe ((_arg_1 _P__+*_S) (_arg_2 _P)) _S (as @_S_1 _S))
+(define-fun _DFunLike.coe_0 ((_arg_1 _S____R__P) (_arg_2 _S)) _P (as @_P_1 _P))
+(define-fun _l () |_TensorProduct_P_S_Ω_P_R_____P___RingHom.ker_algebraMap_P_S| (as @|_TensorProduct_P_S_Ω_P_R_____P___RingHom.ker_algebraMap_P_S|_0 |_TensorProduct_P_S_Ω_P_R_____P___RingHom.ker_algebraMap_P_S|))
+(define-fun _1_ () _S (as @_S_0 _S))
+(define-fun _KaehlerDifferential.D_R_P () |_Derivation_R_P_Ω_P_R_| (as @|_Derivation_R_P_Ω_P_R_|_0 |_Derivation_R_P_Ω_P_R_|))
+(define-fun _DFunLike.coe_1 ((_arg_1 |_Derivation_R_P_Ω_P_R_|) (_arg_2 _P)) |_Ω_P_R_| (as @|_Ω_P_R_|_0 |_Ω_P_R_|))
+(define-fun _TensorProduct.tmul_P ((_arg_1 _S) (_arg_2 |_Ω_P_R_|)) |_TensorProduct_P_S_Ω_P_R_| (as @|_TensorProduct_P_S_Ω_P_R_|_0 |_TensorProduct_P_S_Ω_P_R_|))
+(define-fun _DFunLike.coe_2 ((_arg_1 |_TensorProduct_P_S_Ω_P_R_____P___RingHom.ker_algebraMap_P_S|) (_arg_2 |_TensorProduct_P_S_Ω_P_R_|)) __RingHom.ker_algebraMap_P_S (as @__RingHom.ker_algebraMap_P_S_0 __RingHom.ker_algebraMap_P_S))
+(define-fun _Subtype.val ((_arg_1 __RingHom.ker_algebraMap_P_S)) _P (as @_P_2 _P))
+(define-fun _HSub.hSub ((_arg_1 _P) (_arg_2 _P)) _P (as @_P_3 _P))
+)
+
+
+Testing || Set.up_image : ∀ {α : Type u_1} {β : Type u_2} [inst : MulOneClass α] [inst_1 : MulOneClass β] (f : α →* β) (s : Set α),
+  Set.up (⇑f '' s) = (SetSemiring.imageHom f) (Set.up s)
+Result.autoException ::
+Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
+; cardinality of Empty is 1
+; rep: (as @Empty_0 Empty)
+; cardinality of |_Set_β___SetSemiring_β| is 1
+; rep: (as @|_Set_β___SetSemiring_β|_0 |_Set_β___SetSemiring_β|)
+; cardinality of |_Set_α| is 2
+; rep: (as @|_Set_α|_0 |_Set_α|)
+; rep: (as @|_Set_α|_1 |_Set_α|)
+; cardinality of |_SetSemiring_β| is 3
+; rep: (as @|_SetSemiring_β|_0 |_SetSemiring_β|)
+; rep: (as @|_SetSemiring_β|_1 |_SetSemiring_β|)
+; rep: (as @|_SetSemiring_β|_2 |_SetSemiring_β|)
+; cardinality of |_α__*_β| is 1
+; rep: (as @|_α__*_β|_0 |_α__*_β|)
+; cardinality of |_SetSemiring_α__+*_SetSemiring_β| is 1
+; rep: (as @|_SetSemiring_α__+*_SetSemiring_β|_0 |_SetSemiring_α__+*_SetSemiring_β|)
+; cardinality of |_Set_α___SetSemiring_α| is 1
+; rep: (as @|_Set_α___SetSemiring_α|_0 |_Set_α___SetSemiring_α|)
+(define-fun _Set.up () |_Set_β___SetSemiring_β| (as @|_Set_β___SetSemiring_β|_0 |_Set_β___SetSemiring_β|))
+(define-fun _s () |_Set_α| (as @|_Set_α|_0 |_Set_α|))
+(define-fun _Set.image__f ((_arg_1 |_Set_α|)) |_SetSemiring_β| (as @|_SetSemiring_β|_0 |_SetSemiring_β|))
+(define-fun _DFunLike.coe ((_arg_1 |_Set_β___SetSemiring_β|) (_arg_2 |_SetSemiring_β|)) |_SetSemiring_β| (as @|_SetSemiring_β|_1 |_SetSemiring_β|))
+(define-fun _f () |_α__*_β| (as @|_α__*_β|_0 |_α__*_β|))
+(define-fun _SetSemiring.imageHom ((_arg_1 |_α__*_β|)) |_SetSemiring_α__+*_SetSemiring_β| (as @|_SetSemiring_α__+*_SetSemiring_β|_0 |_SetSemiring_α__+*_SetSemiring_β|))
+(define-fun _Set.up_0 () |_Set_α___SetSemiring_α| (as @|_Set_α___SetSemiring_α|_0 |_Set_α___SetSemiring_α|))
+(define-fun _DFunLike.coe_0 ((_arg_1 |_Set_α___SetSemiring_α|) (_arg_2 |_Set_α|)) |_Set_α| (as @|_Set_α|_1 |_Set_α|))
+(define-fun _DFunLike.coe_1 ((_arg_1 |_SetSemiring_α__+*_SetSemiring_β|) (_arg_2 |_Set_α|)) |_SetSemiring_β| (as @|_SetSemiring_β|_2 |_SetSemiring_β|))
+)
+
+
+Testing || CategoryTheory.Limits.pullbackConeOfRightIso_π_app_right : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y Z : C} (f : X ⟶ Z) (g : Y ⟶ Z)
+  [inst_1 : CategoryTheory.IsIso g],
+  (CategoryTheory.Limits.pullbackConeOfRightIso f g).π.app CategoryTheory.Limits.WalkingCospan.right =
+    CategoryTheory.CategoryStruct.comp f (CategoryTheory.inv g)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || CategoryTheory.PreGaloisCategory.fiberEqualizerEquiv_symm_ι_apply : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)
+  [inst_1 : CategoryTheory.PreGaloisCategory C] [inst_2 : CategoryTheory.PreGaloisCategory.FiberFunctor F] {X Y : C}
+  {f g : X ⟶ Y} (x : ↑(F.obj X)) (h : F.map f x = F.map g x),
+  F.map (CategoryTheory.Limits.equalizer.ι f g)
+      ((CategoryTheory.PreGaloisCategory.fiberEqualizerEquiv F f g).symm ⟨x, h⟩) =
+    x
+Result.autoException ::
+Auto.Monomorphization.ConstInst.ofExpr? :: F.obj X ⟶ F.obj Y is not a `∀`
+
+Testing || CategoryTheory.Limits.prod.lift_fst_snd : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : C}
+  [inst_1 : CategoryTheory.Limits.HasBinaryProduct X Y],
+  CategoryTheory.Limits.prod.lift CategoryTheory.Limits.prod.fst CategoryTheory.Limits.prod.snd =
+    CategoryTheory.CategoryStruct.id (X ⨯ Y)
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `CategoryTheory.Limits.limit.lift
+  (cifvar_1 cifvar_2 cifvar_3) x_0`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || Matrix.SpecialLinearGroup.mem_center_iff : ∀ {n : Type u} [inst : DecidableEq n] [inst_1 : Fintype n] {R : Type v} [inst_2 : CommRing R]
+  {A : Matrix.SpecialLinearGroup n R},
+  A ∈ Subgroup.center (Matrix.SpecialLinearGroup n R) ↔ ∃ r, r ^ Fintype.card n = 1 ∧ (Matrix.scalar n) r = ↑A
+Result.autoException ::
+Auto.Monomorphization.ConstInst.ofExpr? :: Matrix n n R is not a `∀`
+
+Testing || LinearPMap.zero_domain : ∀ {R : Type u_1} [inst : Ring R] {E : Type u_2} [inst_1 : AddCommGroup E] [inst_2 : Module R E] {F : Type u_3}
+  [inst_3 : AddCommGroup F] [inst_4 : Module R F], LinearPMap.domain 0 = ⊤
+Result.autoException ::
+Auto failed to find proof
+
+Testing || char_dvd_card_solutions_of_sum_lt : ∀ {K : Type u_1} {σ : Type u_2} {ι : Type u_3} [inst : Fintype K] [inst_1 : Field K] [inst_2 : Fintype σ]
+  [inst_3 : DecidableEq σ] [inst_4 : DecidableEq K] (p : ℕ) [inst_5 : CharP K p] {s : Finset ι}
+  {f : ι → MvPolynomial σ K},
+  ∑ i ∈ s, (f i).totalDegree < Fintype.card σ → p ∣ Fintype.card { x // ∀ i ∈ s, (MvPolynomial.eval x) (f i) = 0 }
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `GroupWithZero.toMonoidWithZero`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || NNRat.num_coe : ∀ (q : ℚ≥0), (↑q).num = ↑q.num
+Result.autoException ::
+Auto.Solver.SMT.getSexp :: Incomplete input 
+
+Testing || Int.bmod_one_is_zero : ∀ (x : ℤ), x.bmod 1 = 0
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Nat.rel_of_forall_rel_succ_of_lt : ∀ {β : Type v} (r : β → β → Prop) [inst : IsTrans β r] {f : ℕ → β},
+  (∀ (n : ℕ), r (f n) (f (n + 1))) → ∀ ⦃a b : ℕ⦄, a < b → r (f a) (f b)
+Result.autoException ::
+Auto.Solver.SMT.getSexp :: Incomplete input 
+
+Testing || le_of_forall_pos_sub_le : ∀ {α : Type u_1} [inst : AddGroup α] [inst_1 : LinearOrder α] [inst_2 : AddLeftMono α] [inst_3 : DenselyOrdered α]
+  {a b : α}, (∀ (ε : α), 0 < ε → a - ε ≤ b) → a ≤ b
+Result.success
+
+Testing || HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy : ∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_3, u_1} C] {ι : Type u_2} {c : ComplexShape ι}
+  [inst_1 : CategoryTheory.Preadditive C] [inst_2 : CategoryTheory.CategoryWithHomology C]
+  [inst_3 : (HomologicalComplex.quasiIso C c).HasLocalization] [inst_4 : c.QFactorsThroughHomotopy C]
+  {K L : HomologicalComplex C c} {f g : K ⟶ L},
+  Homotopy f g → HomologicalComplexUpToQuasiIso.Q.map f = HomologicalComplexUpToQuasiIso.Q.map g
+Result.autoException ::
+Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
+; cardinality of Empty is 1
+; rep: (as @Empty_0 Empty)
+; cardinality of |_ComplexShape_ι| is 1
+; rep: (as @|_ComplexShape_ι|_0 |_ComplexShape_ι|)
+; cardinality of _K___L is 2
+; rep: (as @_K___L_0 _K___L)
+; rep: (as @_K___L_1 _K___L)
+; cardinality of _HomologicalComplex.quasiIso_C_c.Q_.obj_K___HomologicalComplex.quasiIso_C_c.Q_.obj_L is 2
+; rep: (as @_HomologicalComplex.quasiIso_C_c.Q_.obj_K___HomologicalComplex.quasiIso_C_c.Q_.obj_L_0 _HomologicalComplex.quasiIso_C_c.Q_.obj_K___HomologicalComplex.quasiIso_C_c.Q_.obj_L)
+; rep: (as @_HomologicalComplex.quasiIso_C_c.Q_.obj_K___HomologicalComplex.quasiIso_C_c.Q_.obj_L_1 _HomologicalComplex.quasiIso_C_c.Q_.obj_K___HomologicalComplex.quasiIso_C_c.Q_.obj_L)
+(define-fun _CategoryTheory.CategoryWithHomology_C () Bool true)
+(define-fun _c () |_ComplexShape_ι| (as @|_ComplexShape_ι|_0 |_ComplexShape_ι|))
+(define-fun _fun_c_=>_c.QFactorsThroughHomotopy_C ((_arg_1 |_ComplexShape_ι|)) Bool true)
+(define-fun _f () _K___L (as @_K___L_0 _K___L))
+(define-fun _HomologicalComplex.quasiIso_C_c.Q_.map ((_arg_1 _K___L)) _HomologicalComplex.quasiIso_C_c.Q_.obj_K___HomologicalComplex.quasiIso_C_c.Q_.obj_L (ite (= (as @_K___L_1 _K___L) _arg_1) (as @_HomologicalComplex.quasiIso_C_c.Q_.obj_K___HomologicalComplex.quasiIso_C_c.Q_.obj_L_1 _HomologicalComplex.quasiIso_C_c.Q_.obj_K___HomologicalComplex.quasiIso_C_c.Q_.obj_L) (as @_HomologicalComplex.quasiIso_C_c.Q_.obj_K___HomologicalComplex.quasiIso_C_c.Q_.obj_L_0 _HomologicalComplex.quasiIso_C_c.Q_.obj_K___HomologicalComplex.quasiIso_C_c.Q_.obj_L)))
+(define-fun _g () _K___L (as @_K___L_1 _K___L))
+)
+
+
+Testing || Finset.nonempty_Ico : ∀ {α : Type u_2} {a b : α} [inst : Preorder α] [inst_1 : LocallyFiniteOrder α], (Finset.Ico a b).Nonempty ↔ a < b
+Result.success
+
+Testing || Sum.LiftRel.exists_of_isLeft_right : ∀ {α : Type u} {β : Type v} {γ : Type u_1} {δ : Type u_2} {r : α → γ → Prop} {s : β → δ → Prop} {x : α ⊕ β} {y : γ ⊕ δ},
+  Sum.LiftRel r s x y → y.isLeft = true → ∃ a c, r a c ∧ x = Sum.inl a ∧ y = Sum.inl c
+Result.success
+
+Testing || FirstOrder.Language.Hom.id_comp : ∀ {L : FirstOrder.Language} {M : Type w} {N : Type w'} [inst : L.Structure M] [inst_1 : L.Structure N] (f : L.Hom M N),
+  (FirstOrder.Language.Hom.id L N).comp f = f
+Result.autoException ::
+_private.Auto.Translation.LamFOL2SMT.0.Auto.SMT.lamSort2SSortAux :: Unexpected error. Higher order input?
+
+Testing || Pi.single_inj : ∀ {I : Type u} (f : I → Type v₁) [inst : DecidableEq I] [inst_1 : (i : I) → Zero (f i)] (i : I) {x y : f i},
+  Pi.single i x = Pi.single i y ↔ x = y
+Result.autoException ::
+Auto failed to find proof
+
+Testing || WeierstrassCurve.preΨ'_one : ∀ {R : Type r} [inst : CommRing R] (W : WeierstrassCurve R), W.preΨ' 1 = 1
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Matrix.updateColumn_conjTranspose : ∀ {m : Type u_2} {n : Type u_3} {α : Type v} {M : Matrix m n α} {i : m} {b : n → α} [inst : DecidableEq m]
+  [inst_1 : Star α], M.conjTranspose.updateColumn i (star b) = (M.updateRow i b).conjTranspose
+Result.success
+
+Testing || conformalAt_iff : ∀ {E : Type u_1} {F : Type u_2} [inst : NormedAddCommGroup E] [inst_1 : NormedAddCommGroup F]
+  [inst_2 : InnerProductSpace ℝ E] [inst_3 : InnerProductSpace ℝ F] {f : E → F} {x : E} {f' : E →L[ℝ] F},
+  HasFDerivAt f f' x → (ConformalAt f x ↔ ∃ c, 0 < c ∧ ∀ (u v : E), inner (f' u) (f' v) = c * inner u v)
+Result.success
+
+Testing || List.prod_hom₂_nonempty : ∀ {ι : Type u_1} {M : Type u_4} {N : Type u_5} {P : Type u_6} [inst : Monoid M] [inst_1 : Monoid N] [inst_2 : Monoid P]
+  {l : List ι} (f : M → N → P),
+  (∀ (a b : M) (c d : N), f (a * b) (c * d) = f a c * f b d) →
+    ∀ (f₁ : ι → M) (f₂ : ι → N),
+      l ≠ [] → (List.map (fun i => f (f₁ i) (f₂ i)) l).prod = f (List.map f₁ l).prod (List.map f₂ l).prod
+Result.autoException ::
+Auto.Solver.SMT.getSexp :: Incomplete input 
+
+Testing || Filter.mem_of_superset : ∀ {α : Type u_1} {f : Filter α} {x y : Set α}, x ∈ f → x ⊆ y → y ∈ f
+Result.autoException ::
+Auto failed to find proof
+
+Testing || ContinuousLinearEquiv.contDiffWithinAt_comp_iff : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type uE} [inst_1 : NormedAddCommGroup E]
+  [inst_2 : NormedSpace 𝕜 E] {F : Type uF} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {G : Type uG}
+  [inst_5 : NormedAddCommGroup G] [inst_6 : NormedSpace 𝕜 G] {s : Set E} {f : E → F} {x : E} {n : ℕ∞} (e : G ≃L[𝕜] E),
+  ContDiffWithinAt 𝕜 n (f ∘ ⇑e) (⇑e ⁻¹' s) (e.symm x) ↔ ContDiffWithinAt 𝕜 n f s x
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `cifvar_23 ∘ cifvar_24 x_3`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || eq_sub_of_add_eq' : ∀ {G : Type u_3} [inst : AddCommGroup G] {a b c : G}, c + a = b → a = b - c
+Result.success
+
+Testing || Primrec.pred : Primrec Nat.pred
+Result.success
+
+Testing || MeasurableSet.cylinder : ∀ {ι : Type u_2} {α : ι → Type u_1} [inst : (i : ι) → MeasurableSpace (α i)] (s : Finset ι)
+  {S : Set ((i : { x // x ∈ s }) → α ↑i)}, MeasurableSet S → MeasurableSet (MeasureTheory.cylinder s S)
+Result.autoException ::
+Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
+; cardinality of Empty is 1
+; rep: (as @Empty_0 Empty)
+; cardinality of |_Set__i_____x_//_x___s______α__i| is 1
+; rep: (as @|_Set__i_____x_//_x___s______α__i|_0 |_Set__i_____x_//_x___s______α__i|)
+; cardinality of |_Set__i___ι____α_i| is 1
+; rep: (as @|_Set__i___ι____α_i|_0 |_Set__i___ι____α_i|)
+(define-fun _S () |_Set__i_____x_//_x___s______α__i| (as @|_Set__i_____x_//_x___s______α__i|_0 |_Set__i_____x_//_x___s______α__i|))
+(define-fun _MeasurableSet ((_arg_1 |_Set__i_____x_//_x___s______α__i|)) Bool true)
+(define-fun _MeasureTheory.cylinder_s ((_arg_1 |_Set__i_____x_//_x___s______α__i|)) |_Set__i___ι____α_i| (as @|_Set__i___ι____α_i|_0 |_Set__i___ι____α_i|))
+(define-fun _MeasurableSet_0 ((_arg_1 |_Set__i___ι____α_i|)) Bool false)
+)
+
+
+Testing || ZMod.intCast_eq_intCast_iff : ∀ (a b : ℤ) (c : ℕ), ↑a = ↑b ↔ a ≡ b [ZMOD ↑c]
+Result.autoException ::
+Auto.Solver.SMT.getSexp :: Incomplete input 
+
+Testing || List.getI_eq_default : ∀ {α : Type u} (l : List α) [inst : Inhabited α] {n : ℕ}, l.length ≤ n → l.getI n = default
+Result.autoException ::
+Auto.Solver.SMT.getSexp :: Incomplete input 
+
+Testing || NonUnitalSubsemiring.comap_top : ∀ {R : Type u} {S : Type v} [inst : NonUnitalNonAssocSemiring R] [inst_1 : NonUnitalNonAssocSemiring S] {F : Type u_1}
+  [inst_2 : FunLike F R S] [inst_3 : NonUnitalRingHomClass F R S] (f : F), NonUnitalSubsemiring.comap f ⊤ = ⊤
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Monotone.rightLim_le : ∀ {α : Type u_1} {β : Type u_2} [inst : LinearOrder α] [inst_1 : ConditionallyCompleteLinearOrder β]
+  [inst_2 : TopologicalSpace β] [inst_3 : OrderTopology β] {f : α → β},
+  Monotone f → ∀ {x y : α}, x < y → Function.rightLim f x ≤ f y
+Result.autoException ::
+Auto failed to find proof
+
+Testing || AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom_toStalk : ∀ (R : Type u) [inst : CommRing R] (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (f : R),
+  (AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom R x) ((AlgebraicGeometry.StructureSheaf.toStalk R x) f) =
+    (algebraMap R (Localization.AtPrime x.asIdeal)) f
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `x_0.isPrime`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || ringExpChar.eq_iff : ∀ {R : Type u_1} [inst : Ring R] [inst_1 : IsDomain R] {q : ℕ}, ringExpChar R = q ↔ ExpChar R q
+Result.success
+
+Testing || TopologicalSpace.NoetherianSpace.finite : ∀ {α : Type u_1} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace.NoetherianSpace α] [inst : T2Space α], Finite α
+Result.success
+
+Testing || Subalgebra.mem_op : ∀ {R : Type u_2} {A : Type u_3} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : Algebra R A] {x : Aᵐᵒᵖ}
+  {S : Subalgebra R A}, x ∈ S.op ↔ MulOpposite.unop x ∈ S
+Result.autoException ::
+Auto failed to find proof
+
+Testing || MvQPF.Cofix.bisim₂ : ∀ {n : ℕ} {F : TypeVec.{u} (n + 1) → Type u} [q : MvQPF F] {α : TypeVec.{u} n}
+  (r : MvQPF.Cofix F α → MvQPF.Cofix F α → Prop),
+  (∀ (x y : MvQPF.Cofix F α), r x y → MvFunctor.LiftR' (α.RelLast' r) x.dest y.dest) →
+    ∀ (x y : MvQPF.Cofix F α), r x y → x = y
+Result.autoException ::
+Auto.Monomorphization.ConstInst.ofExpr? :: TypeVec.{u} (n + 1) is not a `∀`
+
+Testing || CategoryTheory.BicategoricalCoherence.whiskerLeft_iso : ∀ {B : Type u} [inst : CategoryTheory.Bicategory B] {a b c : B} (f : a ⟶ b) (g h : b ⟶ c)
+  [inst_1 : CategoryTheory.BicategoricalCoherence g h],
+  CategoryTheory.BicategoricalCoherence.iso =
+    CategoryTheory.Bicategory.whiskerLeftIso f CategoryTheory.BicategoricalCoherence.iso
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Nat.sq_add_sq_mul : ∀ {a b x y u v : ℕ}, a = x ^ 2 + y ^ 2 → b = u ^ 2 + v ^ 2 → ∃ r s, a * b = r ^ 2 + s ^ 2
+Result.autoException ::
+Auto.Solver.SMT.getSexp :: Incomplete input 
+
+Testing || Set.iUnion_smul_left_image : ∀ {α : Type u_2} {β : Type u_3} [inst : SMul α β] {s : Set α} {t : Set β}, ⋃ a ∈ s, a • t = s • t
+Result.autoException ::
+Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type a ∈ x_0 of λ binder contains bound variables
+
+Testing || IsGroupHom.comp : ∀ {α : Type u} {β : Type v} [inst : Group α] [inst_1 : Group β] {f : α → β},
+  IsGroupHom f → ∀ {γ : Type u_1} [inst_2 : Group γ] {g : β → γ}, IsGroupHom g → IsGroupHom (g ∘ f)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || LieSubmodule.sup_lie : ∀ {R : Type u} {L : Type v} {M : Type w} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : AddCommGroup M]
+  [inst_3 : Module R M] [inst_4 : LieRingModule L M] (N : LieSubmodule R L M) [inst_5 : LieAlgebra R L]
+  (I J : LieIdeal R L), ⁅I ⊔ J, N⁆ = ⁅I, N⁆ ⊔ ⁅J, N⁆
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `{ x // cifvar_17 x_1 x }`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || mem_ball_zero_iff : ∀ {E : Type u_6} [inst : SeminormedAddGroup E] {a : E} {r : ℝ}, a ∈ Metric.ball 0 r ↔ ‖a‖ < r
+Result.success
+
+Testing || ContinuousConstSMul.continuous_const_smul : ∀ {Γ : Type u_1} {T : Type u_2} {inst : TopologicalSpace T} {inst_1 : SMul Γ T} [self : ContinuousConstSMul Γ T]
+  (γ : Γ), Continuous fun x => γ • x
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Cardinal.lift_mk_shrink' : ∀ (α : Type u) [inst : Small.{v, u} α],
+  Cardinal.lift.{u, v} (Cardinal.mk (Shrink.{v, u} α)) = Cardinal.lift.{v, u} (Cardinal.mk α)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || SetTheory.PGame.Domineering.snd_pred_mem_erase_of_mem_left : ∀ {b : SetTheory.PGame.Domineering.Board} {m : ℤ × ℤ},
+  m ∈ SetTheory.PGame.Domineering.left b → (m.1, m.2 - 1) ∈ Finset.erase b m
+Result.success
+
+Testing || Ordnode.Valid'.node4L : ∀ {α : Type u_1} [inst : Preorder α] {l : Ordnode α} {x : α} {m : Ordnode α} {y : α} {r : Ordnode α} {o₁ : WithBot α}
+  {o₂ : WithTop α},
+  Ordnode.Valid' o₁ l ↑x →
+    Ordnode.Valid' (↑x) m ↑y →
+      Ordnode.Valid' (↑y) r o₂ →
+        0 < m.size →
+          l.size = 0 ∧ m.size = 1 ∧ r.size ≤ 1 ∨
+              0 < l.size ∧
+                Ordnode.ratio * r.size ≤ m.size ∧
+                  Ordnode.delta * l.size ≤ m.size + r.size ∧
+                    3 * (m.size + r.size) ≤ 16 * l.size + 9 ∧ m.size ≤ Ordnode.delta * r.size →
+            Ordnode.Valid' o₁ (l.node4L x m y r) o₂
+Result.autoException ::
+Auto.Solver.SMT.getSexp :: Incomplete input 
+
+Testing || MeasureTheory.setToFun_sub : ∀ {α : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E]
+  [inst_2 : NormedAddCommGroup F] [inst_3 : NormedSpace ℝ F] {m : MeasurableSpace α} {μ : MeasureTheory.Measure α}
+  [inst_4 : CompleteSpace F] {T : Set α → E →L[ℝ] F} {C : ℝ} {f g : α → E}
+  (hT : MeasureTheory.DominatedFinMeasAdditive μ T C),
+  MeasureTheory.Integrable f μ →
+    MeasureTheory.Integrable g μ →
+      MeasureTheory.setToFun μ T hT (f - g) = MeasureTheory.setToFun μ T hT f - MeasureTheory.setToFun μ T hT g
+Result.autoException ::
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
-Testing || Module.Quotient.mk_smul_mk : ∀ {R : Type u_1} (M : Type u_2) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (I : Ideal R)
-  (r : R) (m : M), (Ideal.Quotient.mk I) r • Submodule.Quotient.mk m = Submodule.Quotient.mk (r • m)
+Testing || CategoryTheory.Pretriangulated.mem_distTriang_op_iff : ∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_2, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]
+  [inst_2 : CategoryTheory.Limits.HasZeroObject C] [inst_3 : CategoryTheory.Preadditive C]
+  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [inst_5 : CategoryTheory.Pretriangulated C]
+  (T : CategoryTheory.Pretriangulated.Triangle Cᵒᵖ),
+  T ∈ CategoryTheory.Pretriangulated.distinguishedTriangles ↔
+    Opposite.unop ((CategoryTheory.Pretriangulated.triangleOpEquivalence C).inverse.obj T) ∈
+      CategoryTheory.Pretriangulated.distinguishedTriangles
 Result.autoException ::
 Auto failed to find proof
 
-Testing || BoundedLatticeHom.asBoolRing_id : ∀ {α : Type u_1} [inst : BooleanAlgebra α], (BoundedLatticeHom.id α).asBoolRing = RingHom.id (AsBoolRing α)
+Testing || LinearMap.lTensor_neg : ∀ {R : Type u_1} [inst : CommSemiring R] {M : Type u_2} {N : Type u_3} {P : Type u_4} [inst_1 : AddCommGroup M]
+  [inst_2 : AddCommGroup N] [inst_3 : AddCommGroup P] [inst_4 : Module R M] [inst_5 : Module R N] [inst_6 : Module R P]
+  (f : N →ₗ[R] P), LinearMap.lTensor M (-f) = -LinearMap.lTensor M f
 Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_BoundedLatticeHom_α_α| is 1
-; rep: (as @|_BoundedLatticeHom_α_α|_0 |_BoundedLatticeHom_α_α|)
-; cardinality of |_AsBoolRing_α__+*_AsBoolRing_α| is 2
-; rep: (as @|_AsBoolRing_α__+*_AsBoolRing_α|_0 |_AsBoolRing_α__+*_AsBoolRing_α|)
-; rep: (as @|_AsBoolRing_α__+*_AsBoolRing_α|_1 |_AsBoolRing_α__+*_AsBoolRing_α|)
-(define-fun |_BoundedLatticeHom.id_α| () |_BoundedLatticeHom_α_α| (as @|_BoundedLatticeHom_α_α|_0 |_BoundedLatticeHom_α_α|))
-(define-fun _BoundedLatticeHom.asBoolRing ((_arg_1 |_BoundedLatticeHom_α_α|)) |_AsBoolRing_α__+*_AsBoolRing_α| (as @|_AsBoolRing_α__+*_AsBoolRing_α|_1 |_AsBoolRing_α__+*_AsBoolRing_α|))
-(define-fun |_RingHom.id_AsBoolRing_α| () |_AsBoolRing_α__+*_AsBoolRing_α| (as @|_AsBoolRing_α__+*_AsBoolRing_α|_0 |_AsBoolRing_α__+*_AsBoolRing_α|))
-)
+Auto failed to find proof
 
-
-Testing || ofAdd_list_prod : ∀ {α : Type u_3} [inst : AddMonoid α] (s : List α),
-  Multiplicative.ofAdd s.sum = (List.map (⇑Multiplicative.ofAdd) s).prod
+Testing || AddLocalization.rec.proof_3 : ∀ {M : Type u_1} [inst : AddCommMonoid M] {S : AddSubmonoid M} {p : AddLocalization S → Sort u_2}
+  (f : (a : M) → (b : ↥S) → p (AddLocalization.mk a b)),
+  (∀ {a c : M} {b d : ↥S} (h : (AddLocalization.r S) (a, b) (c, d)), ⋯ ▸ f a b = f c d) →
+    ∀ (y z : M × ↥S) (h : (AddOreLocalization.oreEqv S M) y z), ⋯ ▸ ⋯ ▸ f y.1 y.2 = ⋯ ▸ f z.1 z.2
 Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_Multiplicative_α| is 3
-; rep: (as @|_Multiplicative_α|_0 |_Multiplicative_α|)
-; rep: (as @|_Multiplicative_α|_1 |_Multiplicative_α|)
-; rep: (as @|_Multiplicative_α|_2 |_Multiplicative_α|)
-; cardinality of |_α___Multiplicative_α| is 1
-; rep: (as @|_α___Multiplicative_α|_0 |_α___Multiplicative_α|)
-(define-fun _Multiplicative.ofAdd () |_α___Multiplicative_α| (as @|_α___Multiplicative_α|_0 |_α___Multiplicative_α|))
-(define-fun _s () |_List_α| _pl___)
-(define-fun _List.sum ((_arg_1 |_List_α|)) |_Multiplicative_α| (as @|_Multiplicative_α|_0 |_Multiplicative_α|))
-(define-fun _DFunLike.coe ((_arg_1 |_α___Multiplicative_α|) (_arg_2 |_Multiplicative_α|)) |_Multiplicative_α| (as @|_Multiplicative_α|_1 |_Multiplicative_α|))
-(define-fun _List.map__Multiplicative.ofAdd ((_arg_1 |_List_α|)) |_List_α| (_List.cons (as @|_Multiplicative_α|_0 |_Multiplicative_α|) _pl___))
-(define-fun _List.prod ((_arg_1 |_List_α|)) |_Multiplicative_α| (as @|_Multiplicative_α|_2 |_Multiplicative_α|))
-(define-fun _List.map_fun_a_=>_a_=_id () Bool true)
-)
+Auto failed to find proof
 
-
-Testing || CategoryTheory.HasSheafify.isLeftExact : ∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {J : CategoryTheory.GrothendieckTopology C} {A : Type u₂}
-  {inst_1 : CategoryTheory.Category.{v₂, u₂} A} [self : CategoryTheory.HasSheafify J A],
-  Nonempty (CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.sheafToPresheaf J A).leftAdjoint)
+Testing || Unitization.lift_symm_apply : ∀ {R : Type u_2} {A : Type u_3} [inst : CommSemiring R] [inst_1 : NonUnitalSemiring A] [inst_2 : Module R A]
+  [inst_3 : SMulCommClass R A A] [inst_4 : IsScalarTower R A A] {C : Type u_5} [inst_5 : Semiring C]
+  [inst_6 : Algebra R C] (φ : Unitization R A →ₐ[R] C),
+  Unitization.lift.symm φ = (NonUnitalAlgHomClass.toNonUnitalAlgHom φ).comp (Unitization.inrNonUnitalAlgHom R A)
 Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of _C is 1
-; rep: (as @_C_0 _C)
-; cardinality of _CategoryTheory.GrothendieckTopology_C is 1
-; rep: (as @_CategoryTheory.GrothendieckTopology_C_0 _CategoryTheory.GrothendieckTopology_C)
-; cardinality of _CategoryTheory.Functor_CategoryTheory.Functor_C___A_CategoryTheory.Sheaf_J_A is 1
-; rep: (as @_CategoryTheory.Functor_CategoryTheory.Functor_C___A_CategoryTheory.Sheaf_J_A_0 _CategoryTheory.Functor_CategoryTheory.Functor_C___A_CategoryTheory.Sheaf_J_A)
-; cardinality of |_Type__max__max_1__max__max_u₁_u₂__v₁__v₂__u₁_v₂_| is 1
-; rep: (as @|_Type__max__max_1__max__max_u₁_u₂__v₁__v₂__u₁_v₂_|_0 |_Type__max__max_1__max__max_u₁_u₂__v₁__v₂__u₁_v₂_|)
-(define-fun _J () _CategoryTheory.GrothendieckTopology_C (as @_CategoryTheory.GrothendieckTopology_C_0 _CategoryTheory.GrothendieckTopology_C))
-(define-fun _fun_J_=>_CategoryTheory.HasSheafify_J_A ((_arg_1 _CategoryTheory.GrothendieckTopology_C)) Bool true)
-(define-fun _CategoryTheory.sheafToPresheaf_J_A.leftAdjoint () _CategoryTheory.Functor_CategoryTheory.Functor_C___A_CategoryTheory.Sheaf_J_A (as @_CategoryTheory.Functor_CategoryTheory.Functor_C___A_CategoryTheory.Sheaf_J_A_0 _CategoryTheory.Functor_CategoryTheory.Functor_C___A_CategoryTheory.Sheaf_J_A))
-(define-fun _CategoryTheory.Limits.PreservesFiniteLimits ((_arg_1 _CategoryTheory.Functor_CategoryTheory.Functor_C___A_CategoryTheory.Sheaf_J_A)) |_Type__max__max_1__max__max_u₁_u₂__v₁__v₂__u₁_v₂_| (as @|_Type__max__max_1__max__max_u₁_u₂__v₁__v₂__u₁_v₂_|_0 |_Type__max__max_1__max__max_u₁_u₂__v₁__v₂__u₁_v₂_|))
-(define-fun _Nonempty ((_arg_1 |_Type__max__max_1__max__max_u₁_u₂__v₁__v₂__u₁_v₂_|)) Bool false)
-)
+Auto failed to find proof
 
+Testing || CategoryTheory.Limits.Types.binaryCoproductColimit_desc : ∀ (X Y : Type u) (s : CategoryTheory.Limits.BinaryCofan X Y) (a : X ⊕ Y),
+  (CategoryTheory.Limits.Types.binaryCoproductColimit X Y).desc s a = Sum.elim s.inl s.inr a
+Result.autoException ::
+Auto.Monomorphization.ConstInst.ofExpr? :: (CategoryTheory.Limits.Types.binaryCoproductCocone X Y).pt ⟶
+  s.pt is not a `∀`
 
-Testing || MvPolynomial.cardinal_mk_eq_max_lift : ∀ {σ : Type u} {R : Type v} [inst : CommSemiring R] [inst_1 : Nonempty σ] [inst_2 : Nontrivial R],
-  Cardinal.mk (MvPolynomial σ R) =
-    max (max (Cardinal.lift.{u, v} (Cardinal.mk R)) (Cardinal.lift.{v, u} (Cardinal.mk σ))) Cardinal.aleph0
+Testing || LinearIsometry.map_ne : ∀ {R : Type u_1} {R₂ : Type u_2} {E₂ : Type u_6} {F : Type u_9} [inst : Semiring R] [inst_1 : Semiring R₂]
+  {σ₁₂ : R →+* R₂} [inst_2 : SeminormedAddCommGroup E₂] [inst_3 : Module R₂ E₂] [inst_4 : NormedAddCommGroup F]
+  [inst_5 : Module R F] (f₁ : F →ₛₗᵢ[σ₁₂] E₂) {x y : F}, x ≠ y → f₁ x ≠ f₁ y
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `Function.Injective (cifvar_5 x_0)`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || Relation.comp_assoc : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} {δ : Type u_4} {r : α → β → Prop} {p : β → γ → Prop} {q : γ → δ → Prop},
+  Relation.Comp (Relation.Comp r p) q = Relation.Comp r (Relation.Comp p q)
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Int.succ_dvd_or_succ_dvd_of_succ_sum_dvd_mul : ∀ {p : ℕ},
+  Nat.Prime p →
+    ∀ {m n : ℤ} {k l : ℕ},
+      ↑(p ^ k) ∣ m → ↑(p ^ l) ∣ n → ↑(p ^ (k + l + 1)) ∣ m * n → ↑(p ^ (k + 1)) ∣ m ∨ ↑(p ^ (l + 1)) ∣ n
 Result.autoException ::
 Auto.Solver.SMT.getSexp :: Incomplete input 
 
-Testing || ContinuousMap.Homotopy.apply_one : ∀ {X : Type u} {Y : Type v} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f₀ f₁ : C(X, Y)}
-  (F : f₀.Homotopy f₁) (x : X), F (1, x) = f₁ x
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of _CauSeq.Completion.Cauchy_abs is 1
-; rep: (as @_CauSeq.Completion.Cauchy_abs_0 _CauSeq.Completion.Cauchy_abs)
-; cardinality of _X is 1
-; rep: (as @_X_0 _X)
-; cardinality of ___x_//_x___Set.Icc_0_1__ is 1
-; rep: (as @___x_//_x___Set.Icc_0_1___0 ___x_//_x___Set.Icc_0_1__)
-; cardinality of |_f₀.Homotopy_f₁| is 1
-; rep: (as @|_f₀.Homotopy_f₁|_0 |_f₀.Homotopy_f₁|)
-; cardinality of _Y is 2
-; rep: (as @_Y_0 _Y)
-; rep: (as @_Y_1 _Y)
-; cardinality of _C_X__Y_ is 1
-; rep: (as @_C_X__Y__0 _C_X__Y_)
-(define-fun _F () |_f₀.Homotopy_f₁| (as @|_f₀.Homotopy_f₁|_0 |_f₀.Homotopy_f₁|))
-(define-fun _1_ () ___x_//_x___Set.Icc_0_1__ (as @___x_//_x___Set.Icc_0_1___0 ___x_//_x___Set.Icc_0_1__))
-(define-fun _x () _X (as @_X_0 _X))
-(define-fun _DFunLike.coe ((_arg_1 |_f₀.Homotopy_f₁|) (_arg_2 ___x_//_x___Set.Icc_0_1_____X)) _Y (as @_Y_0 _Y))
-(define-fun |_f₁| () _C_X__Y_ (as @_C_X__Y__0 _C_X__Y_))
-(define-fun _DFunLike.coe_0 ((_arg_1 _C_X__Y_) (_arg_2 _X)) _Y (as @_Y_1 _Y))
-)
-
-
-Testing || Asymptotics.IsBigOWith.const_mul_right : ∀ {α : Type u_1} {E : Type u_3} {𝕜 : Type u_15} [inst : Norm E] [inst_1 : NormedDivisionRing 𝕜] {f : α → E}
-  {l : Filter α} {g : α → 𝕜} {c : 𝕜},
-  c ≠ 0 →
-    ∀ {c' : ℝ}, 0 ≤ c' → Asymptotics.IsBigOWith c' l f g → Asymptotics.IsBigOWith (c' * ‖c‖⁻¹) l f fun x => c * g x
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Incomplete input 
-
-Testing || CategoryTheory.GradedObject.TriangleIndexData.hp₁₂ : ∀ {I₁ : Type u_1} {I₂ : Type u_2} {I₃ : Type u_3} {J : Type u_4} [inst : Zero I₂] {r : I₁ × I₂ × I₃ → J}
-  {π : I₁ × I₃ → J} (self : CategoryTheory.GradedObject.TriangleIndexData r π) (i : I₁ × I₂ × I₃),
-  π (self.p₁₂ (i.1, i.2.1), i.2.2) = r i
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_I₂| is 1
-; rep: (as @|_I₂|_0 |_I₂|)
-; cardinality of |_I₁| is 2
-; rep: (as @|_I₁|_0 |_I₁|)
-; rep: (as @|_I₁|_1 |_I₁|)
-; cardinality of |_I₃| is 1
-; rep: (as @|_I₃|_0 |_I₃|)
-; cardinality of |_CategoryTheory.GradedObject.TriangleIndexData_r_π| is 1
-; rep: (as @|_CategoryTheory.GradedObject.TriangleIndexData_r_π|_0 |_CategoryTheory.GradedObject.TriangleIndexData_r_π|)
-; cardinality of _J is 2
-; rep: (as @_J_0 _J)
-; rep: (as @_J_1 _J)
-(define-fun _self () |_CategoryTheory.GradedObject.TriangleIndexData_r_π| (as @|_CategoryTheory.GradedObject.TriangleIndexData_r_π|_0 |_CategoryTheory.GradedObject.TriangleIndexData_r_π|))
-(define-fun _i () |_I₁___I₂___I₃| (_Prod.mk_1 (as @|_I₁|_0 |_I₁|) (_Prod.mk_0 (as @|_I₂|_0 |_I₂|) (as @|_I₃|_0 |_I₃|))))
-(define-fun |_CategoryTheory.GradedObject.TriangleIndexData.p₁₂| ((_arg_1 |_CategoryTheory.GradedObject.TriangleIndexData_r_π|) (_arg_2 |_I₁___I₂|)) |_I₁| (as @|_I₁|_1 |_I₁|))
-(define-fun |_π| ((_arg_1 |_I₁___I₃|)) _J (as @_J_0 _J))
-(define-fun _r ((_arg_1 |_I₁___I₂___I₃|)) _J (as @_J_1 _J))
-)
-
-
-Testing || Matrix.toEuclideanLin_piLp_equiv_symm : ∀ {𝕜 : Type u_3} [inst : RCLike 𝕜] {m : Type u_8} {n : Type u_9} [inst_1 : Fintype n] [inst_2 : DecidableEq n]
-  (A : Matrix m n 𝕜) (x : n → 𝕜),
-  (Matrix.toEuclideanLin A) ((WithLp.equiv 2 ((i : n) → (fun x => 𝕜) i)).symm x) =
-    (WithLp.equiv 2 (m → 𝕜)).symm ((Matrix.toLin' A) x)
+Testing || Subring.coe_center : ∀ (R : Type u) [inst : Ring R], ↑(Subring.center R) = Set.center R
 Result.autoException ::
 Auto failed to find proof
 
-Testing || CoalgebraCat.of_isAddCommGroup : ∀ (R : Type u) [inst : CommRing R] (X : Type v) [inst_1 : AddCommGroup X] [inst_2 : Module R X]
-  [inst_3 : Coalgebra R X], (CoalgebraCat.of R X).isAddCommGroup = inst_1
+Testing || AntivaryOn.sum_mul_le_sum_mul_comp_perm : ∀ {ι : Type u_1} {α : Type u_2} [inst : LinearOrderedSemiring α] [inst_1 : ExistsAddOfLE α] {s : Finset ι}
+  {σ : Equiv.Perm ι} {f g : ι → α}, AntivaryOn f g ↑s → {x | σ x ≠ x} ⊆ ↑s → ∑ i ∈ s, f i * g i ≤ ∑ i ∈ s, f i * g (σ i)
 Result.autoException ::
-Auto.Reif.resolveTy :: Unable to resolve AddCommGroup ↑(CoalgebraCat.of R X).toModuleCat
+Monomorphization failed because currently the procedure cannot deal with expression `∑ i ∈ x_0,
+  cifvar_12 (cifvar_13 i) (cifvar_14 (cifvar_15 x_1 i))`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
 
-Testing || ContinuousMultilinearMap.iteratedFDerivComponent_apply : ∀ {𝕜 : Type u} {ι : Type v} {E₁ : ι → Type wE₁} {G : Type wG} [inst : NontriviallyNormedField 𝕜]
-  [inst_1 : (i : ι) → SeminormedAddCommGroup (E₁ i)] [inst_2 : (i : ι) → NormedSpace 𝕜 (E₁ i)]
-  [inst_3 : SeminormedAddCommGroup G] [inst_4 : NormedSpace 𝕜 G] [inst_5 : Fintype ι] {α : Type u_1}
-  [inst_6 : Fintype α] (f : ContinuousMultilinearMap 𝕜 E₁ G) {s : Set ι} (e : α ≃ ↑s)
-  [inst_7 : DecidablePred fun x => x ∈ s] (v : (i : { a // a ∉ s }) → E₁ ↑i) (w : α → (i : ι) → E₁ i),
-  ((f.iteratedFDerivComponent e) v) w = f fun j => if h : j ∈ s then w (e.symm ⟨j, h⟩) j else v ⟨j, h⟩
+Testing || RightOrdContinuous.lt_iff : ∀ {α : Type u} {β : Type v} [inst : SemilatticeInf α] [inst_1 : SemilatticeInf β] {f : α → β},
+  RightOrdContinuous f → Function.Injective f → ∀ {x y : α}, f x < f y ↔ x < y
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+Monomorphization failed because currently the procedure cannot deal with expression `SemilatticeSup.toPartialOrder`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
 
-Testing || nontrivial_iff_lt : ∀ {α : Type u_1} [inst : LinearOrder α], Nontrivial α ↔ ∃ x y, x < y
+Testing || Batteries.Vector.push_pop_back : ∀ {α : Type u_1} {n : ℕ} (v : Batteries.Vector α (n + 1)), Batteries.Vector.push v.back v.pop = v
 Result.autoException ::
-Auto failed to find proof
+Auto.Lemma.rewriteUMonoRigid? :: Motive fun _a =>
+  ∀ {α : Type u_1} {n : ℕ} {v : Batteries.Vector α n} {x : α} {i : ℕ} (h : i < n),
+    (Batteries.Vector.push x v)[i] = v[i] is not type correct
 
-Testing || isUniformInducing_iff_uniformSpace : ∀ {α : Type u} {β : Type v} [inst : UniformSpace α] [inst_1 : UniformSpace β] {f : α → β},
-  IsUniformInducing f ↔ UniformSpace.comap f inst_1 = inst
+Testing || CategoryTheory.Adjunction.toEquivalence_inverse : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]
+  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G)
+  [inst_2 : ∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)]
+  [inst_3 : ∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)], adj.toEquivalence.inverse = G
 Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_α| is 1
-; rep: (as @|_α|_0 |_α|)
-; cardinality of |_β| is 1
-; rep: (as @|_β|_0 |_β|)
-; cardinality of |_Filter_β___β| is 1
-; rep: (as @|_Filter_β___β|_0 |_Filter_β___β|)
-; cardinality of |_Filter_α___α| is 2
-; rep: (as @|_Filter_α___α|_0 |_Filter_α___α|)
-; rep: (as @|_Filter_α___α|_1 |_Filter_α___α|)
-; cardinality of |_UniformSpace_α| is 1
-; rep: (as @|_UniformSpace_α|_0 |_UniformSpace_α|)
-; cardinality of |_UniformSpace_β| is 1
-; rep: (as @|_UniformSpace_β|_0 |_UniformSpace_β|)
-; cardinality of |_Set_β___β| is 1
-; rep: (as @|_Set_β___β|_0 |_Set_β___β|)
-; cardinality of |_Set_α___α| is 1
-; rep: (as @|_Set_α___α|_0 |_Set_α___α|)
-(define-fun |_uniformity_β| () |_Filter_β___β| (as @|_Filter_β___β|_0 |_Filter_β___β|))
-(define-fun _Filter.comap_fun_p_=>__f_p.1__f_p.2_ ((_arg_1 |_Filter_β___β|)) |_Filter_α___α| (as @|_Filter_α___α|_1 |_Filter_α___α|))
-(define-fun |_uniformity_α| () |_Filter_α___α| (as @|_Filter_α___α|_0 |_Filter_α___α|))
-(define-fun _UniformSpace.mk_cifvar_7_cifvar_8_cifvar_9_cifvar_10_exfvar_3_ () |_UniformSpace_α| (as @|_UniformSpace_α|_0 |_UniformSpace_α|))
-(define-fun _inst.116_ () |_UniformSpace_α| (as @|_UniformSpace_α|_0 |_UniformSpace_α|))
-(define-fun _inst.119_ () |_UniformSpace_β| (as @|_UniformSpace_β|_0 |_UniformSpace_β|))
-(define-fun _Membership.mem ((BOUND_VARIABLE_557 |_Filter_β___β|) (BOUND_VARIABLE_558 |_Set_β___β|)) Bool false)
-(define-fun _Membership.mem_0 ((BOUND_VARIABLE_561 |_Filter_α___α|) (BOUND_VARIABLE_562 |_Set_α___α|)) Bool false)
-)
+Monomorphization failed because currently the procedure cannot deal with expression `(cifvar_7 cifvar_8).app x_0`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
 
-
-Testing || Ordinal.lt_omega0_opow_succ : ∀ {a b : Ordinal.{u_1}}, a < Ordinal.omega0 ^ Order.succ b ↔ ∃ n, a < Ordinal.omega0 ^ b * ↑n
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Incomplete input 
-
-Testing || Affine.Simplex.centroid_eq_affineCombination_of_pointsWithCircumcenter : ∀ {V : Type u_1} {P : Type u_2} [inst : NormedAddCommGroup V] [inst_1 : InnerProductSpace ℝ V] [inst_2 : MetricSpace P]
-  [inst_3 : NormedAddTorsor V P] {n : ℕ} (s : Affine.Simplex ℝ P n) (fs : Finset (Fin (n + 1))),
-  Finset.centroid ℝ fs s.points =
-    (Finset.affineCombination ℝ Finset.univ s.pointsWithCircumcenter)
-      (Affine.Simplex.centroidWeightsWithCircumcenter fs)
+Testing || FractionalIdeal.fg_of_isUnit : ∀ {R : Type u_1} [inst : CommRing R] {S : Submonoid R} {P : Type u_2} [inst_1 : CommRing P] [inst_2 : Algebra R P]
+  (I : FractionalIdeal S P), IsUnit I → (↑I).FG
 Result.autoException ::
 Auto failed to find proof
 
-Testing || List.prod_inv : ∀ {G : Type u_7} [inst : CommGroup G] (L : List G), L.prod⁻¹ = (List.map (fun x => x⁻¹) L).prod
+Testing || minpoly.natSepDegree_eq_one_iff_eq_X_sub_C_pow : ∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Ring E] [inst_2 : IsDomain E] [inst_3 : Algebra F E] (q : ℕ)
+  [hF : ExpChar F q] {x : E},
+  (minpoly F x).natSepDegree = 1 ↔
+    ∃ n, Polynomial.map (algebraMap F E) (minpoly F x) = (Polynomial.X - Polynomial.C x) ^ q ^ n
 Result.autoException ::
-Auto.Solver.SMT.getSexp :: Incomplete input 
+Monomorphization failed because currently the procedure cannot deal with expression `HasDistribNeg.toInvolutiveNeg`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
 
-Testing || Filter.BoundedAtFilter.mul : ∀ {α : Type u_2} {β : Type u_3} [inst : SeminormedRing β] {l : Filter α} {f g : α → β},
-  l.BoundedAtFilter f → l.BoundedAtFilter g → l.BoundedAtFilter (f * g)
+Testing || IsAddRightRegular.add : ∀ {R : Type u_1} [inst : AddSemigroup R] {a b : R},
+  IsAddRightRegular a → IsAddRightRegular b → IsAddRightRegular (a + b)
 Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_Filter_α| is 1
-; rep: (as @|_Filter_α|_0 |_Filter_α|)
-(define-fun _l () |_Filter_α| (as @|_Filter_α|_0 |_Filter_α|))
-(define-fun _fun_l_=>_l.BoundedAtFilter_f ((_arg_1 |_Filter_α|)) Bool true)
-(define-fun _fun_l_=>_l.BoundedAtFilter_g ((_arg_1 |_Filter_α|)) Bool true)
-(define-fun _fun_l_=>_l.BoundedAtFilter_f_*_g ((_arg_1 |_Filter_α|)) Bool false)
-)
+Monomorphization failed because currently the procedure cannot deal with expression `(fun x => cifvar_4 x x_0) ∘
+  fun x => cifvar_4 x x_1`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
 
-
-Testing || connectedComponentIn_mem_nhds : ∀ {α : Type u} [inst : TopologicalSpace α] [inst_1 : LocallyConnectedSpace α] {F : Set α} {x : α},
-  F ∈ nhds x → connectedComponentIn F x ∈ nhds x
+Testing || StarConvex.preimage_add_left : ∀ {𝕜 : Type u_1} {E : Type u_2} [inst : OrderedSemiring 𝕜] [inst_1 : AddCommMonoid E] [inst_2 : Module 𝕜 E] {x z : E}
+  {s : Set E}, StarConvex 𝕜 (x + z) s → StarConvex 𝕜 x ((fun x => x + z) ⁻¹' s)
 Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `(cifvar_2 x_0).HasBasis
-  (fun s => cifvar_9 (cifvar_10 s) (cifvar_9 (cifvar_11 s x_0) (cifvar_12 s))) cifvar_13`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
+Monomorphization failed because currently the procedure cannot deal with expression `(fun x => cifvar_1 x_1 x) ⁻¹' x_2`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
 
-Testing || WithTop.coe_bot : ∀ {α : Type u_1} [inst : Bot α], ↑⊥ = ⊥
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_α| is 1
-; rep: (as @|_α|_0 |_α|)
-; cardinality of |_WithTop_α| is 2
-; rep: (as @|_WithTop_α|_0 |_WithTop_α|)
-; rep: (as @|_WithTop_α|_1 |_WithTop_α|)
-(define-fun _pl__ () |_α| (as @|_α|_0 |_α|))
-(define-fun _WithTop.some ((_arg_1 |_α|)) |_WithTop_α| (as @|_WithTop_α|_1 |_WithTop_α|))
-(define-fun _pl___0 () |_WithTop_α| (as @|_WithTop_α|_0 |_WithTop_α|))
-)
-
-
-Testing || Sat.Clause.reify_zero : ∀ {v : Sat.Valuation}, Sat.Clause.reify v Sat.Clause.nil True
-Result.autoException ::
-Auto failed to find proof
-
-Testing || Ordinal.nadd_one : ∀ (a : Ordinal.{u}), a.nadd 1 = Order.succ a
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Incomplete input 
-
-Testing || QuotientMap.restrictPreimage_isOpen : ∀ {X : Type u} {Y : Type v} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : X → Y},
-  IsQuotientMap f → ∀ {s : Set Y}, IsOpen s → IsQuotientMap (s.restrictPreimage f)
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `{ x // cifvar_6 (cifvar_7 s) x }`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
-
-Testing || Equiv.piCongrLeft_apply : ∀ {α : Sort u_1} {β : Sort u_4} (P : β → Sort w) (e : α ≃ β) (f : (a : α) → P (e a)) (b : β),
-  (Equiv.piCongrLeft P e) f b = ⋯ ▸ f (e.symm b)
-Result.autoException ::
-Auto.Monomorphization.ConstInst.toExpr :: Unexpected error
-
-Testing || RingHom.locally_iff_exists : ∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {R S : Type u}
-  [inst : CommRing R] [inst_1 : CommRing S],
-  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →
-    ∀ (f : R →+* S),
-      RingHom.Locally (fun {R S} [CommRing R] [CommRing S] => P) f ↔
-        ∃ ι s,
-          ∃ (_ : Ideal.span (Set.range s) = ⊤),
-            ∃ Sₜ x x_1, ∃ (_ : ∀ (i : ι), IsLocalization.Away (s i) (Sₜ i)), ∀ (i : ι), P ((algebraMap S (Sₜ i)).comp f)
-Result.autoException ::
-Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type CommRing R✝ of λ binder contains bound variables
-
-Testing || OrderIso.refl_toEquiv : ∀ {α : Type u_2} [inst : LE α], (OrderIso.refl α).toEquiv = Equiv.refl α
+Testing || fixedPoints_submonoid_sup : ∀ (M : Type u_1) (α : Type u_2) [inst : Monoid M] [inst_1 : MulAction M α] {P Q : Submonoid M},
+  MulAction.fixedPoints (↥(P ⊔ Q)) α = MulAction.fixedPoints (↥P) α ∩ MulAction.fixedPoints (↥Q) α
 Result.autoException ::
 Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
 ; cardinality of Empty is 1
 ; rep: (as @Empty_0 Empty)
-; cardinality of _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_ is 1
-; rep: (as @_fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_)
-; cardinality of |_α___α| is 2
-; rep: (as @|_α___α|_0 |_α___α|)
-; rep: (as @|_α___α|_1 |_α___α|)
-(define-fun |_OrderIso.refl_α| () _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_ (as @_fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_))
-(define-fun _RelIso.toEquiv ((_arg_1 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_)) |_α___α| (as @|_α___α|_1 |_α___α|))
-(define-fun |_Equiv.refl_α| () |_α___α| (as @|_α___α|_0 |_α___α|))
-)
-
-
-Testing || OrderIso.smulRightDual_symm_apply : ∀ {α : Type u_1} (β : Type u_2) [inst : LinearOrderedField α] [inst_1 : OrderedAddCommGroup β] [inst_2 : Module α β]
-  {a : α} [inst_3 : PosSMulMono α β] (ha : a < 0) (a_1 : βᵒᵈ),
-  (RelIso.symm (OrderIso.smulRightDual β ha)) a_1 = a⁻¹ • OrderDual.ofDual a_1
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_α| is 3
-; rep: (as @|_α|_0 |_α|)
-; rep: (as @|_α|_1 |_α|)
-; rep: (as @|_α|_2 |_α|)
-; cardinality of _a_<_0_ is 1
-; rep: (as @_a_<_0__0 _a_<_0_)
-; cardinality of _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_ is 1
-; rep: (as @_fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_)
-; cardinality of _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0 is 1
-; rep: (as @_fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0_0 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0)
-; cardinality of |_β| is 4
-; rep: (as @|_β|_0 |_β|)
-; rep: (as @|_β|_1 |_β|)
-; rep: (as @|_β|_2 |_β|)
-; rep: (as @|_β|_3 |_β|)
-; cardinality of |_β_____β| is 1
-; rep: (as @|_β_____β|_0 |_β_____β|)
-(define-fun |_PosSMulMono_α_β| () Bool true)
-(define-fun _a () |_α| (as @|_α|_0 |_α|))
-(define-fun _0_ () |_α| (as @|_α|_1 |_α|))
-(define-fun _LT.lt ((_arg_1 |_α|) (_arg_2 |_α|)) Bool true)
-(define-fun _ha () _a_<_0_ (as @_a_<_0__0 _a_<_0_))
-(define-fun |_OrderIso.smulRightDual_β| ((_arg_1 _a_<_0_)) _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_ (as @_fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_))
-(define-fun _RelIso.symm ((_arg_1 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_)) _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0 (as @_fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0_0 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0))
-(define-fun _a.26_ () |_β| (as @|_β|_0 |_β|))
-(define-fun _DFunLike.coe ((_arg_1 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0) (_arg_2 |_β|)) |_β| (as @|_β|_1 |_β|))
-(define-fun _Inv.inv ((_arg_1 |_α|)) |_α| (as @|_α|_2 |_α|))
-(define-fun _OrderDual.ofDual () |_β_____β| (as @|_β_____β|_0 |_β_____β|))
-(define-fun _DFunLike.coe_0 ((_arg_1 |_β_____β|) (_arg_2 |_β|)) |_β| (as @|_β|_2 |_β|))
-(define-fun _HSMul.hSMul ((_arg_1 |_α|) (_arg_2 |_β|)) |_β| (as @|_β|_3 |_β|))
-)
-
-
-Testing || NormedAddGroupHom.completion_id : ∀ {G : Type u_1} [inst : SeminormedAddCommGroup G],
-  (NormedAddGroupHom.id G).completion = NormedAddGroupHom.id (UniformSpace.Completion G)
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `UniformSpace.Completion.map
-  (cifvar_11 x_0) x_1`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
-
-Testing || AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen_image_preimage : ∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} (f g : X ⟶ Y)
-  (U :
-    TopologicalSpace.Opens
-      ↑↑(CategoryTheory.Limits.coequalizer (AlgebraicGeometry.LocallyRingedSpace.Hom.toShHom f)
-              (AlgebraicGeometry.LocallyRingedSpace.Hom.toShHom g)).toPresheafedSpace)
-  (s :
-    ↑((CategoryTheory.Limits.coequalizer (AlgebraicGeometry.LocallyRingedSpace.Hom.toShHom f)
-              (AlgebraicGeometry.LocallyRingedSpace.Hom.toShHom g)).presheaf.obj
-        (Opposite.op U))),
-  ⇑(CategoryTheory.Limits.coequalizer.π (AlgebraicGeometry.LocallyRingedSpace.Hom.toShHom f)
-            (AlgebraicGeometry.LocallyRingedSpace.Hom.toShHom g)).base ⁻¹'
-      (⇑(CategoryTheory.Limits.coequalizer.π (AlgebraicGeometry.LocallyRingedSpace.Hom.toShHom f)
-              (AlgebraicGeometry.LocallyRingedSpace.Hom.toShHom g)).base ''
-        (AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen f g U s).carrier) =
-    (AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen f g U s).carrier
-Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
-
-Testing || Finset.max_of_mem : ∀ {α : Type u_2} [inst : LinearOrder α] {s : Finset α} {a : α}, a ∈ s → ∃ b, s.max = ↑b
-Result.autoException ::
-Auto failed to find proof
-
-Testing || tendsto_integral_exp_smul_cocompact : ∀ {E : Type u_1} {V : Type u_2} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℂ E] (f : V → E)
-  [inst_2 : AddCommGroup V] [inst_3 : TopologicalSpace V] [inst_4 : TopologicalAddGroup V] [inst_5 : T2Space V]
-  [inst_6 : MeasurableSpace V] [inst_7 : BorelSpace V] [inst_8 : Module ℝ V] [inst_9 : ContinuousSMul ℝ V]
-  [inst_10 : FiniteDimensional ℝ V] (μ : MeasureTheory.Measure V) [inst_11 : μ.IsAddHaarMeasure],
-  Filter.Tendsto (fun w => ∫ (v : V), Real.fourierChar (-w v) • f v ∂μ) (Filter.cocompact (V →L[ℝ] ℝ)) (nhds 0)
-Result.autoException ::
-Auto failed to find proof
-
-Testing || Odd.zpow_neg_iff : ∀ {α : Type u_1} [inst : LinearOrderedField α] {a : α} {n : ℤ}, Odd n → (a ^ n < 0 ↔ a < 0)
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Incomplete input 
-
-Testing || Matrix.mul_kronecker_mul : ∀ {α : Type u_2} {l : Type u_8} {m : Type u_9} {n : Type u_10} {l' : Type u_14} {m' : Type u_15} {n' : Type u_16}
-  [inst : Fintype m] [inst_1 : Fintype m'] [inst_2 : CommSemiring α] (A : Matrix l m α) (B : Matrix m n α)
-  (A' : Matrix l' m' α) (B' : Matrix m' n' α),
-  Matrix.kroneckerMap (fun x1 x2 => x1 * x2) (A * B) (A' * B') =
-    Matrix.kroneckerMap (fun x1 x2 => x1 * x2) A A' * Matrix.kroneckerMap (fun x1 x2 => x1 * x2) B B'
-Result.autoException ::
-Auto failed to find proof
-
-Testing || Finset.sum_card_inter_le : ∀ {α : Type u_2} [inst : DecidableEq α] {s : Finset α} {B : Finset (Finset α)} {n : ℕ},
-  (∀ a ∈ s, (Finset.filter (fun b => a ∈ b) B).card ≤ n) → ∑ t ∈ B, (s ∩ t).card ≤ s.card * n
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `Finset.decidableMem x_0 a`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
-
-Testing || Finset.div_def : ∀ {α : Type u_2} [inst : DecidableEq α] [inst_1 : Div α] {s t : Finset α},
-  s / t = Finset.image (fun p => p.1 / p.2) (s ×ˢ t)
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_α| is 1
-; rep: (as @|_α|_0 |_α|)
-; cardinality of |_Finset_α| is 4
-; rep: (as @|_Finset_α|_0 |_Finset_α|)
-; rep: (as @|_Finset_α|_1 |_Finset_α|)
-; rep: (as @|_Finset_α|_2 |_Finset_α|)
-; rep: (as @|_Finset_α|_3 |_Finset_α|)
-; cardinality of |_Finset_α___α| is 1
-; rep: (as @|_Finset_α___α|_0 |_Finset_α___α|)
-(define-fun _s () |_Finset_α| (as @|_Finset_α|_0 |_Finset_α|))
-(define-fun _t () |_Finset_α| (as @|_Finset_α|_1 |_Finset_α|))
-(define-fun _HDiv.hDiv ((_arg_1 |_Finset_α|) (_arg_2 |_Finset_α|)) |_Finset_α| (as @|_Finset_α|_2 |_Finset_α|))
-(define-fun _SProd.sprod ((_arg_1 |_Finset_α|) (_arg_2 |_Finset_α|)) |_Finset_α___α| (as @|_Finset_α___α|_0 |_Finset_α___α|))
-(define-fun _Finset.image_fun_p_=>_p.1_/_p.2_ ((_arg_1 |_Finset_α___α|)) |_Finset_α| (as @|_Finset_α|_3 |_Finset_α|))
-)
-
-
-Testing || Set.inter_sub_union_subset_union : ∀ {α : Type u_2} [inst : Sub α] {s₁ s₂ t₁ t₂ : Set α}, s₁ ∩ s₂ - (t₁ ∪ t₂) ⊆ s₁ - t₁ ∪ (s₂ - t₂)
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_Set_α| is 10
+; cardinality of |_Set_α| is 4
 ; rep: (as @|_Set_α|_0 |_Set_α|)
 ; rep: (as @|_Set_α|_1 |_Set_α|)
 ; rep: (as @|_Set_α|_2 |_Set_α|)
 ; rep: (as @|_Set_α|_3 |_Set_α|)
-; rep: (as @|_Set_α|_4 |_Set_α|)
-; rep: (as @|_Set_α|_5 |_Set_α|)
-; rep: (as @|_Set_α|_6 |_Set_α|)
-; rep: (as @|_Set_α|_7 |_Set_α|)
-; rep: (as @|_Set_α|_8 |_Set_α|)
-; rep: (as @|_Set_α|_9 |_Set_α|)
-(define-fun |_s₁| () |_Set_α| (as @|_Set_α|_0 |_Set_α|))
-(define-fun |_s₂| () |_Set_α| (as @|_Set_α|_1 |_Set_α|))
-(define-fun _Inter.inter ((_arg_1 |_Set_α|) (_arg_2 |_Set_α|)) |_Set_α| (as @|_Set_α|_4 |_Set_α|))
-(define-fun |_t₁| () |_Set_α| (as @|_Set_α|_2 |_Set_α|))
-(define-fun |_t₂| () |_Set_α| (as @|_Set_α|_3 |_Set_α|))
-(define-fun _Union.union ((_arg_1 |_Set_α|) (_arg_2 |_Set_α|)) |_Set_α| (ite (= (as @|_Set_α|_2 |_Set_α|) _arg_1) (ite (= (as @|_Set_α|_3 |_Set_α|) _arg_2) (as @|_Set_α|_5 |_Set_α|) (as @|_Set_α|_9 |_Set_α|)) (as @|_Set_α|_9 |_Set_α|)))
-(define-fun _HSub.hSub ((_arg_1 |_Set_α|) (_arg_2 |_Set_α|)) |_Set_α| (ite (= (as @|_Set_α|_0 |_Set_α|) _arg_1) (ite (= (as @|_Set_α|_2 |_Set_α|) _arg_2) (as @|_Set_α|_7 |_Set_α|) (as @|_Set_α|_8 |_Set_α|)) (ite (= (as @|_Set_α|_4 |_Set_α|) _arg_1) (ite (= (as @|_Set_α|_5 |_Set_α|) _arg_2) (as @|_Set_α|_6 |_Set_α|) (as @|_Set_α|_8 |_Set_α|)) (as @|_Set_α|_8 |_Set_α|))))
-(define-fun _Subset ((_arg_1 |_Set_α|) (_arg_2 |_Set_α|)) Bool false)
+(define-fun |_MulAction.fixedPoints__P___Q_α| () |_Set_α| (as @|_Set_α|_0 |_Set_α|))
+(define-fun |_MulAction.fixedPoints__P_α| () |_Set_α| (as @|_Set_α|_1 |_Set_α|))
+(define-fun |_MulAction.fixedPoints__Q_α| () |_Set_α| (as @|_Set_α|_2 |_Set_α|))
+(define-fun _Inter.inter ((_arg_1 |_Set_α|) (_arg_2 |_Set_α|)) |_Set_α| (as @|_Set_α|_3 |_Set_α|))
 )
 
 
-Testing || Orientation.oangle_sub_right_eq_arccos_of_oangle_eq_pi_div_two : ∀ {V : Type u_1} [inst : NormedAddCommGroup V] [inst_1 : InnerProductSpace ℝ V] [hd2 : Fact (Module.finrank ℝ V = 2)]
-  (o : Orientation ℝ V (Fin 2)) {x y : V},
-  o.oangle x y = ↑(Real.pi / 2) → o.oangle y (y - x) = ↑(Real.arccos (‖y‖ / ‖y - x‖))
+Testing || add_neg_cancel_comm : ∀ {G : Type u_1} [inst : AddCommGroup G] (a b : G), a + b + -a = b
 Result.success
 
-Testing || MulAction.isInvariantBlock_iff_isFixedBlock : ∀ {G : Type u_1} [inst : Group G] {X : Type u_2} [inst_1 : MulAction G X] {B : Set X},
-  MulAction.IsInvariantBlock G B ↔ MulAction.IsFixedBlock G B
+Testing || StructureGroupoid.LocalInvariantProp.liftPropAt_symm_of_mem_maximalAtlas : ∀ {H : Type u_1} {M : Type u_2} [inst : TopologicalSpace H] [inst_1 : TopologicalSpace M] [inst_2 : ChartedSpace H M]
+  {G : StructureGroupoid H} {e : PartialHomeomorph M H} {Q : (H → H) → Set H → H → Prop} [inst_3 : HasGroupoid M G]
+  {x : H},
+  G.LocalInvariantProp G Q →
+    (∀ (y : H), Q id Set.univ y) →
+      e ∈ StructureGroupoid.maximalAtlas M G → x ∈ e.target → ChartedSpace.LiftPropAt Q (↑e.symm) x
 Result.autoException ::
-Auto failed to find proof
+Monomorphization failed because currently the procedure cannot deal with expression `∀ᶠ (y : H) in cifvar_20 x_1,
+  cifvar_16 (cifvar_17 x_0 (cifvar_18 (cifvar_19 x_0) y)) y`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
 
-Testing || WithTop.ofNat_eq_coe : ∀ {α : Type u} [inst : AddMonoidWithOne α] (n : ℕ) [inst_1 : n.AtLeastTwo] (m : α),
-  OfNat.ofNat n = ↑m ↔ OfNat.ofNat n = m
+Testing || MeasureTheory.tendsto_of_uncrossing_lt_top : ∀ {Ω : Type u_1} {f : ℕ → Ω → ℝ} {ω : Ω},
+  Filter.liminf (fun n => ↑‖f n ω‖₊) Filter.atTop < ⊤ →
+    (∀ (a b : ℚ), a < b → MeasureTheory.upcrossings (↑a) (↑b) f ω < ⊤) →
+      ∃ c, Filter.Tendsto (fun n => f n ω) Filter.atTop (nhds c)
 Result.autoException ::
-Auto failed to find proof
+Monomorphization failed because currently the procedure cannot deal with expression `∃ᶠ (n : ℕ) in x_0,
+  cifvar_17 (cifvar_18 n cifvar_6) a`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
 
-Testing || IsDedekindDomain.HeightOneSpectrum.intValuation_singleton : ∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (v : IsDedekindDomain.HeightOneSpectrum R) {r : R},
-  r ≠ 0 → v.asIdeal = Ideal.span {r} → v.intValuation r = ↑(Multiplicative.ofAdd (-1))
-Result.autoException ::
-Auto.LamReif.reifTermCheckType :: LamTerm (¬ ((!7 (!8 !4) !1) = (!9 (!10 !11 (- (iofNat (1 : Nat))))))) is not type correct
-
-Testing || Action.Hom.comm_assoc : ∀ {V : Type (u + 1)} [inst : CategoryTheory.LargeCategory V] {G : MonCat} {M N : Action V G} (self : M.Hom N) (g : ↑G)
-  {Z : V} (h : N.V ⟶ Z),
-  CategoryTheory.CategoryStruct.comp (M.ρ g) (CategoryTheory.CategoryStruct.comp self.hom h) =
-    CategoryTheory.CategoryStruct.comp self.hom (CategoryTheory.CategoryStruct.comp (N.ρ g) h)
+Testing || BitVec.shiftLeft_add_distrib : ∀ {w : ℕ} {x y : BitVec w} {n : ℕ}, (x + y) <<< n = x <<< n + y <<< n
 Result.autoException ::
 Auto.Solver.SMT.getSexp :: Incomplete input 
 
-Testing || CauchySeq.tendsto_uniformity : ∀ {α : Type u} {β : Type v} [uniformSpace : UniformSpace α] [inst : Preorder β] {u : β → α},
-  CauchySeq u → Filter.Tendsto (Prod.map u u) Filter.atTop (uniformity α)
+Testing || Std.DHashMap.Internal.AssocList.get_eq : ∀ {α : Type u} {β : Type v} [inst : BEq α] {l : Std.DHashMap.Internal.AssocList α fun x => β} {a : α}
+  {h : Std.DHashMap.Internal.AssocList.contains a l = true},
+  Std.DHashMap.Internal.AssocList.get a l h = Std.DHashMap.Internal.List.getValue a l.toList ⋯
 Result.autoException ::
 Auto failed to find proof
 
-Testing || TrivSqZeroExt.inlAlgHom_apply : ∀ (S : Type u_1) (R : Type u) (M : Type v) [inst : CommSemiring S] [inst_1 : Semiring R] [inst_2 : AddCommMonoid M]
-  [inst_3 : Algebra S R] [inst_4 : Module S M] [inst_5 : Module R M] [inst_6 : Module Rᵐᵒᵖ M]
-  [inst_7 : SMulCommClass R Rᵐᵒᵖ M] [inst_8 : IsScalarTower S R M] [inst_9 : IsScalarTower S Rᵐᵒᵖ M] (r : R),
-  (TrivSqZeroExt.inlAlgHom S R M) r = TrivSqZeroExt.inl r
+Testing || UniqueFactorizationMonoid.pow_eq_pow_iff : ∀ {M : Type u_1} [inst : CancelCommMonoidWithZero M] {q : M}, ¬IsUnit q → q ≠ 0 → ∀ {m n : ℕ}, q ^ m = q ^ n ↔ m = n
+Result.success
+
+Testing || MvPolynomial.radical_le_vanishingIdeal_zeroLocus : ∀ {k : Type u_1} [inst : Field k] {σ : Type u_2} (I : Ideal (MvPolynomial σ k)),
+  I.radical ≤ MvPolynomial.vanishingIdeal (MvPolynomial.zeroLocus I)
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `{J |
+  cifvar_15 (cifvar_1 x_0 J) (cifvar_16 J)}`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || SimpleGraph.Walk.not_nil_cons : ∀ {V : Type u} {G : SimpleGraph V} {u v w : V} {h : G.Adj u v} {p : G.Walk v w}, ¬(SimpleGraph.Walk.cons h p).Nil
 Result.autoException ::
 Auto failed to find proof
 
-Testing || Matroid.StrictRestriction.ssubset : ∀ {α : Type u_1} {M N : Matroid α}, N.StrictRestriction M → N.E ⊂ M.E
+Testing || Isometry.preimage_emetric_ball : ∀ {α : Type u} {β : Type v} [inst : PseudoEMetricSpace α] [inst_1 : PseudoEMetricSpace β] {f : α → β},
+  Isometry f → ∀ (x : α) (r : ENNReal), f ⁻¹' EMetric.ball (f x) r = EMetric.ball x r
+Result.success
+
+Testing || CategoryTheory.isCoseparating_empty_of_thin : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : Quiver.IsThin C], CategoryTheory.IsCoseparating ∅
 Result.autoException ::
 Auto failed to find proof
 
-Testing || RelEmbedding.sumLexInr_apply : ∀ {α : Type u_1} {β : Type u_2} (r : α → α → Prop) (s : β → β → Prop) (val : β),
-  (RelEmbedding.sumLexInr r s) val = Sum.inr val
+Testing || ENNReal.fun_eq_funMulInvSnorm_mul_snorm : ∀ {α : Type u_1} [inst : MeasurableSpace α] {μ : MeasureTheory.Measure α} {p : ℝ} (f : α → ENNReal),
+  ∫⁻ (a : α), f a ^ p ∂μ ≠ 0 →
+    ∫⁻ (a : α), f a ^ p ∂μ ≠ ⊤ → ∀ {a : α}, f a = ENNReal.funMulInvSnorm f p μ a * (∫⁻ (c : α), f c ^ p ∂μ) ^ (1 / p)
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `∫⁻ (c : α),
+  cifvar_11 (cifvar_6 c) x_1 ∂x_0`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || CategoryTheory.IsFiltered.of_isRightAdjoint : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.IsFiltered C] {D : Type u₁}
+  [inst_2 : CategoryTheory.Category.{v₁, u₁} D] (R : CategoryTheory.Functor C D) [inst : R.IsRightAdjoint],
+  CategoryTheory.IsFiltered D
+Result.autoException ::
+Auto failed to find proof
+
+Testing || heq_rec_iff_heq : ∀ {α : Sort u_2} {β : Sort u_1} {a b : α} {C : α → Sort u_1} {x : β} {y : C a} {e : a = b}, HEq x (e ▸ y) ↔ HEq x y
 Result.autoException ::
 Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
 ; cardinality of Empty is 1
 ; rep: (as @Empty_0 Empty)
-; cardinality of |_α| is 1
-; rep: (as @|_α|_0 |_α|)
 ; cardinality of |_β| is 1
 ; rep: (as @|_β|_0 |_β|)
-; cardinality of _s__r_Sum.Lex_r_s is 1
-; rep: (as @_s__r_Sum.Lex_r_s_0 _s__r_Sum.Lex_r_s)
-(define-fun _RelEmbedding.sumLexInr_r_s () _s__r_Sum.Lex_r_s (as @_s__r_Sum.Lex_r_s_0 _s__r_Sum.Lex_r_s))
-(define-fun _val () |_β| (as @|_β|_0 |_β|))
-(define-fun _DFunLike.coe ((_arg_1 _s__r_Sum.Lex_r_s) (_arg_2 |_β|)) |_α___β| (_Sum.inl (as @|_α|_0 |_α|)))
+; cardinality of _C_a is 1
+; rep: (as @_C_a_0 _C_a)
+; cardinality of _a_=_b is 1
+; rep: (as @_a_=_b_0 _a_=_b)
+; cardinality of _C_b is 1
+; rep: (as @_C_b_0 _C_b)
+(define-fun _x () |_β| (as @|_β|_0 |_β|))
+(define-fun _y () _C_a (as @_C_a_0 _C_a))
+(define-fun _e () _a_=_b (as @_a_=_b_0 _a_=_b))
+(define-fun _fun_refl_=>_Eq.rec_refl ((_arg_1 _C_a) (_arg_2 _a_=_b)) _C_b (as @_C_b_0 _C_b))
+(define-fun _fun_a_=>_HEq_a ((_arg_1 |_β|) (_arg_2 _C_b)) Bool true)
+(define-fun _fun_a_1_=>_HEq_a_1_ ((_arg_1 |_β|) (_arg_2 _C_a)) Bool false)
 )
 
 
-Testing || Algebra.embeddingsMatrix_apply : ∀ {κ : Type w} (A : Type u) {B : Type v} (C : Type z) [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B]
-  [inst_3 : CommRing C] [inst_4 : Algebra A C] (b : κ → B) (i : κ) (σ : B →ₐ[A] C),
-  Algebra.embeddingsMatrix A C b i σ = σ (b i)
+Testing || CategoryTheory.braiding_tensorUnit_left_assoc : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]
+  [inst_2 : CategoryTheory.BraidedCategory C] (X : C) {Z : C}
+  (h : CategoryTheory.MonoidalCategory.tensorObj X (𝟙_ C) ⟶ Z),
+  CategoryTheory.CategoryStruct.comp (β_ (𝟙_ C) X).hom h =
+    CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategory.leftUnitor X).hom
+      (CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategory.rightUnitor X).inv h)
 Result.autoException ::
-Auto.Monomorphization.ConstInst.ofExpr? :: Matrix κ (B →ₐ[A] C) C is not a `∀`
+Monomorphization failed because currently the procedure cannot deal with expression `CategoryTheory.MonoidalCategory.leftUnitor
+  x_0`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
 
-Testing || Quaternion.coe_injective : ∀ {R : Type u_3} [inst : CommRing R], Function.Injective Quaternion.coe
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `QuaternionAlgebra.coe`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
-
-Testing || CategoryTheory.Limits.Cocone.mapCoconeToOver_inv_hom : ∀ {J : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} J] {C : Type u₃} [inst_1 : CategoryTheory.Category.{v₃, u₃} C]
-  {F : CategoryTheory.Functor J C} (c : CategoryTheory.Limits.Cocone F),
-  c.mapCoconeToOver.inv.hom = CategoryTheory.CategoryStruct.id c.pt
-Result.autoException ::
-Auto failed to find proof
-
-Testing || Antivary.inv_right : ∀ {ι : Type u_1} {α : Type u_2} {β : Type u_3} [inst : OrderedCommGroup α] [inst_1 : OrderedCommGroup β] {f : ι → α}
-  {g : ι → β}, Antivary f g → Monovary f g⁻¹
-Result.autoException ::
-Auto failed to find proof
-
-Testing || Submonoid.coe_centralizer : ∀ {M : Type u_1} (S : Set M) [inst : Monoid M], ↑(Submonoid.centralizer S) = S.centralizer
-Result.autoException ::
-Auto failed to find proof
-
-Testing || AddAction.quotient.proof_3 : ∀ {α : Type u_1} (β : Type u_2) [inst : AddGroup α] [inst_1 : AddMonoid β] [inst_2 : AddAction β α] (H : AddSubgroup α)
-  [inst_3 : AddAction.QuotientAction β H] (b b' : β) (q : α ⧸ H), b + b' +ᵥ q = b +ᵥ (b' +ᵥ q)
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `QuotientAddGroup.leftRel x_0`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
-
-Testing || Cardinal.mk_pi : ∀ {ι : Type u} (α : ι → Type v), Cardinal.mk ((i : ι) → α i) = Cardinal.prod fun i => Cardinal.mk (α i)
-Result.autoException ::
-_private.Auto.Translation.LamFOL2SMT.0.Auto.SMT.lamTerm2STermAux :: Unexpected head term Auto.Embedding.Lam.LamTerm.lam (.atom 2) (.app (.atom 2) (.atom 2) (.bvar 0))
-
-Testing || CategoryTheory.Functor.surjective_toEventualRanges : ∀ {J : Type u} [inst : CategoryTheory.Category.{u_1, u} J] (F : CategoryTheory.Functor J (Type v))
-  [inst_1 : CategoryTheory.IsCofilteredOrEmpty J],
-  F.IsMittagLeffler → ∀ ⦃i j : J⦄ (f : i ⟶ j), Function.Surjective (F.toEventualRanges.map f)
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `cifvar_12 f '' cifvar_13`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
-
-Testing || Class.coe_union : ∀ (x y : ZFSet), ↑(x ∪ y) = ↑x ∪ ↑y
-Result.autoException ::
-Auto failed to find proof
-
-Testing || Matrix.GeneralLinearGroup.coe_mul : ∀ {n : Type u} [inst : DecidableEq n] [inst_1 : Fintype n] {R : Type v} [inst_2 : CommRing R] (A B : GL n R),
-  ↑(A * B) = ↑A * ↑B
-Result.autoException ::
-Auto failed to find proof
-
-Testing || WCovBy.ge_of_gt : ∀ {α : Type u_1} [inst : LinearOrder α] {a b c : α}, a ⩿ b → a < c → b ≤ c
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_α| is 3
-; rep: (as @|_α|_0 |_α|)
-; rep: (as @|_α|_1 |_α|)
-; rep: (as @|_α|_2 |_α|)
-(define-fun _a () |_α| (as @|_α|_0 |_α|))
-(define-fun _b () |_α| (as @|_α|_1 |_α|))
-(define-fun _WCovBy ((_arg_1 |_α|) (_arg_2 |_α|)) Bool true)
-(define-fun _c () |_α| (as @|_α|_2 |_α|))
-(define-fun _LT.lt ((_arg_1 |_α|) (_arg_2 |_α|)) Bool true)
-)
-
-
-Testing || IsCyclic.exists_monoid_generator : ∀ {α : Type u} [inst : Group α] [inst_1 : Finite α] [inst_2 : IsCyclic α], ∃ x, ∀ (y : α), y ∈ Submonoid.powers x
+Testing || lipschitzOnWith_iff_norm_div_le : ∀ {E : Type u_3} {F : Type u_4} [inst : SeminormedGroup E] [inst_1 : SeminormedGroup F] {s : Set E} {f : E → F}
+  {C : NNReal}, LipschitzOnWith C f s ↔ ∀ ⦃x : E⦄, x ∈ s → ∀ ⦃y : E⦄, y ∈ s → ‖f x / f y‖ ≤ ↑C * ‖x / y‖
 Result.success
 
-Testing || Polynomial.rootOfSplits'_eq_rootOfSplits : ∀ {K : Type v} {L : Type w} [inst : Field K] [inst_1 : Field L] (i : K →+* L) {f : Polynomial K}
-  (hf : Polynomial.Splits i f) (hfd : (Polynomial.map i f).degree ≠ 0),
-  Polynomial.rootOfSplits' i hf hfd = Polynomial.rootOfSplits i hf ⋯
+Testing || ProbabilityTheory.IsMeasurableRatCDF.tendsto_atBot_zero : ∀ {α : Type u_1} [inst : MeasurableSpace α] {f : α → ℚ → ℝ},
+  ProbabilityTheory.IsMeasurableRatCDF f → ∀ (a : α), Filter.Tendsto (f a) Filter.atBot (nhds 0)
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `Filter.Tendsto (cifvar_8 x_0)
+  cifvar_3 (cifvar_4 cifvar_5)`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || ULift.up_injective : ∀ {α : Type u}, Function.Injective ULift.up
 Result.autoException ::
 Auto failed to find proof
 
-Testing || Booleanisation.comp_sdiff_comp : ∀ {α : Type u_1} [inst : GeneralizedBooleanAlgebra α] (a b : α),
-  Booleanisation.comp a \ Booleanisation.comp b = Booleanisation.lift (b \ a)
+Testing || IsCyclotomicExtension.Rat.absdiscr_prime_pow_succ : ∀ (p : ℕ+) (k : ℕ) (K : Type u) [inst : Field K] [hp : Fact (Nat.Prime ↑p)] [inst_1 : CharZero K]
+  [inst_2 : IsCyclotomicExtension {p ^ (k + 1)} ℚ K],
+  NumberField.discr K = (-1) ^ (↑p ^ k * (↑p - 1) / 2) * ↑↑p ^ (↑p ^ k * ((↑p - 1) * (k + 1) - 1))
 Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_α| is 3
-; rep: (as @|_α|_0 |_α|)
-; rep: (as @|_α|_1 |_α|)
-; rep: (as @|_α|_2 |_α|)
-; cardinality of |_Booleanisation_α| is 4
-; rep: (as @|_Booleanisation_α|_0 |_Booleanisation_α|)
-; rep: (as @|_Booleanisation_α|_1 |_Booleanisation_α|)
-; rep: (as @|_Booleanisation_α|_2 |_Booleanisation_α|)
-; rep: (as @|_Booleanisation_α|_3 |_Booleanisation_α|)
-(define-fun _a () |_α| (as @|_α|_0 |_α|))
-(define-fun _Booleanisation.comp ((_arg_1 |_α|)) |_Booleanisation_α| (ite (= (as @|_α|_1 |_α|) _arg_1) (as @|_Booleanisation_α|_1 |_Booleanisation_α|) (as @|_Booleanisation_α|_0 |_Booleanisation_α|)))
-(define-fun _b () |_α| (as @|_α|_1 |_α|))
-(define-fun _sdiff ((_arg_1 |_Booleanisation_α|) (_arg_2 |_Booleanisation_α|)) |_Booleanisation_α| (as @|_Booleanisation_α|_2 |_Booleanisation_α|))
-(define-fun _sdiff_0 ((_arg_1 |_α|) (_arg_2 |_α|)) |_α| (as @|_α|_2 |_α|))
-(define-fun _Booleanisation.lift ((_arg_1 |_α|)) |_Booleanisation_α| (as @|_Booleanisation_α|_3 |_Booleanisation_α|))
-)
+Monomorphization failed because currently the procedure cannot deal with expression `{ x // cifvar_27 x_0 x }`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
 
-
-Testing || aemeasurable_lineDeriv : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] [inst_1 : LocallyCompactSpace 𝕜] {E : Type u_2}
-  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] [inst_4 : MeasurableSpace E]
-  [inst_5 : OpensMeasurableSpace E] {F : Type u_3} [inst_6 : NormedAddCommGroup F] [inst_7 : NormedSpace 𝕜 F]
-  [inst_8 : CompleteSpace F] {f : E → F} {v : E} [inst_9 : MeasurableSpace F] [inst_10 : BorelSpace F],
-  Continuous f → ∀ (μ : MeasureTheory.Measure E), AEMeasurable (fun x => lineDeriv 𝕜 f x v) μ
+Testing || SemilatticeSup.ext : ∀ {α : Type u_1} {A B : SemilatticeSup α}, (∀ (x y : α), x ≤ y ↔ x ≤ y) → A = B
 Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `Measurable fun x =>
-  cifvar_12 x x_0`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
+Auto.Solver.SMT.getSexp :: Incomplete input 
 
-Testing || ite_false : ∀ {α : Sort u_1} (a b : α), (if False then a else b) = b
+Testing || balanced_zero : ∀ {𝕜 : Type u_1} {E : Type u_3} [inst : SeminormedRing 𝕜] [inst_1 : AddCommGroup E] [inst_2 : Module 𝕜 E], Balanced 𝕜 0
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Orientation.oangle_rotation_oangle_left : ∀ {V : Type u_1} [inst : NormedAddCommGroup V] [inst_1 : InnerProductSpace ℝ V] [inst_2 : Fact (Module.finrank ℝ V = 2)]
+  (o : Orientation ℝ V (Fin 2)) (x y : V), o.oangle ((o.rotation (o.oangle x y)) x) y = 0
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Finsupp.card_Ioc : ∀ {ι : Type u_1} {α : Type u_2} [inst : PartialOrder α] [inst_1 : Zero α] [inst_2 : LocallyFiniteOrder α]
+  (f g : ι →₀ α), (Finset.Ioc f g).card = ∏ i ∈ f.support ∪ g.support, (Finset.Icc (f i) (g i)).card - 1
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `∏
+  i ∈ cifvar_8 (cifvar_9 x_0) (cifvar_9 x_1), cifvar_13 (cifvar_15 (cifvar_19 x_0 i) (cifvar_19 x_1 i))`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || SubfieldClass.coe_ratCast : ∀ {K : Type u} [inst : DivisionRing K] {S : Type u_1} [inst_1 : SetLike S K] [h : SubfieldClass S K] (s : S) (x : ℚ),
+  ↑↑x = ↑x
+Result.autoException ::
+Auto failed to find proof
+
+Testing || AnalyticOn.iteratedFDeriv : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u} [inst_1 : NormedAddCommGroup E]
+  [inst_2 : NormedSpace 𝕜 E] {F : Type v} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {f : E → F}
+  {s : Set E} [inst_5 : CompleteSpace F], AnalyticOnNhd 𝕜 f s → ∀ (n : ℕ), AnalyticOnNhd 𝕜 (iteratedFDeriv 𝕜 n f) s
+Result.autoException ::
+Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type Fin n of λ binder contains bound variables
+
+Testing || Set.image2_inter_subset_left : ∀ {α : Type u_1} {β : Type u_3} {γ : Type u_5} {f : α → β → γ} {s s' : Set α} {t : Set β},
+  Set.image2 f (s ∩ s') t ⊆ Set.image2 f s t ∩ Set.image2 f s' t
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Irrational.div_nat : ∀ {x : ℝ}, Irrational x → ∀ {m : ℕ}, m ≠ 0 → Irrational (x / ↑m)
+Result.autoException ::
+Auto.Solver.SMT.getSexp :: Incomplete input 
+
+Testing || CategoryTheory.Oplax.category_comp : ∀ {B : Type u₁} [inst : CategoryTheory.Bicategory B] {C : Type u₂} [inst_1 : CategoryTheory.Bicategory C]
+  (F G : CategoryTheory.OplaxFunctor B C) {X Y Z : F ⟶ G} (Γ : CategoryTheory.Oplax.Modification X Y)
+  (Δ : CategoryTheory.Oplax.Modification Y Z), CategoryTheory.CategoryStruct.comp Γ Δ = Γ.vcomp Δ
+Result.autoException ::
+Auto failed to find proof
+
+Testing || homothety_inv_two : ∀ {k : Type u_1} {V : Type u_2} {P : Type u_3} [inst : Field k] [inst_1 : CharZero k] [inst_2 : AddCommGroup V]
+  [inst_3 : Module k V] [inst_4 : AddTorsor V P] (a b : P), (AffineMap.homothety a 2⁻¹) b = midpoint k a b
+Result.autoException ::
+Auto failed to find proof
+
+Testing || MulActionHom.map_smul : ∀ {M' : Type u_1} {X : Type u_5} [inst : SMul M' X] {Y : Type u_6} [inst_1 : SMul M' Y] (f : X →ₑ[id] Y) (m : M')
+  (x : X), f (m • x) = m • f x
 Result.success
 
-Testing || linearEquivIsoModuleIso_hom : ∀ {R : Type u} [inst : Ring R] {X Y : Type u} [inst_1 : AddCommGroup X] [inst_2 : AddCommGroup Y] [inst_3 : Module R X]
-  [inst_4 : Module R Y] (e : X ≃ₗ[R] Y), linearEquivIsoModuleIso.hom e = e.toModuleIso
+Testing || AlgebraicGeometry.Scheme.OpenCover.gluedCoverT'_snd_fst : ∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x y z : 𝒰.J),
+  CategoryTheory.CategoryStruct.comp (𝒰.gluedCoverT' x y z)
+      (CategoryTheory.CategoryStruct.comp
+        (CategoryTheory.Limits.pullback.snd (CategoryTheory.Limits.pullback.fst (𝒰.map y) (𝒰.map z))
+          (CategoryTheory.Limits.pullback.fst (𝒰.map y) (𝒰.map x)))
+        (CategoryTheory.Limits.pullback.fst (𝒰.map y) (𝒰.map x))) =
+    CategoryTheory.CategoryStruct.comp
+      (CategoryTheory.Limits.pullback.fst (CategoryTheory.Limits.pullback.fst (𝒰.map x) (𝒰.map y))
+        (CategoryTheory.Limits.pullback.fst (𝒰.map x) (𝒰.map z)))
+      (CategoryTheory.Limits.pullback.snd (𝒰.map x) (𝒰.map y))
 Result.autoException ::
-Auto.Monomorphization.ConstInst.ofExpr? :: (X ≃ₗ[R] Y) ⟶ ModuleCat.of R X ≅ ModuleCat.of R Y is not a `∀`
+Monomorphization failed because currently the procedure cannot deal with expression `cifvar_16.map x_0`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
 
-Testing || Function.fixedPoints_subset_range : ∀ {α : Type u} {f : α → α}, Function.fixedPoints f ⊆ Set.range f
+Testing || List.unattach_join : ∀ {α : Type u_1} {p : α → Prop} {l : List (List { x // p x })}, l.join.unattach = (List.map List.unattach l).join
 Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_Set_α| is 2
-; rep: (as @|_Set_α|_0 |_Set_α|)
-; rep: (as @|_Set_α|_1 |_Set_α|)
-(define-fun _Function.fixedPoints_f () |_Set_α| (as @|_Set_α|_0 |_Set_α|))
-(define-fun _Set.range_f () |_Set_α| (as @|_Set_α|_1 |_Set_α|))
-(define-fun _Subset ((_arg_1 |_Set_α|) (_arg_2 |_Set_α|)) Bool false)
-)
+Auto.Solver.SMT.getSexp :: Incomplete input 
 
+Testing || ContinuousLinearEquiv.piCongrRight_symm_apply : ∀ {R₁ : Type u_1} [inst : Semiring R₁] {ι : Type u_9} {M : ι → Type u_10} [inst_1 : (i : ι) → TopologicalSpace (M i)]
+  [inst_2 : (i : ι) → AddCommMonoid (M i)] [inst_3 : (i : ι) → Module R₁ (M i)] {N : ι → Type u_11}
+  [inst_4 : (i : ι) → TopologicalSpace (N i)] [inst_5 : (i : ι) → AddCommMonoid (N i)]
+  [inst_6 : (i : ι) → Module R₁ (N i)] (f : (i : ι) → M i ≃L[R₁] N i) (n : (i : ι) → N i) (i : ι),
+  (ContinuousLinearEquiv.piCongrRight f).symm n i = (f i).symm (n i)
+Result.autoException ::
+Auto.Monomorphization.ConstInst.toExpr :: Unexpected error
 
-Testing || Prod.normedAddGroup.proof_2 : ∀ {E : Type u_1} {F : Type u_2} [inst : NormedAddGroup E] [inst_1 : NormedAddGroup F] (x y : E × F), dist x y = ‖x - y‖
+Testing || Int.le_iff_pos_of_dvd : ∀ {a b : ℤ}, 0 < a → a ∣ b → (a ≤ b ↔ 0 < b)
 Result.success
 
-Testing || Prod.pow_swap : ∀ {E : Type u_4} {α : Type u_5} {β : Type u_6} [inst : Pow α E] [inst_1 : Pow β E] (p : α × β) (c : E),
-  (p ^ c).swap = p.swap ^ c
+Testing || Real.zpow_le_of_le_log : ∀ {x y : ℝ} {n : ℤ}, 0 < y → Real.log x ≤ ↑n * Real.log y → x ≤ y ^ n
+Result.success
+
+Testing || Ideal.radical_eq_top : ∀ {R : Type u} [inst : CommSemiring R] {I : Ideal R}, I.radical = ⊤ ↔ I = ⊤
+Result.autoException ::
+Auto failed to find proof
+
+Testing || AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app : ∀ {X : AlgebraicGeometry.LocallyRingedSpace} {R : Type u} [inst : CommRing R]
+  (f : AlgebraicGeometry.LocallyRingedSpace.Γ.rightOp.obj X ⟶ Opposite.op (CommRingCat.of R))
+  (U :
+    (TopologicalSpace.Opens
+        ↑↑(AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op (CommRingCat.of R))).toPresheafedSpace)ᵒᵖ),
+  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.StructureSheaf.toOpen R (Opposite.unop U))
+      (((AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction.homEquiv X (Opposite.op (CommRingCat.of R))) f).c.app U) =
+    CategoryTheory.CategoryStruct.comp f.unop (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)
+Result.autoException ::
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || WeierstrassCurve.Affine.nonsingular_negAdd : ∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x₁ x₂ y₁ y₂ : F},
+  W.Nonsingular x₁ y₁ →
+    W.Nonsingular x₂ y₂ →
+      (x₁ = x₂ → y₁ ≠ W.negY x₂ y₂) →
+        W.Nonsingular (W.addX x₁ x₂ (W.slope x₁ x₂ y₁ y₂)) (W.negAddY x₁ x₂ y₁ (W.slope x₁ x₂ y₁ y₂))
+Result.autoException ::
+Auto.Solver.SMT.getSexp :: Incomplete input 
+
+Testing || finrank_le_one : ∀ {R : Type u} {M : Type v} [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]
+  [inst_3 : NoZeroSMulDivisors R M] [inst_4 : StrongRankCondition R] (v : M),
+  (∀ (w : M), ∃ c, c • v = w) → Module.finrank R M ≤ 1
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `One.toOfNat1`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || Option.map₂_coe_left : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} (f : α → β → γ) (a : α) (b : Option β),
+  Option.map₂ f (some a) b = Option.map (fun b => f a b) b
 Result.autoException ::
 Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
 ; cardinality of Empty is 1
 ; rep: (as @Empty_0 Empty)
-; cardinality of |_β| is 3
+; cardinality of |_β| is 1
 ; rep: (as @|_β|_0 |_β|)
-; rep: (as @|_β|_1 |_β|)
-; rep: (as @|_β|_2 |_β|)
-; cardinality of |_α| is 3
-; rep: (as @|_α|_0 |_α|)
-; rep: (as @|_α|_1 |_α|)
-; rep: (as @|_α|_2 |_α|)
-; cardinality of _E is 1
-; rep: (as @_E_0 _E)
-(define-fun _p () |_α___β| (_Prod.mk (as @|_α|_0 |_α|) (as @|_β|_0 |_β|)))
-(define-fun _c () _E (as @_E_0 _E))
-(define-fun _HPow.hPow ((_arg_1 |_α___β|) (_arg_2 _E)) |_α___β| (_Prod.mk (as @|_α|_0 |_α|) (as @|_β|_1 |_β|)))
-(define-fun _Prod.swap ((_arg_1 |_α___β|)) |_β___α| (ite (= (_Prod.mk (as @|_α|_0 |_α|) (as @|_β|_0 |_β|)) _arg_1) (_Prod.mk_0 (as @|_β|_0 |_β|) (as @|_α|_0 |_α|)) (_Prod.mk_0 (as @|_β|_1 |_β|) (as @|_α|_1 |_α|))))
-(define-fun _HPow.hPow_0 ((_arg_1 |_β___α|) (_arg_2 _E)) |_β___α| (_Prod.mk_0 (as @|_β|_2 |_β|) (as @|_α|_2 |_α|)))
-)
-
-
-Testing || hasDerivAt_jacobiTheta₂_fst : ∀ (z : ℂ) {τ : ℂ}, 0 < τ.im → HasDerivAt (fun x => jacobiTheta₂ x τ) (jacobiTheta₂' z τ) z
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `HasSum
-  (fun n => cifvar_13 n x_0 x_1) (cifvar_14 x_0 x_1)`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
-
-Testing || _private.Mathlib.Algebra.Lie.BaseChange.0.LieAlgebra.ExtendScalars.bracket'_tmul : ∀ (R : Type u_1) (A : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : CommRing A]
-  [inst_2 : Algebra R A] [inst_3 : LieRing L] [inst_4 : LieAlgebra R L] [inst_5 : AddCommGroup M] [inst_6 : Module R M]
-  [inst_7 : LieRingModule L M] [inst_8 : LieModule R L M] (s t : A) (x : L) (m : M),
-  ((LieAlgebra.ExtendScalars.bracket' R A L M) (s ⊗ₜ[R] x)) (t ⊗ₜ[R] m) = (s * t) ⊗ₜ[R] ⁅x, m⁆
-Result.autoException ::
-Auto failed to find proof
-
-Testing || CategoryTheory.MorphismProperty.Comma.Hom.hom_left : ∀ {A : Type u_1} [inst : CategoryTheory.Category.{u_4, u_1} A] {B : Type u_2}
-  [inst_1 : CategoryTheory.Category.{u_5, u_2} B] {T : Type u_3} [inst_2 : CategoryTheory.Category.{u_6, u_3} T]
-  {L : CategoryTheory.Functor A T} {R : CategoryTheory.Functor B T} {P : CategoryTheory.MorphismProperty T}
-  {Q : CategoryTheory.MorphismProperty A} {W : CategoryTheory.MorphismProperty B}
-  {X Y : CategoryTheory.MorphismProperty.Comma L R P Q W} (f : X.Hom Y), f.hom.left = f.left
-Result.success
-
-Testing || Nat.log_zero_right : ∀ (b : ℕ), Nat.log b 0 = 0
-Result.success
-
-Testing || ConvexOn.slope_le_deriv : ∀ {S : Set ℝ} {f : ℝ → ℝ} {x y : ℝ},
-  ConvexOn ℝ S f → x ∈ S → y ∈ S → x < y → DifferentiableAt ℝ f y → slope f x y ≤ deriv f y
-Result.success
-
-Testing || NonemptyFinLinOrd.dualEquiv_functor : NonemptyFinLinOrd.dualEquiv.functor = NonemptyFinLinOrd.dual
-Result.autoException ::
-Auto failed to find proof
-
-Testing || CategoryTheory.PreGaloisCategory.toAut_hom_app_apply : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) {G : Type u_1}
-  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G ↑(F.obj X)]
-  [inst_3 : CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] (g : G) {X : C} (x : ↑(F.obj X)),
-  ((CategoryTheory.PreGaloisCategory.toAut F G) g).hom.app X x = g • x
-Result.autoException ::
-Auto.Monomorphization.ConstInst.ofExpr? :: F.obj X ⟶ F.obj X is not a `∀`
-
-Testing || Std.DHashMap.Internal.List.insertEntry_of_containsKey_eq_false : ∀ {α : Type u} {β : α → Type v} [inst : BEq α] {l : List ((a : α) × β a)} {k : α} {v : β k},
-  Std.DHashMap.Internal.List.containsKey k l = false → Std.DHashMap.Internal.List.insertEntry k v l = ⟨k, v⟩ :: l
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |__a___α____β_a| is 1
-; rep: (as @|__a___α____β_a|_0 |__a___α____β_a|)
+; cardinality of |_γ| is 1
+; rep: (as @|_γ|_0 |_γ|)
 ; cardinality of |_α| is 1
 ; rep: (as @|_α|_0 |_α|)
-; cardinality of |_β_k| is 1
-; rep: (as @|_β_k|_0 |_β_k|)
-(define-fun _k () |_α| (as @|_α|_0 |_α|))
-(define-fun _l () |_List__a___α____β_a| _pl___)
-(define-fun _Std.DHashMap.Internal.List.containsKey ((_arg_1 |_α|) (_arg_2 |_List__a___α____β_a|)) Bool false)
-(define-fun _v () |_β_k| (as @|_β_k|_0 |_β_k|))
-(define-fun _Std.DHashMap.Internal.List.insertEntry_k ((_arg_1 |_β_k|) (_arg_2 |_List__a___α____β_a|)) |_List__a___α____β_a| (_List.cons (as @|__a___α____β_a|_0 |__a___α____β_a|) (_List.cons (as @|__a___α____β_a|_0 |__a___α____β_a|) _pl___)))
-(define-fun _Sigma.mk_k ((_arg_1 |_β_k|)) |__a___α____β_a| (as @|__a___α____β_a|_0 |__a___α____β_a|))
+(define-fun _a () |_α| (as @|_α|_0 |_α|))
+(define-fun _b () |_Option_β| _none)
+(define-fun |_Option.map₂_f| ((_arg_1 |_Option_α|) (_arg_2 |_Option_β|)) |_Option_γ| _none_0)
+(define-fun _Option.map_fun_b_=>_f_a_b ((_arg_1 |_Option_β|)) |_Option_γ| (_some_0 (as @|_γ|_0 |_γ|)))
 )
 
 
-Testing || AddSubmonoid.toOrderedAddCommMonoid.proof_2 : ∀ {M : Type u_1} [inst : OrderedAddCommMonoid M] (S : AddSubmonoid M), Function.Injective fun a => ↑a
+Testing || DomMulAct.inducing_mk_symm : ∀ {M : Type u_1} [inst : TopologicalSpace M], IsInducing ⇑DomMulAct.mk.symm
 Result.success
 
-Testing || HasFDerivWithinAt.multiset_prod : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]
-  [inst_2 : NormedSpace 𝕜 E] {s : Set E} {ι : Type u_5} {𝔸' : Type u_7} [inst_3 : NormedCommRing 𝔸']
-  [inst_4 : NormedAlgebra 𝕜 𝔸'] {g : ι → E → 𝔸'} {g' : ι → E →L[𝕜] 𝔸'} [inst_5 : DecidableEq ι] {u : Multiset ι}
-  {x : E},
-  (∀ i ∈ u, HasFDerivWithinAt (fun x => g i x) (g' i) s x) →
-    HasFDerivWithinAt (fun x => (Multiset.map (fun x_1 => g x_1 x) u).prod)
-      (Multiset.map (fun i => (Multiset.map (fun x_1 => g x_1 x) (u.erase i)).prod • g' i) u).sum s x
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `HasFDerivWithinAt
-  (fun x => cifvar_3 x_0 x) (cifvar_4 x_0) cifvar_5 cifvar_6`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
-
-Testing || Complex.map_isometryOfOrthonormal : ∀ {F : Type u_6} [inst : NormedAddCommGroup F] [inst_1 : InnerProductSpace ℝ F] {F' : Type u_7}
-  [inst_2 : NormedAddCommGroup F'] [inst_3 : InnerProductSpace ℝ F'] (v : OrthonormalBasis (Fin 2) ℝ F)
-  (f : F ≃ₗᵢ[ℝ] F'), Complex.isometryOfOrthonormal (v.map f) = (Complex.isometryOfOrthonormal v).trans f
-Result.autoException ::
-Auto failed to find proof
-
-Testing || Finset.image_preimage : ∀ {α : Type u} {β : Type v} [inst : DecidableEq β] (f : α → β) (s : Finset β)
-  [inst_1 : (x : β) → Decidable (x ∈ Set.range f)] (hf : Set.InjOn f (f ⁻¹' ↑s)),
-  Finset.image f (s.preimage f hf) = Finset.filter (fun x => x ∈ Set.range f) s
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `{x |
-  cifvar_22 (cifvar_23 x_0 x) (cifvar_24 cifvar_19 x)}`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
-
-Testing || UInt32.toNat_ofNat_of_lt : ∀ {n : ℕ}, n < UInt32.size → (UInt32.ofNat n).toNat = n
-Result.success
-
-Testing || SimpleGraph.comap_comap : ∀ {V : Type u_1} {W : Type u_2} {X : Type u_3} {G : SimpleGraph X} (f : V → W) (g : W → X),
-  SimpleGraph.comap f (SimpleGraph.comap g G) = SimpleGraph.comap (g ∘ f) G
-Result.autoException ::
-Auto failed to find proof
-
-Testing || CategoryTheory.Subobject.ofMkLE_comp_ofLEMk : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {B A₁ A₂ : C} (f : A₁ ⟶ B) [inst_1 : CategoryTheory.Mono f]
-  (X : CategoryTheory.Subobject B) (g : A₂ ⟶ B) [inst_2 : CategoryTheory.Mono g]
-  (h₁ : CategoryTheory.Subobject.mk f ≤ X) (h₂ : X ≤ CategoryTheory.Subobject.mk g),
-  CategoryTheory.CategoryStruct.comp (CategoryTheory.Subobject.ofMkLE f X h₁) (X.ofLEMk g h₂) =
-    CategoryTheory.Subobject.ofMkLEMk f g ⋯
-Result.autoException ::
-Auto failed to find proof
-
-Testing || Primrec.option_bind₁ : ∀ {α : Type u_1} {σ : Type u_3} [inst : Primcodable α] [inst_1 : Primcodable σ] {f : α → Option σ},
-  Primrec f → Primrec fun o => o.bind f
-Result.autoException ::
-Auto failed to find proof
-
-Testing || HasStrictFDerivAt.congr_of_eventuallyEq : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]
-  [inst_2 : NormedSpace 𝕜 E] {F : Type u_3} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {f f₁ : E → F}
-  {f' : E →L[𝕜] F} {x : E}, HasStrictFDerivAt f f' x → f =ᶠ[nhds x] f₁ → HasStrictFDerivAt f₁ f' x
-Result.success
-
-Testing || MeasureTheory.AEStronglyMeasurable.nullMeasurableSet_le : ∀ {α : Type u_1} {β : Type u_2} {m : MeasurableSpace α} {μ : MeasureTheory.Measure α} [inst : TopologicalSpace β]
-  [inst_1 : Preorder β] [inst_2 : OrderClosedTopology β] [inst_3 : TopologicalSpace.PseudoMetrizableSpace β]
-  {f g : α → β},
-  MeasureTheory.AEStronglyMeasurable f μ →
-    MeasureTheory.AEStronglyMeasurable g μ → MeasureTheory.NullMeasurableSet {a | f a ≤ g a} μ
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `x_1 =ᶠ[cifvar_9 x_0] x_2`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
-
-Testing || List.sorted_mergeSort : ∀ {α : Type u_1} {le : α → α → Bool},
-  (∀ (a b c : α), le a b = true → le b c = true → le a c = true) →
-    (∀ (a b : α), (le a b || le b a) = true) → ∀ (l : List α), List.Pairwise (fun a b => le a b = true) (l.mergeSort le)
-Result.autoException ::
-Auto.Lemma.rewriteUMonoRigid? :: Motive fun _a =>
-  ∀ {α : Type u_1} {n : ℕ} (l : { l // l.length = n }),
-    (List.splitInTwo l).1 = ⟨List.take ((n + 1) / 2) ↑l, ⋯⟩ is not type correct
-
-Testing || List.forall_mem_inter_of_forall_right : ∀ {α : Type u_1} {l₂ : List α} {p : α → Prop} [inst : DecidableEq α] (l₁ : List α), (∀ x ∈ l₂, p x) → ∀ x ∈ l₁ ∩ l₂, p x
-Result.success
-
-Testing || ULift.addCancelMonoid.proof_4 : ∀ {α : Type u_2} [inst : AddCancelMonoid α] (x : ULift.{u_1, u_2} α) (x_1 : ℕ),
-  Equiv.ulift (x_1 • x) = Equiv.ulift (x_1 • x)
-Result.success
-
-Testing || List.nextOr_nil : ∀ {α : Type u_1} [inst : DecidableEq α] (x d : α), [].nextOr x d = d
+Testing || ContinuousAlternatingMap.map_update_zero : ∀ {R : Type u_1} {M : Type u_2} {N : Type u_4} {ι : Type u_6} [inst : Semiring R] [inst_1 : AddCommMonoid M]
+  [inst_2 : Module R M] [inst_3 : TopologicalSpace M] [inst_4 : AddCommMonoid N] [inst_5 : Module R N]
+  [inst_6 : TopologicalSpace N] (f : M [⋀^ι]→L[R] N) [inst_7 : DecidableEq ι] (m : ι → M) (i : ι),
+  f (Function.update m i 0) = 0
 Result.autoException ::
 Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
 ; cardinality of Empty is 1
 ; rep: (as @Empty_0 Empty)
-; cardinality of |_α| is 3
-; rep: (as @|_α|_0 |_α|)
-; rep: (as @|_α|_1 |_α|)
-; rep: (as @|_α|_2 |_α|)
-(define-fun _x () |_α| (as @|_α|_0 |_α|))
-(define-fun _d () |_α| (as @|_α|_1 |_α|))
-(define-fun _List.nextOr ((_arg_1 |_List_α|) (_arg_2 |_α|) (_arg_3 |_α|)) |_α| (as @|_α|_2 |_α|))
+; cardinality of |_M___^ι__L_R__N| is 1
+; rep: (as @|_M___^ι__L_R__N|_0 |_M___^ι__L_R__N|)
+; cardinality of _N is 2
+; rep: (as @_N_0 _N)
+; rep: (as @_N_1 _N)
+(define-fun _f () |_M___^ι__L_R__N| (as @|_M___^ι__L_R__N|_0 |_M___^ι__L_R__N|))
+(define-fun _fun_a_=>_a_Function.update_m_i_0_ ((_arg_1 |_M___^ι__L_R__N|)) _N (as @_N_1 _N))
+(define-fun _0_ () _N (as @_N_0 _N))
 )
 
 
-Testing || Std.HashSet.get?_erase_self : ∀ {α : Type u} {x : BEq α} {x_1 : Hashable α} {m : Std.HashSet α} [inst : EquivBEq α] [inst : LawfulHashable α] {k : α},
-  (m.erase k).get? k = none
+Testing || ArithmeticFunction.pmul_apply : ∀ {R : Type u_1} [inst : MulZeroClass R] {f g : ArithmeticFunction R} {x : ℕ}, (f.pmul g) x = f x * g x
+Result.autoException ::
+Auto failed to find proof
+
+Testing || List.dropLast_prefix : ∀ {α : Type u_1} (l : List α), l.dropLast <+: l
+Result.autoException ::
+Auto failed to find proof
+
+Testing || AlgebraicGeometry.Scheme.homOfLE_ι : ∀ (X : AlgebraicGeometry.Scheme) {U V : X.Opens} (e : U ≤ V), CategoryTheory.CategoryStruct.comp (X.homOfLE e) V.ι = U.ι
+Result.autoException ::
+Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type ↑↑(↑x_0).toPresheafedSpace of λ binder contains bound variables
+
+Testing || Set.range_list_getI : ∀ {α : Type u_1} [inst : Inhabited α] (l : List α), Set.range l.getI = insert default {x | x ∈ l}
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `Set.range fun n =>
+  cifvar_8 (cifvar_9 x_0 n) x_1`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || IsQuotientMap.isClopen_preimage : ∀ {X : Type u} {Y : Type v} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : X → Y},
+  IsQuotientMap f → ∀ {s : Set Y}, IsClopen (f ⁻¹' s) ↔ IsClopen s
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Bifunctor.id_fst : ∀ {F : Type u₀ → Type u₁ → Type u₂} [inst : Bifunctor F] [inst_1 : LawfulBifunctor F] {α : Type u₀} {β : Type u₁}
+  (x : F α β), Bifunctor.fst id x = x
+Result.success
+
+Testing || Auto.Embedding.Lam.LamTerm.rwGenAll_atom : ∀ {conv : Auto.Embedding.Lam.LamTerm → Option Auto.Embedding.Lam.LamTerm} {n : ℕ},
+  Auto.Embedding.Lam.LamTerm.rwGenAll conv (Auto.Embedding.Lam.LamTerm.atom n) =
+    some ((conv (Auto.Embedding.Lam.LamTerm.atom n)).getD (Auto.Embedding.Lam.LamTerm.atom n))
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `match cifvar_7 x_0 with
+| some t' => cifvar_5 t'
+| none => cifvar_5 x_0`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || Multiset.Nodup.product : ∀ {α : Type u_1} {β : Type v} {s : Multiset α} {t : Multiset β}, s.Nodup → t.Nodup → (s ×ˢ t).Nodup
+Result.autoException ::
+Auto failed to find proof
+
+Testing || Set.toFinset_congr : ∀ {α : Type u_1} {s t : Set α} [inst : Fintype ↑s] [inst_1 : Fintype ↑t], s = t → s.toFinset = t.toFinset
 Result.autoException ::
 Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
 ; cardinality of Empty is 1
 ; rep: (as @Empty_0 Empty)
-; cardinality of |_Std.DHashMap_α_fun_x_=>_PUnit._1_| is 1
-; rep: (as @|_Std.DHashMap_α_fun_x_=>_PUnit._1_|_0 |_Std.DHashMap_α_fun_x_=>_PUnit._1_|)
-; cardinality of |_α| is 2
-; rep: (as @|_α|_0 |_α|)
-; rep: (as @|_α|_1 |_α|)
-(define-fun |_EquivBEq_α| () Bool true)
-(define-fun _m () |_Std.HashSet_α| (_Std.HashSet.mk (_Std.HashMap.mk (as @|_Std.DHashMap_α_fun_x_=>_PUnit._1_|_0 |_Std.DHashMap_α_fun_x_=>_PUnit._1_|))))
-(define-fun _k () |_α| (as @|_α|_0 |_α|))
-(define-fun _Std.HashSet.erase ((_arg_1 |_Std.HashSet_α|) (_arg_2 |_α|)) |_Std.HashSet_α| (_Std.HashSet.mk (_Std.HashMap.mk (as @|_Std.DHashMap_α_fun_x_=>_PUnit._1_|_1 |_Std.DHashMap_α_fun_x_=>_PUnit._1_|))))
-(define-fun _Std.HashSet.get? ((_arg_1 |_Std.HashSet_α|) (_arg_2 |_α|)) |_Option_α| (_some (as @|_α|_1 |_α|)))
+; cardinality of |_Finset_α| is 2
+; rep: (as @|_Finset_α|_0 |_Finset_α|)
+; rep: (as @|_Finset_α|_1 |_Finset_α|)
+(define-fun _s.toFinset () |_Finset_α| (as @|_Finset_α|_0 |_Finset_α|))
+(define-fun _t.toFinset () |_Finset_α| (as @|_Finset_α|_1 |_Finset_α|))
 )
 
 
-Testing || Rat.mk'_zero : ∀ (d : ℕ) (h : d ≠ 0) (w : (Int.natAbs 0).Coprime d), { num := 0, den := d, den_nz := h, reduced := w } = 0
-Result.autoException ::
-Auto failed to find proof
-
-Testing || Set.prod_univ : ∀ {α : Type u_1} {β : Type u_2} {s : Set α}, s ×ˢ Set.univ = Prod.fst ⁻¹' s
-Result.autoException ::
-Auto failed to find proof
-
-Testing || tangentMapWithin_id : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]
-  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} {M : Type u_4}
-  [inst_4 : TopologicalSpace M] [inst_5 : ChartedSpace H M] {s : Set M} {p : TangentBundle I M},
-  UniqueMDiffWithinAt I s p.proj → tangentMapWithin I I id s p = p
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `instTopologicalSpaceTangentSpace
-  x_0`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
-
-Testing || affineSegment_eq_segment : ∀ (R : Type u_1) {V : Type u_2} [inst : OrderedRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V] (x y : V),
-  affineSegment R x y = segment R x y
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `cifvar_8 (cifvar_9 x_0 x_1) ''
-  cifvar_10 cifvar_11 cifvar_12`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
-
-Testing || RingHom.OfLocalizationSpanTarget.ofIsLocalization : ∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},
-  (RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => P) →
-    (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →
-      ∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) (s : Set S),
-        Ideal.span s = ⊤ →
-          (∀ (r : ↑s), ∃ T x x_1, ∃ (_ : IsLocalization.Away (↑r) T), P ((algebraMap S T).comp f)) → P f
-Result.autoException ::
-Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type CommRing R✝ of λ binder contains bound variables
-
-Testing || CompHausLike.LocallyConstant.functor_obj_val : ∀ (P : TopCat → Prop) [inst : CompHausLike.HasExplicitFiniteCoproducts P] [inst_1 : CompHausLike.HasExplicitPullbacks P]
-  (hs : ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y), CategoryTheory.EffectiveEpi f → Function.Surjective ⇑f)
-  (X : Type (max u w)),
-  ((CompHausLike.LocallyConstant.functor P hs).obj X).val = CompHausLike.LocallyConstant.functorToPresheaves.obj X
-Result.autoException ::
-Auto failed to find proof
-
-Testing || MeasureTheory.Measure.measure_isMulInvariant_eq_smul_of_isCompact_closure_of_measurableSet : ∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : Group G] [inst_2 : TopologicalGroup G]
-  [inst_3 : MeasurableSpace G] [inst_4 : BorelSpace G] [inst_5 : LocallyCompactSpace G] (μ' μ : MeasureTheory.Measure G)
-  [inst_6 : μ.IsHaarMeasure] [inst_7 : MeasureTheory.IsFiniteMeasureOnCompacts μ'] [inst_8 : μ'.IsMulLeftInvariant]
-  {s : Set G}, MeasurableSet s → IsCompact (closure s) → μ' s = μ'.haarScalarFactor μ • μ s
-Result.autoException ::
-Auto failed to find proof
-
-Testing || Mod_.comap_obj_X : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {A B : Mon_ C}
-  (f : A ⟶ B) (M : Mod_ B), ((Mod_.comap f).obj M).X = M.X
-Result.autoException ::
-Auto failed to find proof
-
-Testing || ContinuousLinearMap.coe_zero : ∀ {R₁ : Type u_1} {R₂ : Type u_2} [inst : Semiring R₁] [inst_1 : Semiring R₂] {σ₁₂ : R₁ →+* R₂} {M₁ : Type u_4}
-  [inst_2 : TopologicalSpace M₁] [inst_3 : AddCommMonoid M₁] {M₂ : Type u_6} [inst_4 : TopologicalSpace M₂]
-  [inst_5 : AddCommMonoid M₂] [inst_6 : Module R₁ M₁] [inst_7 : Module R₂ M₂], ↑0 = 0
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_M₁__SL_σ₁₂__M₂| is 1
-; rep: (as @|_M₁__SL_σ₁₂__M₂|_0 |_M₁__SL_σ₁₂__M₂|)
-; cardinality of |_M₁_____σ₁₂__M₂| is 2
-; rep: (as @|_M₁_____σ₁₂__M₂|_0 |_M₁_____σ₁₂__M₂|)
-; rep: (as @|_M₁_____σ₁₂__M₂|_1 |_M₁_____σ₁₂__M₂|)
-(define-fun _0_ () |_M₁__SL_σ₁₂__M₂| (as @|_M₁__SL_σ₁₂__M₂|_0 |_M₁__SL_σ₁₂__M₂|))
-(define-fun _ContinuousLinearMap.toLinearMap ((_arg_1 |_M₁__SL_σ₁₂__M₂|)) |_M₁_____σ₁₂__M₂| (as @|_M₁_____σ₁₂__M₂|_1 |_M₁_____σ₁₂__M₂|))
-(define-fun _0__0 () |_M₁_____σ₁₂__M₂| (as @|_M₁_____σ₁₂__M₂|_0 |_M₁_____σ₁₂__M₂|))
-)
-
-
-Testing || Function.Injective2.uncurry : ∀ {α : Type u_4} {β : Type u_5} {γ : Type u_6} {f : α → β → γ},
-  Function.Injective2 f → Function.Injective (Function.uncurry f)
-Result.autoException ::
-Auto failed to find proof
-
-Testing || FirstOrder.Language.ElementaryEmbedding.refl_apply : ∀ {L : FirstOrder.Language} {M : Type u_1} [inst : L.Structure M] (x : M),
-  (FirstOrder.Language.ElementaryEmbedding.refl L M) x = x
-Result.autoException ::
-_private.Auto.Translation.LamFOL2SMT.0.Auto.SMT.lamSort2SSortAux :: Unexpected error. Higher order input?
-
-Testing || Cycle.isCycle_formPerm : ∀ {α : Type u_1} [inst : DecidableEq α] (s : Cycle α) (h : s.Nodup), s.Nontrivial → (s.formPerm h).IsCycle
-Result.autoException ::
-Auto failed to find proof
-
-Testing || Matrix.inv_subsingleton : ∀ {m : Type u} {α : Type v} [inst : CommRing α] [inst_1 : Subsingleton m] [inst_2 : Fintype m] [inst_3 : DecidableEq m]
-  (A : Matrix m m α), A⁻¹ = Matrix.diagonal fun i => Ring.inverse (A i i)
-Result.autoException ::
-Auto.Monomorphization.ConstInst.ofExpr? :: Matrix m m α is not a `∀`
-
-Testing || Submodule.dualAnnihilator_sup_eq : ∀ {R : Type u} {M : Type v} [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M]
-  (U V : Submodule R M), (U ⊔ V).dualAnnihilator = U.dualAnnihilator ⊓ V.dualAnnihilator
+Testing || List.suffix_iff_eq_append : ∀ {α : Type u_1} {l₁ l₂ : List α}, l₁ <:+ l₂ ↔ List.take (l₂.length - l₁.length) l₂ ++ l₁ = l₂
 Result.autoException ::
 Auto.Solver.SMT.getSexp :: Incomplete input 
 
-Testing || not_isMin : ∀ {α : Type u_1} [inst : Preorder α] [inst_1 : NoMinOrder α] (a : α), ¬IsMin a
-Result.success
-
-Testing || Combinatorics.Line.vertical_apply : ∀ {α : Type u_5} {ι : Type u_6} {ι' : Type u_7} (v : ι → α) (l : Combinatorics.Line α ι') (x : α),
-  (fun x i => ((Combinatorics.Line.vertical v l).idxFun i).getD x) x = Sum.elim v ((fun x i => (l.idxFun i).getD x) x)
-Result.autoException ::
-Auto failed to find proof
-
-Testing || QuasiIsoAt.quasiIso : ∀ {ι : Type u_1} {C : Type u} {inst : CategoryTheory.Category.{v, u} C}
-  {inst_1 : CategoryTheory.Limits.HasZeroMorphisms C} {c : ComplexShape ι} {K L : HomologicalComplex C c} {f : K ⟶ L}
-  {i : ι} {inst_2 : K.HasHomology i} {inst_3 : L.HasHomology i} [self : QuasiIsoAt f i],
-  CategoryTheory.ShortComplex.QuasiIso ((HomologicalComplex.shortComplexFunctor C c i).map f)
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_ι| is 1
-; rep: (as @|_ι|_0 |_ι|)
-; cardinality of _CategoryTheory.Functor_HomologicalComplex_C_c_CategoryTheory.ShortComplex_C is 1
-; rep: (as @_CategoryTheory.Functor_HomologicalComplex_C_c_CategoryTheory.ShortComplex_C_0 _CategoryTheory.Functor_HomologicalComplex_C_c_CategoryTheory.ShortComplex_C)
-; cardinality of _HomologicalComplex_C_c__q_CategoryTheory.ShortComplex_C is 1
-; rep: (as @_HomologicalComplex_C_c__q_CategoryTheory.ShortComplex_C_0 _HomologicalComplex_C_c__q_CategoryTheory.ShortComplex_C)
-; cardinality of _HomologicalComplex_C_c is 2
-; rep: (as @_HomologicalComplex_C_c_0 _HomologicalComplex_C_c)
-; rep: (as @_HomologicalComplex_C_c_1 _HomologicalComplex_C_c)
-; cardinality of _CategoryTheory.ShortComplex_C is 2
-; rep: (as @_CategoryTheory.ShortComplex_C_0 _CategoryTheory.ShortComplex_C)
-; rep: (as @_CategoryTheory.ShortComplex_C_1 _CategoryTheory.ShortComplex_C)
-; cardinality of _K___L is 1
-; rep: (as @_K___L_0 _K___L)
-; cardinality of _HomologicalComplex.shortComplexFunctor_C_c_i.obj_K___HomologicalComplex.shortComplexFunctor_C_c_i.obj_L is 1
-; rep: (as @_HomologicalComplex.shortComplexFunctor_C_c_i.obj_K___HomologicalComplex.shortComplexFunctor_C_c_i.obj_L_0 _HomologicalComplex.shortComplexFunctor_C_c_i.obj_K___HomologicalComplex.shortComplexFunctor_C_c_i.obj_L)
-(define-fun _i () |_ι| (as @|_ι|_0 |_ι|))
-(define-fun _HomologicalComplex.shortComplexFunctor_C_c ((_arg_1 |_ι|)) _CategoryTheory.Functor_HomologicalComplex_C_c_CategoryTheory.ShortComplex_C (as @_CategoryTheory.Functor_HomologicalComplex_C_c_CategoryTheory.ShortComplex_C_0 _CategoryTheory.Functor_HomologicalComplex_C_c_CategoryTheory.ShortComplex_C))
-(define-fun _CategoryTheory.Functor.toPrefunctor ((_arg_1 _CategoryTheory.Functor_HomologicalComplex_C_c_CategoryTheory.ShortComplex_C)) _HomologicalComplex_C_c__q_CategoryTheory.ShortComplex_C (as @_HomologicalComplex_C_c__q_CategoryTheory.ShortComplex_C_0 _HomologicalComplex_C_c__q_CategoryTheory.ShortComplex_C))
-(define-fun _K () _HomologicalComplex_C_c (as @_HomologicalComplex_C_c_0 _HomologicalComplex_C_c))
-(define-fun _Prefunctor.obj ((_arg_1 _HomologicalComplex_C_c__q_CategoryTheory.ShortComplex_C) (_arg_2 _HomologicalComplex_C_c)) _CategoryTheory.ShortComplex_C (ite (= (as @_HomologicalComplex_C_c__q_CategoryTheory.ShortComplex_C_0 _HomologicalComplex_C_c__q_CategoryTheory.ShortComplex_C) _arg_1) (ite (= (as @_HomologicalComplex_C_c_1 _HomologicalComplex_C_c) _arg_2) (as @_CategoryTheory.ShortComplex_C_1 _CategoryTheory.ShortComplex_C) (as @_CategoryTheory.ShortComplex_C_0 _CategoryTheory.ShortComplex_C)) (as @_CategoryTheory.ShortComplex_C_0 _CategoryTheory.ShortComplex_C)))
-(define-fun _CategoryTheory.ShortComplex.HasHomology ((_arg_1 _CategoryTheory.ShortComplex_C)) Bool true)
-(define-fun _L () _HomologicalComplex_C_c (as @_HomologicalComplex_C_c_1 _HomologicalComplex_C_c))
-(define-fun _f () _K___L (as @_K___L_0 _K___L))
-(define-fun _fun_f_=>_QuasiIsoAt_f_i ((_arg_1 _K___L)) Bool true)
-(define-fun _HomologicalComplex.shortComplexFunctor_C_c_i.map ((_arg_1 _K___L)) _HomologicalComplex.shortComplexFunctor_C_c_i.obj_K___HomologicalComplex.shortComplexFunctor_C_c_i.obj_L (as @_HomologicalComplex.shortComplexFunctor_C_c_i.obj_K___HomologicalComplex.shortComplexFunctor_C_c_i.obj_L_0 _HomologicalComplex.shortComplexFunctor_C_c_i.obj_K___HomologicalComplex.shortComplexFunctor_C_c_i.obj_L))
-(define-fun _CategoryTheory.ShortComplex.QuasiIso ((_arg_1 _HomologicalComplex.shortComplexFunctor_C_c_i.obj_K___HomologicalComplex.shortComplexFunctor_C_c_i.obj_L)) Bool false)
-)
-
-
-Testing || Continuous.locallyIntegrable : ∀ {X : Type u_1} {E : Type u_3} [inst : MeasurableSpace X] [inst_1 : TopologicalSpace X] [inst_2 : NormedAddCommGroup E]
-  {f : X → E} {μ : MeasureTheory.Measure X} [inst_3 : OpensMeasurableSpace X]
-  [inst_4 : MeasureTheory.IsLocallyFiniteMeasure μ] [inst_5 : SecondCountableTopologyEither X E],
-  Continuous f → MeasureTheory.LocallyIntegrable f μ
-Result.autoException ::
-Auto failed to find proof
-
-Testing || CategoryTheory.simplicialToCosimplicialAugmented_map_right : ∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] {X Y : (CategoryTheory.SimplicialObject.Augmented C)ᵒᵖ}
-  (f : X ⟶ Y),
-  ((CategoryTheory.simplicialToCosimplicialAugmented C).map f).right = CategoryTheory.NatTrans.rightOp f.unop.left
-Result.autoException ::
-Auto failed to find proof
-
-Testing || contDiffOn_succ_iff_fderiv_apply : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {D : Type uD} [inst_1 : NormedAddCommGroup D]
-  [inst_2 : NormedSpace 𝕜 D] {E : Type uE} [inst_3 : NormedAddCommGroup E] [inst_4 : NormedSpace 𝕜 E]
-  [inst_5 : CompleteSpace 𝕜] [inst_6 : FiniteDimensional 𝕜 D] {n : ℕ} {f : D → E} {s : Set D},
-  UniqueDiffOn 𝕜 s →
-    (ContDiffOn 𝕜 (↑(n + 1)) f s ↔
-      DifferentiableOn 𝕜 f s ∧ ∀ (y : D), ContDiffOn 𝕜 (↑n) (fun x => (fderivWithin 𝕜 f s x) y) s)
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `ContDiffOn cifvar_13
-  (cifvar_7 cifvar_9) (fun x => cifvar_16 (cifvar_17 cifvar_3 x) y) cifvar_3`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
-
-Testing || Finset.insert_erase : ∀ {α : Type u_1} [inst : DecidableEq α] {s : Finset α} {a : α}, a ∈ s → insert a (s.erase a) = s
-Result.success
-
-Testing || PartENat.lt_add_one_iff_lt : ∀ {x y : PartENat}, x ≠ ⊤ → (x < y + 1 ↔ x ≤ y)
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Incomplete input 
-
-Testing || CategoryTheory.ShortComplex.Homotopy.refl_h₀ : ∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_2, u_1} C] [inst_1 : CategoryTheory.Preadditive C]
-  {S₁ S₂ : CategoryTheory.ShortComplex C} (φ : S₁ ⟶ S₂), (CategoryTheory.ShortComplex.Homotopy.refl φ).h₀ = 0
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_CategoryTheory.ShortComplex.Homotopy_φ_φ| is 1
-; rep: (as @|_CategoryTheory.ShortComplex.Homotopy_φ_φ|_0 |_CategoryTheory.ShortComplex.Homotopy_φ_φ|)
-; cardinality of |_S₁.X₁___S₂.X₁| is 2
-; rep: (as @|_S₁.X₁___S₂.X₁|_0 |_S₁.X₁___S₂.X₁|)
-; rep: (as @|_S₁.X₁___S₂.X₁|_1 |_S₁.X₁___S₂.X₁|)
-(define-fun |_CategoryTheory.ShortComplex.Homotopy.refl_φ| () |_CategoryTheory.ShortComplex.Homotopy_φ_φ| (as @|_CategoryTheory.ShortComplex.Homotopy_φ_φ|_0 |_CategoryTheory.ShortComplex.Homotopy_φ_φ|))
-(define-fun |_CategoryTheory.ShortComplex.Homotopy.h₀| ((_arg_1 |_CategoryTheory.ShortComplex.Homotopy_φ_φ|)) |_S₁.X₁___S₂.X₁| (as @|_S₁.X₁___S₂.X₁|_1 |_S₁.X₁___S₂.X₁|))
-(define-fun _0_ () |_S₁.X₁___S₂.X₁| (as @|_S₁.X₁___S₂.X₁|_0 |_S₁.X₁___S₂.X₁|))
-)
-
-
-Testing || NonUnitalContinuousFunctionalCalculus.predicate_zero : ∀ (R : Type u_1) {A : Type u_2} {p : outParam (A → Prop)} {inst : CommSemiring R} {inst_1 : Nontrivial R}
-  {inst_2 : StarRing R} {inst_3 : MetricSpace R} {inst_4 : TopologicalSemiring R} {inst_5 : ContinuousStar R}
-  {inst_6 : NonUnitalRing A} {inst_7 : StarRing A} {inst_8 : TopologicalSpace A} {inst_9 : Module R A}
-  {inst_10 : IsScalarTower R A A} {inst_11 : SMulCommClass R A A} [self : NonUnitalContinuousFunctionalCalculus R p],
-  p 0
-Result.autoException ::
-Auto.Monomorphization.ConstInst.ofExpr? :: outParam (A → Prop) is not a `∀`
-
-Testing || Filter.Germ.instAddMonoid.proof_3 : ∀ {α : Type u_2} {l : Filter α} {M : Type u_1} [inst : AddMonoid M] (x x_1 : α → M), ↑(x + x_1) = ↑(x + x_1)
-Result.success
-
-Testing || TensorProduct.SMul.aux_of : ∀ {R : Type u_1} [inst : CommSemiring R] {M : Type u_4} {N : Type u_5} [inst_1 : AddCommMonoid M]
-  [inst_2 : AddCommMonoid N] [inst_3 : Module R M] [inst_4 : Module R N] {R' : Type u_10} [inst_5 : SMul R' M] (r : R')
-  (m : M) (n : N), (TensorProduct.SMul.aux r) (FreeAddMonoid.of (m, n)) = (r • m) ⊗ₜ[R] n
-Result.autoException ::
-Auto failed to find proof
-
-Testing || CategoryTheory.ComposableArrows.ext₁ : ∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_2, u_1} C] {F G : CategoryTheory.ComposableArrows C 1}
-  (left : F.left = G.left) (right : F.right = G.right),
-  F.hom =
-      CategoryTheory.CategoryStruct.comp (CategoryTheory.eqToHom left)
-        (CategoryTheory.CategoryStruct.comp G.hom (CategoryTheory.eqToHom ⋯)) →
-    F = G
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Incomplete input 
-
-Testing || Fin.Ioo_eq_finset_subtype : ∀ {n : ℕ} (a b : Fin n), Finset.Ioo a b = Finset.fin n (Finset.Ioo ↑a ↑b)
-Result.autoException ::
-Auto failed to find proof
-
-Testing || Pi.ringHom_injective : ∀ {I : Type u} {f : I → Type v} {γ : Type w} [inst : Nonempty I] [inst : (i : I) → NonAssocSemiring (f i)]
-  [inst_1 : NonAssocSemiring γ] (g : (i : I) → γ →+* f i),
-  (∀ (i : I), Function.Injective ⇑(g i)) → Function.Injective ⇑(Pi.ringHom g)
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `inst✝¹ x_0`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
-
-Testing || MeasureTheory.mul_meas_ge_le_pow_eLpNorm : ∀ {α : Type u_1} {E : Type u_2} {m0 : MeasurableSpace α} [inst : NormedAddCommGroup E] {p : ENNReal}
-  (μ : MeasureTheory.Measure α) {f : α → E},
-  p ≠ 0 →
-    p ≠ ⊤ →
-      MeasureTheory.AEStronglyMeasurable f μ →
-        ∀ (ε : ENNReal), ε * μ {x | ε ≤ ↑‖f x‖₊ ^ p.toReal} ≤ MeasureTheory.eLpNorm f p μ ^ p.toReal
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `{x |
-  cifvar_7 ε (cifvar_12 (cifvar_25 (cifvar_26 (cifvar_27 x))) (cifvar_14 x_0))}`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
-
-Testing || Orientation.map_symm : ∀ {R : Type u_1} [inst : StrictOrderedCommSemiring R] {M : Type u_2} [inst_1 : AddCommMonoid M] [inst_2 : Module R M]
-  {N : Type u_3} [inst_3 : AddCommMonoid N] [inst_4 : Module R N] (ι : Type u_4) (e : M ≃ₗ[R] N),
-  (Orientation.map ι e).symm = Orientation.map ι e.symm
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of _M____R__N is 1
-; rep: (as @_M____R__N_0 _M____R__N)
-; cardinality of |_Module.Ray_R_M___^ι____R__R___Module.Ray_R_N___^ι____R__R| is 1
-; rep: (as @|_Module.Ray_R_M___^ι____R__R___Module.Ray_R_N___^ι____R__R|_0 |_Module.Ray_R_M___^ι____R__R___Module.Ray_R_N___^ι____R__R|)
-; cardinality of |_Module.Ray_R_N___^ι____R__R___Module.Ray_R_M___^ι____R__R| is 2
-; rep: (as @|_Module.Ray_R_N___^ι____R__R___Module.Ray_R_M___^ι____R__R|_0 |_Module.Ray_R_N___^ι____R__R___Module.Ray_R_M___^ι____R__R|)
-; rep: (as @|_Module.Ray_R_N___^ι____R__R___Module.Ray_R_M___^ι____R__R|_1 |_Module.Ray_R_N___^ι____R__R___Module.Ray_R_M___^ι____R__R|)
-; cardinality of _N____R__M is 1
-; rep: (as @_N____R__M_0 _N____R__M)
-(define-fun _e () _M____R__N (as @_M____R__N_0 _M____R__N))
-(define-fun |_Orientation.map_ι| ((_arg_1 _M____R__N)) |_Module.Ray_R_M___^ι____R__R___Module.Ray_R_N___^ι____R__R| (as @|_Module.Ray_R_M___^ι____R__R___Module.Ray_R_N___^ι____R__R|_0 |_Module.Ray_R_M___^ι____R__R___Module.Ray_R_N___^ι____R__R|))
-(define-fun _Equiv.symm ((_arg_1 |_Module.Ray_R_M___^ι____R__R___Module.Ray_R_N___^ι____R__R|)) |_Module.Ray_R_N___^ι____R__R___Module.Ray_R_M___^ι____R__R| (as @|_Module.Ray_R_N___^ι____R__R___Module.Ray_R_M___^ι____R__R|_0 |_Module.Ray_R_N___^ι____R__R___Module.Ray_R_M___^ι____R__R|))
-(define-fun _LinearEquiv.symm ((_arg_1 _M____R__N)) _N____R__M (as @_N____R__M_0 _N____R__M))
-(define-fun |_Orientation.map_ι_0| ((_arg_1 _N____R__M)) |_Module.Ray_R_N___^ι____R__R___Module.Ray_R_M___^ι____R__R| (as @|_Module.Ray_R_N___^ι____R__R___Module.Ray_R_M___^ι____R__R|_1 |_Module.Ray_R_N___^ι____R__R___Module.Ray_R_M___^ι____R__R|))
-)
-
-
-Testing || TopologicalSpace.Opens.map_eq : ∀ {X Y : TopCat} (f g : X ⟶ Y), f = g → TopologicalSpace.Opens.map f = TopologicalSpace.Opens.map g
-Result.success
-
-Testing || IsometryEquiv.surjective : ∀ {α : Type u} {β : Type v} [inst : PseudoEMetricSpace α] [inst_1 : PseudoEMetricSpace β] (h : α ≃ᵢ β),
-  Function.Surjective ⇑h
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `Function.Surjective
-  (cifvar_4 x_0)`.
-This is because it contains free variables and has subterms possessing at least one of the following features
-· Type argument with free variables, e.g. `@Fin.add (n + 2) a b`
-· λ binders whose type contain free variables, e.g. `fun (x : a) => x` where `a` is a free variable
-· (TODO)
-
-Testing || hasMFDerivWithinAt_extChartAt : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]
-  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} {M : Type u_4}
-  [inst_4 : TopologicalSpace M] [inst_5 : ChartedSpace H M] [inst_6 : SmoothManifoldWithCorners I M] {s : Set M}
-  {x y : M},
-  y ∈ (chartAt H x).source →
-    HasMFDerivWithinAt I (modelWithCornersSelf 𝕜 E) (↑(extChartAt I x)) s y (mfderiv I I (↑(chartAt H x)) y)
-Result.success
-
-Testing || AddHom.op.proof_4 : ∀ {M : Type u_1} {N : Type u_2} [inst : Add M] [inst_1 : Add N] (x : AddHom Mᵃᵒᵖ Nᵃᵒᵖ),
-  (fun f => { toFun := AddOpposite.op ∘ ⇑f ∘ AddOpposite.unop, map_add' := ⋯ })
-      ((fun f => { toFun := AddOpposite.unop ∘ ⇑f ∘ AddOpposite.op, map_add' := ⋯ }) x) =
-    (fun f => { toFun := AddOpposite.op ∘ ⇑f ∘ AddOpposite.unop, map_add' := ⋯ })
-      ((fun f => { toFun := AddOpposite.unop ∘ ⇑f ∘ AddOpposite.op, map_add' := ⋯ }) x)
-Result.autoException ::
-Auto.Monomorphization.ConstInst.ofExpr? :: Function.Injective AddOpposite.unop is not a `∀`
-
-Testing || CategoryTheory.Comonad.cofree_obj_A : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (G : CategoryTheory.Comonad C) (X : C),
-  (G.cofree.obj X).A = G.obj X
-Result.autoException ::
-Auto failed to find proof
-
-Testing || Matroid.ground_finite : ∀ {α : Type u_1} (M : Matroid α) [inst : M.Finite], M.E.Finite
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_Matroid_α| is 1
-; rep: (as @|_Matroid_α|_0 |_Matroid_α|)
-; cardinality of |_Set_α| is 1
-; rep: (as @|_Set_α|_0 |_Set_α|)
-(define-fun _M () |_Matroid_α| (as @|_Matroid_α|_0 |_Matroid_α|))
-(define-fun _Matroid.Finite ((_arg_1 |_Matroid_α|)) Bool true)
-(define-fun _Matroid.E ((_arg_1 |_Matroid_α|)) |_Set_α| (as @|_Set_α|_0 |_Set_α|))
-(define-fun _Set.Finite ((_arg_1 |_Set_α|)) Bool false)
-)
-
-
-Testing || Nat.testBit_and : ∀ (x y i : ℕ), (x &&& y).testBit i = (x.testBit i && y.testBit i)
-Result.autoException ::
-Auto failed to find proof
-
-Testing || Function.support_comp_eq_preimage : ∀ {α : Type u_1} {β : Type u_2} {M : Type u_5} [inst : Zero M] (g : β → M) (f : α → β),
-  Function.support (g ∘ f) = f ⁻¹' Function.support g
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_Set_α| is 2
-; rep: (as @|_Set_α|_0 |_Set_α|)
-; rep: (as @|_Set_α|_1 |_Set_α|)
-; cardinality of |_Set_β| is 1
-; rep: (as @|_Set_β|_0 |_Set_β|)
-(define-fun _Function.support_g___f () |_Set_α| (as @|_Set_α|_0 |_Set_α|))
-(define-fun _Function.support_g () |_Set_β| (as @|_Set_β|_0 |_Set_β|))
-(define-fun _Set.preimage_f ((_arg_1 |_Set_β|)) |_Set_α| (as @|_Set_α|_1 |_Set_α|))
-)
-
-
-Testing || DFinsupp.lapply_comp_lsingle_of_ne : ∀ {ι : Type u_1} {R : Type u_2} {M : ι → Type u_4} [inst : Semiring R] [inst_1 : (i : ι) → AddCommMonoid (M i)]
-  [inst_2 : (i : ι) → Module R (M i)] [inst_3 : DecidableEq ι] (i i' : ι),
-  i ≠ i' → DFinsupp.lapply i ∘ₗ DFinsupp.lsingle i' = 0
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_ι| is 2
-; rep: (as @|_ι|_0 |_ι|)
-; rep: (as @|_ι|_1 |_ι|)
-; cardinality of |_Π₀__i___ι___M_i____R__M_i| is 1
-; rep: (as @|_Π₀__i___ι___M_i____R__M_i|_0 |_Π₀__i___ι___M_i____R__M_i|)
-; cardinality of |_M_i_____R__Π₀__i___ι___M_i| is 1
-; rep: (as @|_M_i_____R__Π₀__i___ι___M_i|_0 |_M_i_____R__Π₀__i___ι___M_i|)
-; cardinality of _M_i_____R__M_i is 2
-; rep: (as @_M_i_____R__M_i_0 _M_i_____R__M_i)
-; rep: (as @_M_i_____R__M_i_1 _M_i_____R__M_i)
-(define-fun _i () |_ι| (as @|_ι|_0 |_ι|))
-(define-fun _i_ () |_ι| (as @|_ι|_1 |_ι|))
-(define-fun _DFinsupp.lapply_i () |_Π₀__i___ι___M_i____R__M_i| (as @|_Π₀__i___ι___M_i____R__M_i|_0 |_Π₀__i___ι___M_i____R__M_i|))
-(define-fun _DFinsupp.lsingle_i_ () |_M_i_____R__Π₀__i___ι___M_i| (as @|_M_i_____R__Π₀__i___ι___M_i|_0 |_M_i_____R__Π₀__i___ι___M_i|))
-(define-fun _LinearMap.comp ((_arg_1 |_Π₀__i___ι___M_i____R__M_i|) (_arg_2 |_M_i_____R__Π₀__i___ι___M_i|)) _M_i_____R__M_i (as @_M_i_____R__M_i_1 _M_i_____R__M_i))
-(define-fun _0_ () _M_i_____R__M_i (as @_M_i_____R__M_i_0 _M_i_____R__M_i))
-)
-
-
-Elapsed time: 115516 ms
+Elapsed time: 185287 ms

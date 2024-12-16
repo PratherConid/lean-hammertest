@@ -22,8 +22,19 @@ set_option trace.auto.eval.printResult true
 --     logFile := "evalOut.txt" }
 --   "EvalResults/MathlibNames128.txt"
 
+-- set_option maxHeartbeats 200000000
+-- #eval namesFileEval
+--   { solverConfig := .native,
+--     logFile := "evalOut.txt" }
+--   "EvalResults/MathlibNames128.txt"
+
 set_option maxHeartbeats 200000000
 #eval namesFileEval
-  { solverConfig := .native,
+  { solverConfig := .smt .z3,
     logFile := "evalOut.txt" }
   "EvalResults/MathlibNames128.txt"
+
+#check hasMFDerivWithinAt_extChartAt
+#print CategoryTheory.ComposableArrows.ext₁
+#print DFinsupp.lapply_comp_lsingle_of_ne
+#print ENNReal.fun_eq_funMulInvSnorm_mul_eLpNorm

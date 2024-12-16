@@ -230,7 +230,6 @@ open is_short_exact
 set_option profiler true
 set_option trace.auto.lamReif.printProofs true
 
-set_option auto.mono.saturationThreshold 500
 def short_five_mono (injh : Injective h) (injl : Injective l) :
     Injective k := by
   auto [injective_iff_map_eq_zero, injl, injh, short_exact₁.inj,
