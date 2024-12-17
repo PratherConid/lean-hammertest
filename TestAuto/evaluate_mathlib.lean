@@ -10,31 +10,35 @@ set_option trace.auto.tactic true
 set_option trace.auto.eval.printResult true
 --set_option trace.auto.tptp.printProof true
 
-
---set_option maxHeartbeats 200000000
---#eval randEval
---  { solverConfig := .tptp (.zeport .lams)  "/home/indprinciples/Programs/zipperposition/portfolio", logFile := "evalOut.txt" }
---  128
+-- #eval @id (CoreM _) do
+--   let all ← allHumanTheorems
+--   let n := 128
+--   NameArray.save (← Array.randPick all n) s!"MathlibNames{n}.txt"
 
 -- set_option maxHeartbeats 200000000
 -- #eval namesFileEval
---   { solverConfig := .tptp (.zeport .lams)  "/home/indprinciples/Programs/zipperposition/portfolio",
+--   { solverConfig := .tptp (.zeport .lams) "/home/indprinciples/Programs/zipperposition/portfolio",
 --     logFile := "evalOut.txt" }
 --   "EvalResults/MathlibNames128.txt"
 
--- set_option maxHeartbeats 200000000
 -- #eval namesFileEval
 --   { solverConfig := .native,
 --     logFile := "evalOut.txt" }
---   "EvalResults/MathlibNames128.txt"
+--   "EvalResults/MathlibNames512.txt"
 
-set_option maxHeartbeats 200000000
-#eval namesFileEval
-  { solverConfig := .smt .z3,
-    logFile := "evalOut.txt" }
-  "EvalResults/MathlibNames128.txt"
+-- set_option maxHeartbeats 200000000
+-- #eval namesFileEval
+--   { solverConfig := .smt .z3,
+--     logFile := "evalOut.txt" }
+--   "EvalResults/MathlibNames128.txt"
 
 #check hasMFDerivWithinAt_extChartAt
 #print CategoryTheory.ComposableArrows.ext₁
 #print DFinsupp.lapply_comp_lsingle_of_ne
 #print ENNReal.fun_eq_funMulInvSnorm_mul_eLpNorm
+#print Set.toFinset_mul
+
+set_option trace.auto.lamReif.printResult true
+set_option trace.auto.lamReif.printValuation true
+#eval runAutoOnConsts { solverConfig := .native } #[``Set.toFinset_mul]
+#check Set.toFinset_image2
