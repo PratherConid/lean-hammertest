@@ -165,7 +165,7 @@ Testing || Equiv.Perm.support_prod_of_pairwise_disjoint : ∀ {α : Type u_1} [i
   List.Pairwise Equiv.Perm.Disjoint l →
     l.prod.support = List.foldr (fun x1 x2 => x1 ⊔ x2) ⊥ (List.map Equiv.Perm.support l)
 Result.autoException ::
-(deterministic) timeout at `forwardSimpLoop`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `match`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Finset.gcd_eq_gcd_image : ∀ {α : Type u_2} {β : Type u_3} [inst : CancelCommMonoidWithZero α] [inst_1 : NormalizedGCDMonoid α] {s : Finset β}
@@ -219,7 +219,7 @@ Result.success
 
 Testing || Real.tendsto_div_pow_mul_exp_add_atTop : ∀ (b c : ℝ) (n : ℕ), 0 ≠ b → Filter.Tendsto (fun x => x ^ n / (b * Real.exp x + c)) Filter.atTop (nhds 0)
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `«forward demodulation»`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Cardinal.mk_univ_quaternion : ∀ (R : Type u_1) [inst : _root_.One R] [inst_1 : Neg R], Cardinal.mk ↑Set.univ = Cardinal.mk R ^ 4
@@ -229,7 +229,7 @@ Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type QuaternionAlgebra R x_
 
 Testing || List.Perm.append_cons : ∀ {α : Type u_1} (a : α) {h₁ h₂ t₁ t₂ : List α}, h₁.Perm h₂ → t₁.Perm t₂ → (h₁ ++ a :: t₁).Perm (h₂ ++ a :: t₂)
 Result.autoException ::
-(deterministic) timeout at `match`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `«forward demodulation»`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Functor.Comp.seq_pure : ∀ {F : Type u → Type w} {G : Type v → Type u} [inst : Applicative F] [inst_1 : Applicative G]
@@ -276,7 +276,7 @@ Auto.Monomorphization.ConstInst.ofExpr? :: FormalMultilinearSeries 𝕜 E F is n
 
 Testing || String.Iterator.ValidFor.atEnd : ∀ {l r : List Char} {it : String.Iterator}, String.Iterator.ValidFor l r it → (it.atEnd = true ↔ r = [])
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `«forward demodulation»`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Stream'.WSeq.append_assoc : ∀ {α : Type u} (s t u : Stream'.WSeq α), (s.append t).append u = s.append (t.append u)
@@ -352,7 +352,7 @@ Result.success
 
 Testing || AddSubgroup.mem_iInf : ∀ {G : Type u_1} [inst : AddGroup G] {ι : Sort u_2} {S : ι → AddSubgroup G} {x : G}, x ∈ ⨅ i, S i ↔ ∀ (i : ι), x ∈ S i
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Submonoid.closure_eq_mrange : ∀ {M : Type u_1} [inst : Monoid M] (s : Set M), Submonoid.closure s = MonoidHom.mrange (FreeMonoid.lift Subtype.val)
@@ -361,7 +361,7 @@ Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type { x // x ∈ x_0 } of 
 
 Testing || _private.Mathlib.NumberTheory.FermatPsp.0.Nat.b_id_helper : ∀ {a b : ℕ}, 2 ≤ a → 2 < b → 2 ≤ (a ^ b + 1) / (a + 1)
 Result.autoException ::
-(deterministic) timeout at `match`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || SimplexCategory.δ_comp_σ_of_gt : ∀ {n : ℕ} {i : Fin (n + 2)} {j : Fin (n + 1)},
@@ -370,9 +370,9 @@ Testing || SimplexCategory.δ_comp_σ_of_gt : ∀ {n : ℕ} {i : Fin (n + 2)} {j
       CategoryTheory.CategoryStruct.comp (SimplexCategory.σ j) (SimplexCategory.δ i)
 Result.autoException ::
 application type mismatch
-  n = SimplexCategory.mk n
+  a✝¹ + a✝ = SimplexCategory.mk (a✝¹ + a✝)
 argument
-  SimplexCategory.mk n
+  SimplexCategory.mk (a✝¹ + a✝)
 has type
   SimplexCategory : Type
 but is expected to have type
@@ -399,19 +399,19 @@ Testing || OrderMonoidIso.cancel_right : ∀ {α : Type u_2} {β : Type u_3} {γ
   [inst_3 : MulOneClass α] [inst_4 : MulOneClass β] [inst_5 : MulOneClass γ] {g₁ g₂ : α ≃*o β} {f : β ≃*o γ},
   Function.Injective ⇑f → (g₁.trans f = g₂.trans f ↔ g₁ = g₂)
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || _private.Std.Data.HashMap.Lemmas.0.Std.HashMap.ext : ∀ {α : Type u} {β : Type v} {x : BEq α} {x_1 : Hashable α} {m m' : Std.HashMap α β}, m.inner = m'.inner → m = m'
 Result.autoException ::
 application type mismatch
-  m = { inner := m }.inner
+  (fun β => Std.DHashMap α β) β = { inner := { m // m.WF } }.inner
 argument
-  { inner := m }.inner
+  { inner := { m // m.WF } }.inner
 has type
-  Std.DHashMap α fun x => β : Type (max 0 u v)
+  Std.DHashMap α fun x => β✝ : Type (max 0 u v)
 but is expected to have type
-  Std.HashMap α β : Type (max u v)
+  Type (max 0 u v) : Type (max (u + 1) (v + 1))
 
 Testing || LocallyFinite.comp_injOn : ∀ {ι : Type u_1} {ι' : Type u_2} {X : Type u_4} [inst : TopologicalSpace X] {f : ι → Set X} {g : ι' → ι},
   LocallyFinite f → Set.InjOn g {i | (f (g i)).Nonempty} → LocallyFinite (f ∘ g)
@@ -481,13 +481,13 @@ Testing || RingCon.op_iff : ∀ {R : Type u_1} [inst : Add R] [inst_1 : Mul R] {
   c.op x y ↔ c (MulOpposite.unop y) (MulOpposite.unop x)
 Result.autoException ::
 application type mismatch
-  αᵐᵒᵖ = MulOpposite.unop { unop' := PreOpposite α }
+  x = MulOpposite.unop { unop' := x }
 argument
-  MulOpposite.unop { unop' := PreOpposite α }
+  MulOpposite.unop { unop' := x }
 has type
   R : Type u_1
 but is expected to have type
-  Type u_1 : Type (u_1 + 1)
+  Rᵐᵒᵖ : Type u_1
 
 Testing || Set.mem_iUnion₂_of_mem : ∀ {α : Type u_1} {ι : Sort u_4} {κ : ι → Sort u_7} {s : (i : ι) → κ i → Set α} {a : α} {i : ι} (j : κ i),
   a ∈ s i j → a ∈ ⋃ i, ⋃ j, s i j
@@ -503,7 +503,7 @@ Duper saturated
 Testing || Finsupp.mem_supported' : ∀ {α : Type u_1} {M : Type u_2} (R : Type u_5) [inst : Semiring R] [inst_1 : AddCommMonoid M]
   [inst_2 : _root_.Module R M] {s : Set α} (p : α →₀ M), p ∈ Finsupp.supported M R s ↔ ∀ x ∉ s, p x = 0
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || LinearMap.lTensor_id : ∀ {R : Type u_1} [inst : CommSemiring R] (M : Type u_4) (N : Type u_5) [inst_1 : AddCommMonoid M]
@@ -536,7 +536,7 @@ Testing || TendstoUniformly.mul : ∀ {α : Type u_1} {β : Type u_2} [inst : Un
   {l : Filter ι} {f f' : ι → β → α} {g g' : β → α},
   TendstoUniformly f g l → TendstoUniformly f' g' l → TendstoUniformly (f * f') (g * g') l
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || NonemptyInterval.mem_coe_interval : ∀ {α : Type u_1} [inst : PartialOrder α] {s : NonemptyInterval α} {x : α}, x ∈ ↑s ↔ x ∈ s
@@ -567,7 +567,7 @@ Duper saturated
 Testing || Set.image_comm : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} {s : Set α} {β' : Type u_5} {f : β → γ} {g : α → β} {f' : α → β'}
   {g' : β' → γ}, (∀ (a : α), f (g a) = g' (f' a)) → f '' (g '' s) = g' '' (f' '' s)
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || FreeGroup.Red.trans : ∀ {α : Type u} {L₁ L₂ L₃ : List (α × Bool)}, FreeGroup.Red L₁ L₂ → FreeGroup.Red L₂ L₃ → FreeGroup.Red L₁ L₃
@@ -901,13 +901,13 @@ Duper saturated
 Testing || Finset.Colex.ext : ∀ {α : Type u_3} {x y : Finset.Colex α}, x.ofColex = y.ofColex → x = y
 Result.autoException ::
 application type mismatch
-  x = { ofColex := x }.ofColex
+  Finset.Colex α = { ofColex := Finset.Colex α }.ofColex
 argument
-  { ofColex := x }.ofColex
+  { ofColex := Finset.Colex α }.ofColex
 has type
-  Finset α : Type u_3
+  Finset α✝ : Type u_3
 but is expected to have type
-  Finset.Colex α : Type u_3
+  Type u_3 : Type (u_3 + 1)
 
 Testing || Function.IsPeriodicPt.const_mul : ∀ {α : Type u_1} {f : α → α} {x : α} {m : ℕ}, Function.IsPeriodicPt f m x → ∀ (n : ℕ), Function.IsPeriodicPt f (n * m) x
 Result.success
@@ -1028,7 +1028,7 @@ Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type M₁ →SL[x_0] M₂ o
 Testing || Function.comp_eq_zero_iff : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} [inst : _root_.Zero β] [inst_1 : _root_.Zero γ] (f : α → β) {g : β → γ},
   Function.Injective g → g 0 = 0 → (g ∘ f = 0 ↔ f = 0)
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || PNat.Icc_eq_finset_subtype : ∀ (a b : ℕ+), Finset.Icc a b = Finset.subtype (fun n => 0 < n) (Finset.Icc ↑a ↑b)
@@ -1042,7 +1042,7 @@ Testing || OrderIso.strictConvexOn_symm : ∀ {𝕜 : Type u_1} {α : Type u_4} 
   [inst_2 : SMul 𝕜 α] [inst_3 : OrderedAddCommMonoid β] [inst_4 : SMul 𝕜 β] (f : α ≃o β),
   StrictConcaveOn 𝕜 Set.univ ⇑f → StrictConvexOn 𝕜 Set.univ ⇑f.symm
 Result.autoException ::
-(deterministic) timeout at `match`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Fintype.piFinset_sub : ∀ {ι : Type u_5} {α : ι → Type u_6} [inst : Fintype ι] [inst_1 : DecidableEq ι] [inst_2 : (i : ι) → DecidableEq (α i)]
@@ -1081,7 +1081,7 @@ Duper saturated
 
 Testing || _private.Init.Data.BitVec.Bitblast.0.BitVec.mod_two_pow_add_mod_two_pow_add_bool_lt_two_pow_succ : ∀ (x y i : ℕ) (c : Bool), x % 2 ^ i + (y % 2 ^ i + c.toNat) < 2 ^ (i + 1)
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || mdifferentiableAt_extChartAt : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]
@@ -1104,7 +1104,7 @@ Testing || MeasureTheory.measure_preimage_snd_singleton_eq_tsum : ∀ {α : Type
   [inst : MeasurableSingletonClass β] [inst : Countable α] (μ : MeasureTheory.Measure (α × β)) (y : β),
   μ (Prod.snd ⁻¹' {y}) = ∑' (x : α), μ {(x, y)}
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `match`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Matrix.charpoly.univ_monic : ∀ (R : Type u_1) (n : Type u_3) [inst : CommRing R] [inst_1 : Fintype n] [inst_2 : DecidableEq n],
@@ -1120,7 +1120,7 @@ Result.success
 
 Testing || Set.image_mul_const_uIcc : ∀ {α : Type u_1} [inst : LinearOrderedField α] (a b c : α), (fun x => x * a) '' Set.uIcc b c = Set.uIcc (b * a) (c * a)
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || CategoryTheory.Limits.Cofork.condition : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : C} {f g : X ⟶ Y} (t : CategoryTheory.Limits.Cofork f g),
@@ -1178,7 +1178,7 @@ Testing || AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right : 
     CategoryTheory.Limits.pullback.snd (AlgebraicGeometry.Proj.awayι 𝒜 f f_deg hm)
       (AlgebraicGeometry.Proj.awayι 𝒜 g g_deg hm')
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || SmoothBumpCovering.mem_chartAt_source_of_eq_one : ∀ {ι : Type uι} {E : Type uE} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {H : Type uH}
@@ -1186,7 +1186,7 @@ Testing || SmoothBumpCovering.mem_chartAt_source_of_eq_one : ∀ {ι : Type uι}
   [inst_4 : ChartedSpace H M] [inst_5 : FiniteDimensional ℝ E] {s : Set M} (fs : SmoothBumpCovering ι I M s) {i : ι}
   {x : M}, ↑(fs.toFun i) x = 1 → x ∈ (chartAt H (fs.c i)).source
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Submodule.smul_le : ∀ {R : Type u} {M : Type v} [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : _root_.Module R M] {I : Ideal R}
@@ -1204,7 +1204,7 @@ Result.success
 Testing || Disjoint.map_orderIso : ∀ {α : Type u_2} {β : Type u_3} [inst : SemilatticeInf α] [inst_1 : OrderBot α] [inst_2 : SemilatticeInf β]
   [inst_3 : OrderBot β] {a b : α} (f : α ≃o β), Disjoint a b → Disjoint (f a) (f b)
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Matrix.conjTransposeRingEquiv_apply : ∀ (m : Type u_2) (α : Type v) [inst : Semiring α] [inst_1 : StarRing α] [inst_2 : Fintype m] (M : Matrix m m α),
@@ -1215,7 +1215,7 @@ Duper saturated
 Testing || FreeAddGroup.Red.Step.negRev : ∀ {α : Type u} {L₁ L₂ : List (α × Bool)},
   FreeAddGroup.Red.Step L₁ L₂ → FreeAddGroup.Red.Step (FreeAddGroup.negRev L₁) (FreeAddGroup.negRev L₂)
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || TopologicalSpace.IsSeparable.univ_pi : ∀ {ι : Type u_2} [inst : Countable ι] {X : ι → Type u_3} {s : (i : ι) → Set (X i)}
@@ -1323,9 +1323,7 @@ Result.autoException ::
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Finset.Nonempty.add : ∀ {α : Type u_2} [inst : DecidableEq α] [inst_1 : Add α] {s t : Finset α}, s.Nonempty → t.Nonempty → (s + t).Nonempty
-Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+Result.success
 
 Testing || SimpleGraph.map_singletonSubgraph : ∀ {V : Type u} {W : Type v} {G : SimpleGraph V} {G' : SimpleGraph W} (f : G →g G') {v : V},
   SimpleGraph.Subgraph.map f (G.singletonSubgraph v) = G'.singletonSubgraph (f v)
@@ -1381,7 +1379,7 @@ Result.success
 
 Testing || summable_norm_pow_mul_geometric_of_norm_lt_one : ∀ {R : Type u_2} [inst : NormedRing R] (k : ℕ) {r : R}, ‖r‖ < 1 → Summable fun n => ‖↑n ^ k * r ^ n‖
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Real.volume_Icc : ∀ {a b : ℝ}, MeasureTheory.volume (Set.Icc a b) = ENNReal.ofReal (b - a)
@@ -1436,7 +1434,7 @@ Result.success
 
 Testing || AddCommGroup.ModEq.of_intCast : ∀ {α : Type u_1} [inst : AddCommGroupWithOne α] [inst_1 : CharZero α] {a b z : ℤ}, ↑a ≡ ↑b [PMOD ↑z] → a ≡ b [PMOD z]
 Result.autoException ::
-(deterministic) timeout at `superposition`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Polynomial.exists_eq_pow_rootMultiplicity_mul_and_not_dvd : ∀ {R : Type u} [inst : Ring R] (p : Polynomial R),
@@ -1648,7 +1646,7 @@ Testing || Batteries.UnionFind.root_link.go : ∀ {self : Batteries.UnionFind} {
         (∀ (i : ℕ), m.parent i = if ↑y = i then ↑x else self.parent i) →
           ∀ (i : ℕ), m.rootD i = if self.rootD i = ↑x ∨ self.rootD i = ↑y then ↑x else self.rootD i
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Submodule.liftQ_mkQ : ∀ {R : Type u_1} {M : Type u_2} [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : _root_.Module R M]
@@ -1734,7 +1732,7 @@ Testing || Measurable.mul_iff_right : ∀ {α : Type u_1} {G : Type u_2} [inst :
   [inst_3 : MeasurableMul₂ G] [inst_4 : MeasurableInv G] {f g : α → G},
   Measurable f → (Measurable (f * g) ↔ Measurable g)
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `match`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Filter.atBot_Iic_eq : ∀ {α : Type u_3} [inst : Preorder α] [inst_1 : IsDirected α fun x1 x2 => x1 ≥ x2] (a : α),
@@ -1887,7 +1885,7 @@ Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy,
 Testing || WeierstrassCurve.Affine.evalEval_polynomialX : ∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve.Affine R) (x y : R),
   Polynomial.evalEval x y W.polynomialX = W.a₁ * y - (3 * x ^ 2 + 2 * W.a₂ * x + W.a₄)
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || MvPolynomial.cardinal_mk_eq_max : ∀ {σ R : Type u} [inst : CommSemiring R] [inst_1 : Nonempty σ] [inst_2 : Nontrivial R],
@@ -1939,7 +1937,7 @@ Result.success
 Testing || is_ascending_rev_series_of_is_descending : ∀ (G : Type u_1) [inst : Group G] {H : ℕ → Subgroup G} {n : ℕ},
   H n = ⊥ → IsDescendingCentralSeries H → IsAscendingCentralSeries fun m => H (n - m)
 Result.autoException ::
-(deterministic) timeout at `match`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `«forward demodulation»`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || WeierstrassCurve.VariableChange.comp_left_inv : ∀ {R : Type u} [inst : CommRing R] (C : WeierstrassCurve.VariableChange R),
@@ -1950,7 +1948,7 @@ Duper saturated
 Testing || Multiset.fold_add : ∀ {α : Type u_1} (op : α → α → α) [hc : Std.Commutative op] [ha : Std.Associative op] (b₁ b₂ : α) (s₁ s₂ : Multiset α),
   Multiset.fold op (op b₁ b₂) (s₁ + s₂) = op (Multiset.fold op b₁ s₁) (Multiset.fold op b₂ s₂)
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `match`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || CategoryTheory.WithTerminal.inclLift_inv_app : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{u_2, u_1} D]
@@ -2001,7 +1999,7 @@ Testing || Orientation.oangle_rotation_right : ∀ {V : Type u_1} [inst : Normed
   (o : Orientation ℝ V (Fin 2)) {x y : V},
   x ≠ 0 → y ≠ 0 → ∀ (θ : Real.Angle), o.oangle x ((o.rotation θ) y) = o.oangle x y + θ
 Result.autoException ::
-(deterministic) timeout at `«backward demodulation»`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `match`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || BoundedContinuousFunction.isEmbedding_coeFn : ∀ {α : Type u} {β : Type v} [inst : TopologicalSpace α] [inst_1 : PseudoMetricSpace β],
@@ -2112,7 +2110,7 @@ Testing || CategoryTheory.Monad.left_unit_assoc : ∀ {C : Type u₁} [inst : Ca
   (h : self.obj X ⟶ Z),
   CategoryTheory.CategoryStruct.comp (self.η.app (self.obj X)) (CategoryTheory.CategoryStruct.comp (self.μ.app X) h) = h
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `match`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Finset.compl_eq_univ_iff : ∀ {α : Type u_1} [inst : Fintype α] [inst_1 : DecidableEq α] (s : Finset α), sᶜ = Finset.univ ↔ s = ∅
@@ -2184,13 +2182,13 @@ Testing || CategoryTheory.unopUnop_map : ∀ (C : Type u₁) [inst : CategoryThe
   (CategoryTheory.unopUnop C).map f = f.unop.unop
 Result.autoException ::
 application type mismatch
-  X✝ = Opposite.unop (Opposite.op X✝)
+  f = Opposite.unop (Opposite.op f)
 argument
-  Opposite.unop (Opposite.op X✝)
+  Opposite.unop (Opposite.op f)
 has type
   Cᵒᵖ : Type u₁
 but is expected to have type
-  Cᵒᵖᵒᵖ : Type u₁
+  X✝ ⟶ Y✝ : Type v₁
 
 Testing || Function.Surjective.lieAlgebra_isSolvable : ∀ {R : Type u} {L : Type v} {L' : Type w₁} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]
   [inst_3 : LieRing L'] [inst_4 : LieAlgebra R L'] {f : L' →ₗ⁅R⁆ L} [h₁ : LieAlgebra.IsSolvable R L'],
@@ -2210,7 +2208,7 @@ Testing || MeasureTheory.Measure.ofMeasurable_apply : ∀ {α : Type u_1} [inst 
       Pairwise (Disjoint on f) → m (⋃ i, f i) ⋯ = ∑' (i : ℕ), m (f i) ⋯}
   (s : Set α) (hs : MeasurableSet s), (MeasureTheory.Measure.ofMeasurable m m0 mU) s = m s hs
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || CategoryTheory.Limits.WalkingParallelPairHom.comp_id : ∀ {X Y : CategoryTheory.Limits.WalkingParallelPair} (f : CategoryTheory.Limits.WalkingParallelPairHom X Y),
@@ -2248,7 +2246,7 @@ Testing || ProbabilityTheory.Kernel.iIndepFun.indepFun_add_left : ∀ {α : Type
     (∀ (i : ι), Measurable (f i)) →
       ∀ (i j k : ι), i ≠ k → j ≠ k → ProbabilityTheory.Kernel.IndepFun (f i + f j) (f k) κ μ
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `fluidSup`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || ProbabilityTheory.Kernel.isSFiniteKernel_prodMkLeft_unit : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β} {κ : ProbabilityTheory.Kernel α β},
@@ -2263,7 +2261,7 @@ Testing || _private.Mathlib.NumberTheory.FLT.Three.0.FermatLastTheoremForThreeGe
     ↑(FermatLastTheoremForThreeGen.Solution.u₅ S) *
       ((hζ.toInteger - 1) ^ (S.multiplicity - 1) * FermatLastTheoremForThreeGen.Solution.X S) ^ 3
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || LipschitzWith.dist_right : ∀ {α : Type u} [inst : PseudoMetricSpace α] (x : α), LipschitzWith 1 (dist x)
@@ -2410,7 +2408,7 @@ Testing || MeasureTheory.Integrable.comp_inv : ∀ {G : Type u_4} {F : Type u_6}
   [inst_2 : Group G] [inst_3 : MeasurableInv G] [inst_4 : μ.IsInvInvariant] {f : G → F},
   MeasureTheory.Integrable f μ → MeasureTheory.Integrable (fun t => f t⁻¹) μ
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `match`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Nat.ord_proj_mul_ord_compl_eq_self : ∀ (n p : ℕ), p ^ n.factorization p * (n / p ^ n.factorization p) = n
@@ -2438,13 +2436,13 @@ Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy,
 Testing || Sum.one_le_elim_iff : ∀ {α₁ : Type u_1} {α₂ : Type u_2} {β : Type u_3} [inst : LE β] [inst_1 : _root_.One β] {v₁ : α₁ → β} {v₂ : α₂ → β},
   1 ≤ Sum.elim v₁ v₂ ↔ 1 ≤ v₁ ∧ 1 ≤ v₂
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || List.mapIdx_cons : ∀ {α : Type u_1} {α_1 : Type u_2} {f : ℕ → α → α_1} {l : List α} {a : α},
   List.mapIdx f (a :: l) = f 0 a :: List.mapIdx (fun i => f (i + 1)) l
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Std.Tactic.BVDecide.BVExpr.bitblast.denote_blastVar : ∀ {w : ℕ} (aig : Std.Sat.AIG Std.Tactic.BVDecide.BVBit) (var : Std.Tactic.BVDecide.BVExpr.bitblast.BVVar w)
@@ -2497,13 +2495,13 @@ Testing || Convex.second_derivative_within_at_symmetric_of_mem_interior : ∀ {E
             HasFDerivWithinAt f' f'' (interior s) x →
               ∀ {v w : E}, x + 4 • v ∈ interior s → x + 4 • w ∈ interior s → (f'' w) v = (f'' v) w
 Result.autoException ::
-Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #0, ((!3 x0) = (!27 (!28 (!29 (λx1 : #0, ((!30 x1) ∧ (!31 x1 x0)))))))) is not type correct
+Auto.LamReif.reifTermCheckType :: LamTerm (!1 = (!27 !1)) is not type correct
 
 Testing || baseChange_ext : ∀ {R : Type uR} {A : Type uA} {M₂ : Type uM₂} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : AddCommGroup M₂]
   [inst_3 : Algebra R A] [inst_4 : _root_.Module R M₂] ⦃Q₁ Q₂ : QuadraticForm A (TensorProduct R A M₂)⦄,
   (∀ (m : M₂), Q₁ (1 ⊗ₜ[R] m) = Q₂ (1 ⊗ₜ[R] m)) → Q₁ = Q₂
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || AlgebraicGeometry.morphismRestrict_comp : ∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (U : TopologicalSpace.Opens ↑↑Z.toPresheafedSpace),
@@ -2564,7 +2562,7 @@ Testing || Auto.Embedding.Lam.LamThmEquiv.fromLam : ∀ {lval : Embedding.Lam.La
   Embedding.Lam.LamThmEquiv lval lctx (w.func s) (Embedding.Lam.LamTerm.lam w a) (Embedding.Lam.LamTerm.lam w b) →
     Embedding.Lam.LamThmEquiv lval (w :: lctx) s a b
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Real.log_le_rpow_div : ∀ {x ε : ℝ}, 0 ≤ x → 0 < ε → Real.log x ≤ x ^ ε / ε
@@ -2576,7 +2574,7 @@ Testing || measurable_from_prod_countable : ∀ {α : Type u_1} {β : Type u_2} 
   [inst : MeasurableSingletonClass β] {x : MeasurableSpace γ} {f : α × β → γ},
   (∀ (y : β), Measurable fun x => f (x, y)) → Measurable f
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Monotone.of_le_map_sup : ∀ {α : Type u} {β : Type v} [inst : SemilatticeSup α] [inst_1 : SemilatticeSup β] {f : α → β},
@@ -2637,7 +2635,7 @@ Testing || UniqueMul.to_mulOpposite : ∀ {G : Type u_1} [inst : Mul G] {A B : F
     UniqueMul (Finset.map { toFun := MulOpposite.op, inj' := ⋯ } B)
       (Finset.map { toFun := MulOpposite.op, inj' := ⋯ } A) (MulOpposite.op b0) (MulOpposite.op a0)
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || continuous_iff_continuous_dist : ∀ {α : Type u_1} {β : Type u_2} [inst : PseudoMetricSpace α] [inst_1 : TopologicalSpace β] {f : β → α},
@@ -3038,4 +3036,4 @@ Result.autoException ::
 (deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
-Elapsed time: 283013 ms
+Elapsed time: 311227 ms

@@ -24,11 +24,11 @@ set_option trace.auto.eval.printResult true
 -- #eval namesFileEval
 --   { solverConfig := .native,
 --     logFile := "evalOut.txt" }
---   "EvalResults/MathlibNames512.txt"
+--   "EvalResults/MathlibNames128.txt"
 
 -- set_option maxHeartbeats 200000000
 -- #eval namesFileEval
---   { solverConfig := .smt .z3,
+--   { solverConfig := .smt .cvc5,
 --     logFile := "evalOut.txt" }
 --   "EvalResults/MathlibNames128.txt"
 
@@ -37,8 +37,3 @@ set_option trace.auto.eval.printResult true
 #print DFinsupp.lapply_comp_lsingle_of_ne
 #print ENNReal.fun_eq_funMulInvSnorm_mul_eLpNorm
 #print Set.toFinset_mul
-
-set_option trace.auto.lamReif.printResult true
-set_option trace.auto.lamReif.printValuation true
-#eval runAutoOnConsts { solverConfig := .native } #[``Set.toFinset_mul]
-#check Set.toFinset_image2

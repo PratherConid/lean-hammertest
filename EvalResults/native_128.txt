@@ -1,803 +1,742 @@
 Config = {maxHeartbeats := 65536, timeout := 10, solverConfig = native, logFile := evalOut.txt}
 
-Testing || Int.natAbs_one : Int.natAbs 1 = 1
-Result.autoException ::
-Duper saturated
-
-Testing || HNNExtension.NormalWord.group_smul_def : ∀ {G : Type u_1} [inst : Group G] {A B : Subgroup G} {d : HNNExtension.NormalWord.TransversalPair G A B} (g : G)
-  (w : HNNExtension.NormalWord d), g • w = { head := g * w.head, toList := w.toList, chain := ⋯, mem_set := ⋯ }
-Result.autoException ::
-Duper saturated
-
-Testing || Batteries.RBNode.balance2_eq : ∀ {α : Type u_1} {c : Batteries.RBColor} {n : ℕ} {l : Batteries.RBNode α} {v : α} {r : Batteries.RBNode α},
-  r.Balanced c n → l.balance2 v r = Batteries.RBNode.node Batteries.RBColor.black l v r
+Testing || AEMeasurable.inf : ∀ {M : Type u_1} [inst : MeasurableSpace M] {α : Type u_2} {m : MeasurableSpace α} {μ : MeasureTheory.Measure α}
+  {f g : α → M} [inst_1 : Min M] [inst_2 : MeasurableInf₂ M],
+  AEMeasurable f μ → AEMeasurable g μ → AEMeasurable (fun a => f a ⊓ g a) μ
 Result.autoException ::
 (deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
-Testing || PMF.toOuterMeasure_bind_apply : ∀ {α : Type u_1} {β : Type u_2} (p : PMF α) (f : α → PMF β) (s : Set β),
-  (p.bind f).toOuterMeasure s = ∑' (a : α), p a * (f a).toOuterMeasure s
-Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || PEquiv.single_trans_single_of_ne : ∀ {α : Type u} {β : Type v} {γ : Type w} [inst : DecidableEq α] [inst_1 : DecidableEq β] [inst_2 : DecidableEq γ]
-  {b₁ b₂ : β}, b₁ ≠ b₂ → ∀ (a : α) (c : γ), (PEquiv.single a b₁).trans (PEquiv.single b₂ c) = ⊥
-Result.success
-
-Testing || Equiv.bijOn_swap : ∀ {α : Type u_1} {s : Set α} [inst : DecidableEq α] {a b : α}, a ∈ s → b ∈ s → Set.BijOn (⇑(Equiv.swap a b)) s s
-Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || Matrix.kroneckerMap_zero_right : ∀ {α : Type u_2} {β : Type u_4} {γ : Type u_6} {l : Type u_8} {m : Type u_9} {n : Type u_10} {p : Type u_11}
-  [inst : Zero β] [inst_1 : Zero γ] (f : α → β → γ),
-  (∀ (a : α), f a 0 = 0) → ∀ (A : Matrix l m α), Matrix.kroneckerMap f A 0 = 0
-Result.autoException ::
-Duper saturated
-
-Testing || HomogeneousIdeal.toIdeal_add : ∀ {ι : Type u_1} {σ : Type u_2} {A : Type u_3} [inst : Semiring A] [inst_1 : DecidableEq ι] [inst_2 : AddMonoid ι]
-  [inst_3 : SetLike σ A] [inst_4 : AddSubmonoidClass σ A] {𝒜 : ι → σ} [inst_5 : GradedRing 𝒜]
-  (I J : HomogeneousIdeal 𝒜), (I + J).toIdeal = I.toIdeal + J.toIdeal
-Result.autoException ::
-Duper saturated
-
-Testing || List.nodup_rotate : ∀ {α : Type u} {l : List α} {n : ℕ}, (l.rotate n).Nodup ↔ l.Nodup
-Result.success
-
-Testing || Submodule.le_comap_pow_of_le_comap : ∀ {R : Type u_1} {M : Type u_5} [inst : Semiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M] (p : Submodule R M)
-  {f : M →ₗ[R] M}, p ≤ Submodule.comap f p → ∀ (k : ℕ), p ≤ Submodule.comap (f ^ k) p
-Result.autoException ::
-(deterministic) timeout at `«forward demodulation»`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || FiniteField.isSquare_neg_two_iff : ∀ {F : Type u_1} [inst : Field F] [inst_1 : Fintype F], IsSquare (-2) ↔ Fintype.card F % 8 ≠ 5 ∧ Fintype.card F % 8 ≠ 7
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `quadraticChar cifvar_54`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
-
-Testing || HasSum.hasSum_at_zero : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]
-  [inst_2 : NormedSpace 𝕜 E] (a : ℕ → E), HasSum (fun n => 0 ^ n • a n) (a 0)
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `SMulWithZero.toSMulZeroClass`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
-
-Testing || AddOreLocalization.oreSub_add_oreSub : ∀ {R : Type u_1} [inst : AddMonoid R] {S : AddSubmonoid R} [inst_1 : AddOreLocalization.AddOreSet S] {r₁ r₂ : R}
-  {s₁ s₂ : ↥S},
-  r₁ -ₒ s₁ + (r₂ -ₒ s₂) = AddOreLocalization.oreMin r₁ s₂ + r₂ -ₒ (AddOreLocalization.oreSubtra r₁ s₂ + s₁)
-Result.autoException ::
-Duper saturated
-
-Testing || sectionOfRetractionKerToTensor_algebraMap : ∀ {R P S : Type u} [inst : CommRing R] [inst_1 : CommRing P] [inst_2 : CommRing S] [inst_3 : Algebra R P]
-  [inst_4 : Algebra P S] (l : TensorProduct P S (Ω[P⁄R]) →ₗ[P] ↥(RingHom.ker (algebraMap P S)))
-  (hl : l ∘ₗ KaehlerDifferential.kerToTensor R P S = LinearMap.id) [inst_5 : Algebra R S] [inst_6 : IsScalarTower R P S]
-  (hf' : RingHom.ker (algebraMap P S) ^ 2 = ⊥) (hf : Function.Surjective ⇑(algebraMap P S)) (x : P),
-  (sectionOfRetractionKerToTensor l hl hf' hf) ((algebraMap P S) x) = x - ↑(l (1 ⊗ₜ[P] (KaehlerDifferential.D R P) x))
-Result.autoException ::
-Duper saturated
-
-Testing || Set.up_image : ∀ {α : Type u_1} {β : Type u_2} [inst : MulOneClass α] [inst_1 : MulOneClass β] (f : α →* β) (s : Set α),
-  Set.up (⇑f '' s) = (SetSemiring.imageHom f) (Set.up s)
-Result.autoException ::
-Duper saturated
-
-Testing || CategoryTheory.Limits.pullbackConeOfRightIso_π_app_right : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y Z : C} (f : X ⟶ Z) (g : Y ⟶ Z)
-  [inst_1 : CategoryTheory.IsIso g],
-  (CategoryTheory.Limits.pullbackConeOfRightIso f g).π.app CategoryTheory.Limits.WalkingCospan.right =
-    CategoryTheory.CategoryStruct.comp f (CategoryTheory.inv g)
-Result.autoException ::
-Duper saturated
-
-Testing || CategoryTheory.PreGaloisCategory.fiberEqualizerEquiv_symm_ι_apply : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)
-  [inst_1 : CategoryTheory.PreGaloisCategory C] [inst_2 : CategoryTheory.PreGaloisCategory.FiberFunctor F] {X Y : C}
-  {f g : X ⟶ Y} (x : ↑(F.obj X)) (h : F.map f x = F.map g x),
-  F.map (CategoryTheory.Limits.equalizer.ι f g)
-      ((CategoryTheory.PreGaloisCategory.fiberEqualizerEquiv F f g).symm ⟨x, h⟩) =
-    x
-Result.autoException ::
-Auto.Monomorphization.ConstInst.ofExpr? :: F.obj X ⟶ F.obj Y is not a `∀`
-
-Testing || CategoryTheory.Limits.prod.lift_fst_snd : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : C}
-  [inst_1 : CategoryTheory.Limits.HasBinaryProduct X Y],
-  CategoryTheory.Limits.prod.lift CategoryTheory.Limits.prod.fst CategoryTheory.Limits.prod.snd =
-    CategoryTheory.CategoryStruct.id (X ⨯ Y)
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `CategoryTheory.Limits.limit.lift
-  (cifvar_1 cifvar_2 cifvar_3) x_0`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
-
-Testing || Matrix.SpecialLinearGroup.mem_center_iff : ∀ {n : Type u} [inst : DecidableEq n] [inst_1 : Fintype n] {R : Type v} [inst_2 : CommRing R]
-  {A : Matrix.SpecialLinearGroup n R},
-  A ∈ Subgroup.center (Matrix.SpecialLinearGroup n R) ↔ ∃ r, r ^ Fintype.card n = 1 ∧ (Matrix.scalar n) r = ↑A
-Result.autoException ::
-Auto.Monomorphization.ConstInst.ofExpr? :: Matrix n n R is not a `∀`
-
-Testing || LinearPMap.zero_domain : ∀ {R : Type u_1} [inst : Ring R] {E : Type u_2} [inst_1 : AddCommGroup E] [inst_2 : Module R E] {F : Type u_3}
-  [inst_3 : AddCommGroup F] [inst_4 : Module R F], LinearPMap.domain 0 = ⊤
-Result.autoException ::
-Duper saturated
-
-Testing || char_dvd_card_solutions_of_sum_lt : ∀ {K : Type u_1} {σ : Type u_2} {ι : Type u_3} [inst : Fintype K] [inst_1 : Field K] [inst_2 : Fintype σ]
-  [inst_3 : DecidableEq σ] [inst_4 : DecidableEq K] (p : ℕ) [inst_5 : CharP K p] {s : Finset ι}
-  {f : ι → MvPolynomial σ K},
-  ∑ i ∈ s, (f i).totalDegree < Fintype.card σ → p ∣ Fintype.card { x // ∀ i ∈ s, (MvPolynomial.eval x) (f i) = 0 }
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `GroupWithZero.toMonoidWithZero`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
-
-Testing || NNRat.num_coe : ∀ (q : ℚ≥0), (↑q).num = ↑q.num
-Result.autoException ::
-Duper saturated
-
-Testing || Int.bmod_one_is_zero : ∀ (x : ℤ), x.bmod 1 = 0
-Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || Nat.rel_of_forall_rel_succ_of_lt : ∀ {β : Type v} (r : β → β → Prop) [inst : IsTrans β r] {f : ℕ → β},
-  (∀ (n : ℕ), r (f n) (f (n + 1))) → ∀ ⦃a b : ℕ⦄, a < b → r (f a) (f b)
-Result.success
-
-Testing || le_of_forall_pos_sub_le : ∀ {α : Type u_1} [inst : AddGroup α] [inst_1 : LinearOrder α] [inst_2 : AddLeftMono α] [inst_3 : DenselyOrdered α]
-  {a b : α}, (∀ (ε : α), 0 < ε → a - ε ≤ b) → a ≤ b
-Result.success
-
-Testing || HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy : ∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_3, u_1} C] {ι : Type u_2} {c : ComplexShape ι}
-  [inst_1 : CategoryTheory.Preadditive C] [inst_2 : CategoryTheory.CategoryWithHomology C]
-  [inst_3 : (HomologicalComplex.quasiIso C c).HasLocalization] [inst_4 : c.QFactorsThroughHomotopy C]
-  {K L : HomologicalComplex C c} {f g : K ⟶ L},
-  Homotopy f g → HomologicalComplexUpToQuasiIso.Q.map f = HomologicalComplexUpToQuasiIso.Q.map g
-Result.autoException ::
-Duper saturated
-
-Testing || Finset.nonempty_Ico : ∀ {α : Type u_2} {a b : α} [inst : Preorder α] [inst_1 : LocallyFiniteOrder α], (Finset.Ico a b).Nonempty ↔ a < b
-Result.success
-
-Testing || Sum.LiftRel.exists_of_isLeft_right : ∀ {α : Type u} {β : Type v} {γ : Type u_1} {δ : Type u_2} {r : α → γ → Prop} {s : β → δ → Prop} {x : α ⊕ β} {y : γ ⊕ δ},
-  Sum.LiftRel r s x y → y.isLeft = true → ∃ a c, r a c ∧ x = Sum.inl a ∧ y = Sum.inl c
-Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || FirstOrder.Language.Hom.id_comp : ∀ {L : FirstOrder.Language} {M : Type w} {N : Type w'} [inst : L.Structure M] [inst_1 : L.Structure N] (f : L.Hom M N),
-  (FirstOrder.Language.Hom.id L N).comp f = f
-Result.autoException ::
-Duper saturated
-
-Testing || Pi.single_inj : ∀ {I : Type u} (f : I → Type v₁) [inst : DecidableEq I] [inst_1 : (i : I) → Zero (f i)] (i : I) {x y : f i},
-  Pi.single i x = Pi.single i y ↔ x = y
-Result.autoException ::
-Duper saturated
-
-Testing || WeierstrassCurve.preΨ'_one : ∀ {R : Type r} [inst : CommRing R] (W : WeierstrassCurve R), W.preΨ' 1 = 1
-Result.autoException ::
-Duper saturated
-
-Testing || Matrix.updateColumn_conjTranspose : ∀ {m : Type u_2} {n : Type u_3} {α : Type v} {M : Matrix m n α} {i : m} {b : n → α} [inst : DecidableEq m]
-  [inst_1 : Star α], M.conjTranspose.updateColumn i (star b) = (M.updateRow i b).conjTranspose
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `(cifvar_16 x_0).updateColumn x_1
-  x_2`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
-
-Testing || conformalAt_iff : ∀ {E : Type u_1} {F : Type u_2} [inst : NormedAddCommGroup E] [inst_1 : NormedAddCommGroup F]
-  [inst_2 : InnerProductSpace ℝ E] [inst_3 : InnerProductSpace ℝ F] {f : E → F} {x : E} {f' : E →L[ℝ] F},
-  HasFDerivAt f f' x → (ConformalAt f x ↔ ∃ c, 0 < c ∧ ∀ (u v : E), inner (f' u) (f' v) = c * inner u v)
-Result.success
-
-Testing || List.prod_hom₂_nonempty : ∀ {ι : Type u_1} {M : Type u_4} {N : Type u_5} {P : Type u_6} [inst : Monoid M] [inst_1 : Monoid N] [inst_2 : Monoid P]
-  {l : List ι} (f : M → N → P),
-  (∀ (a b : M) (c d : N), f (a * b) (c * d) = f a c * f b d) →
-    ∀ (f₁ : ι → M) (f₂ : ι → N),
-      l ≠ [] → (List.map (fun i => f (f₁ i) (f₂ i)) l).prod = f (List.map f₁ l).prod (List.map f₂ l).prod
-Result.autoException ::
-Duper saturated
-
-Testing || Filter.mem_of_superset : ∀ {α : Type u_1} {f : Filter α} {x y : Set α}, x ∈ f → x ⊆ y → y ∈ f
-Result.autoException ::
-Duper saturated
-
-Testing || ContinuousLinearEquiv.contDiffWithinAt_comp_iff : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type uE} [inst_1 : NormedAddCommGroup E]
-  [inst_2 : NormedSpace 𝕜 E] {F : Type uF} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {G : Type uG}
-  [inst_5 : NormedAddCommGroup G] [inst_6 : NormedSpace 𝕜 G] {s : Set E} {f : E → F} {x : E} {n : ℕ∞} (e : G ≃L[𝕜] E),
-  ContDiffWithinAt 𝕜 n (f ∘ ⇑e) (⇑e ⁻¹' s) (e.symm x) ↔ ContDiffWithinAt 𝕜 n f s x
-Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || eq_sub_of_add_eq' : ∀ {G : Type u_3} [inst : AddCommGroup G] {a b c : G}, c + a = b → a = b - c
-Result.success
-
-Testing || Primrec.pred : Primrec Nat.pred
-Result.success
-
-Testing || MeasurableSet.cylinder : ∀ {ι : Type u_2} {α : ι → Type u_1} [inst : (i : ι) → MeasurableSpace (α i)] (s : Finset ι)
-  {S : Set ((i : { x // x ∈ s }) → α ↑i)}, MeasurableSet S → MeasurableSet (MeasureTheory.cylinder s S)
-Result.autoException ::
-Duper saturated
-
-Testing || ZMod.intCast_eq_intCast_iff : ∀ (a b : ℤ) (c : ℕ), ↑a = ↑b ↔ a ≡ b [ZMOD ↑c]
-Result.autoException ::
-Duper saturated
-
-Testing || List.getI_eq_default : ∀ {α : Type u} (l : List α) [inst : Inhabited α] {n : ℕ}, l.length ≤ n → l.getI n = default
-Result.autoException ::
-Duper saturated
-
-Testing || NonUnitalSubsemiring.comap_top : ∀ {R : Type u} {S : Type v} [inst : NonUnitalNonAssocSemiring R] [inst_1 : NonUnitalNonAssocSemiring S] {F : Type u_1}
-  [inst_2 : FunLike F R S] [inst_3 : NonUnitalRingHomClass F R S] (f : F), NonUnitalSubsemiring.comap f ⊤ = ⊤
-Result.autoException ::
-Duper saturated
-
-Testing || Monotone.rightLim_le : ∀ {α : Type u_1} {β : Type u_2} [inst : LinearOrder α] [inst_1 : ConditionallyCompleteLinearOrder β]
-  [inst_2 : TopologicalSpace β] [inst_3 : OrderTopology β] {f : α → β},
-  Monotone f → ∀ {x y : α}, x < y → Function.rightLim f x ≤ f y
-Result.autoException ::
-(deterministic) timeout at `superposition`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom_toStalk : ∀ (R : Type u) [inst : CommRing R] (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (f : R),
-  (AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom R x) ((AlgebraicGeometry.StructureSheaf.toStalk R x) f) =
-    (algebraMap R (Localization.AtPrime x.asIdeal)) f
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `x_0.isPrime`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
-
-Testing || ringExpChar.eq_iff : ∀ {R : Type u_1} [inst : Ring R] [inst_1 : IsDomain R] {q : ℕ}, ringExpChar R = q ↔ ExpChar R q
-Result.success
-
-Testing || TopologicalSpace.NoetherianSpace.finite : ∀ {α : Type u_1} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace.NoetherianSpace α] [inst : T2Space α], Finite α
-Result.success
-
-Testing || Subalgebra.mem_op : ∀ {R : Type u_2} {A : Type u_3} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : Algebra R A] {x : Aᵐᵒᵖ}
-  {S : Subalgebra R A}, x ∈ S.op ↔ MulOpposite.unop x ∈ S
-Result.autoException ::
-Duper saturated
-
-Testing || MvQPF.Cofix.bisim₂ : ∀ {n : ℕ} {F : TypeVec.{u} (n + 1) → Type u} [q : MvQPF F] {α : TypeVec.{u} n}
-  (r : MvQPF.Cofix F α → MvQPF.Cofix F α → Prop),
-  (∀ (x y : MvQPF.Cofix F α), r x y → MvFunctor.LiftR' (α.RelLast' r) x.dest y.dest) →
-    ∀ (x y : MvQPF.Cofix F α), r x y → x = y
-Result.autoException ::
-Auto.Monomorphization.ConstInst.ofExpr? :: TypeVec.{u} (n + 1) is not a `∀`
-
-Testing || CategoryTheory.BicategoricalCoherence.whiskerLeft_iso : ∀ {B : Type u} [inst : CategoryTheory.Bicategory B] {a b c : B} (f : a ⟶ b) (g h : b ⟶ c)
-  [inst_1 : CategoryTheory.BicategoricalCoherence g h],
-  CategoryTheory.BicategoricalCoherence.iso =
-    CategoryTheory.Bicategory.whiskerLeftIso f CategoryTheory.BicategoricalCoherence.iso
-Result.autoException ::
-Duper saturated
-
-Testing || Nat.sq_add_sq_mul : ∀ {a b x y u v : ℕ}, a = x ^ 2 + y ^ 2 → b = u ^ 2 + v ^ 2 → ∃ r s, a * b = r ^ 2 + s ^ 2
+Testing || Std.HashSet.getD_insert : ∀ {α : Type u} {x : BEq α} {x_1 : Hashable α} {m : Std.HashSet α} [inst : EquivBEq α] [inst : LawfulHashable α]
+  {k a fallback : α}, (m.insert k).getD a fallback = if (k == a) = true ∧ k ∉ m then k else m.getD a fallback
 Result.autoException ::
 (deterministic) timeout at `match`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
-Testing || Set.iUnion_smul_left_image : ∀ {α : Type u_2} {β : Type u_3} [inst : SMul α β] {s : Set α} {t : Set β}, ⋃ a ∈ s, a • t = s • t
-Result.autoException ::
-Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type a ∈ s of λ binder contains bound variables
-
-Testing || IsGroupHom.comp : ∀ {α : Type u} {β : Type v} [inst : Group α] [inst_1 : Group β] {f : α → β},
-  IsGroupHom f → ∀ {γ : Type u_1} [inst_2 : Group γ] {g : β → γ}, IsGroupHom g → IsGroupHom (g ∘ f)
+Testing || LinOrd.Iso.mk_inv : ∀ {α β : LinOrd} (e : ↑α ≃o ↑β), (LinOrd.Iso.mk e).inv = ↑e.symm
 Result.autoException ::
 Duper saturated
 
-Testing || LieSubmodule.sup_lie : ∀ {R : Type u} {L : Type v} {M : Type w} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : AddCommGroup M]
-  [inst_3 : Module R M] [inst_4 : LieRingModule L M] (N : LieSubmodule R L M) [inst_5 : LieAlgebra R L]
-  (I J : LieIdeal R L), ⁅I ⊔ J, N⁆ = ⁅I, N⁆ ⊔ ⁅J, N⁆
-Result.autoException ::
-Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type ↥x_1 of λ binder contains bound variables
-
-Testing || mem_ball_zero_iff : ∀ {E : Type u_6} [inst : SeminormedAddGroup E] {a : E} {r : ℝ}, a ∈ Metric.ball 0 r ↔ ‖a‖ < r
-Result.success
-
-Testing || ContinuousConstSMul.continuous_const_smul : ∀ {Γ : Type u_1} {T : Type u_2} {inst : TopologicalSpace T} {inst_1 : SMul Γ T} [self : ContinuousConstSMul Γ T]
-  (γ : Γ), Continuous fun x => γ • x
+Testing || List.sublistsLen_length : ∀ {α : Type u} (l : List α), List.sublistsLen l.length l = [l]
 Result.autoException ::
 Duper saturated
 
-Testing || Cardinal.lift_mk_shrink' : ∀ (α : Type u) [inst : Small.{v, u} α],
-  Cardinal.lift.{u, v} (Cardinal.mk (Shrink.{v, u} α)) = Cardinal.lift.{v, u} (Cardinal.mk α)
+Testing || GenContFract.zeroth_contAux_eq_one_zero : ∀ {K : Type u_1} {g : GenContFract K} [inst : DivisionRing K], g.contsAux 0 = { a := 1, b := 0 }
 Result.autoException ::
-Duper saturated
+Auto.Monomorphization.ConstInst.ofExpr? :: Stream' (GenContFract.Pair K) is not a `∀`
 
-Testing || SetTheory.PGame.Domineering.snd_pred_mem_erase_of_mem_left : ∀ {b : SetTheory.PGame.Domineering.Board} {m : ℤ × ℤ},
-  m ∈ SetTheory.PGame.Domineering.left b → (m.1, m.2 - 1) ∈ Finset.erase b m
-Result.autoException ::
-(deterministic) timeout at `superposition`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || Ordnode.Valid'.node4L : ∀ {α : Type u_1} [inst : Preorder α] {l : Ordnode α} {x : α} {m : Ordnode α} {y : α} {r : Ordnode α} {o₁ : WithBot α}
-  {o₂ : WithTop α},
-  Ordnode.Valid' o₁ l ↑x →
-    Ordnode.Valid' (↑x) m ↑y →
-      Ordnode.Valid' (↑y) r o₂ →
-        0 < m.size →
-          l.size = 0 ∧ m.size = 1 ∧ r.size ≤ 1 ∨
-              0 < l.size ∧
-                Ordnode.ratio * r.size ≤ m.size ∧
-                  Ordnode.delta * l.size ≤ m.size + r.size ∧
-                    3 * (m.size + r.size) ≤ 16 * l.size + 9 ∧ m.size ≤ Ordnode.delta * r.size →
-            Ordnode.Valid' o₁ (l.node4L x m y r) o₂
-Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || MeasureTheory.setToFun_sub : ∀ {α : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E]
-  [inst_2 : NormedAddCommGroup F] [inst_3 : NormedSpace ℝ F] {m : MeasurableSpace α} {μ : MeasureTheory.Measure α}
-  [inst_4 : CompleteSpace F] {T : Set α → E →L[ℝ] F} {C : ℝ} {f g : α → E}
-  (hT : MeasureTheory.DominatedFinMeasAdditive μ T C),
-  MeasureTheory.Integrable f μ →
-    MeasureTheory.Integrable g μ →
-      MeasureTheory.setToFun μ T hT (f - g) = MeasureTheory.setToFun μ T hT f - MeasureTheory.setToFun μ T hT g
-Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || CategoryTheory.Pretriangulated.mem_distTriang_op_iff : ∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_2, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]
-  [inst_2 : CategoryTheory.Limits.HasZeroObject C] [inst_3 : CategoryTheory.Preadditive C]
-  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [inst_5 : CategoryTheory.Pretriangulated C]
-  (T : CategoryTheory.Pretriangulated.Triangle Cᵒᵖ),
-  T ∈ CategoryTheory.Pretriangulated.distinguishedTriangles ↔
-    Opposite.unop ((CategoryTheory.Pretriangulated.triangleOpEquivalence C).inverse.obj T) ∈
-      CategoryTheory.Pretriangulated.distinguishedTriangles
-Result.autoException ::
-Duper saturated
-
-Testing || LinearMap.lTensor_neg : ∀ {R : Type u_1} [inst : CommSemiring R] {M : Type u_2} {N : Type u_3} {P : Type u_4} [inst_1 : AddCommGroup M]
-  [inst_2 : AddCommGroup N] [inst_3 : AddCommGroup P] [inst_4 : Module R M] [inst_5 : Module R N] [inst_6 : Module R P]
-  (f : N →ₗ[R] P), LinearMap.lTensor M (-f) = -LinearMap.lTensor M f
-Result.autoException ::
-Duper saturated
-
-Testing || AddLocalization.rec.proof_3 : ∀ {M : Type u_1} [inst : AddCommMonoid M] {S : AddSubmonoid M} {p : AddLocalization S → Sort u_2}
-  (f : (a : M) → (b : ↥S) → p (AddLocalization.mk a b)),
-  (∀ {a c : M} {b d : ↥S} (h : (AddLocalization.r S) (a, b) (c, d)), ⋯ ▸ f a b = f c d) →
-    ∀ (y z : M × ↥S) (h : (AddOreLocalization.oreEqv S M) y z), ⋯ ▸ ⋯ ▸ f y.1 y.2 = ⋯ ▸ f z.1 z.2
-Result.autoException ::
-Duper saturated
-
-Testing || Unitization.lift_symm_apply : ∀ {R : Type u_2} {A : Type u_3} [inst : CommSemiring R] [inst_1 : NonUnitalSemiring A] [inst_2 : Module R A]
-  [inst_3 : SMulCommClass R A A] [inst_4 : IsScalarTower R A A] {C : Type u_5} [inst_5 : Semiring C]
-  [inst_6 : Algebra R C] (φ : Unitization R A →ₐ[R] C),
-  Unitization.lift.symm φ = (NonUnitalAlgHomClass.toNonUnitalAlgHom φ).comp (Unitization.inrNonUnitalAlgHom R A)
-Result.autoException ::
-Duper saturated
-
-Testing || CategoryTheory.Limits.Types.binaryCoproductColimit_desc : ∀ (X Y : Type u) (s : CategoryTheory.Limits.BinaryCofan X Y) (a : X ⊕ Y),
-  (CategoryTheory.Limits.Types.binaryCoproductColimit X Y).desc s a = Sum.elim s.inl s.inr a
-Result.autoException ::
-Auto.Monomorphization.ConstInst.ofExpr? :: (CategoryTheory.Limits.Types.binaryCoproductCocone X Y).pt ⟶
-  s.pt is not a `∀`
-
-Testing || LinearIsometry.map_ne : ∀ {R : Type u_1} {R₂ : Type u_2} {E₂ : Type u_6} {F : Type u_9} [inst : Semiring R] [inst_1 : Semiring R₂]
-  {σ₁₂ : R →+* R₂} [inst_2 : SeminormedAddCommGroup E₂] [inst_3 : Module R₂ E₂] [inst_4 : NormedAddCommGroup F]
-  [inst_5 : Module R F] (f₁ : F →ₛₗᵢ[σ₁₂] E₂) {x y : F}, x ≠ y → f₁ x ≠ f₁ y
-Result.success
-
-Testing || Relation.comp_assoc : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} {δ : Type u_4} {r : α → β → Prop} {p : β → γ → Prop} {q : γ → δ → Prop},
-  Relation.Comp (Relation.Comp r p) q = Relation.Comp r (Relation.Comp p q)
-Result.autoException ::
-Duper saturated
-
-Testing || Int.succ_dvd_or_succ_dvd_of_succ_sum_dvd_mul : ∀ {p : ℕ},
-  Nat.Prime p →
-    ∀ {m n : ℤ} {k l : ℕ},
-      ↑(p ^ k) ∣ m → ↑(p ^ l) ∣ n → ↑(p ^ (k + l + 1)) ∣ m * n → ↑(p ^ (k + 1)) ∣ m ∨ ↑(p ^ (l + 1)) ∣ n
-Result.success
-
-Testing || Subring.coe_center : ∀ (R : Type u) [inst : Ring R], ↑(Subring.center R) = Set.center R
-Result.autoException ::
-Duper saturated
-
-Testing || AntivaryOn.sum_mul_le_sum_mul_comp_perm : ∀ {ι : Type u_1} {α : Type u_2} [inst : LinearOrderedSemiring α] [inst_1 : ExistsAddOfLE α] {s : Finset ι}
-  {σ : Equiv.Perm ι} {f g : ι → α}, AntivaryOn f g ↑s → {x | σ x ≠ x} ⊆ ↑s → ∑ i ∈ s, f i * g i ≤ ∑ i ∈ s, f i * g (σ i)
-Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || RightOrdContinuous.lt_iff : ∀ {α : Type u} {β : Type v} [inst : SemilatticeInf α] [inst_1 : SemilatticeInf β] {f : α → β},
-  RightOrdContinuous f → Function.Injective f → ∀ {x y : α}, f x < f y ↔ x < y
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `SemilatticeSup.toPartialOrder`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
-
-Testing || Batteries.Vector.push_pop_back : ∀ {α : Type u_1} {n : ℕ} (v : Batteries.Vector α (n + 1)), Batteries.Vector.push v.back v.pop = v
-Result.autoException ::
-Auto.Lemma.rewriteUMonoRigid? :: Motive fun _a =>
-  ∀ {α : Type u_1} {n : ℕ} {v : Batteries.Vector α n} {x : α} {i : ℕ} (h : i < n),
-    (Batteries.Vector.push x v)[i] = v[i] is not type correct
-
-Testing || CategoryTheory.Adjunction.toEquivalence_inverse : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]
-  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G)
-  [inst_2 : ∀ (X : C), CategoryTheory.IsIso (adj.unit.app X)]
-  [inst_3 : ∀ (Y : D), CategoryTheory.IsIso (adj.counit.app Y)], adj.toEquivalence.inverse = G
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `(cifvar_7 cifvar_8).app x_0`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
-
-Testing || FractionalIdeal.fg_of_isUnit : ∀ {R : Type u_1} [inst : CommRing R] {S : Submonoid R} {P : Type u_2} [inst_1 : CommRing P] [inst_2 : Algebra R P]
-  (I : FractionalIdeal S P), IsUnit I → (↑I).FG
-Result.autoException ::
-Duper saturated
-
-Testing || minpoly.natSepDegree_eq_one_iff_eq_X_sub_C_pow : ∀ {F : Type u} {E : Type v} [inst : Field F] [inst_1 : Ring E] [inst_2 : IsDomain E] [inst_3 : Algebra F E] (q : ℕ)
-  [hF : ExpChar F q] {x : E},
-  (minpoly F x).natSepDegree = 1 ↔
-    ∃ n, Polynomial.map (algebraMap F E) (minpoly F x) = (Polynomial.X - Polynomial.C x) ^ q ^ n
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `HasDistribNeg.toInvolutiveNeg`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
-
-Testing || IsAddRightRegular.add : ∀ {R : Type u_1} [inst : AddSemigroup R] {a b : R},
-  IsAddRightRegular a → IsAddRightRegular b → IsAddRightRegular (a + b)
-Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || StarConvex.preimage_add_left : ∀ {𝕜 : Type u_1} {E : Type u_2} [inst : OrderedSemiring 𝕜] [inst_1 : AddCommMonoid E] [inst_2 : Module 𝕜 E] {x z : E}
-  {s : Set E}, StarConvex 𝕜 (x + z) s → StarConvex 𝕜 x ((fun x => x + z) ⁻¹' s)
-Result.autoException ::
-Duper saturated
-
-Testing || fixedPoints_submonoid_sup : ∀ (M : Type u_1) (α : Type u_2) [inst : Monoid M] [inst_1 : MulAction M α] {P Q : Submonoid M},
-  MulAction.fixedPoints (↥(P ⊔ Q)) α = MulAction.fixedPoints (↥P) α ∩ MulAction.fixedPoints (↥Q) α
-Result.autoException ::
-Duper saturated
-
-Testing || add_neg_cancel_comm : ∀ {G : Type u_1} [inst : AddCommGroup G] (a b : G), a + b + -a = b
-Result.success
-
-Testing || StructureGroupoid.LocalInvariantProp.liftPropAt_symm_of_mem_maximalAtlas : ∀ {H : Type u_1} {M : Type u_2} [inst : TopologicalSpace H] [inst_1 : TopologicalSpace M] [inst_2 : ChartedSpace H M]
-  {G : StructureGroupoid H} {e : PartialHomeomorph M H} {Q : (H → H) → Set H → H → Prop} [inst_3 : HasGroupoid M G]
-  {x : H},
-  G.LocalInvariantProp G Q →
-    (∀ (y : H), Q id Set.univ y) →
-      e ∈ StructureGroupoid.maximalAtlas M G → x ∈ e.target → ChartedSpace.LiftPropAt Q (↑e.symm) x
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `ChartedSpace.LiftPropWithinAt x_5
-  x_6 x_7 x_8`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
-
-Testing || MeasureTheory.tendsto_of_uncrossing_lt_top : ∀ {Ω : Type u_1} {f : ℕ → Ω → ℝ} {ω : Ω},
-  Filter.liminf (fun n => ↑‖f n ω‖₊) Filter.atTop < ⊤ →
-    (∀ (a b : ℚ), a < b → MeasureTheory.upcrossings (↑a) (↑b) f ω < ⊤) →
-      ∃ c, Filter.Tendsto (fun n => f n ω) Filter.atTop (nhds c)
-Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || BitVec.shiftLeft_add_distrib : ∀ {w : ℕ} {x y : BitVec w} {n : ℕ}, (x + y) <<< n = x <<< n + y <<< n
-Result.autoException ::
-(deterministic) timeout at `match`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || Std.DHashMap.Internal.AssocList.get_eq : ∀ {α : Type u} {β : Type v} [inst : BEq α] {l : Std.DHashMap.Internal.AssocList α fun x => β} {a : α}
-  {h : Std.DHashMap.Internal.AssocList.contains a l = true},
-  Std.DHashMap.Internal.AssocList.get a l h = Std.DHashMap.Internal.List.getValue a l.toList ⋯
-Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || UniqueFactorizationMonoid.pow_eq_pow_iff : ∀ {M : Type u_1} [inst : CancelCommMonoidWithZero M] {q : M}, ¬IsUnit q → q ≠ 0 → ∀ {m n : ℕ}, q ^ m = q ^ n ↔ m = n
-Result.success
-
-Testing || MvPolynomial.radical_le_vanishingIdeal_zeroLocus : ∀ {k : Type u_1} [inst : Field k] {σ : Type u_2} (I : Ideal (MvPolynomial σ k)),
-  I.radical ≤ MvPolynomial.vanishingIdeal (MvPolynomial.zeroLocus I)
-Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || SimpleGraph.Walk.not_nil_cons : ∀ {V : Type u} {G : SimpleGraph V} {u v w : V} {h : G.Adj u v} {p : G.Walk v w}, ¬(SimpleGraph.Walk.cons h p).Nil
-Result.autoException ::
-Duper saturated
-
-Testing || Isometry.preimage_emetric_ball : ∀ {α : Type u} {β : Type v} [inst : PseudoEMetricSpace α] [inst_1 : PseudoEMetricSpace β] {f : α → β},
-  Isometry f → ∀ (x : α) (r : ENNReal), f ⁻¹' EMetric.ball (f x) r = EMetric.ball x r
-Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || CategoryTheory.isCoseparating_empty_of_thin : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : Quiver.IsThin C], CategoryTheory.IsCoseparating ∅
-Result.autoException ::
-Duper saturated
-
-Testing || ENNReal.fun_eq_funMulInvSnorm_mul_snorm : ∀ {α : Type u_1} [inst : MeasurableSpace α] {μ : MeasureTheory.Measure α} {p : ℝ} (f : α → ENNReal),
-  ∫⁻ (a : α), f a ^ p ∂μ ≠ 0 →
-    ∫⁻ (a : α), f a ^ p ∂μ ≠ ⊤ → ∀ {a : α}, f a = ENNReal.funMulInvSnorm f p μ a * (∫⁻ (c : α), f c ^ p ∂μ) ^ (1 / p)
-Result.success
-
-Testing || CategoryTheory.IsFiltered.of_isRightAdjoint : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.IsFiltered C] {D : Type u₁}
-  [inst_2 : CategoryTheory.Category.{v₁, u₁} D] (R : CategoryTheory.Functor C D) [inst : R.IsRightAdjoint],
-  CategoryTheory.IsFiltered D
-Result.autoException ::
-Duper saturated
-
-Testing || heq_rec_iff_heq : ∀ {α : Sort u_2} {β : Sort u_1} {a b : α} {C : α → Sort u_1} {x : β} {y : C a} {e : a = b}, HEq x (e ▸ y) ↔ HEq x y
-Result.autoException ::
-Duper saturated
-
-Testing || CategoryTheory.braiding_tensorUnit_left_assoc : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]
-  [inst_2 : CategoryTheory.BraidedCategory C] (X : C) {Z : C}
-  (h : CategoryTheory.MonoidalCategory.tensorObj X (𝟙_ C) ⟶ Z),
-  CategoryTheory.CategoryStruct.comp (β_ (𝟙_ C) X).hom h =
-    CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategory.leftUnitor X).hom
-      (CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategory.rightUnitor X).inv h)
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `CategoryTheory.MonoidalCategory.leftUnitor
-  x_0`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
-
-Testing || lipschitzOnWith_iff_norm_div_le : ∀ {E : Type u_3} {F : Type u_4} [inst : SeminormedGroup E] [inst_1 : SeminormedGroup F] {s : Set E} {f : E → F}
-  {C : NNReal}, LipschitzOnWith C f s ↔ ∀ ⦃x : E⦄, x ∈ s → ∀ ⦃y : E⦄, y ∈ s → ‖f x / f y‖ ≤ ↑C * ‖x / y‖
-Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || ProbabilityTheory.IsMeasurableRatCDF.tendsto_atBot_zero : ∀ {α : Type u_1} [inst : MeasurableSpace α] {f : α → ℚ → ℝ},
-  ProbabilityTheory.IsMeasurableRatCDF f → ∀ (a : α), Filter.Tendsto (f a) Filter.atBot (nhds 0)
-Result.success
-
-Testing || ULift.up_injective : ∀ {α : Type u}, Function.Injective ULift.up
-Result.autoException ::
-Duper saturated
-
-Testing || IsCyclotomicExtension.Rat.absdiscr_prime_pow_succ : ∀ (p : ℕ+) (k : ℕ) (K : Type u) [inst : Field K] [hp : Fact (Nat.Prime ↑p)] [inst_1 : CharZero K]
-  [inst_2 : IsCyclotomicExtension {p ^ (k + 1)} ℚ K],
-  NumberField.discr K = (-1) ^ (↑p ^ k * (↑p - 1) / 2) * ↑↑p ^ (↑p ^ k * ((↑p - 1) * (k + 1) - 1))
-Result.autoException ::
-Duper saturated
-
-Testing || SemilatticeSup.ext : ∀ {α : Type u_1} {A B : SemilatticeSup α}, (∀ (x y : α), x ≤ y ↔ x ≤ y) → A = B
-Result.autoException ::
-Duper saturated
-
-Testing || balanced_zero : ∀ {𝕜 : Type u_1} {E : Type u_3} [inst : SeminormedRing 𝕜] [inst_1 : AddCommGroup E] [inst_2 : Module 𝕜 E], Balanced 𝕜 0
-Result.autoException ::
-Duper saturated
-
-Testing || Orientation.oangle_rotation_oangle_left : ∀ {V : Type u_1} [inst : NormedAddCommGroup V] [inst_1 : InnerProductSpace ℝ V] [inst_2 : Fact (Module.finrank ℝ V = 2)]
-  (o : Orientation ℝ V (Fin 2)) (x y : V), o.oangle ((o.rotation (o.oangle x y)) x) y = 0
-Result.autoException ::
-Duper saturated
-
-Testing || Finsupp.card_Ioc : ∀ {ι : Type u_1} {α : Type u_2} [inst : PartialOrder α] [inst_1 : Zero α] [inst_2 : LocallyFiniteOrder α]
-  (f g : ι →₀ α), (Finset.Ioc f g).card = ∏ i ∈ f.support ∪ g.support, (Finset.Icc (f i) (g i)).card - 1
-Result.success
-
-Testing || SubfieldClass.coe_ratCast : ∀ {K : Type u} [inst : DivisionRing K] {S : Type u_1} [inst_1 : SetLike S K] [h : SubfieldClass S K] (s : S) (x : ℚ),
-  ↑↑x = ↑x
-Result.autoException ::
-Duper saturated
-
-Testing || AnalyticOn.iteratedFDeriv : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u} [inst_1 : NormedAddCommGroup E]
-  [inst_2 : NormedSpace 𝕜 E] {F : Type v} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {f : E → F}
-  {s : Set E} [inst_5 : CompleteSpace F], AnalyticOnNhd 𝕜 f s → ∀ (n : ℕ), AnalyticOnNhd 𝕜 (iteratedFDeriv 𝕜 n f) s
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `Fin.fintype n`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
-
-Testing || Set.image2_inter_subset_left : ∀ {α : Type u_1} {β : Type u_3} {γ : Type u_5} {f : α → β → γ} {s s' : Set α} {t : Set β},
-  Set.image2 f (s ∩ s') t ⊆ Set.image2 f s t ∩ Set.image2 f s' t
-Result.autoException ::
-Duper saturated
-
-Testing || Irrational.div_nat : ∀ {x : ℝ}, Irrational x → ∀ {m : ℕ}, m ≠ 0 → Irrational (x / ↑m)
-Result.autoException ::
-(deterministic) timeout at `superposition`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
-
-Testing || CategoryTheory.Oplax.category_comp : ∀ {B : Type u₁} [inst : CategoryTheory.Bicategory B] {C : Type u₂} [inst_1 : CategoryTheory.Bicategory C]
-  (F G : CategoryTheory.OplaxFunctor B C) {X Y Z : F ⟶ G} (Γ : CategoryTheory.Oplax.Modification X Y)
-  (Δ : CategoryTheory.Oplax.Modification Y Z), CategoryTheory.CategoryStruct.comp Γ Δ = Γ.vcomp Δ
-Result.autoException ::
-Duper saturated
-
-Testing || homothety_inv_two : ∀ {k : Type u_1} {V : Type u_2} {P : Type u_3} [inst : Field k] [inst_1 : CharZero k] [inst_2 : AddCommGroup V]
-  [inst_3 : Module k V] [inst_4 : AddTorsor V P] (a b : P), (AffineMap.homothety a 2⁻¹) b = midpoint k a b
-Result.autoException ::
-Duper saturated
-
-Testing || MulActionHom.map_smul : ∀ {M' : Type u_1} {X : Type u_5} [inst : SMul M' X] {Y : Type u_6} [inst_1 : SMul M' Y] (f : X →ₑ[id] Y) (m : M')
-  (x : X), f (m • x) = m • f x
-Result.success
-
-Testing || AlgebraicGeometry.Scheme.OpenCover.gluedCoverT'_snd_fst : ∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x y z : 𝒰.J),
-  CategoryTheory.CategoryStruct.comp (𝒰.gluedCoverT' x y z)
-      (CategoryTheory.CategoryStruct.comp
-        (CategoryTheory.Limits.pullback.snd (CategoryTheory.Limits.pullback.fst (𝒰.map y) (𝒰.map z))
-          (CategoryTheory.Limits.pullback.fst (𝒰.map y) (𝒰.map x)))
-        (CategoryTheory.Limits.pullback.fst (𝒰.map y) (𝒰.map x))) =
-    CategoryTheory.CategoryStruct.comp
-      (CategoryTheory.Limits.pullback.fst (CategoryTheory.Limits.pullback.fst (𝒰.map x) (𝒰.map y))
-        (CategoryTheory.Limits.pullback.fst (𝒰.map x) (𝒰.map z)))
-      (CategoryTheory.Limits.pullback.snd (𝒰.map x) (𝒰.map y))
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `cifvar_17.map x_0`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
-
-Testing || List.unattach_join : ∀ {α : Type u_1} {p : α → Prop} {l : List (List { x // p x })}, l.join.unattach = (List.map List.unattach l).join
-Result.autoException ::
-Duper saturated
-
-Testing || ContinuousLinearEquiv.piCongrRight_symm_apply : ∀ {R₁ : Type u_1} [inst : Semiring R₁] {ι : Type u_9} {M : ι → Type u_10} [inst_1 : (i : ι) → TopologicalSpace (M i)]
-  [inst_2 : (i : ι) → AddCommMonoid (M i)] [inst_3 : (i : ι) → Module R₁ (M i)] {N : ι → Type u_11}
-  [inst_4 : (i : ι) → TopologicalSpace (N i)] [inst_5 : (i : ι) → AddCommMonoid (N i)]
-  [inst_6 : (i : ι) → Module R₁ (N i)] (f : (i : ι) → M i ≃L[R₁] N i) (n : (i : ι) → N i) (i : ι),
-  (ContinuousLinearEquiv.piCongrRight f).symm n i = (f i).symm (n i)
-Result.autoException ::
-Auto.Monomorphization.ConstInst.toExpr :: Unexpected error
-
-Testing || Int.le_iff_pos_of_dvd : ∀ {a b : ℤ}, 0 < a → a ∣ b → (a ≤ b ↔ 0 < b)
-Result.success
-
-Testing || Real.zpow_le_of_le_log : ∀ {x y : ℝ} {n : ℤ}, 0 < y → Real.log x ≤ ↑n * Real.log y → x ≤ y ^ n
-Result.success
-
-Testing || Ideal.radical_eq_top : ∀ {R : Type u} [inst : CommSemiring R] {I : Ideal R}, I.radical = ⊤ ↔ I = ⊤
-Result.autoException ::
-Duper saturated
-
-Testing || AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app : ∀ {X : AlgebraicGeometry.LocallyRingedSpace} {R : Type u} [inst : CommRing R]
-  (f : AlgebraicGeometry.LocallyRingedSpace.Γ.rightOp.obj X ⟶ Opposite.op (CommRingCat.of R))
-  (U :
-    (TopologicalSpace.Opens
-        ↑↑(AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op (CommRingCat.of R))).toPresheafedSpace)ᵒᵖ),
-  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.StructureSheaf.toOpen R (Opposite.unop U))
-      (((AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction.homEquiv X (Opposite.op (CommRingCat.of R))) f).c.app U) =
-    CategoryTheory.CategoryStruct.comp f.unop (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)
+Testing || Rat.cast_sub_of_ne_zero : ∀ {α : Type u_3} [inst : DivisionRing α] {p q : ℚ}, ↑p.den ≠ 0 → ↑q.den ≠ 0 → ↑(p - q) = ↑p - ↑q
 Result.autoException ::
 (deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
-Testing || WeierstrassCurve.Affine.nonsingular_negAdd : ∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x₁ x₂ y₁ y₂ : F},
-  W.Nonsingular x₁ y₁ →
-    W.Nonsingular x₂ y₂ →
-      (x₁ = x₂ → y₁ ≠ W.negY x₂ y₂) →
-        W.Nonsingular (W.addX x₁ x₂ (W.slope x₁ x₂ y₁ y₂)) (W.negAddY x₁ x₂ y₁ (W.slope x₁ x₂ y₁ y₂))
+Testing || _private.Mathlib.Combinatorics.SimpleGraph.Triangle.Counting.0.SimpleGraph.edgeDensity_badVertices_le : ∀ {α : Type u_1} (G : SimpleGraph α) [inst : DecidableRel G.Adj] {ε : ℝ} {s t : Finset α},
+  0 ≤ ε → 2 * ε ≤ ↑(G.edgeDensity s t) → ↑(G.edgeDensity (SimpleGraph.badVertices G ε s t) t) ≤ ↑(G.edgeDensity s t) - ε
+Result.autoException ::
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || _private.Mathlib.Combinatorics.Additive.SmallTripling.0.Finset.small_pos_neg_pos_add : ∀ {G : Type u_1} [inst : DecidableEq G] [inst_1 : AddGroup G] {A : Finset G} {K : ℝ},
+  ↑(3 • A).card ≤ K * ↑A.card → ↑(A + -A + A).card ≤ K ^ 3 * ↑A.card
 Result.autoException ::
 (deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
-Testing || finrank_le_one : ∀ {R : Type u} {M : Type v} [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]
-  [inst_3 : NoZeroSMulDivisors R M] [inst_4 : StrongRankCondition R] (v : M),
-  (∀ (w : M), ∃ c, c • v = w) → Module.finrank R M ≤ 1
+Testing || AddMonoid.exponent_pi_eq_zero : ∀ {ι : Type u_1} {M : ι → Type u_2} [inst : (i : ι) → AddMonoid (M i)] {j : ι},
+  AddMonoid.exponent (M j) = 0 → AddMonoid.exponent ((i : ι) → M i) = 0
 Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `One.toOfNat1`.
+Monomorphization failed because currently the procedure cannot deal with expression `n • g`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
 
-Testing || Option.map₂_coe_left : ∀ {α : Type u_1} {β : Type u_2} {γ : Type u_3} (f : α → β → γ) (a : α) (b : Option β),
-  Option.map₂ f (some a) b = Option.map (fun b => f a b) b
+Testing || isLUB_sSup : ∀ {α : Type u_1} [inst : CompleteSemilatticeSup α] (s : Set α), IsLUB s (sSup s)
 Result.autoException ::
 Duper saturated
 
-Testing || DomMulAct.inducing_mk_symm : ∀ {M : Type u_1} [inst : TopologicalSpace M], IsInducing ⇑DomMulAct.mk.symm
+Testing || Algebra.coe_sInf : ∀ {R : Type u} {A : Type v} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : Algebra R A]
+  (S : Set (Subalgebra R A)), ↑(sInf S) = ⋂ s ∈ S, ↑s
+Result.autoException ::
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || Set.image_mul_left_Ioo : ∀ {α : Type u_1} [inst : LinearOrderedField α] {a : α},
+  0 < a → ∀ (b c : α), (fun x => a * x) '' Set.Ioo b c = Set.Ioo (a * b) (a * c)
+Result.autoException ::
+(deterministic) timeout at `match`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || FirstOrder.Language.ElementaryEmbedding.map_rel : ∀ {L : FirstOrder.Language} {M : Type u_1} {N : Type u_2} [inst : L.Structure M] [inst_1 : L.Structure N]
+  (φ : L.ElementaryEmbedding M N) {n : ℕ} (r : L.Relations n) (x : Fin n → M),
+  FirstOrder.Language.Structure.RelMap r (⇑φ ∘ x) ↔ FirstOrder.Language.Structure.RelMap r x
+Result.autoException ::
+Duper saturated
+
+Testing || hnot_le_iff_codisjoint_left : ∀ {α : Type u_2} [inst : CoheytingAlgebra α] {a b : α}, ￢a ≤ b ↔ Codisjoint b a
 Result.success
 
-Testing || ContinuousAlternatingMap.map_update_zero : ∀ {R : Type u_1} {M : Type u_2} {N : Type u_4} {ι : Type u_6} [inst : Semiring R] [inst_1 : AddCommMonoid M]
-  [inst_2 : Module R M] [inst_3 : TopologicalSpace M] [inst_4 : AddCommMonoid N] [inst_5 : Module R N]
-  [inst_6 : TopologicalSpace N] (f : M [⋀^ι]→L[R] N) [inst_7 : DecidableEq ι] (m : ι → M) (i : ι),
-  f (Function.update m i 0) = 0
+Testing || SemistandardYoungTableau.copy_eq : ∀ {μ : YoungDiagram} (T : SemistandardYoungTableau μ) (entry' : ℕ → ℕ → ℕ) (h : entry' = ⇑T), T.copy entry' h = T
 Result.autoException ::
 Duper saturated
 
-Testing || ArithmeticFunction.pmul_apply : ∀ {R : Type u_1} [inst : MulZeroClass R] {f g : ArithmeticFunction R} {x : ℕ}, (f.pmul g) x = f x * g x
+Testing || CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map' : ∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{u_4, u_1} C]
+  [inst_1 : CategoryTheory.Category.{u_3, u_2} D] {G : CategoryTheory.Functor C D} {A : Type w}
+  [inst_2 : CategoryTheory.Category.{w', w} A] {J : CategoryTheory.GrothendieckTopology C}
+  {K : CategoryTheory.GrothendieckTopology D} [inst_3 : G.IsCocontinuous J K] {F : CategoryTheory.Functor Cᵒᵖ A}
+  (hF : CategoryTheory.Presheaf.IsSheaf J F) {R : CategoryTheory.Functor Dᵒᵖ A} (α : G.op.comp R ⟶ F) {X : D}
+  {S : K.Cover X} (s : CategoryTheory.Limits.Multifork (S.index R)) {Y Y' : C} (f : G.obj Y ⟶ X) (f' : G.obj Y' ⟶ X)
+  {W : C} (a : W ⟶ Y) (b : W ⟶ Y'),
+  CategoryTheory.CategoryStruct.comp (G.map a) f = CategoryTheory.CategoryStruct.comp (G.map b) f' →
+    CategoryTheory.CategoryStruct.comp (CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux hF α s f) (F.map a.op) =
+      CategoryTheory.CategoryStruct.comp (CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux hF α s f') (F.map b.op)
 Result.autoException ::
-Duper saturated
-
-Testing || List.dropLast_prefix : ∀ {α : Type u_1} (l : List α), l.dropLast <+: l
-Result.autoException ::
-Duper saturated
-
-Testing || AlgebraicGeometry.Scheme.homOfLE_ι : ∀ (X : AlgebraicGeometry.Scheme) {U V : X.Opens} (e : U ≤ V), CategoryTheory.CategoryStruct.comp (X.homOfLE e) V.ι = U.ι
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `(cifvar_12
-      (cifvar_13 (cifvar_14 (cifvar_15 (cifvar_17 x_0))))).instFunLike
-  (cifvar_12 (cifvar_13 (cifvar_14 (cifvar_15 cifvar_16))))`.
+Monomorphization failed because currently the procedure cannot deal with expression `(cifvar_29 x_0).map
+  (cifvar_7 x_1 x_2)`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
 
-Testing || Set.range_list_getI : ∀ {α : Type u_1} [inst : Inhabited α] (l : List α), Set.range l.getI = insert default {x | x ∈ l}
+Testing || AlgebraicGeometry.Spec.toSheafedSpace_obj : ∀ (R : CommRingCatᵒᵖ),
+  AlgebraicGeometry.Spec.toSheafedSpace.obj R = AlgebraicGeometry.Spec.sheafedSpaceObj (Opposite.unop R)
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
+application type mismatch
+  CommRingCat = Opposite.unop (Opposite.op (CategoryTheory.Bundled CommRing))
+argument
+  Opposite.unop (Opposite.op (CategoryTheory.Bundled CommRing))
+has type
+  CommRingCat : Type (u + 1)
+but is expected to have type
+  Type (u + 1) : Type (u + 2)
 
-Testing || IsQuotientMap.isClopen_preimage : ∀ {X : Type u} {Y : Type v} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : X → Y},
-  IsQuotientMap f → ∀ {s : Set Y}, IsClopen (f ⁻¹' s) ↔ IsClopen s
+Testing || Set.image_preimage : ∀ {α : Type u_1} {β : Type u_2} {f : α → β}, GaloisConnection (Set.image f) (Set.preimage f)
 Result.autoException ::
 Duper saturated
 
-Testing || Bifunctor.id_fst : ∀ {F : Type u₀ → Type u₁ → Type u₂} [inst : Bifunctor F] [inst_1 : LawfulBifunctor F] {α : Type u₀} {β : Type u₁}
-  (x : F α β), Bifunctor.fst id x = x
+Testing || deriv_sinh : ∀ {f : ℝ → ℝ} {x : ℝ}, DifferentiableAt ℝ f x → deriv (fun x => Real.sinh (f x)) x = Real.cosh (f x) * deriv f x
 Result.success
 
-Testing || Auto.Embedding.Lam.LamTerm.rwGenAll_atom : ∀ {conv : Auto.Embedding.Lam.LamTerm → Option Auto.Embedding.Lam.LamTerm} {n : ℕ},
-  Auto.Embedding.Lam.LamTerm.rwGenAll conv (Auto.Embedding.Lam.LamTerm.atom n) =
-    some ((conv (Auto.Embedding.Lam.LamTerm.atom n)).getD (Auto.Embedding.Lam.LamTerm.atom n))
+Testing || WCovBy.le_of_lt : ∀ {α : Type u_1} [inst : LinearOrder α] {a b c : α}, a ⩿ b → c < b → c ≤ a
+Result.autoException ::
+Duper saturated
+
+Testing || Bool.not_eq_not : ∀ {a b : Bool}, ¬a = !b ↔ a = b
+Result.success
+
+Testing || CategoryTheory.Limits.coneOfSectionCompYoneda_pt : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : Type w} [inst_1 : CategoryTheory.Category.{t, w} J]
+  (F : CategoryTheory.Functor J Cᵒᵖ) (X : C) (s : ↑(F.comp (CategoryTheory.yoneda.obj X)).sections),
+  (CategoryTheory.Limits.coneOfSectionCompYoneda F X s).pt = Opposite.op X
+Result.autoException ::
+Duper saturated
+
+Testing || WittVector.wittMul_vars : ∀ (p : ℕ) [hp : Fact (Nat.Prime p)] (n : ℕ), (WittVector.wittMul p n).vars ⊆ Finset.univ ×ˢ Finset.range (n + 1)
+Result.autoException ::
+Duper saturated
+
+Testing || Real.borel_eq_generateFrom_Ioi_rat : borel ℝ = MeasurableSpace.generateFrom (⋃ a, {Set.Ioi ↑a})
+Result.autoException ::
+Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type x ∈ x_0 of λ binder contains bound variables
+
+Testing || HomologicalComplex₂.comm_f : ∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_4, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]
+  {I₁ : Type u_2} {I₂ : Type u_3} {c₁ : ComplexShape I₁} {c₂ : ComplexShape I₂} {K L : HomologicalComplex₂ C c₁ c₂}
+  (f : K ⟶ L) (i₁ i₁' : I₁) (i₂ : I₂),
+  CategoryTheory.CategoryStruct.comp ((f.f i₁).f i₂) ((L.d i₁ i₁').f i₂) =
+    CategoryTheory.CategoryStruct.comp ((K.d i₁ i₁').f i₂) ((f.f i₁').f i₂)
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `cifvar_17.d cifvar_16 x_1`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || Asymptotics.IsBigO.comp_tendsto : ∀ {α : Type u_1} {β : Type u_2} {E : Type u_3} {F : Type u_4} [inst : Norm E] [inst_1 : Norm F] {f : α → E} {g : α → F}
+  {l : Filter α}, f =O[l] g → ∀ {k : β → α} {l' : Filter β}, Filter.Tendsto k l' l → (f ∘ k) =O[l'] (g ∘ k)
+Result.success
+
+Testing || Filter.Tendsto.cexp : ∀ {α : Type u_1} {l : Filter α} {f : α → ℂ} {z : ℂ},
+  Filter.Tendsto f l (nhds z) → Filter.Tendsto (fun x => Complex.exp (f x)) l (nhds (Complex.exp z))
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `nhds x`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || IsLocalizedModule.fromLocalizedModule'_add : ∀ {R : Type u_1} [inst : CommSemiring R] (S : Submonoid R) {M : Type u_2} {M' : Type u_3} [inst_1 : AddCommMonoid M]
+  [inst_2 : AddCommMonoid M'] [inst_3 : _root_.Module R M] [inst_4 : _root_.Module R M'] (f : M →ₗ[R] M')
+  [inst_5 : IsLocalizedModule S f] (x y : LocalizedModule S M),
+  IsLocalizedModule.fromLocalizedModule' S f (x + y) =
+    IsLocalizedModule.fromLocalizedModule' S f x + IsLocalizedModule.fromLocalizedModule' S f y
+Result.autoException ::
+Duper saturated
+
+Testing || AffineSubspace.affineSpan_coe : ∀ {k : Type u_1} {V : Type u_2} {P : Type u_3} [inst : Ring k] [inst_1 : AddCommGroup V] [inst_2 : _root_.Module k V]
+  [S : AddTorsor V P] (s : AffineSubspace k P), affineSpan k ↑s = s
+Result.autoException ::
+Duper saturated
+
+Testing || ENat.mem_nhds_natCast_iff : ∀ (n : ℕ) {s : Set ℕ∞}, s ∈ nhds ↑n ↔ ↑n ∈ s
+Result.success
+
+Testing || HasProd.div : ∀ {α : Type u_1} {β : Type u_2} [inst : CommGroup α] [inst_1 : TopologicalSpace α] [inst_2 : TopologicalGroup α]
+  {f g : β → α} {a₁ a₂ : α}, HasProd f a₁ → HasProd g a₂ → HasProd (fun b => f b / g b) (a₁ / a₂)
+Result.success
+
+Testing || IsLocalization.coeSubmodule_fg : ∀ {R : Type u_1} [inst : CommSemiring R] (S : Type u_2) [inst_1 : CommSemiring S] [inst_2 : Algebra R S],
+  Function.Injective ⇑(algebraMap R S) → ∀ (I : Ideal R), (IsLocalization.coeSubmodule S I).FG ↔ Submodule.FG I
+Result.autoException ::
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || CategoryTheory.IsPullback.of_right : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {X₁₁ X₁₂ X₁₃ X₂₁ X₂₂ X₂₃ : C} {h₁₁ : X₁₁ ⟶ X₁₂}
+  {h₁₂ : X₁₂ ⟶ X₁₃} {h₂₁ : X₂₁ ⟶ X₂₂} {h₂₂ : X₂₂ ⟶ X₂₃} {v₁₁ : X₁₁ ⟶ X₂₁} {v₁₂ : X₁₂ ⟶ X₂₂} {v₁₃ : X₁₃ ⟶ X₂₃},
+  CategoryTheory.IsPullback (CategoryTheory.CategoryStruct.comp h₁₁ h₁₂) v₁₁ v₁₃
+      (CategoryTheory.CategoryStruct.comp h₂₁ h₂₂) →
+    CategoryTheory.CategoryStruct.comp h₁₁ v₁₂ = CategoryTheory.CategoryStruct.comp v₁₁ h₂₁ →
+      CategoryTheory.IsPullback h₁₂ v₁₂ v₁₃ h₂₂ → CategoryTheory.IsPullback h₁₁ v₁₁ v₁₂ h₂₁
 Result.autoException ::
 (deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
-Testing || Multiset.Nodup.product : ∀ {α : Type u_1} {β : Type v} {s : Multiset α} {t : Multiset β}, s.Nodup → t.Nodup → (s ×ˢ t).Nodup
+Testing || Nat.nonempty_properDivisors : ∀ {n : ℕ}, n.properDivisors.Nonempty ↔ 1 < n
 Result.autoException ::
 Duper saturated
 
-Testing || Set.toFinset_congr : ∀ {α : Type u_1} {s t : Set α} [inst : Fintype ↑s] [inst_1 : Fintype ↑t], s = t → s.toFinset = t.toFinset
+Testing || RingEquiv.map_prod : ∀ {α : Type u_1} {R : Type u_2} {S : Type u_3} [inst : CommSemiring R] [inst_1 : CommSemiring S] (g : R ≃+* S)
+  (f : α → R) (s : Finset α), g (∏ x ∈ s, f x) = ∏ x ∈ s, g (f x)
+Result.success
+
+Testing || dist_smul : ∀ {M : Type u} {X : Type w} [inst : PseudoMetricSpace X] [inst_1 : SMul M X] [inst_2 : IsometricSMul M X] (c : M)
+  (x y : X), dist (c • x) (c • y) = dist x y
+Result.success
+
+Testing || map_mul_right_nhds₀ : ∀ {G₀ : Type u_3} [inst : TopologicalSpace G₀] [inst_1 : GroupWithZero G₀] [inst_2 : ContinuousMul G₀] {a : G₀},
+  a ≠ 0 → ∀ (b : G₀), Filter.map (fun x => x * a) (nhds b) = nhds (b * a)
 Result.autoException ::
 Duper saturated
 
-Testing || List.suffix_iff_eq_append : ∀ {α : Type u_1} {l₁ l₂ : List α}, l₁ <:+ l₂ ↔ List.take (l₂.length - l₁.length) l₂ ++ l₁ = l₂
+Testing || Nat.find_le : ∀ {n : ℕ} {p : ℕ → Prop} [inst : DecidablePred p] {h : ∃ n, p n}, p n → Nat.find h ≤ n
 Result.autoException ::
-(deterministic) timeout at `superposition`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.
-Additional diagnostic information may be available using the `set_option diagnostics true` command.
+Duper saturated
 
-Elapsed time: 63052 ms
+Testing || Finset.subset_mul_left : ∀ {α : Type u_2} [inst : DecidableEq α] [inst_1 : MulOneClass α] (s : Finset α) {t : Finset α}, 1 ∈ t → s ⊆ s * t
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `a.decidableEq b`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || IterateAddAct.ext : ∀ {α : Type u_1} {f : α → α} {x y : IterateAddAct f}, x.val = y.val → x = y
+Result.autoException ::
+application type mismatch
+  x = { val := x }.val
+argument
+  { val := x }.val
+has type
+  ℕ : Type
+but is expected to have type
+  IterateAddAct f : Type
+
+Testing || Mathlib.Vector.mem_cons_of_mem : ∀ {α : Type u_1} {n : ℕ} (a a' : α) (v : Mathlib.Vector α n), a' ∈ v.toList → a' ∈ (a ::ᵥ v).toList
+Result.success
+
+Testing || Measurable.set_lintegral_kernel : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β} {κ : ProbabilityTheory.Kernel α β}
+  [inst : ProbabilityTheory.IsSFiniteKernel κ] {f : β → ENNReal},
+  Measurable f → ∀ {s : Set β}, MeasurableSet s → Measurable fun a => ∫⁻ (b : β) in s, f b ∂κ a
+Result.success
+
+Testing || Nat.dvd_zero : ∀ (a : ℕ), a ∣ 0
+Result.autoException ::
+Duper saturated
+
+Testing || Function.Embedding.toEquivRange_symm_apply_self : ∀ {α : Type u_1} {β : Type u_2} [inst : Fintype α] [inst_1 : DecidableEq β] (f : α ↪ β) (a : α),
+  f.toEquivRange.symm ⟨f a, ⋯⟩ = a
+Result.autoException ::
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || Matrix.star_dotProduct_star : ∀ {m : Type u_2} {α : Type v} [inst : Fintype m] [inst_1 : NonUnitalSemiring α] [inst_2 : StarRing α] (v w : m → α),
+  Matrix.dotProduct (star v) (star w) = star (Matrix.dotProduct w v)
+Result.autoException ::
+(deterministic) timeout at `match`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || Finset.singleton_infs_singleton : ∀ {α : Type u_2} [inst : DecidableEq α] [inst_1 : SemilatticeInf α] {a b : α}, {a} ⊼ {b} = {a ⊓ b}
+Result.success
+
+Testing || IsConjRoot.isIntegral : ∀ {R : Type u_1} {A : Type u_5} [inst : CommRing R] [inst_1 : Ring A] [inst_2 : Algebra R A] {x y : A},
+  IsIntegral R x → IsConjRoot R x y → IsIntegral R y
+Result.autoException ::
+Duper saturated
+
+Testing || SimpleGraph.Walk.transfer_transfer : ∀ {V : Type u} {G : SimpleGraph V} {u v : V} (p : G.Walk u v) {H : SimpleGraph V} (hp : ∀ e ∈ p.edges, e ∈ H.edgeSet)
+  {K : SimpleGraph V} (hp' : ∀ e ∈ (p.transfer H hp).edges, e ∈ K.edgeSet),
+  (p.transfer H hp).transfer K hp' = p.transfer K ⋯
+Result.autoException ::
+Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type (p.transfer H hp).edges =
+  x✝ of λ binder contains bound variables
+
+Testing || CategoryTheory.ofTypeMonad_μ_app : ∀ (m : Type u → Type u) [inst : Monad m] [inst_1 : LawfulMonad m] {α : Type u} (a : m (m α)),
+  (CategoryTheory.ofTypeMonad m).μ.app α a = joinM a
+Result.autoException ::
+Auto.Monomorphization.ConstInst.ofExpr? :: ((CategoryTheory.ofTypeMonad m).comp
+        (CategoryTheory.ofTypeMonad m).toFunctor).obj
+    α ⟶
+  (CategoryTheory.ofTypeMonad m).obj α is not a `∀`
+
+Testing || measure_Ioc_lt_top : ∀ {α : Type u_1} [inst : Preorder α] [inst_1 : TopologicalSpace α] [inst_2 : CompactIccSpace α] {m : MeasurableSpace α}
+  {μ : MeasureTheory.Measure α} [inst_3 : MeasureTheory.IsLocallyFiniteMeasure μ] {a b : α}, μ (Set.Ioc a b) < ⊤
+Result.success
+
+Testing || List.takeDTR_go_eq : ∀ {α : Type u_1} {dflt : α} {acc : Array α} (n : ℕ) (l : List α),
+  List.takeDTR.go dflt n l acc = acc.toList ++ List.takeD n l dflt
+Result.autoException ::
+application type mismatch
+  dflt = { toList := dflt }.toList
+argument
+  { toList := dflt }.toList
+has type
+  List α✝ : Type u_1
+but is expected to have type
+  α✝ : Type u_1
+
+Testing || Symmetric.iff : ∀ {α : Type u_1} {r : α → α → Prop}, Symmetric r → ∀ (x y : α), r x y ↔ r y x
+Result.autoException ::
+Duper saturated
+
+Testing || LieModuleEquiv.symm_apply_apply : ∀ {R : Type u} {L : Type v} {M : Type w} {N : Type w₁} [inst : CommRing R] [inst_1 : LieRing L]
+  [inst_2 : AddCommGroup M] [inst_3 : AddCommGroup N] [inst_4 : _root_.Module R M] [inst_5 : _root_.Module R N]
+  [inst_6 : LieRingModule L M] [inst_7 : LieRingModule L N] (e : M ≃ₗ⁅R,L⁆ N) (x : M), e.symm (e x) = x
+Result.autoException ::
+Duper saturated
+
+Testing || AffineIndependent.mem_affineSpan_iff : ∀ {k : Type u_1} {V : Type u_2} {P : Type u_3} [inst : Ring k] [inst_1 : AddCommGroup V] [inst_2 : _root_.Module k V]
+  [inst_3 : AddTorsor V P] {ι : Type u_4} [inst_4 : Nontrivial k] {p : ι → P},
+  AffineIndependent k p → ∀ (i : ι) (s : Set ι), p i ∈ affineSpan k (p '' s) ↔ i ∈ s
+Result.autoException ::
+Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : (#1 → Prop), ((∃x1 : #1, x0 x1) = (!19 x0))) is not type correct
+
+Testing || CategoryTheory.ofTypeMonad_obj : ∀ (m : Type u → Type u) [inst : Monad m] [inst_1 : LawfulMonad m] (a : Type u),
+  (CategoryTheory.ofTypeMonad m).obj a = m a
+Result.autoException ::
+Duper saturated
+
+Testing || Set.center_eq_univ : ∀ (M : Type u_1) [inst : CommSemigroup M], Set.center M = Set.univ
+Result.autoException ::
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || LinearIsometryEquiv.differentiableOn : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]
+  [inst_2 : NormedSpace 𝕜 E] {F : Type u_3} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {s : Set E}
+  (iso : E ≃ₗᵢ[𝕜] F), DifferentiableOn 𝕜 (⇑iso) s
+Result.success
+
+Testing || TwoUniqueSums.of_addHom : ∀ {G : Type u} {H : Type v} [inst : Add G] [inst_1 : Add H] (f : H →ₙ+ G),
+  (∀ ⦃a b c d : H⦄, a + b = c + d → f a = f c ∧ f b = f d → a = c ∧ b = d) → ∀ [inst : TwoUniqueSums G], TwoUniqueSums H
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `Finset.image (cifvar_3 x_5) x_0`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || SimpleGraph.Walk.map_toDeleteEdges_eq : ∀ {V : Type u} {G : SimpleGraph V} {v w : V} (s : Set (Sym2 V)) {p : G.Walk v w} (hp : ∀ e ∈ p.edges, e ∉ s),
+  SimpleGraph.Walk.map (SimpleGraph.Hom.mapSpanningSubgraphs ⋯) (SimpleGraph.Walk.toDeleteEdges s p hp) = p
+Result.autoException ::
+Duper saturated
+
+Testing || LinearEquiv.symm_apply_apply : ∀ {R : Type u_1} {S : Type u_5} {M : Type u_6} {M₂ : Type u_8} [inst : Semiring R] [inst_1 : Semiring S]
+  [inst_2 : AddCommMonoid M] [inst_3 : AddCommMonoid M₂] {module_M : _root_.Module R M}
+  {module_S_M₂ : _root_.Module S M₂} {σ : R →+* S} {σ' : S →+* R} {re₁ : RingHomInvPair σ σ'}
+  {re₂ : RingHomInvPair σ' σ} (e : M ≃ₛₗ[σ] M₂) (b : M), e.symm (e b) = b
+Result.autoException ::
+Duper saturated
+
+Testing || Valuation.IsEquiv.ne_zero : ∀ {R : Type u_3} {Γ₀ : Type u_4} {Γ'₀ : Type u_5} [inst : Ring R] [inst_1 : LinearOrderedCommMonoidWithZero Γ₀]
+  [inst_2 : LinearOrderedCommMonoidWithZero Γ'₀] {v₁ : Valuation R Γ₀} {v₂ : Valuation R Γ'₀},
+  v₁.IsEquiv v₂ → ∀ {r : R}, v₁ r ≠ 0 ↔ v₂ r ≠ 0
+Result.success
+
+Testing || List.pwFilter_map : ∀ {α : Type u_1} {R : α → α → Prop} {β : Type u_2} [inst : DecidableRel R] (f : β → α) (l : List β),
+  List.pwFilter R (List.map f l) = List.map f (List.pwFilter (fun x y => R (f x) (f y)) l)
+Result.autoException ::
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || Relator.RightUnique.forall₂ : ∀ {α : Type u_1} {β : Type u_2} {R : α → β → Prop}, Relator.RightUnique R → Relator.RightUnique (List.Forall₂ R)
+Result.autoException ::
+Duper saturated
+
+Testing || CFC.quasispectrum_zero_eq : ∀ {R : Type u_1} {A : Type u_2} {p : A → Prop} [inst : CommSemiring R] [inst_1 : Nontrivial R] [inst_2 : StarRing R]
+  [inst_3 : MetricSpace R] [inst_4 : TopologicalSemiring R] [inst_5 : ContinuousStar R] [inst_6 : NonUnitalRing A]
+  [inst_7 : StarRing A] [inst_8 : TopologicalSpace A] [inst_9 : _root_.Module R A] [inst_10 : IsScalarTower R A A]
+  [inst_11 : SMulCommClass R A A] [instCFCₙ : NonUnitalContinuousFunctionalCalculus R p], quasispectrum R 0 = {0}
+Result.autoException ::
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || taylor_mean_remainder_cauchy : ∀ {f : ℝ → ℝ} {x x₀ : ℝ} {n : ℕ},
+  x₀ < x →
+    ContDiffOn ℝ (↑n) f (Set.Icc x₀ x) →
+      DifferentiableOn ℝ (iteratedDerivWithin n f (Set.Icc x₀ x)) (Set.Ioo x₀ x) →
+        ∃ x' ∈ Set.Ioo x₀ x,
+          f x - taylorWithinEval f n (Set.Icc x₀ x) x₀ x =
+            iteratedDerivWithin (n + 1) f (Set.Icc x₀ x) x' * (x - x') ^ n / ↑n.factorial * (x - x₀)
+Result.autoException ::
+(deterministic) timeout at `«forward demodulation»`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || CategoryTheory.Idempotents.DoldKan.N_obj : ∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_2, u_1} C] [inst_1 : CategoryTheory.Preadditive C]
+  [inst_2 : CategoryTheory.IsIdempotentComplete C] [inst_3 : CategoryTheory.Limits.HasFiniteCoproducts C]
+  (X : CategoryTheory.SimplicialObject C),
+  CategoryTheory.Idempotents.DoldKan.N.obj X =
+    (CategoryTheory.Idempotents.toKaroubiEquivalence (ChainComplex C ℕ)).inverse.obj
+      (AlgebraicTopology.DoldKan.N₁.obj X)
+Result.autoException ::
+Duper saturated
+
+Testing || HomogeneousLocalization.val_zsmul : ∀ {ι : Type u_1} {R : Type u_2} {A : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]
+  {𝒜 : ι → Submodule R A} (x : Submonoid A) (n : ℤ) (y : HomogeneousLocalization 𝒜 x), (n • y).val = n • y.val
+Result.success
+
+Testing || Filter.NeBot.mul_zero_nonneg : ∀ {α : Type u_2} [inst : MulZeroClass α] {f : Filter α}, f.NeBot → 0 ≤ f * 0
+Result.autoException ::
+Duper saturated
+
+Testing || sdiff_sdiff : ∀ {α : Type u_2} [inst : GeneralizedCoheytingAlgebra α] (a b c : α), (a \ b) \ c = a \ (b ⊔ c)
+Result.autoException ::
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || Rat.ofInt_eq_cast : ∀ (n : ℤ), Rat.ofInt n = ↑n
+Result.success
+
+Testing || QPF.Fix.ind_rec : ∀ {F : Type u → Type u} [q : QPF F] {α : Type u} (g₁ g₂ : QPF.Fix F → α),
+  (∀ (x : F (QPF.Fix F)), g₁ <$> x = g₂ <$> x → g₁ (QPF.Fix.mk x) = g₂ (QPF.Fix.mk x)) → ∀ (x : QPF.Fix F), g₁ x = g₂ x
+Result.autoException ::
+Duper saturated
+
+Testing || Polynomial.eval_one_cyclotomic_not_prime_pow : ∀ {R : Type u_1} [inst : Ring R] {n : ℕ},
+  (∀ {p : ℕ}, Nat.Prime p → ∀ (k : ℕ), p ^ k ≠ n) → Polynomial.eval 1 (Polynomial.cyclotomic n R) = 1
+Result.autoException ::
+Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type Decidable
+  (¬p = 1 ∧ 0 < n) of λ binder contains bound variables
+
+Testing || leibniz_cross : ∀ {R : Type u_1} [inst : CommRing R] (u v w : Fin 3 → R),
+  (crossProduct u) ((crossProduct v) w) = (crossProduct ((crossProduct u) v)) w + (crossProduct v) ((crossProduct u) w)
+Result.autoException ::
+(deterministic) timeout at `match`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || Real.one_sub_le_exp_neg : ∀ (x : ℝ), 1 - x ≤ Real.exp (-x)
+Result.success
+
+Testing || Monovary.sum_smul_comp_perm_le_sum_smul : ∀ {ι : Type u_1} {α : Type u_2} {β : Type u_3} [inst : LinearOrderedSemiring α] [inst_1 : ExistsAddOfLE α]
+  [inst_2 : LinearOrderedCancelAddCommMonoid β] [inst_3 : _root_.Module α β] [inst_4 : PosSMulMono α β]
+  {σ : Equiv.Perm ι} {f : ι → α} {g : ι → β} [inst_5 : Fintype ι],
+  Monovary f g → ∑ i : ι, f i • g (σ i) ≤ ∑ i : ι, f i • g i
+Result.autoException ::
+Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : (#0 → #1), (∀ x1 : (#0 → #2), (∀ x2 : #5, ((!11 x0 x1 x2) = (!13 x2 (λx3 : #0, (∀ x4 : #0, ((!16 x2 x4) → ((!17 (x1 x3) (x1 x4)) → (!18 (x0 x3) (x0 x4))))))))))) is not type correct
+
+Testing || IndexedPartition.disjoint : ∀ {ι : Type u_1} {α : Type u_2} {s : ι → Set α}, IndexedPartition s → Pairwise (Disjoint on s)
+Result.autoException ::
+Duper saturated
+
+Testing || isConjRoot_iff_mem_minpoly_rootSet : ∀ {K : Type u_2} {S : Type u_4} [inst : CommRing S] [inst_1 : Field K] [inst_2 : Algebra K S] [inst_3 : IsDomain S]
+  {x y : S}, IsIntegral K x → (IsConjRoot K x y ↔ y ∈ (minpoly K x).rootSet S)
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `x_2.toFinset`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || List.Perm.eraseP : ∀ {α : Type u_1} (f : α → Bool) {l₁ l₂ : List α},
+  List.Pairwise (fun a b => f a = true → f b = true → False) l₁ →
+    l₁.Perm l₂ → (List.eraseP f l₁).Perm (List.eraseP f l₂)
+Result.autoException ::
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || Fin.appendIsometry_symm_apply : ∀ {α : Type u} [inst : PseudoEMetricSpace α] (m n : ℕ) (f : Fin (m + n) → α),
+  (Fin.appendIsometry m n).symm f = (fun i => f (Fin.castAdd n i), fun i => f (Fin.natAdd m i))
+Result.autoException ::
+Duper saturated
+
+Testing || AddUnits.addRight_bijective : ∀ {M : Type u_3} [inst : AddMonoid M] (a : AddUnits M), Function.Bijective fun x => x + ↑a
+Result.autoException ::
+Duper saturated
+
+Testing || SimpleGraph.Walk.length_transfer : ∀ {V : Type u} {G : SimpleGraph V} {u v : V} (p : G.Walk u v) {H : SimpleGraph V} (hp : ∀ e ∈ p.edges, e ∈ H.edgeSet),
+  (p.transfer H hp).length = p.length
+Result.autoException ::
+Duper saturated
+
+Testing || CliffordAlgebra.forall_mul_self_eq_iff : ∀ {R : Type u_1} [inst : CommRing R] {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : _root_.Module R M]
+  {Q : QuadraticForm R M} {A : Type u_4} [inst_3 : Ring A] [inst_4 : Algebra R A],
+  IsUnit 2 →
+    ∀ (f : M →ₗ[R] A),
+      (∀ (x : M), f x * f x = (algebraMap R A) (Q x)) ↔
+        (LinearMap.mul R A).compl₂ f ∘ₗ f + (LinearMap.mul R A).flip.compl₂ f ∘ₗ f =
+          LinearMap.compr₂ (QuadraticMap.polarBilin Q) (Algebra.linearMap R A)
+Result.autoException ::
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || Topology.IsQuotientMap.image_connectedComponent : ∀ {α : Type u} {β : Type v} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β] {f : α → β},
+  Topology.IsQuotientMap f →
+    (∀ (y : β), IsConnected (f ⁻¹' {y})) → ∀ (a : α), f '' connectedComponent a = connectedComponent (f a)
+Result.success
+
+Testing || isPiSystem_iUnion_of_monotone : ∀ {α : Type u_3} {ι : Type u_4} [inst : SemilatticeSup ι] (p : ι → Set (Set α)),
+  (∀ (n : ι), IsPiSystem (p n)) → Monotone p → IsPiSystem (⋃ n, p n)
+Result.autoException ::
+Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #1, ((!0 x0) = (!5 x0 (λx1 : #2, (∀ x2 : #2, ((!14 x0 x2) → ((!15 (!16 x1 x2)) → (!14 x0 (!16 x1 x2))))))))) is not type correct
+
+Testing || Setoid.eq_of_mem_eqv_class : ∀ {α : Type u_1} {c : Set (Set α)},
+  (∀ (a : α), ∃! b, b ∈ c ∧ a ∈ b) → ∀ {x : α} {b b' : Set α}, b ∈ c → x ∈ b → b' ∈ c → x ∈ b' → b = b'
+Result.success
+
+Testing || univLE_max : UnivLE.{u, max u v}
+Result.autoException ::
+Duper saturated
+
+Testing || hasLineDerivAt_zero : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {F : Type u_2} [inst_1 : NormedAddCommGroup F]
+  [inst_2 : NormedSpace 𝕜 F] {E : Type u_3} [inst_3 : AddCommGroup E] [inst_4 : _root_.Module 𝕜 E] {f : E → F} {x : E},
+  HasLineDerivAt 𝕜 f 0 x 0
+Result.autoException ::
+Duper saturated
+
+Testing || Complex.polarCoord_apply : ∀ (a : ℂ), ↑Complex.polarCoord a = (Complex.abs a, a.arg)
+Result.autoException ::
+Duper saturated
+
+Testing || Complex.cosh_sub : ∀ (x y : ℂ), Complex.cosh (x - y) = Complex.cosh x * Complex.cosh y - Complex.sinh x * Complex.sinh y
+Result.success
+
+Testing || MeasureTheory.Measure.restrict_apply' : ∀ {α : Type u_2} {m0 : MeasurableSpace α} {μ : MeasureTheory.Measure α} {s t : Set α},
+  MeasurableSet s → (μ.restrict s) t = μ (t ∩ s)
+Result.success
+
+Testing || Inseparable.mem_open_iff : ∀ {X : Type u_1} [inst : TopologicalSpace X] {x y : X} {s : Set X}, Inseparable x y → IsOpen s → (x ∈ s ↔ y ∈ s)
+Result.success
+
+Testing || CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_map_base : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (F : CategoryTheory.Functor C CategoryTheory.Cat)
+  {X Y : CategoryTheory.Grothendieck F} (f : X ⟶ Y),
+  ((CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse F).map f).base = f.base
+Result.autoException ::
+Duper saturated
+
+Testing || UniqueFactorizationMonoid.squarefree_iff_nodup_normalizedFactors : ∀ {R : Type u_1} [inst : CancelCommMonoidWithZero R] [inst_1 : UniqueFactorizationMonoid R]
+  [inst_2 : NormalizationMonoid R] {x : R},
+  x ≠ 0 → (Squarefree x ↔ (UniqueFactorizationMonoid.normalizedFactors x).Nodup)
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `Multiset.count a x_1`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || ContDiffAt.prod_map : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type uE} [inst_1 : NormedAddCommGroup E]
+  [inst_2 : NormedSpace 𝕜 E] {F : Type uF} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : WithTop ℕ∞}
+  {E' : Type u_3} [inst_5 : NormedAddCommGroup E'] [inst_6 : NormedSpace 𝕜 E'] {F' : Type u_4}
+  [inst_7 : NormedAddCommGroup F'] [inst_8 : NormedSpace 𝕜 F'] {f : E → F} {g : E' → F'} {x : E} {y : E'},
+  ContDiffAt 𝕜 n f x → ContDiffAt 𝕜 n g y → ContDiffAt 𝕜 n (Prod.map f g) (x, y)
+Result.success
+
+Testing || MeasureTheory.isClosed_aeStronglyMeasurable' : ∀ {α : Type u_1} {F : Type u_2} {p : ENNReal} [inst : NormedAddCommGroup F] {m m0 : MeasurableSpace α}
+  {μ : MeasureTheory.Measure α} [inst_1 : Fact (1 ≤ p)] [inst_2 : CompleteSpace F],
+  m ≤ m0 → IsClosed {f | MeasureTheory.AEStronglyMeasurable' m (↑↑f) μ}
+Result.autoException ::
+Duper saturated
+
+Testing || ProbabilityTheory.Kernel.fst_comp : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β} {γ : Type u_3} {δ : Type u_4}
+  {mγ : MeasurableSpace γ} {mδ : MeasurableSpace δ} (κ : ProbabilityTheory.Kernel α β)
+  (η : ProbabilityTheory.Kernel β (γ × δ)), (η.comp κ).fst = η.fst.comp κ
+Result.autoException ::
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || TypeVec.dropFun_id : ∀ {n : ℕ} {α : TypeVec.{u_1} (n + 1)}, TypeVec.dropFun TypeVec.id = TypeVec.id
+Result.autoException ::
+Duper saturated
+
+Testing || Real.cos_sq_add_sin_sq : ∀ (x : ℝ), Real.cos x ^ 2 + Real.sin x ^ 2 = 1
+Result.success
+
+Testing || Equiv.addCommSemigroup.proof_1 : ∀ {α : Type u_2} {β : Type u_1} (e : α ≃ β) [inst : AddCommSemigroup β] (x y : α), e (e.symm (e x + e y)) = e x + e y
+Result.success
+
+Testing || Nat.lcm_pos : ∀ {m n : ℕ}, 0 < m → 0 < n → 0 < m.lcm n
+Result.success
+
+Testing || PProd.exists' : ∀ {α : Sort u_1} {β : Sort u_2} {p : α → β → Prop}, (∃ x, p x.fst x.snd) ↔ ∃ a b, p a b
+Result.autoException ::
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || div_le_div_left : ∀ {α : Type u_2} [inst : LinearOrderedSemifield α] {a b c : α}, 0 < a → 0 < b → 0 < c → (a / b ≤ a / c ↔ c ≤ b)
+Result.success
+
+Testing || Set.Finite.induction_to_univ : ∀ {α : Type u} [inst : Finite α] {C : Set α → Prop} (S0 : Set α),
+  C S0 → (∀ (S : Set α), S ≠ Set.univ → C S → ∃ a ∉ S, C (insert a S)) → C Set.univ
+Result.autoException ::
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || VectorBundleCore.continuous_proj : ∀ {R : Type u_1} {B : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField R] [inst_1 : NormedAddCommGroup F]
+  [inst_2 : NormedSpace R F] [inst_3 : TopologicalSpace B] {ι : Type u_5} (Z : VectorBundleCore R B F ι),
+  Continuous Z.proj
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `x_0.toTopologicalSpace`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || CategoryTheory.equivYoneda'_inv_val : ∀ (S : CategoryTheory.Sheaf CategoryTheory.typesGrothendieckTopology (Type u)),
+  (CategoryTheory.equivYoneda' S).inv.val = (CategoryTheory.equivYoneda S.val ⋯).inv
+Result.autoException ::
+application type mismatch
+  (¬a) = { val := a → False }.val
+argument
+  { val := a → False }.val
+has type
+  (CategoryTheory.yoneda'.obj (S.val.obj (Opposite.op PUnit.{u + 1}))).val ⟶ S.val : Type (u + 1)
+but is expected to have type
+  Prop : Type
+
+Testing || Fintype.decidableEqAddEquivFintype.proof_1 : ∀ {α : Type u_1} {β : Type u_2} [inst : Add α] [inst_1 : Add β] (a b : α ≃+ β), ⇑a = ⇑b ↔ a = b
+Result.success
+
+Testing || intervalIntegral.intervalIntegrable_log : ∀ {a b : ℝ} {μ : MeasureTheory.Measure ℝ} [inst : MeasureTheory.IsLocallyFiniteMeasure μ],
+  0 ∉ Set.uIcc a b → IntervalIntegrable Real.log μ a b
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `x.decidableEq cifvar_7`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || StrictConcaveOn.concaveOn : ∀ {𝕜 : Type u_1} {E : Type u_2} {β : Type u_5} [inst : OrderedSemiring 𝕜] [inst_1 : AddCommMonoid E]
+  [inst_2 : OrderedAddCommMonoid β] [inst_3 : _root_.Module 𝕜 E] [inst_4 : _root_.Module 𝕜 β] {s : Set E} {f : E → β},
+  StrictConcaveOn 𝕜 s f → ConcaveOn 𝕜 s f
+Result.success
+
+Testing || ProbabilityTheory.Kernel.ae_compProd_iff : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β} {γ : Type u_3}
+  {mγ : MeasurableSpace γ} {κ : ProbabilityTheory.Kernel α β} [inst : ProbabilityTheory.IsSFiniteKernel κ]
+  {η : ProbabilityTheory.Kernel (α × β) γ} [inst : ProbabilityTheory.IsSFiniteKernel η] {a : α} {p : β × γ → Prop},
+  MeasurableSet {x | p x} →
+    ((∀ᵐ (bc : β × γ) ∂(κ.compProd η) a, p bc) ↔ ∀ᵐ (b : β) ∂κ a, ∀ᵐ (c : γ) ∂η (a, b), p (b, c))
+Result.autoException ::
+(deterministic) timeout at `printProof`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || SMulPosReflectLT.toSMulPosMono : ∀ {α : Type u_1} {β : Type u_2} [inst : SMul α β] [inst_1 : Preorder α] [inst_2 : LinearOrder β]
+  [inst_3 : _root_.Zero β] [inst_4 : SMulPosReflectLT α β], SMulPosMono α β
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `Zero.toOfNat0`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || MeasureTheory.withDensity_indicator_one : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ : MeasureTheory.Measure α} {s : Set α},
+  MeasurableSet s → μ.withDensity (s.indicator 1) = μ.restrict s
+Result.autoException ::
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || add_halves' : ∀ {R : Type u_1} [inst : DivisionSemiring R] [inst_1 : NeZero 2] (a : R), a / 2 + a / 2 = a
+Result.success
+
+Testing || CategoryTheory.Limits.preservesBiproductsOfShape_of_preservesProductsOfShape : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C] {D : Type u'}
+  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Preadditive D] (F : CategoryTheory.Functor C D)
+  [inst_4 : F.PreservesZeroMorphisms] {J : Type} [inst_5 : Fintype J]
+  [inst_6 : CategoryTheory.Limits.PreservesLimitsOfShape (CategoryTheory.Discrete J) F],
+  CategoryTheory.Limits.PreservesBiproductsOfShape J F
+Result.autoException ::
+Duper saturated
+
+Testing || WithTop.image_coe_Ioi : ∀ {α : Type u_1} [inst : Preorder α] {a : α}, WithTop.some '' Set.Ioi a = Set.Ioo ↑a ⊤
+Result.autoException ::
+Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #1, (∀ x1 : #1, ((!24 x0 x1) = (!22 (!26 x0) (λx2 : #1, (!26 x2 x1)))))) is not type correct
+
+Testing || CategoryTheory.forgetEnrichment_id : ∀ {C : Type u₁} (W : Type v) [inst : CategoryTheory.Category.{w, v} W] [inst_1 : CategoryTheory.MonoidalCategory W]
+  [inst_2 : CategoryTheory.EnrichedCategory W C] (X : CategoryTheory.ForgetEnrichment W C),
+  CategoryTheory.ForgetEnrichment.homTo W (CategoryTheory.CategoryStruct.id X) =
+    CategoryTheory.eId W (CategoryTheory.ForgetEnrichment.to W X)
+Result.autoException ::
+Duper saturated
+
+Testing || CategoryTheory.Comma.mapLeftComp_inv_app_left : ∀ {A : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} A] {B : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} B]
+  {T : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} T] (R : CategoryTheory.Functor B T)
+  {L₁ L₂ L₃ : CategoryTheory.Functor A T} (l : L₁ ⟶ L₂) (l' : L₂ ⟶ L₃) (X : CategoryTheory.Comma L₃ R),
+  ((CategoryTheory.Comma.mapLeftComp R l l').inv.app X).left = CategoryTheory.CategoryStruct.id X.left
+Result.autoException ::
+Duper saturated
+
+Testing || Order.pred_lt : ∀ {α : Type u_1} [inst : Preorder α] [inst_1 : PredOrder α] [inst_2 : NoMinOrder α] (a : α), Order.pred a < a
+Result.success
+
+Testing || isOfFinAddOrder_zero : ∀ {G : Type u_1} [inst : AddMonoid G], IsOfFinAddOrder 0
+Result.success
+
+Testing || gradient_eq : ∀ {𝕜 : Type u_1} {F : Type u_2} [inst : RCLike 𝕜] [inst_1 : NormedAddCommGroup F] [inst_2 : InnerProductSpace 𝕜 F]
+  [inst_3 : CompleteSpace F] {f : F → 𝕜} {f' : F → F}, (∀ (x : F), HasGradientAt f (f' x) x) → gradient f = f'
+Result.success
+
+Testing || padicNorm.int_lt_one_iff : ∀ {p : ℕ} [hp : Fact (Nat.Prime p)] (m : ℤ), padicNorm p ↑m < 1 ↔ ↑p ∣ m
+Result.success
+
+Testing || FiberBundle.mem_baseSet_trivializationAt : ∀ {B : Type u_2} (F : Type u_3) [inst : TopologicalSpace B] [inst_1 : TopologicalSpace F] (E : B → Type u_5)
+  [inst_2 : TopologicalSpace (Bundle.TotalSpace F E)] [inst_3 : (b : B) → TopologicalSpace (E b)]
+  [inst_4 : FiberBundle F E] (b : B), b ∈ (trivializationAt F E b).baseSet
+Result.success
+
+Testing || Multiset.map_add_left_Ioc : ∀ {α : Type u_1} [inst : OrderedCancelAddCommMonoid α] [inst_1 : ExistsAddOfLE α] [inst_2 : LocallyFiniteOrder α]
+  (a b c : α), Multiset.map (fun x => c + x) (Multiset.Ioc a b) = Multiset.Ioc (c + a) (c + b)
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `Finset.image
+  (fun x => cifvar_4 x_3 x) (cifvar_10 x_1 x_2)`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+
+Testing || IsOpen.div_right : ∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : Group G] [inst_2 : TopologicalGroup G] {s t : Set G},
+  IsOpen s → IsOpen (s / t)
+Result.autoException ::
+Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type a ∈ x_1 of λ binder contains bound variables
+
+Testing || ZModModule.add_add_add_cancel : ∀ {G : Type u_2} [inst : AddCommGroup G] [inst_1 : _root_.Module (ZMod 2) G] (x y z : G), x + y + (y + z) = x + z
+Result.success
+
+Testing || ProbabilityTheory.centralMoment_one' : ∀ {Ω : Type u_1} {m : MeasurableSpace Ω} {X : Ω → ℝ} {μ : MeasureTheory.Measure Ω}
+  [inst : MeasureTheory.IsFiniteMeasure μ],
+  MeasureTheory.Integrable X μ → ProbabilityTheory.centralMoment X 1 μ = (1 - (μ Set.univ).toReal) * ∫ (x : Ω), X x ∂μ
+Result.autoException ::
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Testing || CategoryTheory.Functor.relativelyRepresentable.symmetry_fst_assoc : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]
+  {F : CategoryTheory.Functor C D} {Y : D} {b : C} {f' : F.obj b ⟶ Y} (hf' : F.relativelyRepresentable f') {a : C}
+  {g : F.obj a ⟶ Y} (hg : F.relativelyRepresentable g) [inst_2 : F.Full] [inst_3 : F.Faithful] {Z : C} (h : a ⟶ Z),
+  CategoryTheory.CategoryStruct.comp (hf'.symmetry hg) (CategoryTheory.CategoryStruct.comp (hg.fst' f') h) =
+    CategoryTheory.CategoryStruct.comp (hf'.snd g) h
+Result.autoException ::
+Auto.Monomorphization.ConstInst.ofExpr? :: CategoryTheory.MorphismProperty D is not a `∀`
+
+Testing || Duper.rule15bTheorem : ∀ (b : Bool), (!!b) = b
+Result.success
+
+Testing || Real.summable_cexp_multipliable : ∀ {α : Type u_1} {ι : Type u_2} (f : ι → α → ℝ),
+  (∀ (x : α) (n : ι), 0 < f n x) →
+    (∀ (x : α), Summable fun n => Real.log (f n x)) → ∀ (a : α), Multipliable fun b => f b a
+Result.autoException ::
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+
+Elapsed time: 82344 ms
