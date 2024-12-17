@@ -82,6 +82,7 @@ example (a e : ℝ) (h1 : a < e) : (∃ b c d, a < b ∧ b < c ∧ c < d ∧ d <
 example (m n : Nat) (mlt : m < n) (heq : n = m * (n / m)) : m * 1 < m * (n / m) := by
   auto [mul_one, heq, mlt, lt_of_mul_lt_mul_left]
 
+-- **TODO:** Auto.LamReif.reifTermCheckType :: ... is not type correct
 set_option auto.native false in
 set_option trace.auto.printLemmas true in
 example (a b c d : ℝ) (h1 : a < b) :
@@ -89,12 +90,14 @@ example (a b c d : ℝ) (h1 : a < b) :
   rw [Set.subset_def]
   auto [Set.mem_Icc, Set.mem_Ico, @le_trans, @le_total, @lt_iff_not_le, h1]
 
+-- **TODO:** Auto.LamReif.reifTermCheckType :: ... is not type correct
 set_option auto.native false in
 set_option trace.auto.smt.result true in
 example (a b c d : ℝ) (h1 : a < b) : Set.Icc a b ⊆ Set.Ico c d ↔ c ≤ a ∧ b < d := by
   rw [Set.subset_def]
   auto [Set.mem_Icc, Set.mem_Ico, @le_trans, @le_total, @lt_iff_not_le, h1]
 
+-- **TODO:** Auto.LamReif.reifTermCheckType :: ... is not type correct
 set_option auto.native false in
 set_option trace.auto.lamReif.printValuation true in
 example : f '' s ⊆ v ↔ s ⊆ f ⁻¹' v := by
@@ -143,6 +146,7 @@ set_option profiler true
 set_option trace.auto.lamReif.printProofs true
 set_option trace.auto.tptp.result true
 
+set_option auto.lamReif.prep.def false in
 /-- The `n`-th Chebyshev polynomial of the first kind evaluates on `cos θ` to the
 value `cos (n * θ)`. -/
 @[simp]
@@ -160,6 +164,7 @@ theorem T_complex_cos : ∀ (n : ℕ), (T ℂ n).eval (cos θ) = cos (n * θ)
     simp only [mul_sub, pow_two, mul_one]
     auto [sub_right_comm, mul_comm, mul_assoc]
 
+set_option auto.lamReif.prep.def false in
 theorem T_complex_cos' : ∀ (n : ℕ), (T ℂ n).eval (cos θ) = cos (n * θ)
   | 0 => by auto [T_zero, eval_one, Nat.cast_zero, zero_mul, cos_zero]
   | 1 => by auto [eval_X, one_mul, T_one, Nat.cast_one]
@@ -174,8 +179,8 @@ theorem T_complex_cos' : ∀ (n : ℕ), (T ℂ n).eval (cos θ) = cos (n * θ)
     simp only [mul_sub, sub_right_comm, mul_one]
     auto [pow_two, mul_comm, mul_assoc]
 
-set_option auto.tptp false
-
+set_option auto.tptp false in
+set_option auto.lamReif.prep.def false in
 /-- The `n`-th Chebyshev polynomial of the second kind evaluates on `cos θ` to the
 value `sin ((n + 1) * θ) / sin θ`. -/
 @[simp]
