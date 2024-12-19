@@ -4,13 +4,661 @@ Testing || AEMeasurable.inf : ∀ {M : Type u_1} [inst : MeasurableSpace M] {α 
   {f g : α → M} [inst_1 : Min M] [inst_2 : MeasurableInf₂ M],
   AEMeasurable f μ → AEMeasurable g μ → AEMeasurable (fun a => f a ⊓ g a) μ
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
+  ;; universe for _MeasureTheory.Measure_α:
+  ;;   |_MeasureTheory.Measure_α!val!0| 
+  ;; -----------
+  ;; definitions for universe elements:
+  (declare-fun |_MeasureTheory.Measure_α!val!0| () _MeasureTheory.Measure_α)
+  ;; cardinality constraint:
+  (forall ((x _MeasureTheory.Measure_α)) (= x |_MeasureTheory.Measure_α!val!0|))
+  ;; -----------
+  (define-fun valid_fact_5 () Bool
+    _Measurable_fun_p_=>_p.1___p.2_)
+  (define-fun valid_fact_41 () Bool
+    (forall ((_m_31 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_31))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__g_x___f_x_|
+        _m_31)
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___g_x__g_x___f_x_|
+             _m_31)))))
+  (define-fun valid_fact_0 () Bool
+    |_MeasurableInf₂_M|)
+  (define-fun valid_fact_29 () Bool
+    (forall ((_m_19 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_19))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__g_x_|
+             _m_19))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x__g_x_|
+        _m_19))))
+  (define-fun valid_fact_17 () Bool
+    (forall ((_m_7 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_fun_a_=>_f_a___g_a| _m_7))
+      (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__f_x___g_x_|
+        _m_7))))
+  (define-fun valid_fact_15 () Bool
+    (forall ((_m_5 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_5))
+      (not (|_@AEMeasurable_α_M_inst.1232_m_fun_a_=>_f_a___g_a| _m_5))
+      (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__g_x_|
+        _m_5))))
+  (define-fun |_μ| () _MeasureTheory.Measure_α
+    |_MeasureTheory.Measure_α!val!0|)
+  (define-fun valid_fact_59 () Bool
+    (forall ((_m_49 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_49))
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___g_x__g_x___f_x_|
+             _m_49))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___g_x__g_x___f_x_|
+        _m_49))))
+  (define-fun valid_fact_28 () Bool
+    (forall ((_m_18 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_18))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x_|
+             _m_18))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__g_x__f_x_|
+        _m_18))))
+  (define-fun valid_fact_58 () Bool
+    (forall ((_m_48 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_48))
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x__f_x___g_x___f_x_|
+             _m_48))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___f_x__f_x___g_x___f_x_|
+        _m_48))))
+  (define-fun valid_fact_18 () Bool
+    (forall ((_m_8 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_8))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x__f_x___f_x_|
+        _m_8)
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x_|
+             _m_8)))))
+  (define-fun valid_fact_43 () Bool
+    (forall ((_m_33 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_33))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__f_x___g_x___f_x_|
+        _m_33)
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___g_x__f_x___g_x___f_x_|
+             _m_33)))))
+  (define-fun valid_fact_11 () Bool
+    (forall ((_m_1 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_1))
+      (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_1))
+      (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__g_x_|
+        _m_1))))
+  (define-fun valid_fact_60 () Bool
+    (forall ((_m_50 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_50))
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x___g_x__g_x___f_x_|
+             _m_50))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___f_x___g_x__g_x___f_x_|
+        _m_50))))
+  (define-fun valid_fact_27 () Bool
+    (forall ((_m_17 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_17))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x_|
+             _m_17))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x__f_x_|
+        _m_17))))
+  (define-fun valid_fact_39 () Bool
+    (forall ((_m_29 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_29))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___f_x___g_x__f_x___f_x_|
+        _m_29)
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x___g_x__f_x___f_x_|
+             _m_29)))))
+  (define-fun valid_fact_54 () Bool
+    (forall ((_m_44 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_44))
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x__f_x___f_x_|
+             _m_44))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___f_x__f_x___f_x_|
+        _m_44))))
+  (define-fun valid_fact_20 () Bool
+    (forall ((_m_10 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_10))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x__g_x___f_x_|
+        _m_10)
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__g_x_|
+             _m_10)))))
+  (define-fun valid_fact_48 () Bool
+    (forall ((_m_38 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_38))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__f_x_|
+             _m_38))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x___g_x__f_x_|
+        _m_38))))
+  (define-fun valid_fact_63 () Bool
+    (forall ((_m_53 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_53))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x__f_x__f_x_|
+        _m_53)
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x__f_x_|
+             _m_53)))))
+  (define-fun valid_fact_4 () Bool
+    _Measurable_fun_p_=>_p.1___p.2_)
+  (define-fun valid_fact_6 () Bool
+    _Measurable_fun_p_=>_p.1___p.2_)
+  (define-fun valid_fact_62 () Bool
+    (forall ((_m_52 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_52))
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x___g_x__f_x___g_x___f_x_|
+             _m_52))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___f_x___g_x__f_x___g_x___f_x_|
+        _m_52))))
+  (define-fun valid_fact_49 () Bool
+    (forall ((_m_39 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_39))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x___g_x_|
+             _m_39))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x__f_x___g_x_|
+        _m_39))))
+  (define-fun valid_fact_34 () Bool
+    (forall ((_m_24 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_24))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x___g_x_|
+             _m_24))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__g_x__f_x___g_x_|
+        _m_24))))
+  (define-fun _Measurable_fun_p_=>_p.1___p.2_ () Bool
+    true)
+  (define-fun valid_fact_25 () Bool
+    (forall ((_m_15 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_15))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___g_x__f_x___g_x___f_x_|
+        _m_15)
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x___g_x_|
+             _m_15)))))
+  (define-fun valid_fact_1 () Bool
+    (|_@AEMeasurable_α_M_inst.1232_m_f| |_μ|))
+  (define-fun valid_fact_46 () Bool
+    (forall ((_m_36 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_36))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x_|
+             _m_36))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__g_x__f_x_|
+        _m_36))))
+  (define-fun valid_fact_33 () Bool
+    (forall ((_m_23 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_23))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__g_x_|
+             _m_23))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x___g_x__g_x_|
+        _m_23))))
+  (define-fun valid_fact_38 () Bool
+    (forall ((_m_28 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_28))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___f_x__g_x___f_x_|
+        _m_28)
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x__g_x___f_x_|
+             _m_28)))))
+  (define-fun valid_fact_50 () Bool
+    (forall ((_m_40 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_40))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__g_x_|
+             _m_40))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__g_x__g_x_|
+        _m_40))))
+  (define-fun valid_fact_9 () Bool
+    (forall ((_m _MeasureTheory.Measure_α))
+  (or (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x_|
+        _m)
+      (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m)))))
+  (define-fun valid_fact_14 () Bool
+    (forall ((_m_4 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_4))
+      (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__g_x_|
+        _m_4))))
+  (define-fun valid_fact_7 () Bool
+    _Measurable_fun_p_=>_p.1___p.2_)
+  (define-fun valid_fact_57 () Bool
+    (forall ((_m_47 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_47))
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x___g_x__f_x___f_x_|
+             _m_47))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___f_x___g_x__f_x___f_x_|
+        _m_47))))
+  (define-fun valid_fact_2 () Bool
+    (|_@AEMeasurable_α_M_inst.1232_m_g| |_μ|))
+  (define-fun valid_fact_56 () Bool
+    (forall ((_m_46 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_46))
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x__g_x___f_x_|
+             _m_46))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___f_x__g_x___f_x_|
+        _m_46))))
+  (define-fun valid_fact_55 () Bool
+    (forall ((_m_45 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_45))
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___g_x__f_x___f_x_|
+             _m_45))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___g_x__f_x___f_x_|
+        _m_45))))
+  (define-fun valid_fact_53 () Bool
+    (forall ((_m_43 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_43))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__f_x___g_x_|
+             _m_43))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x___g_x__f_x___g_x_|
+        _m_43))))
+  (define-fun valid_fact_10 () Bool
+    (forall ((_m_0 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_0))
+      (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x_|
+        _m_0)
+      (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_0)))))
+  (define-fun valid_fact_30 () Bool
+    (forall ((_m_20 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_20))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__f_x_|
+             _m_20))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x___g_x__f_x_|
+        _m_20))))
+  (define-fun valid_fact_52 () Bool
+    (forall ((_m_42 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_42))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x___g_x_|
+             _m_42))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__g_x__f_x___g_x_|
+        _m_42))))
+  (define-fun valid_fact_45 () Bool
+    (forall ((_m_35 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_35))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x_|
+             _m_35))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x__f_x_|
+        _m_35))))
+  (define-fun valid_fact_19 () Bool
+    (forall ((_m_9 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_9))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___g_x__f_x___f_x_|
+        _m_9)
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x_|
+             _m_9)))))
+  (define-fun valid_fact_3 () Bool
+    (not (|_@AEMeasurable_α_M_inst.1232_m_fun_a_=>_f_a___g_a| |_μ|)))
+  (define-fun valid_fact_8 () Bool
+    _Measurable_fun_p_=>_p.1___p.2_)
+  (define-fun valid_fact_47 () Bool
+    (forall ((_m_37 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_37))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__g_x_|
+             _m_37))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x__g_x_|
+        _m_37))))
+  (define-fun valid_fact_16 () Bool
+    (forall ((_m_6 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_6))
+      (not (|_@AEMeasurable_α_M_inst.1232_m_fun_a_=>_f_a___g_a| _m_6))
+      (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x___g_x_|
+        _m_6))))
+  (define-fun valid_fact_42 () Bool
+    (forall ((_m_32 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_32))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___f_x___g_x__g_x___f_x_|
+        _m_32)
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x___g_x__g_x___f_x_|
+             _m_32)))))
+  (define-fun valid_fact_51 () Bool
+    (forall ((_m_41 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_41))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__g_x_|
+             _m_41))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x___g_x__g_x_|
+        _m_41))))
+  (define-fun valid_fact_61 () Bool
+    (forall ((_m_51 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_g| _m_51))
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___g_x__f_x___g_x___f_x_|
+             _m_51))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___g_x__f_x___g_x___f_x_|
+        _m_51))))
+  (define-fun valid_fact_35 () Bool
+    (forall ((_m_25 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_25))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__f_x___g_x_|
+             _m_25))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x___g_x__f_x___g_x_|
+        _m_25))))
+  (define-fun |_MeasurableInf₂_M| () Bool
+    true)
+  (define-fun valid_fact_44 () Bool
+    (forall ((_m_34 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_34))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___f_x___g_x__f_x___g_x___f_x_|
+        _m_34)
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x___g_x__f_x___g_x___f_x_|
+             _m_34)))))
+  (define-fun valid_fact_31 () Bool
+    (forall ((_m_21 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_21))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x___g_x_|
+             _m_21))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x__f_x___g_x_|
+        _m_21))))
+  (define-fun valid_fact_40 () Bool
+    (forall ((_m_30 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_30))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___f_x__f_x___g_x___f_x_|
+        _m_30)
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x__f_x___g_x___f_x_|
+             _m_30)))))
+  (define-fun valid_fact_37 () Bool
+    (forall ((_m_27 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_27))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__f_x___f_x_|
+        _m_27)
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___g_x__f_x___f_x_|
+             _m_27)))))
+  (define-fun valid_fact_13 () Bool
+    (forall ((_m_3 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_3))
+      (not (|_@AEMeasurable_α_M_inst.1232_m_fun_a_=>_f_a___g_a| _m_3))
+      (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x___g_x_|
+        _m_3))))
+  (define-fun valid_fact_22 () Bool
+    (forall ((_m_12 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_12))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x__f_x___g_x___f_x_|
+        _m_12)
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x___g_x_|
+             _m_12)))))
+  (define-fun valid_fact_24 () Bool
+    (forall ((_m_14 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_14))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x___g_x__g_x___f_x_|
+        _m_14)
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__g_x_|
+             _m_14)))))
+  (define-fun valid_fact_12 () Bool
+    (forall ((_m_2 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_2))
+      (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__f_x_|
+        _m_2)
+      (not (|_@AEMeasurable_α_M_inst.1232_m_fun_a_=>_f_a___g_a| _m_2)))))
+  (define-fun valid_fact_26 () Bool
+    (forall ((_m_16 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_16))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x___g_x__f_x___g_x___f_x_|
+        _m_16)
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__f_x___g_x_|
+             _m_16)))))
+  (define-fun valid_fact_23 () Bool
+    (forall ((_m_13 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_13))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___g_x__g_x___f_x_|
+        _m_13)
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__g_x_|
+             _m_13)))))
+  (define-fun valid_fact_32 () Bool
+    (forall ((_m_22 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_22))
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__g_x_|
+             _m_22))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__g_x__g_x_|
+        _m_22))))
+  (define-fun valid_fact_21 () Bool
+    (forall ((_m_11 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_11))
+      (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x___g_x__f_x___f_x_|
+        _m_11)
+      (not (|_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__f_x_|
+             _m_11)))))
+  (define-fun valid_fact_36 () Bool
+    (forall ((_m_26 _MeasureTheory.Measure_α))
+  (or (not (|_@AEMeasurable_α_M_inst.1232_m_f| _m_26))
+      (|_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___f_x__f_x___f_x_|
+        _m_26)
+      (not (|_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x__f_x___f_x_|
+             _m_26)))))
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x___g_x__f_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___g_x__f_x___g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___f_x___g_x__f_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x__f_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x___g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___f_x__f_x___g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___f_x___g_x__f_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x__f_x___g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___f_x__f_x___g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__f_x___g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x___g_x__g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M_inst.1232_m_fun_a_=>_f_a___g_a| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__g_x__f_x___g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x___g_x__g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___g_x__g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x___g_x__f_x___g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___f_x__f_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x___g_x__f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___g_x__g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x__f_x___g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x___g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___f_x__g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___f_x__g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__g_x__f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__g_x__g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___g_x__f_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x___g_x__f_x___g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__g_x__g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x__f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___f_x___g_x__f_x___g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___g_x__f_x___g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___f_x___g_x__f_x___g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x__f_x___g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x___g_x__g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M_inst.1232_m_f| ((x!0 _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M_inst.1232_m_g| ((x!0 _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___f_x___g_x__g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x__g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x__g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x___f_x___g_x__g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___f_x__g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>___g_x__f_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x___g_x__f_x___g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x__f_x__f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__f_x___g_x__f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__g_x__g_x__f_x___g_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__f_x__f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__f_x___g_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    false)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___g_x__f_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x___f_x__f_x___f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+  (define-fun |_@AEMeasurable_α_M___M___M_Prod.instMeasurableSpace_m_fun_x_=>__f_x__g_x__f_x_| ((x!0
+    _MeasureTheory.Measure_α)) Bool
+    true)
+)
+
 
 Testing || Std.HashSet.getD_insert : ∀ {α : Type u} {x : BEq α} {x_1 : Hashable α} {m : Std.HashSet α} [inst : EquivBEq α] [inst : LawfulHashable α]
   {k a fallback : α}, (m.insert k).getD a fallback = if (k == a) = true ∧ k ∉ m then k else m.getD a fallback
 Result.autoException ::
+application type mismatch
+  Std.HashSet α = { inner := Std.HashSet α }.inner
+argument
+  { inner := Std.HashSet α }.inner
+has type
+  Std.HashMap α Unit : Type u
+but is expected to have type
+  Type u : Type (u + 1)
+
+Testing || LinOrd.Iso.mk_inv : ∀ {α β : LinOrd} (e : ↑α ≃o ↑β), (LinOrd.Iso.mk e).inv = ↑e.symm
+Result.success
+
+Testing || List.sublistsLen_length : ∀ {α : Type u} (l : List α), List.sublistsLen l.length l = [l]
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `List.map (cifvar_9 x_1)
+  (cifvar_2 x_0 x_2)`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+
+Testing || GenContFract.zeroth_contAux_eq_one_zero : ∀ {K : Type u_1} {g : GenContFract K} [inst : DivisionRing K], g.contsAux 0 = { a := 1, b := 0 }
+Result.autoException ::
+Auto.Monomorphization.ConstInst.ofExpr? :: Stream' (GenContFract.Pair K) is not a `∀`
+
+Testing || Rat.cast_sub_of_ne_zero : ∀ {α : Type u_3} [inst : DivisionRing α] {p q : ℚ}, ↑p.den ≠ 0 → ↑q.den ≠ 0 → ↑(p - q) = ↑p - ↑q
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `a.den_nz`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+
+Testing || _private.Mathlib.Combinatorics.SimpleGraph.Triangle.Counting.0.SimpleGraph.edgeDensity_badVertices_le : ∀ {α : Type u_1} (G : SimpleGraph α) [inst : DecidableRel G.Adj] {ε : ℝ} {s t : Finset α},
+  0 ≤ ε → 2 * ε ≤ ↑(G.edgeDensity s t) → ↑(G.edgeDensity (SimpleGraph.badVertices G ε s t) t) ≤ ↑(G.edgeDensity s t) - ε
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `AddGroup.toSubtractionMonoid`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+
+Testing || _private.Mathlib.Combinatorics.Additive.SmallTripling.0.Finset.small_pos_neg_pos_add : ∀ {G : Type u_1} [inst : DecidableEq G] [inst_1 : AddGroup G] {A : Finset G} {K : ℝ},
+  ↑(3 • A).card ≤ K * ↑A.card → ↑(A + -A + A).card ≤ K ^ 3 * ↑A.card
+Result.autoException ::
+Auto failed to find proof
+
+Testing || AddMonoid.exponent_pi_eq_zero : ∀ {ι : Type u_1} {M : ι → Type u_2} [inst : (i : ι) → AddMonoid (M i)] {j : ι},
+  AddMonoid.exponent (M j) = 0 → AddMonoid.exponent ((i : ι) → M i) = 0
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `n • g`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+
+Testing || isLUB_sSup : ∀ {α : Type u_1} [inst : CompleteSemilatticeSup α] (s : Set α), IsLUB s (sSup s)
+Result.autoException ::
 Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
+  ;; universe for _Set_α:
+  ;;   |_Set_α!val!0| 
+  ;; -----------
+  ;; definitions for universe elements:
+  (declare-fun |_Set_α!val!0| () _Set_α)
+  ;; cardinality constraint:
+  (forall ((x _Set_α)) (= x |_Set_α!val!0|))
+  ;; -----------
   ;; universe for _α:
   ;;   |_α!val!1| |_α!val!4| |_α!val!2| |_α!val!3| |_α!val!0| 
   ;; -----------
@@ -27,176 +675,6 @@ Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
               (= x |_α!val!2|)
               (= x |_α!val!3|)
               (= x |_α!val!0|)))
-  ;; -----------
-  ;; universe for _Std.DHashMap_α_fun_x_=>_PUnit._1_:
-  ;;   |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!0| |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!1| 
-  ;; -----------
-  ;; definitions for universe elements:
-  (declare-fun |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!0| () _Std.DHashMap_α_fun_x_=>_PUnit._1_)
-  (declare-fun |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!1| () _Std.DHashMap_α_fun_x_=>_PUnit._1_)
-  ;; cardinality constraint:
-  (forall ((x _Std.DHashMap_α_fun_x_=>_PUnit._1_))
-          (or (= x |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!0|)
-              (= x |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!1|)))
-  ;; -----------
-  (define-fun valid_fact_2 () Bool
-    (let ((a!1 (not (_Std.DHashMap.contains
-                  (_Std.HashMap.inner (_Std.HashSet.inner _m))
-                  _k))))
-(let ((a!2 (= (_Std.HashSet.getD (_Std.HashSet.insert _m _k) _a _fallback)
-              (ite (and (_BEq.beq _k _a) a!1)
-                   _k
-                   (_Std.HashSet.getD _m _a _fallback)))))
-  (not a!2))))
-  (define-fun |_EquivBEq_α| () Bool
-    true)
-  (define-fun valid_fact_1 () Bool
-    |_LawfulHashable_α|)
-  (define-fun _a () _α
-    |_α!val!1|)
-  (define-fun _fallback () _α
-    |_α!val!2|)
-  (define-fun _k () _α
-    |_α!val!0|)
-  (define-fun valid_fact_0 () Bool
-    |_EquivBEq_α|)
-  (define-fun |_LawfulHashable_α| () Bool
-    true)
-  (define-fun _m () _Std.HashSet_α
-    (_Std.HashSet.mk (_Std.HashMap.mk |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!0|)))
-  (define-fun _Std.HashSet.insert ((x!0 _Std.HashSet_α) (x!1 _α)) _Std.HashSet_α
-    (_Std.HashSet.mk (_Std.HashMap.mk |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!1|)))
-  (define-fun _BEq.beq ((x!0 _α) (x!1 _α)) Bool
-    false)
-  (define-fun _Std.HashSet.getD ((x!0 _Std.HashSet_α) (x!1 _α) (x!2 _α)) _α
-    (ite (and (= x!0
-                 (_Std.HashSet.mk (_Std.HashMap.mk |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!0|)))
-              (= x!1 |_α!val!1|)
-              (= x!2 |_α!val!2|))
-      |_α!val!4|
-      |_α!val!3|))
-  (define-fun _Std.DHashMap.contains ((x!0 _Std.DHashMap_α_fun_x_=>_PUnit._1_)
-   (x!1 _α)) Bool
-    false)
-)
-
-
-Testing || LinOrd.Iso.mk_inv : ∀ {α β : LinOrd} (e : ↑α ≃o ↑β), (LinOrd.Iso.mk e).inv = ↑e.symm
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-  ;; universe for _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_:
-  ;;   _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_!val!0 
-  ;; -----------
-  ;; definitions for universe elements:
-  (declare-fun _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_!val!0 () _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_)
-  ;; cardinality constraint:
-  (forall ((x _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_))
-          (= x _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_!val!0))
-  ;; -----------
-  ;; universe for _α___β:
-  ;;   |_α___β!val!0| 
-  ;; -----------
-  ;; definitions for universe elements:
-  (declare-fun |_α___β!val!0| () _α___β)
-  ;; cardinality constraint:
-  (forall ((x _α___β)) (= x |_α___β!val!0|))
-  ;; -----------
-  ;; universe for __β__o__α:
-  ;;   |__β__o__α!val!0| |__β__o__α!val!1| 
-  ;; -----------
-  ;; definitions for universe elements:
-  (declare-fun |__β__o__α!val!0| () __β__o__α)
-  (declare-fun |__β__o__α!val!1| () __β__o__α)
-  ;; cardinality constraint:
-  (forall ((x __β__o__α))
-          (or (= x |__β__o__α!val!0|) (= x |__β__o__α!val!1|)))
-  ;; -----------
-  ;; universe for _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0:
-  ;;   _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0!val!0 
-  ;; -----------
-  ;; definitions for universe elements:
-  (declare-fun _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0!val!0 () _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0)
-  ;; cardinality constraint:
-  (forall ((x _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0))
-          (= x _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0!val!0))
-  ;; -----------
-  (define-fun _e () _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_
-    _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_!val!0)
-  (define-fun valid_fact_0 () Bool
-    (not (= (_CategoryTheory.Iso.inv (_LinOrd.Iso.mk _e))
-        (_OrderHomClass.toOrderHom (_OrderIso.symm _e)))))
-  (define-fun _OrderHomClass.toOrderHom ((x!0
-    _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0)) __β__o__α
-    |__β__o__α!val!1|)
-  (define-fun _OrderIso.symm ((x!0 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_)) _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0
-    _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0!val!0)
-  (define-fun _CategoryTheory.Iso.inv ((x!0 _α___β)) __β__o__α
-    |__β__o__α!val!0|)
-  (define-fun _LinOrd.Iso.mk ((x!0 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_)) _α___β
-    |_α___β!val!0|)
-)
-
-
-Testing || List.sublistsLen_length : ∀ {α : Type u} (l : List α), List.sublistsLen l.length l = [l]
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `List.map (cifvar_9 x_1)
-  (cifvar_2 x_0 x_2)`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
-
-Testing || GenContFract.zeroth_contAux_eq_one_zero : ∀ {K : Type u_1} {g : GenContFract K} [inst : DivisionRing K], g.contsAux 0 = { a := 1, b := 0 }
-Result.autoException ::
-Auto.Monomorphization.ConstInst.ofExpr? :: Stream' (GenContFract.Pair K) is not a `∀`
-
-Testing || Rat.cast_sub_of_ne_zero : ∀ {α : Type u_3} [inst : DivisionRing α] {p q : ℚ}, ↑p.den ≠ 0 → ↑q.den ≠ 0 → ↑(p - q) = ↑p - ↑q
-Result.autoException ::
-Auto failed to find proof
-
-Testing || _private.Mathlib.Combinatorics.SimpleGraph.Triangle.Counting.0.SimpleGraph.edgeDensity_badVertices_le : ∀ {α : Type u_1} (G : SimpleGraph α) [inst : DecidableRel G.Adj] {ε : ℝ} {s t : Finset α},
-  0 ≤ ε → 2 * ε ≤ ↑(G.edgeDensity s t) → ↑(G.edgeDensity (SimpleGraph.badVertices G ε s t) t) ≤ ↑(G.edgeDensity s t) - ε
-Result.autoException ::
-Auto failed to find proof
-
-Testing || _private.Mathlib.Combinatorics.Additive.SmallTripling.0.Finset.small_pos_neg_pos_add : ∀ {G : Type u_1} [inst : DecidableEq G] [inst_1 : AddGroup G] {A : Finset G} {K : ℝ},
-  ↑(3 • A).card ≤ K * ↑A.card → ↑(A + -A + A).card ≤ K ^ 3 * ↑A.card
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `Monotone fun n =>
-  cifvar_2 (cifvar_3 n x_0)`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
-
-Testing || AddMonoid.exponent_pi_eq_zero : ∀ {ι : Type u_1} {M : ι → Type u_2} [inst : (i : ι) → AddMonoid (M i)] {j : ι},
-  AddMonoid.exponent (M j) = 0 → AddMonoid.exponent ((i : ι) → M i) = 0
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `n • g`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
-
-Testing || isLUB_sSup : ∀ {α : Type u_1} [inst : CompleteSemilatticeSup α] (s : Set α), IsLUB s (sSup s)
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-  ;; universe for _Set_α:
-  ;;   |_Set_α!val!0| 
-  ;; -----------
-  ;; definitions for universe elements:
-  (declare-fun |_Set_α!val!0| () _Set_α)
-  ;; cardinality constraint:
-  (forall ((x _Set_α)) (= x |_Set_α!val!0|))
-  ;; -----------
-  ;; universe for _α:
-  ;;   |_α!val!1| |_α!val!0| 
-  ;; -----------
-  ;; definitions for universe elements:
-  (declare-fun |_α!val!1| () _α)
-  (declare-fun |_α!val!0| () _α)
-  ;; cardinality constraint:
-  (forall ((x _α)) (or (= x |_α!val!1|) (= x |_α!val!0|)))
   ;; -----------
   (define-fun valid_fact_1 () Bool
     (forall ((_s_0 _Set_α) (|_α_0| _α))
@@ -216,18 +694,30 @@ Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
   (define-fun valid_fact_2 () Bool
     (forall ((_s_1 _Set_α) (|_α_1| _α))
   (or (not (_Membership.mem _s_1 |_α_1|)) (_LE.le |_α_1| (_sSup _s_1)))))
+  (define-fun valid_fact_5 () Bool
+    (forall ((_s_4 _Set_α) (|_α_6| _α))
+  (let ((a!1 (forall ((|_α_7| _α))
+               (or (not (_Membership.mem _s_4 |_α_7|))
+                   (_LE.le |_α_7| |_α_6|)))))
+    (or (not a!1) (_LE.le (_sSup _s_4) |_α_6|)))))
   (define-fun valid_fact_0 () Bool
     (not (_IsLUB _s (_sSup _s))))
   (define-fun _s () _Set_α
     |_Set_α!val!0|)
-  (define-fun _LE.le ((x!0 _α) (x!1 _α)) Bool
-    true)
   (define-fun _IsLUB ((x!0 _Set_α) (x!1 _α)) Bool
     false)
   (define-fun _sSup ((x!0 _Set_α)) _α
     |_α!val!0|)
+  (define-fun _LE.le ((x!0 _α) (x!1 _α)) Bool
+    (or (and (= x!0 |_α!val!3|) (= x!1 |_α!val!0|))
+        (and (= x!0 |_α!val!2|) (not (= x!0 |_α!val!3|)) (= x!1 |_α!val!0|))
+        (and (not (= x!0 |_α!val!2|))
+             (not (= x!0 |_α!val!3|))
+             (= x!1 |_α!val!0|))))
   (define-fun _Membership.mem ((x!0 _Set_α) (x!1 _α)) Bool
-    false)
+    (or (= x!1 |_α!val!3|)
+        (and (not (= x!1 |_α!val!2|)) (not (= x!1 |_α!val!3|)))
+        (and (= x!1 |_α!val!2|) (not (= x!1 |_α!val!3|)))))
 )
 
 
@@ -245,6 +735,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || FirstOrder.Language.ElementaryEmbedding.map_rel : ∀ {L : FirstOrder.Language} {M : Type u_1} {N : Type u_2} [inst : L.Structure M] [inst_1 : L.Structure N]
   (φ : L.ElementaryEmbedding M N) {n : ℕ} (r : L.Relations n) (x : Fin n → M),
@@ -255,6 +746,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || hnot_le_iff_codisjoint_left : ∀ {α : Type u_2} [inst : CoheytingAlgebra α] {a b : α}, ￢a ≤ b ↔ Codisjoint b a
 Result.success
@@ -266,6 +758,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map' : ∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{u_4, u_1} C]
   [inst_1 : CategoryTheory.Category.{u_3, u_2} D] {G : CategoryTheory.Functor C D} {A : Type w}
@@ -278,24 +771,19 @@ Testing || CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map' : ∀ {C : Typ
     CategoryTheory.CategoryStruct.comp (CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux hF α s f) (F.map a.op) =
       CategoryTheory.CategoryStruct.comp (CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux hF α s f') (F.map b.op)
 Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `(cifvar_29 x_0).map
-  (cifvar_7 x_1 x_2)`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
+Auto failed to find proof
 
 Testing || AlgebraicGeometry.Spec.toSheafedSpace_obj : ∀ (R : CommRingCatᵒᵖ),
   AlgebraicGeometry.Spec.toSheafedSpace.obj R = AlgebraicGeometry.Spec.sheafedSpaceObj (Opposite.unop R)
 Result.autoException ::
 application type mismatch
-  CommRingCat = Opposite.unop (Opposite.op (CategoryTheory.Bundled CommRing))
+  CommRing α = Opposite.unop (Opposite.op (CommRing α))
 argument
-  Opposite.unop (Opposite.op (CategoryTheory.Bundled CommRing))
+  Opposite.unop (Opposite.op (CommRing α))
 has type
   CommRingCat : Type (u + 1)
 but is expected to have type
-  Type (u + 1) : Type (u + 2)
+  Type u : Type (u + 1)
 
 Testing || Set.image_preimage : ∀ {α : Type u_1} {β : Type u_2} {f : α → β}, GaloisConnection (Set.image f) (Set.preimage f)
 Result.autoException ::
@@ -378,7 +866,14 @@ Testing || CategoryTheory.Limits.coneOfSectionCompYoneda_pt : ∀ {C : Type u} [
   (F : CategoryTheory.Functor J Cᵒᵖ) (X : C) (s : ↑(F.comp (CategoryTheory.yoneda.obj X)).sections),
   (CategoryTheory.Limits.coneOfSectionCompYoneda F X s).pt = Opposite.op X
 Result.autoException ::
-Auto failed to find proof
+application type mismatch
+  Opposite.op unop = Opposite.unop (Opposite.op (Opposite.op unop))
+argument
+  Opposite.unop (Opposite.op (Opposite.op unop))
+has type
+  C : Type u
+but is expected to have type
+  Cᵒᵖ : Type u
 
 Testing || WittVector.wittMul_vars : ∀ (p : ℕ) [hp : Fact (Nat.Prime p)] (n : ℕ), (WittVector.wittMul p n).vars ⊆ Finset.univ ×ˢ Finset.range (n + 1)
 Result.autoException ::
@@ -386,7 +881,7 @@ Auto failed to find proof
 
 Testing || Real.borel_eq_generateFrom_Ioi_rat : borel ℝ = MeasurableSpace.generateFrom (⋃ a, {Set.Ioi ↑a})
 Result.autoException ::
-Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type x ∈ x_0 of λ binder contains bound variables
+Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type x ∈ x_1 of λ binder contains bound variables
 
 Testing || HomologicalComplex₂.comm_f : ∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_4, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]
   {I₁ : Type u_2} {I₂ : Type u_3} {c₁ : ComplexShape I₁} {c₂ : ComplexShape I₂} {K L : HomologicalComplex₂ C c₁ c₂}
@@ -394,11 +889,12 @@ Testing || HomologicalComplex₂.comm_f : ∀ {C : Type u_1} [inst : CategoryThe
   CategoryTheory.CategoryStruct.comp ((f.f i₁).f i₂) ((L.d i₁ i₁').f i₂) =
     CategoryTheory.CategoryStruct.comp ((K.d i₁ i₁').f i₂) ((f.f i₁').f i₂)
 Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `cifvar_17.d cifvar_16 x_1`.
+Monomorphization failed because currently the procedure cannot deal with expression `x_0.f x_1`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || Asymptotics.IsBigO.comp_tendsto : ∀ {α : Type u_1} {β : Type u_2} {E : Type u_3} {F : Type u_4} [inst : Norm E] [inst_1 : Norm F] {f : α → E} {g : α → F}
   {l : Filter α}, f =O[l] g → ∀ {k : β → α} {l' : Filter β}, Filter.Tendsto k l' l → (f ∘ k) =O[l'] (g ∘ k)
@@ -450,15 +946,19 @@ Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
              (_fun_c_l_=>_Asymptotics.IsBigOWith_l_c_f___k_g___k _pl___4 _f_0)))
       (exists ((_pl___5 _pl__))
         (_fun_c_l_=>_Asymptotics.IsBigOWith_l_c_f___k_g___k _pl___5 _f_0)))))
-  (define-fun _l () _Filter_α
-    |_Filter_α!val!0|)
   (define-fun valid_fact_2 () Bool
     (not (exists ((_pl___1 _pl__))
        (_fun_c_l_=>_Asymptotics.IsBigOWith_l_c_f___k_g___k _pl___1 _l_))))
-  (define-fun _l_ () _Filter_β
-    |_Filter_β!val!0|)
   (define-fun valid_fact_1 () Bool
     (_Filter.Tendsto_k _l_ _l))
+  (define-fun _l () _Filter_α
+    |_Filter_α!val!0|)
+  (define-fun _l_ () _Filter_β
+    |_Filter_β!val!0|)
+  (define-fun valid_fact_6 () Bool
+    true)
+  (define-fun valid_fact_5 () Bool
+    true)
   (define-fun _Filter.Tendsto_k ((x!0 _Filter_β) (x!1 _Filter_α)) Bool
     true)
   (define-fun _fun_c_l_=>_Asymptotics.IsBigOWith_l_c_f___k_g___k ((x!0 _pl__)
@@ -467,6 +967,12 @@ Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
   (define-fun _fun_c_l_=>_Asymptotics.IsBigOWith_l_c_f_g ((x!0 _pl__)
    (x!1 _Filter_α)) Bool
     true)
+  (define-fun _g ((x!0 _α)) _F
+    _F!val!0)
+  (define-fun _f_1 ((x!0 _α)) _E
+    _E!val!0)
+  (define-fun _k ((x!0 _β_0)) _α
+    |_α!val!0|)
 )
 
 
@@ -495,18 +1001,19 @@ Result.success
 Testing || HasProd.div : ∀ {α : Type u_1} {β : Type u_2} [inst : CommGroup α] [inst_1 : TopologicalSpace α] [inst_2 : TopologicalGroup α]
   {f g : β → α} {a₁ a₂ : α}, HasProd f a₁ → HasProd g a₂ → HasProd (fun b => f b / g b) (a₁ / a₂)
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || IsLocalization.coeSubmodule_fg : ∀ {R : Type u_1} [inst : CommSemiring R] (S : Type u_2) [inst_1 : CommSemiring S] [inst_2 : Algebra R S],
   Function.Injective ⇑(algebraMap R S) → ∀ (I : Ideal R), (IsLocalization.coeSubmodule S I).FG ↔ Submodule.FG I
 Result.autoException ::
 Monomorphization failed because currently the procedure cannot deal with expression `Function.Injective
-  (cifvar_11 x_0)`.
+  (cifvar_10 x_0)`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || CategoryTheory.IsPullback.of_right : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {X₁₁ X₁₂ X₁₃ X₂₁ X₂₂ X₂₃ : C} {h₁₁ : X₁₁ ⟶ X₁₂}
   {h₁₂ : X₁₂ ⟶ X₁₃} {h₂₁ : X₂₁ ⟶ X₂₂} {h₂₂ : X₂₂ ⟶ X₂₃} {v₁₁ : X₁₁ ⟶ X₂₁} {v₁₂ : X₁₂ ⟶ X₂₂} {v₁₃ : X₁₃ ⟶ X₂₃},
@@ -514,9 +1021,7 @@ Testing || CategoryTheory.IsPullback.of_right : ∀ {C : Type u₁} [inst : Cate
       (CategoryTheory.CategoryStruct.comp h₂₁ h₂₂) →
     CategoryTheory.CategoryStruct.comp h₁₁ v₁₂ = CategoryTheory.CategoryStruct.comp v₁₁ h₂₁ →
       CategoryTheory.IsPullback h₁₂ v₁₂ v₁₃ h₂₂ → CategoryTheory.IsPullback h₁₁ v₁₁ v₁₂ h₂₁
-Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+Result.success
 
 Testing || Nat.nonempty_properDivisors : ∀ {n : ℕ}, n.properDivisors.Nonempty ↔ 1 < n
 Result.autoException ::
@@ -526,11 +1031,12 @@ Testing || RingEquiv.map_prod : ∀ {α : Type u_1} {R : Type u_2} {S : Type u_3
   (f : α → R) (s : Finset α), g (∏ x ∈ s, f x) = ∏ x ∈ s, g (f x)
 Result.autoException ::
 Monomorphization failed because currently the procedure cannot deal with expression `∏ x ∈ x_1,
-  cifvar_2 x_0 (cifvar_9 x)`.
+  cifvar_2 x_0 (cifvar_10 x)`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || dist_smul : ∀ {M : Type u} {X : Type w} [inst : PseudoMetricSpace X] [inst_1 : SMul M X] [inst_2 : IsometricSMul M X] (c : M)
   (x y : X), dist (c • x) (c • y) = dist x y
@@ -540,6 +1046,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || map_mul_right_nhds₀ : ∀ {G₀ : Type u_3} [inst : TopologicalSpace G₀] [inst_1 : GroupWithZero G₀] [inst_2 : ContinuousMul G₀] {a : G₀},
   a ≠ 0 → ∀ (b : G₀), Filter.map (fun x => x * a) (nhds b) = nhds (b * a)
@@ -550,6 +1057,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || Nat.find_le : ∀ {n : ℕ} {p : ℕ → Prop} [inst : DecidablePred p] {h : ∃ n, p n}, p n → Nat.find h ≤ n
 Result.autoException ::
@@ -562,17 +1070,18 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || IterateAddAct.ext : ∀ {α : Type u_1} {f : α → α} {x y : IterateAddAct f}, x.val = y.val → x = y
 Result.autoException ::
 application type mismatch
-  α = { val := α }.val
+  ℕ = { val := ℕ }.val
 argument
-  { val := α }.val
+  { val := ℕ }.val
 has type
   ℕ : Type
 but is expected to have type
-  Type u_1 : Type (u_1 + 1)
+  Type : Type 1
 
 Testing || Mathlib.Vector.mem_cons_of_mem : ∀ {α : Type u_1} {n : ℕ} (a a' : α) (v : Mathlib.Vector α n), a' ∈ v.toList → a' ∈ (a ::ᵥ v).toList
 Result.success
@@ -581,7 +1090,7 @@ Testing || Measurable.set_lintegral_kernel : ∀ {α : Type u_1} {β : Type u_2}
   [inst : ProbabilityTheory.IsSFiniteKernel κ] {f : β → ENNReal},
   Measurable f → ∀ {s : Set β}, MeasurableSet s → Measurable fun a => ∫⁻ (b : β) in s, f b ∂κ a
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Nat.dvd_zero : ∀ (a : ℕ), a ∣ 0
@@ -804,50 +1313,7 @@ Result.autoException ::
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Finset.singleton_infs_singleton : ∀ {α : Type u_2} [inst : DecidableEq α] [inst_1 : SemilatticeInf α] {a b : α}, {a} ⊼ {b} = {a ⊓ b}
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-  ;; universe for _α:
-  ;;   |_α!val!0| |_α!val!1| |_α!val!2| 
-  ;; -----------
-  ;; definitions for universe elements:
-  (declare-fun |_α!val!0| () _α)
-  (declare-fun |_α!val!1| () _α)
-  (declare-fun |_α!val!2| () _α)
-  ;; cardinality constraint:
-  (forall ((x _α)) (or (= x |_α!val!0|) (= x |_α!val!1|) (= x |_α!val!2|)))
-  ;; -----------
-  ;; universe for _Finset_α:
-  ;;   |_Finset_α!val!1| |_Finset_α!val!3| |_Finset_α!val!0| |_Finset_α!val!2| 
-  ;; -----------
-  ;; definitions for universe elements:
-  (declare-fun |_Finset_α!val!1| () _Finset_α)
-  (declare-fun |_Finset_α!val!3| () _Finset_α)
-  (declare-fun |_Finset_α!val!0| () _Finset_α)
-  (declare-fun |_Finset_α!val!2| () _Finset_α)
-  ;; cardinality constraint:
-  (forall ((x _Finset_α))
-          (or (= x |_Finset_α!val!1|)
-              (= x |_Finset_α!val!3|)
-              (= x |_Finset_α!val!0|)
-              (= x |_Finset_α!val!2|)))
-  ;; -----------
-  (define-fun _a () _α
-    |_α!val!0|)
-  (define-fun valid_fact_0 () Bool
-    (not (= (_HasInfs.infs (_singleton _a) (_singleton _b))
-        (_singleton (_min _a _b)))))
-  (define-fun _b () _α
-    |_α!val!1|)
-  (define-fun _min ((x!0 _α) (x!1 _α)) _α
-    |_α!val!2|)
-  (define-fun _singleton ((x!0 _α)) _Finset_α
-    (ite (= x!0 |_α!val!1|) |_Finset_α!val!1|
-    (ite (= x!0 |_α!val!2|) |_Finset_α!val!3|
-      |_Finset_α!val!0|)))
-  (define-fun _HasInfs.infs ((x!0 _Finset_α) (x!1 _Finset_α)) _Finset_α
-    |_Finset_α!val!2|)
-)
-
+Result.success
 
 Testing || IsConjRoot.isIntegral : ∀ {R : Type u_1} {A : Type u_5} [inst : CommRing R] [inst_1 : Ring A] [inst_2 : Algebra R A] {x y : A},
   IsIntegral R x → IsConjRoot R x y → IsIntegral R y
@@ -877,13 +1343,13 @@ Testing || List.takeDTR_go_eq : ∀ {α : Type u_1} {dflt : α} {acc : Array α}
   List.takeDTR.go dflt n l acc = acc.toList ++ List.takeD n l dflt
 Result.autoException ::
 application type mismatch
-  (¬a) = { toList := a → False }.toList
+  α✝ = { toList := α✝ }.toList
 argument
-  { toList := a → False }.toList
+  { toList := α✝ }.toList
 has type
   List α✝ : Type u_1
 but is expected to have type
-  Prop : Type
+  Type u_1 : Type (u_1 + 1)
 
 Testing || Symmetric.iff : ∀ {α : Type u_1} {r : α → α → Prop}, Symmetric r → ∀ (x y : α), r x y ↔ r y x
 Result.autoException ::
@@ -927,8 +1393,7 @@ Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : (#5 → Prop), ((∃x1 : #5,
 
 Testing || CategoryTheory.ofTypeMonad_obj : ∀ (m : Type u → Type u) [inst : Monad m] [inst_1 : LawfulMonad m] (a : Type u),
   (CategoryTheory.ofTypeMonad m).obj a = m a
-Result.autoException ::
-Auto failed to find proof
+Result.success
 
 Testing || Set.center_eq_univ : ∀ (M : Type u_1) [inst : CommSemigroup M], Set.center M = Set.univ
 Result.autoException ::
@@ -944,6 +1409,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || TwoUniqueSums.of_addHom : ∀ {G : Type u} {H : Type v} [inst : Add G] [inst_1 : Add H] (f : H →ₙ+ G),
   (∀ ⦃a b c d : H⦄, a + b = c + d → f a = f c ∧ f b = f d → a = c ∧ b = d) → ∀ [inst : TwoUniqueSums G], TwoUniqueSums H
@@ -953,6 +1419,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || SimpleGraph.Walk.map_toDeleteEdges_eq : ∀ {V : Type u} {G : SimpleGraph V} {v w : V} (s : Set (Sym2 V)) {p : G.Walk v w} (hp : ∀ e ∈ p.edges, e ∉ s),
   SimpleGraph.Walk.map (SimpleGraph.Hom.mapSpanningSubgraphs ⋯) (SimpleGraph.Walk.toDeleteEdges s p hp) = p
@@ -1107,8 +1574,7 @@ Testing || CategoryTheory.Idempotents.DoldKan.N_obj : ∀ {C : Type u_1} [inst :
   CategoryTheory.Idempotents.DoldKan.N.obj X =
     (CategoryTheory.Idempotents.toKaroubiEquivalence (ChainComplex C ℕ)).inverse.obj
       (AlgebraicTopology.DoldKan.N₁.obj X)
-Result.autoException ::
-Auto failed to find proof
+Result.success
 
 Testing || HomogeneousLocalization.val_zsmul : ∀ {ι : Type u_1} {R : Type u_2} {A : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]
   {𝒜 : ι → Submodule R A} (x : Submonoid A) (n : ℤ) (y : HomogeneousLocalization 𝒜 x), (n • y).val = n • y.val
@@ -1193,12 +1659,22 @@ Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
               (= x |_F_α!val!0|)))
   ;; -----------
   ;; universe for __QPF.P_F_QPF.P_F.W:
-  ;;   __QPF.P_F_QPF.P_F.W!val!0 
+  ;;   __QPF.P_F_QPF.P_F.W!val!1 __QPF.P_F_QPF.P_F.W!val!0 
   ;; -----------
   ;; definitions for universe elements:
+  (declare-fun __QPF.P_F_QPF.P_F.W!val!1 () __QPF.P_F_QPF.P_F.W)
   (declare-fun __QPF.P_F_QPF.P_F.W!val!0 () __QPF.P_F_QPF.P_F.W)
   ;; cardinality constraint:
-  (forall ((x __QPF.P_F_QPF.P_F.W)) (= x __QPF.P_F_QPF.P_F.W!val!0))
+  (forall ((x __QPF.P_F_QPF.P_F.W))
+          (or (= x __QPF.P_F_QPF.P_F.W!val!1) (= x __QPF.P_F_QPF.P_F.W!val!0)))
+  ;; -----------
+  ;; universe for _F_QPF.P_F.W:
+  ;;   _F_QPF.P_F.W!val!0 
+  ;; -----------
+  ;; definitions for universe elements:
+  (declare-fun _F_QPF.P_F.W!val!0 () _F_QPF.P_F.W)
+  ;; cardinality constraint:
+  (forall ((x _F_QPF.P_F.W)) (= x _F_QPF.P_F.W!val!0))
   ;; -----------
   ;; universe for _QPF.P_F.W:
   ;;   _QPF.P_F.W!val!0 
@@ -1208,24 +1684,30 @@ Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
   ;; cardinality constraint:
   (forall ((x _QPF.P_F.W)) (= x _QPF.P_F.W!val!0))
   ;; -----------
+  (define-fun valid_fact_5 () Bool
+    true)
+  (define-fun valid_fact_3 () Bool
+    (forall ((_pl___0 __QPF.P_F_QPF.Fix_F))
+  (= (_QPF.abs (|_QPF.P_F.map_g₂| _pl___0))
+     (|_Functor.map_g₂| (_QPF.abs_0 _pl___0)))))
+  (define-fun valid_fact_4 () Bool
+    (forall ((_pl___1 __QPF.P_F_QPF.Fix_F))
+  (= (_QPF.abs_1 (_QPF.P_F.map_QPF.fixToW _pl___1))
+     (_Functor.map_QPF.fixToW (_QPF.abs_0 _pl___1)))))
+  (define-fun valid_fact_2 () Bool
+    (forall ((_pl__ __QPF.P_F_QPF.Fix_F))
+  (= (_QPF.abs (|_QPF.P_F.map_g₁| _pl__))
+     (|_Functor.map_g₁| (_QPF.abs_0 _pl__)))))
   (define-fun valid_fact_1 () Bool
     (not (= (|_g₁| _x) (|_g₂| _x))))
+  (define-fun _x () _QPF.Fix_F
+    _QPF.Fix_F!val!0)
   (define-fun valid_fact_0 () Bool
     (forall ((_f _F_QPF.Fix_F))
   (let ((a!1 (_Quotient.mk_QPF.Wsetoid
                (_PFunctor.W.mk (_QPF.P_F.map_QPF.fixToW (_QPF.repr _f))))))
     (or (not (= (|_Functor.map_g₁| _f) (|_Functor.map_g₂| _f)))
         (= (|_g₁| a!1) (|_g₂| a!1))))))
-  (define-fun _x () _QPF.Fix_F
-    _QPF.Fix_F!val!0)
-  (define-fun valid_fact_2 () Bool
-    (forall ((_pl__ __QPF.P_F_QPF.Fix_F))
-  (= (_QPF.abs (|_QPF.P_F.map_g₁| _pl__))
-     (|_Functor.map_g₁| (_QPF.abs_0 _pl__)))))
-  (define-fun valid_fact_3 () Bool
-    (forall ((_pl___0 __QPF.P_F_QPF.Fix_F))
-  (= (_QPF.abs (|_QPF.P_F.map_g₂| _pl___0))
-     (|_Functor.map_g₂| (_QPF.abs_0 _pl___0)))))
   (define-fun _QPF.abs ((x!0 __QPF.P_F_α)) _F_α
     (ite (= x!0 |__QPF.P_F_α!val!1|) |_F_α!val!1|
       |_F_α!val!0|))
@@ -1239,6 +1721,8 @@ Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
     __QPF.P_F_QPF.Fix_F!val!0)
   (define-fun _QPF.abs_0 ((x!0 __QPF.P_F_QPF.Fix_F)) _F_QPF.Fix_F
     _F_QPF.Fix_F!val!0)
+  (define-fun _Functor.map_QPF.fixToW ((x!0 _F_QPF.Fix_F)) _F_QPF.P_F.W
+    _F_QPF.P_F.W!val!0)
   (define-fun |_Functor.map_g₁| ((x!0 _F_QPF.Fix_F)) _F_α
     |_F_α!val!1|)
   (define-fun |_Functor.map_g₂| ((x!0 _F_QPF.Fix_F)) _F_α
@@ -1251,6 +1735,8 @@ Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
     |__QPF.P_F_α!val!0|)
   (define-fun |_g₂| ((x!0 _QPF.Fix_F)) _α
     |_α!val!1|)
+  (define-fun _QPF.abs_1 ((x!0 __QPF.P_F_QPF.P_F.W)) _F_QPF.P_F.W
+    _F_QPF.P_F.W!val!0)
 )
 
 
@@ -1263,11 +1749,13 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || leibniz_cross : ∀ {R : Type u_1} [inst : CommRing R] (u v w : Fin 3 → R),
   (crossProduct u) ((crossProduct v) w) = (crossProduct ((crossProduct u) v)) w + (crossProduct v) ((crossProduct u) w)
 Result.autoException ::
-Auto failed to find proof
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Real.one_sub_le_exp_neg : ∀ (x : ℝ), 1 - x ≤ Real.exp (-x)
 Result.success
@@ -1283,6 +1771,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || IndexedPartition.disjoint : ∀ {ι : Type u_1} {α : Type u_2} {s : ι → Set α}, IndexedPartition s → Pairwise (Disjoint on s)
 Result.autoException ::
@@ -1296,6 +1785,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || List.Perm.eraseP : ∀ {α : Type u_1} (f : α → Bool) {l₁ l₂ : List α},
   List.Pairwise (fun a b => f a = true → f b = true → False) l₁ →
@@ -1331,6 +1821,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || Topology.IsQuotientMap.image_connectedComponent : ∀ {α : Type u} {β : Type v} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β] {f : α → β},
   Topology.IsQuotientMap f →
@@ -1351,6 +1842,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || univLE_max : UnivLE.{u, max u v}
 Result.autoException ::
@@ -1379,8 +1871,7 @@ Result.success
 Testing || CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_map_base : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (F : CategoryTheory.Functor C CategoryTheory.Cat)
   {X Y : CategoryTheory.Grothendieck F} (f : X ⟶ Y),
   ((CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse F).map f).base = f.base
-Result.autoException ::
-Auto failed to find proof
+Result.success
 
 Testing || UniqueFactorizationMonoid.squarefree_iff_nodup_normalizedFactors : ∀ {R : Type u_1} [inst : CancelCommMonoidWithZero R] [inst_1 : UniqueFactorizationMonoid R]
   [inst_2 : NormalizationMonoid R] {x : R},
@@ -1391,6 +1882,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || ContDiffAt.prod_map : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type uE} [inst_1 : NormedAddCommGroup E]
   [inst_2 : NormedSpace 𝕜 E] {F : Type uF} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : WithTop ℕ∞}
@@ -1473,41 +1965,11 @@ Testing || ProbabilityTheory.Kernel.fst_comp : ∀ {α : Type u_1} {β : Type u_
   {mγ : MeasurableSpace γ} {mδ : MeasurableSpace δ} (κ : ProbabilityTheory.Kernel α β)
   (η : ProbabilityTheory.Kernel β (γ × δ)), (η.comp κ).fst = η.fst.comp κ
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || TypeVec.dropFun_id : ∀ {n : ℕ} {α : TypeVec.{u_1} (n + 1)}, TypeVec.dropFun TypeVec.id = TypeVec.id
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-  ;; universe for _α.Arrow_α:
-  ;;   |_α.Arrow_α!val!0| 
-  ;; -----------
-  ;; definitions for universe elements:
-  (declare-fun |_α.Arrow_α!val!0| () _α.Arrow_α)
-  ;; cardinality constraint:
-  (forall ((x _α.Arrow_α)) (= x |_α.Arrow_α!val!0|))
-  ;; -----------
-  ;; universe for _α.drop.Arrow_α.drop:
-  ;;   |_α.drop.Arrow_α.drop!val!1| |_α.drop.Arrow_α.drop!val!0| 
-  ;; -----------
-  ;; definitions for universe elements:
-  (declare-fun |_α.drop.Arrow_α.drop!val!1| () _α.drop.Arrow_α.drop)
-  (declare-fun |_α.drop.Arrow_α.drop!val!0| () _α.drop.Arrow_α.drop)
-  ;; cardinality constraint:
-  (forall ((x _α.drop.Arrow_α.drop))
-          (or (= x |_α.drop.Arrow_α.drop!val!1|)
-              (= x |_α.drop.Arrow_α.drop!val!0|)))
-  ;; -----------
-  (define-fun _TypeVec.id () _α.Arrow_α
-    |_α.Arrow_α!val!0|)
-  (define-fun _TypeVec.id_0 () _α.drop.Arrow_α.drop
-    |_α.drop.Arrow_α.drop!val!1|)
-  (define-fun valid_fact_0 () Bool
-    (not (= (_TypeVec.dropFun _TypeVec.id) _TypeVec.id_0)))
-  (define-fun _TypeVec.dropFun ((x!0 _α.Arrow_α)) _α.drop.Arrow_α.drop
-    |_α.drop.Arrow_α.drop!val!0|)
-)
-
+Result.success
 
 Testing || Real.cos_sq_add_sin_sq : ∀ (x : ℝ), Real.cos x ^ 2 + Real.sin x ^ 2 = 1
 Result.success
@@ -1539,18 +2001,19 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || CategoryTheory.equivYoneda'_inv_val : ∀ (S : CategoryTheory.Sheaf CategoryTheory.typesGrothendieckTopology (Type u)),
   (CategoryTheory.equivYoneda' S).inv.val = (CategoryTheory.equivYoneda S.val ⋯).inv
 Result.autoException ::
 application type mismatch
-  (¬a) = { val := a → False }.val
+  αᵒᵖ = { val := αᵒᵖ }.val
 argument
-  { val := a → False }.val
+  { val := αᵒᵖ }.val
 has type
   (CategoryTheory.yoneda'.obj (S.val.obj (Opposite.op PUnit.{u + 1}))).val ⟶ S.val : Type (u + 1)
 but is expected to have type
-  Prop : Type
+  Type (u + 1) : Type (u + 2)
 
 Testing || Fintype.decidableEqAddEquivFintype.proof_1 : ∀ {α : Type u_1} {β : Type u_2} [inst : Add α] [inst_1 : Add β] (a b : α ≃+ β), ⇑a = ⇑b ↔ a = b
 Result.autoException ::
@@ -1559,6 +2022,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || intervalIntegral.intervalIntegrable_log : ∀ {a b : ℝ} {μ : MeasureTheory.Measure ℝ} [inst : MeasureTheory.IsLocallyFiniteMeasure μ],
   0 ∉ Set.uIcc a b → IntervalIntegrable Real.log μ a b
@@ -1568,6 +2032,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || StrictConcaveOn.concaveOn : ∀ {𝕜 : Type u_1} {E : Type u_2} {β : Type u_5} [inst : OrderedSemiring 𝕜] [inst_1 : AddCommMonoid E]
   [inst_2 : OrderedAddCommMonoid β] [inst_3 : _root_.Module 𝕜 E] [inst_4 : _root_.Module 𝕜 β] {s : Set E} {f : E → β},
@@ -1586,6 +2051,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || SMulPosReflectLT.toSMulPosMono : ∀ {α : Type u_1} {β : Type u_2} [inst : SMul α β] [inst_1 : Preorder α] [inst_2 : LinearOrder β]
   [inst_3 : _root_.Zero β] [inst_4 : SMulPosReflectLT α β], SMulPosMono α β
@@ -1595,11 +2061,12 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || MeasureTheory.withDensity_indicator_one : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ : MeasureTheory.Measure α} {s : Set α},
   MeasurableSet s → μ.withDensity (s.indicator 1) = μ.restrict s
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || add_halves' : ∀ {R : Type u_1} [inst : DivisionSemiring R] [inst_1 : NeZero 2] (a : R), a / 2 + a / 2 = a
@@ -1615,21 +2082,27 @@ Auto failed to find proof
 
 Testing || WithTop.image_coe_Ioi : ∀ {α : Type u_1} [inst : Preorder α] {a : α}, WithTop.some '' Set.Ioi a = Set.Ioo ↑a ⊤
 Result.autoException ::
-Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #2, (∀ x1 : #2, ((!24 x0 x1) = (!22 (!26 x0) (λx2 : #2, (!26 x2 x1)))))) is not type correct
+Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #3, (∀ x1 : #3, ((!3 x0 x1) = (!11 (!17 x0) (λx2 : #3, (!17 x2 x1)))))) is not type correct
 
 Testing || CategoryTheory.forgetEnrichment_id : ∀ {C : Type u₁} (W : Type v) [inst : CategoryTheory.Category.{w, v} W] [inst_1 : CategoryTheory.MonoidalCategory W]
   [inst_2 : CategoryTheory.EnrichedCategory W C] (X : CategoryTheory.ForgetEnrichment W C),
   CategoryTheory.ForgetEnrichment.homTo W (CategoryTheory.CategoryStruct.id X) =
     CategoryTheory.eId W (CategoryTheory.ForgetEnrichment.to W X)
 Result.autoException ::
-Auto failed to find proof
+application type mismatch
+  CategoryTheory.ForgetEnrichment W C = Opposite.unop (Opposite.op C)
+argument
+  Opposite.unop (Opposite.op C)
+has type
+  W : Type v
+but is expected to have type
+  Type u₁ : Type (u₁ + 1)
 
 Testing || CategoryTheory.Comma.mapLeftComp_inv_app_left : ∀ {A : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} A] {B : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} B]
   {T : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} T] (R : CategoryTheory.Functor B T)
   {L₁ L₂ L₃ : CategoryTheory.Functor A T} (l : L₁ ⟶ L₂) (l' : L₂ ⟶ L₃) (X : CategoryTheory.Comma L₃ R),
   ((CategoryTheory.Comma.mapLeftComp R l l').inv.app X).left = CategoryTheory.CategoryStruct.id X.left
-Result.autoException ::
-Auto failed to find proof
+Result.success
 
 Testing || Order.pred_lt : ∀ {α : Type u_1} [inst : Preorder α] [inst_1 : PredOrder α] [inst_2 : NoMinOrder α] (a : α), Order.pred a < a
 Result.success
@@ -1659,6 +2132,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || IsOpen.div_right : ∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : Group G] [inst_2 : TopologicalGroup G] {s t : Set G},
   IsOpen s → IsOpen (s / t)
@@ -1695,5 +2169,6 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
-Elapsed time: 159364 ms
+Elapsed time: 134443 ms

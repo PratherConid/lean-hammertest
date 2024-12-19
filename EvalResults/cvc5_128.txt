@@ -4,56 +4,22 @@ Testing || AEMeasurable.inf : ∀ {M : Type u_1} [inst : MeasurableSpace M] {α 
   {f g : α → M} [inst_1 : Min M] [inst_2 : MeasurableInf₂ M],
   AEMeasurable f μ → AEMeasurable g μ → AEMeasurable (fun a => f a ⊓ g a) μ
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+Auto failed to find proof
 
 Testing || Std.HashSet.getD_insert : ∀ {α : Type u} {x : BEq α} {x_1 : Hashable α} {m : Std.HashSet α} [inst : EquivBEq α] [inst : LawfulHashable α]
   {k a fallback : α}, (m.insert k).getD a fallback = if (k == a) = true ∧ k ∉ m then k else m.getD a fallback
 Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_Std.DHashMap_α_fun_x_=>_PUnit._1_| is 1
-; rep: (as @|_Std.DHashMap_α_fun_x_=>_PUnit._1_|_0 |_Std.DHashMap_α_fun_x_=>_PUnit._1_|)
-; cardinality of |_α| is 4
-; rep: (as @|_α|_0 |_α|)
-; rep: (as @|_α|_1 |_α|)
-; rep: (as @|_α|_2 |_α|)
-; rep: (as @|_α|_3 |_α|)
-(define-fun |_EquivBEq_α| () Bool true)
-(define-fun |_LawfulHashable_α| () Bool true)
-(define-fun _m () |_Std.HashSet_α| (_Std.HashSet.mk (_Std.HashMap.mk (as @|_Std.DHashMap_α_fun_x_=>_PUnit._1_|_0 |_Std.DHashMap_α_fun_x_=>_PUnit._1_|))))
-(define-fun _k () |_α| (as @|_α|_3 |_α|))
-(define-fun _Std.HashSet.insert ((_arg_1 |_Std.HashSet_α|) (_arg_2 |_α|)) |_Std.HashSet_α| (_Std.HashSet.mk (_Std.HashMap.mk (as @|_Std.DHashMap_α_fun_x_=>_PUnit._1_|_1 |_Std.DHashMap_α_fun_x_=>_PUnit._1_|))))
-(define-fun _a () |_α| (as @|_α|_0 |_α|))
-(define-fun _fallback () |_α| (as @|_α|_1 |_α|))
-(define-fun _Std.HashSet.getD ((_arg_1 |_Std.HashSet_α|) (_arg_2 |_α|) (_arg_3 |_α|)) |_α| (as @|_α|_2 |_α|))
-(define-fun _BEq.beq ((_arg_1 |_α|) (_arg_2 |_α|)) Bool true)
-(define-fun _Std.DHashMap.contains ((_arg_1 |_Std.DHashMap_α_fun_x_=>_PUnit._1_|) (_arg_2 |_α|)) Bool false)
-)
-
+application type mismatch
+  Std.HashSet α = { inner := Std.HashSet α }.inner
+argument
+  { inner := Std.HashSet α }.inner
+has type
+  Std.HashMap α Unit : Type u
+but is expected to have type
+  Type u : Type (u + 1)
 
 Testing || LinOrd.Iso.mk_inv : ∀ {α β : LinOrd} (e : ↑α ≃o ↑β), (LinOrd.Iso.mk e).inv = ↑e.symm
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_ is 1
-; rep: (as @_fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_)
-; cardinality of |_α___β| is 1
-; rep: (as @|_α___β|_0 |_α___β|)
-; cardinality of |__β__o__α| is 2
-; rep: (as @|__β__o__α|_0 |__β__o__α|)
-; rep: (as @|__β__o__α|_1 |__β__o__α|)
-; cardinality of _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0 is 1
-; rep: (as @_fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0_0 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0)
-(define-fun _e () _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_ (as @_fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_))
-(define-fun _LinOrd.Iso.mk ((_arg_1 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_)) |_α___β| (as @|_α___β|_0 |_α___β|))
-(define-fun _CategoryTheory.Iso.inv ((_arg_1 |_α___β|)) |__β__o__α| (as @|__β__o__α|_0 |__β__o__α|))
-(define-fun _OrderIso.symm ((_arg_1 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2_)) _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0 (as @_fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0_0 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0))
-(define-fun _OrderHomClass.toOrderHom ((_arg_1 _fun_x1_x2_=>_x1___x2__r_fun_x1_x2_=>_x1___x2__0)) |__β__o__α| (as @|__β__o__α|_1 |__β__o__α|))
-)
-
+Result.success
 
 Testing || List.sublistsLen_length : ∀ {α : Type u} (l : List α), List.sublistsLen l.length l = [l]
 Result.autoException ::
@@ -63,6 +29,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || GenContFract.zeroth_contAux_eq_one_zero : ∀ {K : Type u_1} {g : GenContFract K} [inst : DivisionRing K], g.contsAux 0 = { a := 1, b := 0 }
 Result.autoException ::
@@ -70,22 +37,27 @@ Auto.Monomorphization.ConstInst.ofExpr? :: Stream' (GenContFract.Pair K) is not 
 
 Testing || Rat.cast_sub_of_ne_zero : ∀ {α : Type u_3} [inst : DivisionRing α] {p q : ℚ}, ↑p.den ≠ 0 → ↑q.den ≠ 0 → ↑(p - q) = ↑p - ↑q
 Result.autoException ::
-Auto.Solver.SMT.getSexp :: Incomplete input 
-
-Testing || _private.Mathlib.Combinatorics.SimpleGraph.Triangle.Counting.0.SimpleGraph.edgeDensity_badVertices_le : ∀ {α : Type u_1} (G : SimpleGraph α) [inst : DecidableRel G.Adj] {ε : ℝ} {s t : Finset α},
-  0 ≤ ε → 2 * ε ≤ ↑(G.edgeDensity s t) → ↑(G.edgeDensity (SimpleGraph.badVertices G ε s t) t) ≤ ↑(G.edgeDensity s t) - ε
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Incomplete input 
-
-Testing || _private.Mathlib.Combinatorics.Additive.SmallTripling.0.Finset.small_pos_neg_pos_add : ∀ {G : Type u_1} [inst : DecidableEq G] [inst_1 : AddGroup G] {A : Finset G} {K : ℝ},
-  ↑(3 • A).card ≤ K * ↑A.card → ↑(A + -A + A).card ≤ K ^ 3 * ↑A.card
-Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `Monotone fun n =>
-  cifvar_2 (cifvar_3 n x_0)`.
+Monomorphization failed because currently the procedure cannot deal with expression `a.den_nz`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+
+Testing || _private.Mathlib.Combinatorics.SimpleGraph.Triangle.Counting.0.SimpleGraph.edgeDensity_badVertices_le : ∀ {α : Type u_1} (G : SimpleGraph α) [inst : DecidableRel G.Adj] {ε : ℝ} {s t : Finset α},
+  0 ≤ ε → 2 * ε ≤ ↑(G.edgeDensity s t) → ↑(G.edgeDensity (SimpleGraph.badVertices G ε s t) t) ≤ ↑(G.edgeDensity s t) - ε
+Result.autoException ::
+Monomorphization failed because currently the procedure cannot deal with expression `AddGroup.toSubtractionMonoid`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+
+Testing || _private.Mathlib.Combinatorics.Additive.SmallTripling.0.Finset.small_pos_neg_pos_add : ∀ {G : Type u_1} [inst : DecidableEq G] [inst_1 : AddGroup G] {A : Finset G} {K : ℝ},
+  ↑(3 • A).card ≤ K * ↑A.card → ↑(A + -A + A).card ≤ K ^ 3 * ↑A.card
+Result.autoException ::
+Auto.Solver.SMT.getSexp :: Incomplete input 
 
 Testing || AddMonoid.exponent_pi_eq_zero : ∀ {ι : Type u_1} {M : ι → Type u_2} [inst : (i : ι) → AddMonoid (M i)] {j : ι},
   AddMonoid.exponent (M j) = 0 → AddMonoid.exponent ((i : ι) → M i) = 0
@@ -95,6 +67,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || isLUB_sSup : ∀ {α : Type u_1} [inst : CompleteSemilatticeSup α] (s : Set α), IsLUB s (sSup s)
 Result.autoException ::
@@ -114,6 +87,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || FirstOrder.Language.ElementaryEmbedding.map_rel : ∀ {L : FirstOrder.Language} {M : Type u_1} {N : Type u_2} [inst : L.Structure M] [inst_1 : L.Structure N]
   (φ : L.ElementaryEmbedding M N) {n : ℕ} (r : L.Relations n) (x : Fin n → M),
@@ -124,6 +98,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || hnot_le_iff_codisjoint_left : ∀ {α : Type u_2} [inst : CoheytingAlgebra α] {a b : α}, ￢a ≤ b ↔ Codisjoint b a
 Result.success
@@ -135,6 +110,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map' : ∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{u_4, u_1} C]
   [inst_1 : CategoryTheory.Category.{u_3, u_2} D] {G : CategoryTheory.Functor C D} {A : Type w}
@@ -147,24 +123,19 @@ Testing || CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map' : ∀ {C : Typ
     CategoryTheory.CategoryStruct.comp (CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux hF α s f) (F.map a.op) =
       CategoryTheory.CategoryStruct.comp (CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux hF α s f') (F.map b.op)
 Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `(cifvar_29 x_0).map
-  (cifvar_7 x_1 x_2)`.
-This is because it has subterms possessing at least one of the following features
-· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
-· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
-· Other (TODO)
+Auto failed to find proof
 
 Testing || AlgebraicGeometry.Spec.toSheafedSpace_obj : ∀ (R : CommRingCatᵒᵖ),
   AlgebraicGeometry.Spec.toSheafedSpace.obj R = AlgebraicGeometry.Spec.sheafedSpaceObj (Opposite.unop R)
 Result.autoException ::
 application type mismatch
-  CommRingCat = Opposite.unop (Opposite.op (CategoryTheory.Bundled CommRing))
+  CommRing α = Opposite.unop (Opposite.op (CommRing α))
 argument
-  Opposite.unop (Opposite.op (CategoryTheory.Bundled CommRing))
+  Opposite.unop (Opposite.op (CommRing α))
 has type
   CommRingCat : Type (u + 1)
 but is expected to have type
-  Type (u + 1) : Type (u + 2)
+  Type u : Type (u + 1)
 
 Testing || Set.image_preimage : ∀ {α : Type u_1} {β : Type u_2} {f : α → β}, GaloisConnection (Set.image f) (Set.preimage f)
 Result.autoException ::
@@ -199,7 +170,14 @@ Testing || CategoryTheory.Limits.coneOfSectionCompYoneda_pt : ∀ {C : Type u} [
   (F : CategoryTheory.Functor J Cᵒᵖ) (X : C) (s : ↑(F.comp (CategoryTheory.yoneda.obj X)).sections),
   (CategoryTheory.Limits.coneOfSectionCompYoneda F X s).pt = Opposite.op X
 Result.autoException ::
-Auto failed to find proof
+application type mismatch
+  Opposite.op unop = Opposite.unop (Opposite.op (Opposite.op unop))
+argument
+  Opposite.unop (Opposite.op (Opposite.op unop))
+has type
+  C : Type u
+but is expected to have type
+  Cᵒᵖ : Type u
 
 Testing || WittVector.wittMul_vars : ∀ (p : ℕ) [hp : Fact (Nat.Prime p)] (n : ℕ), (WittVector.wittMul p n).vars ⊆ Finset.univ ×ˢ Finset.range (n + 1)
 Result.autoException ::
@@ -207,7 +185,7 @@ Auto failed to find proof
 
 Testing || Real.borel_eq_generateFrom_Ioi_rat : borel ℝ = MeasurableSpace.generateFrom (⋃ a, {Set.Ioi ↑a})
 Result.autoException ::
-Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type x ∈ x_0 of λ binder contains bound variables
+Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type x ∈ x_1 of λ binder contains bound variables
 
 Testing || HomologicalComplex₂.comm_f : ∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_4, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]
   {I₁ : Type u_2} {I₂ : Type u_3} {c₁ : ComplexShape I₁} {c₂ : ComplexShape I₂} {K L : HomologicalComplex₂ C c₁ c₂}
@@ -215,11 +193,12 @@ Testing || HomologicalComplex₂.comm_f : ∀ {C : Type u_1} [inst : CategoryThe
   CategoryTheory.CategoryStruct.comp ((f.f i₁).f i₂) ((L.d i₁ i₁').f i₂) =
     CategoryTheory.CategoryStruct.comp ((K.d i₁ i₁').f i₂) ((f.f i₁').f i₂)
 Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `cifvar_17.d cifvar_16 x_1`.
+Monomorphization failed because currently the procedure cannot deal with expression `x_0.f x_1`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || Asymptotics.IsBigO.comp_tendsto : ∀ {α : Type u_1} {β : Type u_2} {E : Type u_3} {F : Type u_4} [inst : Norm E] [inst_1 : Norm F] {f : α → E} {g : α → F}
   {l : Filter α}, f =O[l] g → ∀ {k : β → α} {l' : Filter β}, Filter.Tendsto k l' l → (f ∘ k) =O[l'] (g ∘ k)
@@ -251,18 +230,19 @@ Result.success
 Testing || HasProd.div : ∀ {α : Type u_1} {β : Type u_2} [inst : CommGroup α] [inst_1 : TopologicalSpace α] [inst_2 : TopologicalGroup α]
   {f g : β → α} {a₁ a₂ : α}, HasProd f a₁ → HasProd g a₂ → HasProd (fun b => f b / g b) (a₁ / a₂)
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || IsLocalization.coeSubmodule_fg : ∀ {R : Type u_1} [inst : CommSemiring R] (S : Type u_2) [inst_1 : CommSemiring S] [inst_2 : Algebra R S],
   Function.Injective ⇑(algebraMap R S) → ∀ (I : Ideal R), (IsLocalization.coeSubmodule S I).FG ↔ Submodule.FG I
 Result.autoException ::
 Monomorphization failed because currently the procedure cannot deal with expression `Function.Injective
-  (cifvar_11 x_0)`.
+  (cifvar_10 x_0)`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || CategoryTheory.IsPullback.of_right : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {X₁₁ X₁₂ X₁₃ X₂₁ X₂₂ X₂₃ : C} {h₁₁ : X₁₁ ⟶ X₁₂}
   {h₁₂ : X₁₂ ⟶ X₁₃} {h₂₁ : X₂₁ ⟶ X₂₂} {h₂₂ : X₂₂ ⟶ X₂₃} {v₁₁ : X₁₁ ⟶ X₂₁} {v₁₂ : X₁₂ ⟶ X₂₂} {v₁₃ : X₁₃ ⟶ X₂₃},
@@ -270,9 +250,7 @@ Testing || CategoryTheory.IsPullback.of_right : ∀ {C : Type u₁} [inst : Cate
       (CategoryTheory.CategoryStruct.comp h₂₁ h₂₂) →
     CategoryTheory.CategoryStruct.comp h₁₁ v₁₂ = CategoryTheory.CategoryStruct.comp v₁₁ h₂₁ →
       CategoryTheory.IsPullback h₁₂ v₁₂ v₁₃ h₂₂ → CategoryTheory.IsPullback h₁₁ v₁₁ v₁₂ h₂₁
-Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+Result.success
 
 Testing || Nat.nonempty_properDivisors : ∀ {n : ℕ}, n.properDivisors.Nonempty ↔ 1 < n
 Result.autoException ::
@@ -282,11 +260,12 @@ Testing || RingEquiv.map_prod : ∀ {α : Type u_1} {R : Type u_2} {S : Type u_3
   (f : α → R) (s : Finset α), g (∏ x ∈ s, f x) = ∏ x ∈ s, g (f x)
 Result.autoException ::
 Monomorphization failed because currently the procedure cannot deal with expression `∏ x ∈ x_1,
-  cifvar_2 x_0 (cifvar_9 x)`.
+  cifvar_2 x_0 (cifvar_10 x)`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || dist_smul : ∀ {M : Type u} {X : Type w} [inst : PseudoMetricSpace X] [inst_1 : SMul M X] [inst_2 : IsometricSMul M X] (c : M)
   (x y : X), dist (c • x) (c • y) = dist x y
@@ -296,6 +275,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || map_mul_right_nhds₀ : ∀ {G₀ : Type u_3} [inst : TopologicalSpace G₀] [inst_1 : GroupWithZero G₀] [inst_2 : ContinuousMul G₀] {a : G₀},
   a ≠ 0 → ∀ (b : G₀), Filter.map (fun x => x * a) (nhds b) = nhds (b * a)
@@ -306,6 +286,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || Nat.find_le : ∀ {n : ℕ} {p : ℕ → Prop} [inst : DecidablePred p] {h : ∃ n, p n}, p n → Nat.find h ≤ n
 Result.autoException ::
@@ -318,17 +299,18 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || IterateAddAct.ext : ∀ {α : Type u_1} {f : α → α} {x y : IterateAddAct f}, x.val = y.val → x = y
 Result.autoException ::
 application type mismatch
-  α = { val := α }.val
+  ℕ = { val := ℕ }.val
 argument
-  { val := α }.val
+  { val := ℕ }.val
 has type
   ℕ : Type
 but is expected to have type
-  Type u_1 : Type (u_1 + 1)
+  Type : Type 1
 
 Testing || Mathlib.Vector.mem_cons_of_mem : ∀ {α : Type u_1} {n : ℕ} (a a' : α) (v : Mathlib.Vector α n), a' ∈ v.toList → a' ∈ (a ::ᵥ v).toList
 Result.success
@@ -337,7 +319,7 @@ Testing || Measurable.set_lintegral_kernel : ∀ {α : Type u_1} {β : Type u_2}
   [inst : ProbabilityTheory.IsSFiniteKernel κ] {f : β → ENNReal},
   Measurable f → ∀ {s : Set β}, MeasurableSet s → Measurable fun a => ∫⁻ (b : β) in s, f b ∂κ a
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Nat.dvd_zero : ∀ (a : ℕ), a ∣ 0
@@ -356,26 +338,7 @@ Result.autoException ::
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Finset.singleton_infs_singleton : ∀ {α : Type u_2} [inst : DecidableEq α] [inst_1 : SemilatticeInf α] {a b : α}, {a} ⊼ {b} = {a ⊓ b}
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_α| is 3
-; rep: (as @|_α|_0 |_α|)
-; rep: (as @|_α|_1 |_α|)
-; rep: (as @|_α|_2 |_α|)
-; cardinality of |_Finset_α| is 4
-; rep: (as @|_Finset_α|_0 |_Finset_α|)
-; rep: (as @|_Finset_α|_1 |_Finset_α|)
-; rep: (as @|_Finset_α|_2 |_Finset_α|)
-; rep: (as @|_Finset_α|_3 |_Finset_α|)
-(define-fun _a () |_α| (as @|_α|_0 |_α|))
-(define-fun _singleton ((_arg_1 |_α|)) |_Finset_α| (ite (= (as @|_α|_1 |_α|) _arg_1) (as @|_Finset_α|_1 |_Finset_α|) (ite (= (as @|_α|_2 |_α|) _arg_1) (as @|_Finset_α|_3 |_Finset_α|) (as @|_Finset_α|_0 |_Finset_α|))))
-(define-fun _b () |_α| (as @|_α|_1 |_α|))
-(define-fun _HasInfs.infs ((_arg_1 |_Finset_α|) (_arg_2 |_Finset_α|)) |_Finset_α| (as @|_Finset_α|_2 |_Finset_α|))
-(define-fun _min ((_arg_1 |_α|) (_arg_2 |_α|)) |_α| (as @|_α|_2 |_α|))
-)
-
+Result.success
 
 Testing || IsConjRoot.isIntegral : ∀ {R : Type u_1} {A : Type u_5} [inst : CommRing R] [inst_1 : Ring A] [inst_2 : Algebra R A] {x y : A},
   IsIntegral R x → IsConjRoot R x y → IsIntegral R y
@@ -405,13 +368,13 @@ Testing || List.takeDTR_go_eq : ∀ {α : Type u_1} {dflt : α} {acc : Array α}
   List.takeDTR.go dflt n l acc = acc.toList ++ List.takeD n l dflt
 Result.autoException ::
 application type mismatch
-  (¬a) = { toList := a → False }.toList
+  α✝ = { toList := α✝ }.toList
 argument
-  { toList := a → False }.toList
+  { toList := α✝ }.toList
 has type
   List α✝ : Type u_1
 but is expected to have type
-  Prop : Type
+  Type u_1 : Type (u_1 + 1)
 
 Testing || Symmetric.iff : ∀ {α : Type u_1} {r : α → α → Prop}, Symmetric r → ∀ (x y : α), r x y ↔ r y x
 Result.autoException ::
@@ -442,8 +405,7 @@ Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : (#5 → Prop), ((∃x1 : #5,
 
 Testing || CategoryTheory.ofTypeMonad_obj : ∀ (m : Type u → Type u) [inst : Monad m] [inst_1 : LawfulMonad m] (a : Type u),
   (CategoryTheory.ofTypeMonad m).obj a = m a
-Result.autoException ::
-Auto failed to find proof
+Result.success
 
 Testing || Set.center_eq_univ : ∀ (M : Type u_1) [inst : CommSemigroup M], Set.center M = Set.univ
 Result.autoException ::
@@ -459,6 +421,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || TwoUniqueSums.of_addHom : ∀ {G : Type u} {H : Type v} [inst : Add G] [inst_1 : Add H] (f : H →ₙ+ G),
   (∀ ⦃a b c d : H⦄, a + b = c + d → f a = f c ∧ f b = f d → a = c ∧ b = d) → ∀ [inst : TwoUniqueSums G], TwoUniqueSums H
@@ -468,6 +431,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || SimpleGraph.Walk.map_toDeleteEdges_eq : ∀ {V : Type u} {G : SimpleGraph V} {v w : V} (s : Set (Sym2 V)) {p : G.Walk v w} (hp : ∀ e ∈ p.edges, e ∉ s),
   SimpleGraph.Walk.map (SimpleGraph.Hom.mapSpanningSubgraphs ⋯) (SimpleGraph.Walk.toDeleteEdges s p hp) = p
@@ -536,7 +500,7 @@ Testing || taylor_mean_remainder_cauchy : ∀ {f : ℝ → ℝ} {x x₀ : ℝ} {
           f x - taylorWithinEval f n (Set.Icc x₀ x) x₀ x =
             iteratedDerivWithin (n + 1) f (Set.Icc x₀ x) x' * (x - x') ^ n / ↑n.factorial * (x - x₀)
 Result.autoException ::
-Auto.Solver.SMT.getSexp :: Incomplete input 
+Auto failed to find proof
 
 Testing || CategoryTheory.Idempotents.DoldKan.N_obj : ∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_2, u_1} C] [inst_1 : CategoryTheory.Preadditive C]
   [inst_2 : CategoryTheory.IsIdempotentComplete C] [inst_3 : CategoryTheory.Limits.HasFiniteCoproducts C]
@@ -544,8 +508,7 @@ Testing || CategoryTheory.Idempotents.DoldKan.N_obj : ∀ {C : Type u_1} [inst :
   CategoryTheory.Idempotents.DoldKan.N.obj X =
     (CategoryTheory.Idempotents.toKaroubiEquivalence (ChainComplex C ℕ)).inverse.obj
       (AlgebraicTopology.DoldKan.N₁.obj X)
-Result.autoException ::
-Auto failed to find proof
+Result.success
 
 Testing || HomogeneousLocalization.val_zsmul : ∀ {ι : Type u_1} {R : Type u_2} {A : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]
   {𝒜 : ι → Submodule R A} (x : Submonoid A) (n : ℤ) (y : HomogeneousLocalization 𝒜 x), (n • y).val = n • y.val
@@ -576,11 +539,13 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || leibniz_cross : ∀ {R : Type u_1} [inst : CommRing R] (u v w : Fin 3 → R),
   (crossProduct u) ((crossProduct v) w) = (crossProduct ((crossProduct u) v)) w + (crossProduct v) ((crossProduct u) w)
 Result.autoException ::
-Auto.Solver.SMT.getSexp :: Incomplete input 
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Real.one_sub_le_exp_neg : ∀ (x : ℝ), 1 - x ≤ Real.exp (-x)
 Result.success
@@ -596,6 +561,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || IndexedPartition.disjoint : ∀ {ι : Type u_1} {α : Type u_2} {s : ι → Set α}, IndexedPartition s → Pairwise (Disjoint on s)
 Result.autoException ::
@@ -609,6 +575,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || List.Perm.eraseP : ∀ {α : Type u_1} (f : α → Bool) {l₁ l₂ : List α},
   List.Pairwise (fun a b => f a = true → f b = true → False) l₁ →
@@ -644,6 +611,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || Topology.IsQuotientMap.image_connectedComponent : ∀ {α : Type u} {β : Type v} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β] {f : α → β},
   Topology.IsQuotientMap f →
@@ -664,6 +632,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || univLE_max : UnivLE.{u, max u v}
 Result.autoException ::
@@ -677,7 +646,7 @@ Auto failed to find proof
 
 Testing || Complex.polarCoord_apply : ∀ (a : ℂ), ↑Complex.polarCoord a = (Complex.abs a, a.arg)
 Result.autoException ::
-Auto failed to find proof
+Auto.Solver.SMT.getSexp :: Incomplete input 
 
 Testing || Complex.cosh_sub : ∀ (x y : ℂ), Complex.cosh (x - y) = Complex.cosh x * Complex.cosh y - Complex.sinh x * Complex.sinh y
 Result.success
@@ -692,8 +661,7 @@ Result.success
 Testing || CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_map_base : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (F : CategoryTheory.Functor C CategoryTheory.Cat)
   {X Y : CategoryTheory.Grothendieck F} (f : X ⟶ Y),
   ((CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse F).map f).base = f.base
-Result.autoException ::
-Auto failed to find proof
+Result.success
 
 Testing || UniqueFactorizationMonoid.squarefree_iff_nodup_normalizedFactors : ∀ {R : Type u_1} [inst : CancelCommMonoidWithZero R] [inst_1 : UniqueFactorizationMonoid R]
   [inst_2 : NormalizationMonoid R] {x : R},
@@ -704,6 +672,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || ContDiffAt.prod_map : ∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type uE} [inst_1 : NormedAddCommGroup E]
   [inst_2 : NormedSpace 𝕜 E] {F : Type uF} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : WithTop ℕ∞}
@@ -722,24 +691,11 @@ Testing || ProbabilityTheory.Kernel.fst_comp : ∀ {α : Type u_1} {β : Type u_
   {mγ : MeasurableSpace γ} {mδ : MeasurableSpace δ} (κ : ProbabilityTheory.Kernel α β)
   (η : ProbabilityTheory.Kernel β (γ × δ)), (η.comp κ).fst = η.fst.comp κ
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || TypeVec.dropFun_id : ∀ {n : ℕ} {α : TypeVec.{u_1} (n + 1)}, TypeVec.dropFun TypeVec.id = TypeVec.id
-Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-; cardinality of Empty is 1
-; rep: (as @Empty_0 Empty)
-; cardinality of |_α.Arrow_α| is 1
-; rep: (as @|_α.Arrow_α|_0 |_α.Arrow_α|)
-; cardinality of |_α.drop.Arrow_α.drop| is 2
-; rep: (as @|_α.drop.Arrow_α.drop|_0 |_α.drop.Arrow_α.drop|)
-; rep: (as @|_α.drop.Arrow_α.drop|_1 |_α.drop.Arrow_α.drop|)
-(define-fun _TypeVec.id () |_α.Arrow_α| (as @|_α.Arrow_α|_0 |_α.Arrow_α|))
-(define-fun _TypeVec.dropFun ((_arg_1 |_α.Arrow_α|)) |_α.drop.Arrow_α.drop| (as @|_α.drop.Arrow_α.drop|_1 |_α.drop.Arrow_α.drop|))
-(define-fun _TypeVec.id_0 () |_α.drop.Arrow_α.drop| (as @|_α.drop.Arrow_α.drop|_0 |_α.drop.Arrow_α.drop|))
-)
-
+Result.success
 
 Testing || Real.cos_sq_add_sin_sq : ∀ (x : ℝ), Real.cos x ^ 2 + Real.sin x ^ 2 = 1
 Result.success
@@ -771,18 +727,19 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || CategoryTheory.equivYoneda'_inv_val : ∀ (S : CategoryTheory.Sheaf CategoryTheory.typesGrothendieckTopology (Type u)),
   (CategoryTheory.equivYoneda' S).inv.val = (CategoryTheory.equivYoneda S.val ⋯).inv
 Result.autoException ::
 application type mismatch
-  (¬a) = { val := a → False }.val
+  αᵒᵖ = { val := αᵒᵖ }.val
 argument
-  { val := a → False }.val
+  { val := αᵒᵖ }.val
 has type
   (CategoryTheory.yoneda'.obj (S.val.obj (Opposite.op PUnit.{u + 1}))).val ⟶ S.val : Type (u + 1)
 but is expected to have type
-  Prop : Type
+  Type (u + 1) : Type (u + 2)
 
 Testing || Fintype.decidableEqAddEquivFintype.proof_1 : ∀ {α : Type u_1} {β : Type u_2} [inst : Add α] [inst_1 : Add β] (a b : α ≃+ β), ⇑a = ⇑b ↔ a = b
 Result.autoException ::
@@ -791,6 +748,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || intervalIntegral.intervalIntegrable_log : ∀ {a b : ℝ} {μ : MeasureTheory.Measure ℝ} [inst : MeasureTheory.IsLocallyFiniteMeasure μ],
   0 ∉ Set.uIcc a b → IntervalIntegrable Real.log μ a b
@@ -800,6 +758,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || StrictConcaveOn.concaveOn : ∀ {𝕜 : Type u_1} {E : Type u_2} {β : Type u_5} [inst : OrderedSemiring 𝕜] [inst_1 : AddCommMonoid E]
   [inst_2 : OrderedAddCommMonoid β] [inst_3 : _root_.Module 𝕜 E] [inst_4 : _root_.Module 𝕜 β] {s : Set E} {f : E → β},
@@ -818,6 +777,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || SMulPosReflectLT.toSMulPosMono : ∀ {α : Type u_1} {β : Type u_2} [inst : SMul α β] [inst_1 : Preorder α] [inst_2 : LinearOrder β]
   [inst_3 : _root_.Zero β] [inst_4 : SMulPosReflectLT α β], SMulPosMono α β
@@ -827,6 +787,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || MeasureTheory.withDensity_indicator_one : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ : MeasureTheory.Measure α} {s : Set α},
   MeasurableSet s → μ.withDensity (s.indicator 1) = μ.restrict s
@@ -847,21 +808,27 @@ Auto failed to find proof
 
 Testing || WithTop.image_coe_Ioi : ∀ {α : Type u_1} [inst : Preorder α] {a : α}, WithTop.some '' Set.Ioi a = Set.Ioo ↑a ⊤
 Result.autoException ::
-Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #2, (∀ x1 : #2, ((!24 x0 x1) = (!22 (!26 x0) (λx2 : #2, (!26 x2 x1)))))) is not type correct
+Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #3, (∀ x1 : #3, ((!3 x0 x1) = (!11 (!17 x0) (λx2 : #3, (!17 x2 x1)))))) is not type correct
 
 Testing || CategoryTheory.forgetEnrichment_id : ∀ {C : Type u₁} (W : Type v) [inst : CategoryTheory.Category.{w, v} W] [inst_1 : CategoryTheory.MonoidalCategory W]
   [inst_2 : CategoryTheory.EnrichedCategory W C] (X : CategoryTheory.ForgetEnrichment W C),
   CategoryTheory.ForgetEnrichment.homTo W (CategoryTheory.CategoryStruct.id X) =
     CategoryTheory.eId W (CategoryTheory.ForgetEnrichment.to W X)
 Result.autoException ::
-Auto failed to find proof
+application type mismatch
+  CategoryTheory.ForgetEnrichment W C = Opposite.unop (Opposite.op C)
+argument
+  Opposite.unop (Opposite.op C)
+has type
+  W : Type v
+but is expected to have type
+  Type u₁ : Type (u₁ + 1)
 
 Testing || CategoryTheory.Comma.mapLeftComp_inv_app_left : ∀ {A : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} A] {B : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} B]
   {T : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} T] (R : CategoryTheory.Functor B T)
   {L₁ L₂ L₃ : CategoryTheory.Functor A T} (l : L₁ ⟶ L₂) (l' : L₂ ⟶ L₃) (X : CategoryTheory.Comma L₃ R),
   ((CategoryTheory.Comma.mapLeftComp R l l').inv.app X).left = CategoryTheory.CategoryStruct.id X.left
-Result.autoException ::
-Auto failed to find proof
+Result.success
 
 Testing || Order.pred_lt : ∀ {α : Type u_1} [inst : Preorder α] [inst_1 : PredOrder α] [inst_2 : NoMinOrder α] (a : α), Order.pred a < a
 Result.success
@@ -891,6 +858,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || IsOpen.div_right : ∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : Group G] [inst_2 : TopologicalGroup G] {s t : Set G},
   IsOpen s → IsOpen (s / t)
@@ -927,5 +895,6 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
-Elapsed time: 216638 ms
+Elapsed time: 194887 ms

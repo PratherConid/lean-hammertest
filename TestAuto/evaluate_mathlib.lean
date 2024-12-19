@@ -21,19 +21,16 @@ set_option trace.auto.eval.printResult true
 --     logFile := "evalOut.txt" }
 --   "EvalResults/MathlibNames128.txt"
 
--- **TODO:** tyDefEq.mode
--- **TODO:** tyDefEq.mode
 -- #eval namesFileEval
 --   { solverConfig := .native,
 --     logFile := "evalOut.txt" }
---   "EvalResults/MathlibNames512.txt"
+--   "EvalResults/MathlibNames128.txt"
 
 -- set_option maxHeartbeats 200000000
 -- #eval namesFileEval
---   { solverConfig := .smt .cvc5,
+--   { solverConfig := .smt .z3,
 --     logFile := "evalOut.txt" }
 --   "EvalResults/MathlibNames128.txt"
-
 
 #print finCongr_symm_apply
 
