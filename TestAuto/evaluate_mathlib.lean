@@ -21,10 +21,12 @@ set_option trace.auto.eval.printResult true
 --     logFile := "evalOut.txt" }
 --   "EvalResults/MathlibNames128.txt"
 
+-- **TODO:** tyDefEq.mode
+-- **TODO:** tyDefEq.mode
 -- #eval namesFileEval
 --   { solverConfig := .native,
 --     logFile := "evalOut.txt" }
---   "EvalResults/MathlibNames128.txt"
+--   "EvalResults/MathlibNames512.txt"
 
 -- set_option maxHeartbeats 200000000
 -- #eval namesFileEval
@@ -32,8 +34,14 @@ set_option trace.auto.eval.printResult true
 --     logFile := "evalOut.txt" }
 --   "EvalResults/MathlibNames128.txt"
 
-#check hasMFDerivWithinAt_extChartAt
-#print CategoryTheory.ComposableArrows.ext₁
-#print DFinsupp.lapply_comp_lsingle_of_ne
-#print ENNReal.fun_eq_funMulInvSnorm_mul_eLpNorm
-#print Set.toFinset_mul
+
+#print finCongr_symm_apply
+
+set_option trace.auto.mono true
+set_option trace.auto.lamReif.printResult true
+
+#check alexDiscEquivPreord_functor
+#check WeierstrassCurve.Affine.Point.map_id
+#check Stream'.WSeq.append_assoc
+#check SchwartzMap.derivCLM_apply
+#check RingHom.FiniteType.of_finite

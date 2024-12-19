@@ -82,24 +82,26 @@ example (a e : ℝ) (h1 : a < e) : (∃ b c d, a < b ∧ b < c ∧ c < d ∧ d <
 example (m n : Nat) (mlt : m < n) (heq : n = m * (n / m)) : m * 1 < m * (n / m) := by
   auto [mul_one, heq, mlt, lt_of_mul_lt_mul_left]
 
--- **TODO:** Auto.LamReif.reifTermCheckType :: ... is not type correct
+-- **TODO** Why can't we set both `auto.mono.ciInstDefEq.mode` and
+--   `auto.mono.tyCan.mode` to `default`?
 set_option auto.native false in
 set_option trace.auto.printLemmas true in
+set_option auto.mono.ciInstDefEq.mode "reducible" in
 example (a b c d : ℝ) (h1 : a < b) :
   Set.Icc a b ⊆ Set.Ico c d ↔ c ≤ a ∧ b < d := by
   rw [Set.subset_def]
   auto [Set.mem_Icc, Set.mem_Ico, @le_trans, @le_total, @lt_iff_not_le, h1]
 
--- **TODO:** Auto.LamReif.reifTermCheckType :: ... is not type correct
 set_option auto.native false in
 set_option trace.auto.smt.result true in
+set_option auto.mono.ciInstDefEq.mode "reducible" in
 example (a b c d : ℝ) (h1 : a < b) : Set.Icc a b ⊆ Set.Ico c d ↔ c ≤ a ∧ b < d := by
   rw [Set.subset_def]
   auto [Set.mem_Icc, Set.mem_Ico, @le_trans, @le_total, @lt_iff_not_le, h1]
 
--- **TODO:** Auto.LamReif.reifTermCheckType :: ... is not type correct
 set_option auto.native false in
 set_option trace.auto.lamReif.printValuation true in
+set_option auto.mono.ciInstDefEq.mode "reducible" in
 example : f '' s ⊆ v ↔ s ⊆ f ⁻¹' v := by
   auto [Set.subset_def, Set.mem_image, Set.mem_preimage]
 
@@ -108,10 +110,12 @@ example (h : Function.Injective f) : f ⁻¹' (f '' s) ⊆ s := by
   auto [Set.subset_def, Set.mem_preimage, Function.Injective.mem_set_image, h]
 
 set_option auto.native false in
+set_option auto.mono.ciInstDefEq.mode "reducible" in
 example : f '' (f ⁻¹' u) ⊆ u := by
   auto [Set.subset_def, Set.mem_image, Set.mem_preimage]
 
 set_option auto.native false in
+set_option auto.mono.ciInstDefEq.mode "reducible" in
 example (h : Function.Surjective f) : u ⊆ f '' (f ⁻¹' u) := by
   auto [Set.subset_def, Set.mem_image, Set.mem_preimage, h] d[Function.Surjective]
 
