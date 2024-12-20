@@ -21,6 +21,7 @@ set_option trace.auto.eval.printResult true
 --     logFile := "evalOut.txt" }
 --   "EvalResults/MathlibNames128.txt"
 
+-- set_option maxHeartbeats 200000000
 -- #eval namesFileEval
 --   { solverConfig := .native,
 --     logFile := "evalOut.txt" }
@@ -37,8 +38,11 @@ set_option trace.auto.eval.printResult true
 set_option trace.auto.mono true
 set_option trace.auto.lamReif.printResult true
 
-#check alexDiscEquivPreord_functor
 #check WeierstrassCurve.Affine.Point.map_id
 #check Stream'.WSeq.append_assoc
-#check SchwartzMap.derivCLM_apply
 #check RingHom.FiniteType.of_finite
+#check MvPolynomial.eval_X
+#check List.map_concat
+#check SuccOrder.nhdsWithin_Ici
+
+#eval runAutoOnConsts { solverConfig := .native } #[``MvPolynomial.eval_X]

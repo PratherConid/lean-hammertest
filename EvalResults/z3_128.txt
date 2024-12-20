@@ -588,14 +588,78 @@ Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
 Testing || Std.HashSet.getD_insert : ∀ {α : Type u} {x : BEq α} {x_1 : Hashable α} {m : Std.HashSet α} [inst : EquivBEq α] [inst : LawfulHashable α]
   {k a fallback : α}, (m.insert k).getD a fallback = if (k == a) = true ∧ k ∉ m then k else m.getD a fallback
 Result.autoException ::
-application type mismatch
-  Std.HashSet α = { inner := Std.HashSet α }.inner
-argument
-  { inner := Std.HashSet α }.inner
-has type
-  Std.HashMap α Unit : Type u
-but is expected to have type
-  Type u : Type (u + 1)
+Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
+  ;; universe for _Std.DHashMap_α_fun_x_=>_PUnit._1_:
+  ;;   |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!0| |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!1| 
+  ;; -----------
+  ;; definitions for universe elements:
+  (declare-fun |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!0| () _Std.DHashMap_α_fun_x_=>_PUnit._1_)
+  (declare-fun |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!1| () _Std.DHashMap_α_fun_x_=>_PUnit._1_)
+  ;; cardinality constraint:
+  (forall ((x _Std.DHashMap_α_fun_x_=>_PUnit._1_))
+          (or (= x |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!0|)
+              (= x |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!1|)))
+  ;; -----------
+  ;; universe for _α:
+  ;;   |_α!val!1| |_α!val!4| |_α!val!2| |_α!val!3| |_α!val!0| 
+  ;; -----------
+  ;; definitions for universe elements:
+  (declare-fun |_α!val!1| () _α)
+  (declare-fun |_α!val!4| () _α)
+  (declare-fun |_α!val!2| () _α)
+  (declare-fun |_α!val!3| () _α)
+  (declare-fun |_α!val!0| () _α)
+  ;; cardinality constraint:
+  (forall ((x _α))
+          (or (= x |_α!val!1|)
+              (= x |_α!val!4|)
+              (= x |_α!val!2|)
+              (= x |_α!val!3|)
+              (= x |_α!val!0|)))
+  ;; -----------
+  (define-fun valid_fact_2 () Bool
+    (let ((a!1 (not (_Std.DHashMap.contains
+                  (_Std.HashMap.inner (_Std.HashSet.inner _m))
+                  _k))))
+(let ((a!2 (= (_Std.HashSet.getD (_Std.HashSet.insert _m _k) _a _fallback)
+              (ite (and (_BEq.beq _k _a) a!1)
+                   _k
+                   (_Std.HashSet.getD _m _a _fallback)))))
+  (not a!2))))
+  (define-fun |_EquivBEq_α| () Bool
+    true)
+  (define-fun valid_fact_1 () Bool
+    |_LawfulHashable_α|)
+  (define-fun valid_fact_3 () Bool
+    true)
+  (define-fun _a () _α
+    |_α!val!1|)
+  (define-fun _fallback () _α
+    |_α!val!2|)
+  (define-fun _k () _α
+    |_α!val!0|)
+  (define-fun valid_fact_0 () Bool
+    |_EquivBEq_α|)
+  (define-fun |_LawfulHashable_α| () Bool
+    true)
+  (define-fun _m () _Std.HashSet_α
+    (_Std.HashSet.mk (_Std.HashMap.mk |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!0|)))
+  (define-fun _Std.HashSet.insert ((x!0 _Std.HashSet_α) (x!1 _α)) _Std.HashSet_α
+    (_Std.HashSet.mk (_Std.HashMap.mk |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!1|)))
+  (define-fun _BEq.beq ((x!0 _α) (x!1 _α)) Bool
+    false)
+  (define-fun _Std.HashSet.getD ((x!0 _Std.HashSet_α) (x!1 _α) (x!2 _α)) _α
+    (ite (and (= x!0
+                 (_Std.HashSet.mk (_Std.HashMap.mk |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!0|)))
+              (= x!1 |_α!val!1|)
+              (= x!2 |_α!val!2|))
+      |_α!val!4|
+      |_α!val!3|))
+  (define-fun _Std.DHashMap.contains ((x!0 _Std.DHashMap_α_fun_x_=>_PUnit._1_)
+   (x!1 _α)) Bool
+    false)
+)
+
 
 Testing || LinOrd.Iso.mk_inv : ∀ {α β : LinOrd} (e : ↑α ≃o ↑β), (LinOrd.Iso.mk e).inv = ↑e.symm
 Result.success
@@ -775,15 +839,7 @@ Auto failed to find proof
 
 Testing || AlgebraicGeometry.Spec.toSheafedSpace_obj : ∀ (R : CommRingCatᵒᵖ),
   AlgebraicGeometry.Spec.toSheafedSpace.obj R = AlgebraicGeometry.Spec.sheafedSpaceObj (Opposite.unop R)
-Result.autoException ::
-application type mismatch
-  CommRing α = Opposite.unop (Opposite.op (CommRing α))
-argument
-  Opposite.unop (Opposite.op (CommRing α))
-has type
-  CommRingCat : Type (u + 1)
-but is expected to have type
-  Type u : Type (u + 1)
+Result.success
 
 Testing || Set.image_preimage : ∀ {α : Type u_1} {β : Type u_2} {f : α → β}, GaloisConnection (Set.image f) (Set.preimage f)
 Result.autoException ::
@@ -865,15 +921,7 @@ Result.success
 Testing || CategoryTheory.Limits.coneOfSectionCompYoneda_pt : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : Type w} [inst_1 : CategoryTheory.Category.{t, w} J]
   (F : CategoryTheory.Functor J Cᵒᵖ) (X : C) (s : ↑(F.comp (CategoryTheory.yoneda.obj X)).sections),
   (CategoryTheory.Limits.coneOfSectionCompYoneda F X s).pt = Opposite.op X
-Result.autoException ::
-application type mismatch
-  Opposite.op unop = Opposite.unop (Opposite.op (Opposite.op unop))
-argument
-  Opposite.unop (Opposite.op (Opposite.op unop))
-has type
-  C : Type u
-but is expected to have type
-  Cᵒᵖ : Type u
+Result.success
 
 Testing || WittVector.wittMul_vars : ∀ (p : ℕ) [hp : Fact (Nat.Prime p)] (n : ℕ), (WittVector.wittMul p n).vars ⊆ Finset.univ ×ˢ Finset.range (n + 1)
 Result.autoException ::
@@ -889,7 +937,7 @@ Testing || HomologicalComplex₂.comm_f : ∀ {C : Type u_1} [inst : CategoryThe
   CategoryTheory.CategoryStruct.comp ((f.f i₁).f i₂) ((L.d i₁ i₁').f i₂) =
     CategoryTheory.CategoryStruct.comp ((K.d i₁ i₁').f i₂) ((f.f i₁').f i₂)
 Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `x_0.f x_1`.
+Monomorphization failed because currently the procedure cannot deal with expression `cifvar_17.d cifvar_16 x_1`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
@@ -1001,7 +1049,7 @@ Result.success
 Testing || HasProd.div : ∀ {α : Type u_1} {β : Type u_2} [inst : CommGroup α] [inst_1 : TopologicalSpace α] [inst_2 : TopologicalGroup α]
   {f g : β → α} {a₁ a₂ : α}, HasProd f a₁ → HasProd g a₂ → HasProd (fun b => f b / g b) (a₁ / a₂)
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || IsLocalization.coeSubmodule_fg : ∀ {R : Type u_1} [inst : CommSemiring R] (S : Type u_2) [inst_1 : CommSemiring S] [inst_2 : Algebra R S],
@@ -1073,15 +1121,7 @@ This is because it has subterms possessing at least one of the following feature
 `set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || IterateAddAct.ext : ∀ {α : Type u_1} {f : α → α} {x y : IterateAddAct f}, x.val = y.val → x = y
-Result.autoException ::
-application type mismatch
-  ℕ = { val := ℕ }.val
-argument
-  { val := ℕ }.val
-has type
-  ℕ : Type
-but is expected to have type
-  Type : Type 1
+Result.success
 
 Testing || Mathlib.Vector.mem_cons_of_mem : ∀ {α : Type u_1} {n : ℕ} (a a' : α) (v : Mathlib.Vector α n), a' ∈ v.toList → a' ∈ (a ::ᵥ v).toList
 Result.success
@@ -1090,7 +1130,7 @@ Testing || Measurable.set_lintegral_kernel : ∀ {α : Type u_1} {β : Type u_2}
   [inst : ProbabilityTheory.IsSFiniteKernel κ] {f : β → ENNReal},
   Measurable f → ∀ {s : Set β}, MeasurableSet s → Measurable fun a => ∫⁻ (b : β) in s, f b ∂κ a
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Nat.dvd_zero : ∀ (a : ℕ), a ∣ 0
@@ -1342,14 +1382,12 @@ Result.success
 Testing || List.takeDTR_go_eq : ∀ {α : Type u_1} {dflt : α} {acc : Array α} (n : ℕ) (l : List α),
   List.takeDTR.go dflt n l acc = acc.toList ++ List.takeD n l dflt
 Result.autoException ::
-application type mismatch
-  α✝ = { toList := α✝ }.toList
-argument
-  { toList := α✝ }.toList
-has type
-  List α✝ : Type u_1
-but is expected to have type
-  Type u_1 : Type (u_1 + 1)
+Monomorphization failed because currently the procedure cannot deal with expression `cifvar_29 as ≤ cifvar_29 as`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || Symmetric.iff : ∀ {α : Type u_1} {r : α → α → Prop}, Symmetric r → ∀ (x y : α), r x y ↔ r y x
 Result.autoException ::
@@ -1389,7 +1427,7 @@ Testing || AffineIndependent.mem_affineSpan_iff : ∀ {k : Type u_1} {V : Type u
   [inst_3 : AddTorsor V P] {ι : Type u_4} [inst_4 : Nontrivial k] {p : ι → P},
   AffineIndependent k p → ∀ (i : ι) (s : Set ι), p i ∈ affineSpan k (p '' s) ↔ i ∈ s
 Result.autoException ::
-Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : (#5 → Prop), ((∃x1 : #5, x0 x1) = (!14 x0))) is not type correct
+Auto failed to find proof
 
 Testing || CategoryTheory.ofTypeMonad_obj : ∀ (m : Type u → Type u) [inst : Monad m] [inst_1 : LawfulMonad m] (a : Type u),
   (CategoryTheory.ofTypeMonad m).obj a = m a
@@ -1831,7 +1869,7 @@ Result.success
 Testing || isPiSystem_iUnion_of_monotone : ∀ {α : Type u_3} {ι : Type u_4} [inst : SemilatticeSup ι] (p : ι → Set (Set α)),
   (∀ (n : ι), IsPiSystem (p n)) → Monotone p → IsPiSystem (⋃ n, p n)
 Result.autoException ::
-Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #1, ((!0 x0) = (!5 x0 (λx1 : #2, (∀ x2 : #2, ((!6 x0 x2) → ((!7 (!8 x1 x2)) → (!6 x0 (!8 x1 x2))))))))) is not type correct
+Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #1, ((!5 x0 (λx1 : #2, (∀ x2 : #2, ((!6 x0 x2) → ((!7 (!8 x1 x2)) → (!6 x0 (!8 x1 x2))))))) = (!0 x0))) is not type correct
 
 Testing || Setoid.eq_of_mem_eqv_class : ∀ {α : Type u_1} {c : Set (Set α)},
   (∀ (a : α), ∃! b, b ∈ c ∧ a ∈ b) → ∀ {x : α} {b b' : Set α}, b ∈ c → x ∈ b → b' ∈ c → x ∈ b' → b = b'
@@ -1965,7 +2003,7 @@ Testing || ProbabilityTheory.Kernel.fst_comp : ∀ {α : Type u_1} {β : Type u_
   {mγ : MeasurableSpace γ} {mδ : MeasurableSpace δ} (κ : ProbabilityTheory.Kernel α β)
   (η : ProbabilityTheory.Kernel β (γ × δ)), (η.comp κ).fst = η.fst.comp κ
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || TypeVec.dropFun_id : ∀ {n : ℕ} {α : TypeVec.{u_1} (n + 1)}, TypeVec.dropFun TypeVec.id = TypeVec.id
@@ -2005,15 +2043,7 @@ This is because it has subterms possessing at least one of the following feature
 
 Testing || CategoryTheory.equivYoneda'_inv_val : ∀ (S : CategoryTheory.Sheaf CategoryTheory.typesGrothendieckTopology (Type u)),
   (CategoryTheory.equivYoneda' S).inv.val = (CategoryTheory.equivYoneda S.val ⋯).inv
-Result.autoException ::
-application type mismatch
-  αᵒᵖ = { val := αᵒᵖ }.val
-argument
-  { val := αᵒᵖ }.val
-has type
-  (CategoryTheory.yoneda'.obj (S.val.obj (Opposite.op PUnit.{u + 1}))).val ⟶ S.val : Type (u + 1)
-but is expected to have type
-  Type (u + 1) : Type (u + 2)
+Result.success
 
 Testing || Fintype.decidableEqAddEquivFintype.proof_1 : ∀ {α : Type u_1} {β : Type u_2} [inst : Add α] [inst_1 : Add β] (a b : α ≃+ β), ⇑a = ⇑b ↔ a = b
 Result.autoException ::
@@ -2066,7 +2096,7 @@ This is because it has subterms possessing at least one of the following feature
 Testing || MeasureTheory.withDensity_indicator_one : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ : MeasureTheory.Measure α} {s : Set α},
   MeasurableSet s → μ.withDensity (s.indicator 1) = μ.restrict s
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || add_halves' : ∀ {R : Type u_1} [inst : DivisionSemiring R] [inst_1 : NeZero 2] (a : R), a / 2 + a / 2 = a
@@ -2082,21 +2112,98 @@ Auto failed to find proof
 
 Testing || WithTop.image_coe_Ioi : ∀ {α : Type u_1} [inst : Preorder α] {a : α}, WithTop.some '' Set.Ioi a = Set.Ioo ↑a ⊤
 Result.autoException ::
-Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #3, (∀ x1 : #3, ((!3 x0 x1) = (!11 (!17 x0) (λx2 : #3, (!17 x2 x1)))))) is not type correct
+Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #3, (∀ x1 : #3, ((!11 (!17 x0) (λx2 : #3, (!17 x2 x1))) = (!3 x0 x1)))) is not type correct
 
 Testing || CategoryTheory.forgetEnrichment_id : ∀ {C : Type u₁} (W : Type v) [inst : CategoryTheory.Category.{w, v} W] [inst_1 : CategoryTheory.MonoidalCategory W]
   [inst_2 : CategoryTheory.EnrichedCategory W C] (X : CategoryTheory.ForgetEnrichment W C),
   CategoryTheory.ForgetEnrichment.homTo W (CategoryTheory.CategoryStruct.id X) =
     CategoryTheory.eId W (CategoryTheory.ForgetEnrichment.to W X)
 Result.autoException ::
-application type mismatch
-  CategoryTheory.ForgetEnrichment W C = Opposite.unop (Opposite.op C)
-argument
-  Opposite.unop (Opposite.op C)
-has type
-  W : Type v
-but is expected to have type
-  Type u₁ : Type (u₁ + 1)
+Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
+  ;; universe for ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X:
+  ;;   ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!1 ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!0 
+  ;; -----------
+  ;; definitions for universe elements:
+  (declare-fun ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!1 () ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X)
+  (declare-fun ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!0 () ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X)
+  ;; cardinality constraint:
+  (forall ((x ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X))
+          (or (= x
+                 ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!1)
+              (= x
+                 ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!0)))
+  ;; -----------
+  ;; universe for _C:
+  ;;   _C!val!0 
+  ;; -----------
+  ;; definitions for universe elements:
+  (declare-fun _C!val!0 () _C)
+  ;; cardinality constraint:
+  (forall ((x _C)) (= x _C!val!0))
+  ;; -----------
+  (define-fun _X () _C
+    _C!val!0)
+  (define-fun valid_fact_5 () Bool
+    (= (_CategoryTheory.ForgetEnrichment.homTo_W
+     _CategoryTheory.CategoryStruct.id_X)
+   _CategoryTheory.CategoryStruct.id_X))
+  (define-fun _CategoryTheory.CategoryStruct.id_X () ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X
+    ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!0)
+  (define-fun valid_fact_10 () Bool
+    true)
+  (define-fun valid_fact_3 () Bool
+    true)
+  (define-fun valid_fact_8 () Bool
+    true)
+  (define-fun valid_fact_0 () Bool
+    (not (= (_CategoryTheory.ForgetEnrichment.homTo_W
+          _CategoryTheory.CategoryStruct.id_X)
+        (_CategoryTheory.ForgetEnrichment.homTo_W
+          _CategoryTheory.EnrichedCategory.id_CategoryTheory.ForgetEnrichment.to_W_X))))
+  (define-fun valid_fact_4 () Bool
+    (= (_CategoryTheory.ForgetEnrichment.homTo_W
+     _CategoryTheory.CategoryStruct.id_X)
+   _CategoryTheory.CategoryStruct.id_X))
+  (define-fun valid_fact_11 () Bool
+    (= (_CategoryTheory.ForgetEnrichment.homTo_W
+     _CategoryTheory.EnrichedCategory.id_CategoryTheory.ForgetEnrichment.to_W_X)
+   _CategoryTheory.EnrichedCategory.id_CategoryTheory.ForgetEnrichment.to_W_X))
+  (define-fun valid_fact_9 () Bool
+    true)
+  (define-fun valid_fact_7 () Bool
+    (= (_CategoryTheory.ForgetEnrichment.homTo_W
+     _CategoryTheory.EnrichedCategory.id_CategoryTheory.ForgetEnrichment.to_W_X)
+   _CategoryTheory.EnrichedCategory.id_CategoryTheory.ForgetEnrichment.to_W_X))
+  (define-fun _CategoryTheory.EnrichedCategory.id_CategoryTheory.ForgetEnrichment.to_W_X () ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X
+    ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!1)
+  (define-fun valid_fact_6 () Bool
+    true)
+  (define-fun valid_fact_2 () Bool
+    (= (_CategoryTheory.ForgetEnrichment.to_W _X) _X))
+  (define-fun valid_fact_1 () Bool
+    (= (_CategoryTheory.ForgetEnrichment.to_W _X) _X))
+  (define-fun valid_fact_12 () Bool
+    (= _CategoryTheory.EnrichedCategory.id_CategoryTheory.ForgetEnrichment.to_W_X
+   (_CategoryTheory.ForgetEnrichment.homTo_W
+     _CategoryTheory.EnrichedCategory.id_CategoryTheory.ForgetEnrichment.to_W_X)))
+  (define-fun _CategoryTheory.ForgetEnrichment_W_C () _Type_u₁
+    |_Type_u₁!val!0|)
+  (define-fun ____W () _W
+    _W!val!0)
+  (define-fun _CategoryTheory.ForgetEnrichment.to_W ((x!0 _C)) _C
+    _C!val!0)
+  (define-fun _CategoryTheory.ForgetEnrichment.homTo_W ((x!0
+    ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X)) ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X
+    (ite (= x!0
+            ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!1)
+      ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!1
+      ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!0))
+  (define-fun _Quiver.Hom ((x!0 _W) (x!1 _W)) _Type_w
+    _Type_w!val!0)
+  (define-fun _CategoryTheory.EnrichedCategory.Hom ((x!0 _C) (x!1 _C)) _W
+    _W!val!0)
+)
+
 
 Testing || CategoryTheory.Comma.mapLeftComp_inv_app_left : ∀ {A : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} A] {B : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} B]
   {T : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} T] (R : CategoryTheory.Functor B T)
@@ -2171,4 +2278,4 @@ This is because it has subterms possessing at least one of the following feature
 · Other (TODO)
 `set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
-Elapsed time: 134443 ms
+Elapsed time: 142649 ms
