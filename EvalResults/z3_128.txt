@@ -588,78 +588,13 @@ Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
 Testing || Std.HashSet.getD_insert : ∀ {α : Type u} {x : BEq α} {x_1 : Hashable α} {m : Std.HashSet α} [inst : EquivBEq α] [inst : LawfulHashable α]
   {k a fallback : α}, (m.insert k).getD a fallback = if (k == a) = true ∧ k ∉ m then k else m.getD a fallback
 Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-  ;; universe for _Std.DHashMap_α_fun_x_=>_PUnit._1_:
-  ;;   |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!0| |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!1| 
-  ;; -----------
-  ;; definitions for universe elements:
-  (declare-fun |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!0| () _Std.DHashMap_α_fun_x_=>_PUnit._1_)
-  (declare-fun |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!1| () _Std.DHashMap_α_fun_x_=>_PUnit._1_)
-  ;; cardinality constraint:
-  (forall ((x _Std.DHashMap_α_fun_x_=>_PUnit._1_))
-          (or (= x |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!0|)
-              (= x |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!1|)))
-  ;; -----------
-  ;; universe for _α:
-  ;;   |_α!val!1| |_α!val!4| |_α!val!2| |_α!val!3| |_α!val!0| 
-  ;; -----------
-  ;; definitions for universe elements:
-  (declare-fun |_α!val!1| () _α)
-  (declare-fun |_α!val!4| () _α)
-  (declare-fun |_α!val!2| () _α)
-  (declare-fun |_α!val!3| () _α)
-  (declare-fun |_α!val!0| () _α)
-  ;; cardinality constraint:
-  (forall ((x _α))
-          (or (= x |_α!val!1|)
-              (= x |_α!val!4|)
-              (= x |_α!val!2|)
-              (= x |_α!val!3|)
-              (= x |_α!val!0|)))
-  ;; -----------
-  (define-fun valid_fact_2 () Bool
-    (let ((a!1 (not (_Std.DHashMap.contains
-                  (_Std.HashMap.inner (_Std.HashSet.inner _m))
-                  _k))))
-(let ((a!2 (= (_Std.HashSet.getD (_Std.HashSet.insert _m _k) _a _fallback)
-              (ite (and (_BEq.beq _k _a) a!1)
-                   _k
-                   (_Std.HashSet.getD _m _a _fallback)))))
-  (not a!2))))
-  (define-fun |_EquivBEq_α| () Bool
-    true)
-  (define-fun valid_fact_1 () Bool
-    |_LawfulHashable_α|)
-  (define-fun valid_fact_3 () Bool
-    true)
-  (define-fun _a () _α
-    |_α!val!1|)
-  (define-fun _fallback () _α
-    |_α!val!2|)
-  (define-fun _k () _α
-    |_α!val!0|)
-  (define-fun valid_fact_0 () Bool
-    |_EquivBEq_α|)
-  (define-fun |_LawfulHashable_α| () Bool
-    true)
-  (define-fun _m () _Std.HashSet_α
-    (_Std.HashSet.mk (_Std.HashMap.mk |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!0|)))
-  (define-fun _Std.HashSet.insert ((x!0 _Std.HashSet_α) (x!1 _α)) _Std.HashSet_α
-    (_Std.HashSet.mk (_Std.HashMap.mk |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!1|)))
-  (define-fun _BEq.beq ((x!0 _α) (x!1 _α)) Bool
-    false)
-  (define-fun _Std.HashSet.getD ((x!0 _Std.HashSet_α) (x!1 _α) (x!2 _α)) _α
-    (ite (and (= x!0
-                 (_Std.HashSet.mk (_Std.HashMap.mk |_Std.DHashMap_α_fun_x_=>_PUnit._1_!val!0|)))
-              (= x!1 |_α!val!1|)
-              (= x!2 |_α!val!2|))
-      |_α!val!4|
-      |_α!val!3|))
-  (define-fun _Std.DHashMap.contains ((x!0 _Std.DHashMap_α_fun_x_=>_PUnit._1_)
-   (x!1 _α)) Bool
-    false)
-)
-
+Monomorphization failed because currently the procedure cannot deal with expression `Std.DHashMap.insertIfNew.proof_1
+  m✝¹`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || LinOrd.Iso.mk_inv : ∀ {α β : LinOrd} (e : ↑α ≃o ↑β), (LinOrd.Iso.mk e).inv = ↑e.symm
 Result.success
@@ -788,7 +723,7 @@ Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
 Testing || Algebra.coe_sInf : ∀ {R : Type u} {A : Type v} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : Algebra R A]
   (S : Set (Subalgebra R A)), ↑(sInf S) = ⋂ s ∈ S, ↑s
 Result.autoException ::
-Auto failed to find proof
+Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type a ∈ x_0 of λ binder contains bound variables
 
 Testing || Set.image_mul_left_Ioo : ∀ {α : Type u_1} [inst : LinearOrderedField α] {a : α},
   0 < a → ∀ (b c : α), (fun x => a * x) '' Set.Ioo b c = Set.Ioo (a * b) (a * c)
@@ -896,18 +831,22 @@ Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
   ;; cardinality constraint:
   (forall ((x _α)) (or (= x |_α!val!0|) (= x |_α!val!1|) (= x |_α!val!2|)))
   ;; -----------
-  (define-fun _a () _α
-    |_α!val!0|)
+  (define-fun valid_fact_3 () Bool
+    true)
   (define-fun valid_fact_2 () Bool
     (_LT.lt _a _c))
-  (define-fun valid_fact_0 () Bool
-    (_WCovBy _a _b))
-  (define-fun valid_fact_1 () Bool
-    (_LT.lt _c _b))
   (define-fun _b () _α
     |_α!val!1|)
+  (define-fun valid_fact_4 () Bool
+    true)
+  (define-fun valid_fact_1 () Bool
+    (_LT.lt _c _b))
   (define-fun _c () _α
     |_α!val!2|)
+  (define-fun _a () _α
+    |_α!val!0|)
+  (define-fun valid_fact_0 () Bool
+    (_WCovBy _a _b))
   (define-fun _LT.lt ((x!0 _α) (x!1 _α)) Bool
     true)
   (define-fun _WCovBy ((x!0 _α) (x!1 _α)) Bool
@@ -924,8 +863,7 @@ Testing || CategoryTheory.Limits.coneOfSectionCompYoneda_pt : ∀ {C : Type u} [
 Result.success
 
 Testing || WittVector.wittMul_vars : ∀ (p : ℕ) [hp : Fact (Nat.Prime p)] (n : ℕ), (WittVector.wittMul p n).vars ⊆ Finset.univ ×ˢ Finset.range (n + 1)
-Result.autoException ::
-Auto failed to find proof
+Result.success
 
 Testing || Real.borel_eq_generateFrom_Ioi_rat : borel ℝ = MeasurableSpace.generateFrom (⋃ a, {Set.Ioi ↑a})
 Result.autoException ::
@@ -937,7 +875,7 @@ Testing || HomologicalComplex₂.comm_f : ∀ {C : Type u_1} [inst : CategoryThe
   CategoryTheory.CategoryStruct.comp ((f.f i₁).f i₂) ((L.d i₁ i₁').f i₂) =
     CategoryTheory.CategoryStruct.comp ((K.d i₁ i₁').f i₂) ((f.f i₁').f i₂)
 Result.autoException ::
-Monomorphization failed because currently the procedure cannot deal with expression `cifvar_17.d cifvar_16 x_1`.
+Monomorphization failed because currently the procedure cannot deal with expression `x_0.f x_1`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
@@ -1027,7 +965,7 @@ Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
 Testing || Filter.Tendsto.cexp : ∀ {α : Type u_1} {l : Filter α} {f : α → ℂ} {z : ℂ},
   Filter.Tendsto f l (nhds z) → Filter.Tendsto (fun x => Complex.exp (f x)) l (nhds (Complex.exp z))
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || IsLocalizedModule.fromLocalizedModule'_add : ∀ {R : Type u_1} [inst : CommSemiring R] (S : Submonoid R) {M : Type u_2} {M' : Type u_3} [inst_1 : AddCommMonoid M]
@@ -1056,7 +994,7 @@ Testing || IsLocalization.coeSubmodule_fg : ∀ {R : Type u_1} [inst : CommSemir
   Function.Injective ⇑(algebraMap R S) → ∀ (I : Ideal R), (IsLocalization.coeSubmodule S I).FG ↔ Submodule.FG I
 Result.autoException ::
 Monomorphization failed because currently the procedure cannot deal with expression `Function.Injective
-  (cifvar_10 x_0)`.
+  (cifvar_11 x_0)`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
@@ -1226,131 +1164,133 @@ Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
   (forall ((x _β)) (or (= x |_β!val!1|) (= x |_β!val!0|)))
   ;; -----------
   (define-fun _a () _α
-    |_α!val!1|)
-  (define-fun valid_fact_0 () Bool
-    (not (= (_DFunLike.coe (_Equiv.symm _f.toEquivRange)
-                       (_Subtype.mk_f_a _Set.mem_range_self_a))
-        _a)))
-  (define-fun valid_fact_1 () Bool
-    (forall ((|_α_0| _α))
-  (_Membership.mem _Set.range__f (_DFunLike.coe_0 _f |_α_0|))))
-  (define-fun _f () _α___β
-    |_α___β!val!0|)
-  (define-fun valid_fact_3 () Bool
-    (forall ((_pl___0 ___x_//_x___Set.range__f_____α)
-         (|_α_3| _α)
-         (_pl___1 ___x_//_x___Set.range__f__))
-  (= (= (_DFunLike.coe_1 (_Equiv.symm_0 _pl___0) |_α_3|) _pl___1)
-     (= |_α_3| (_DFunLike.coe _pl___0 _pl___1)))))
+    |_α!val!2|)
+  (define-fun valid_fact_5 () Bool
+    true)
   (define-fun valid_fact_2 () Bool
     (forall ((|_α_1| _α_____x_//_x___Set.range__f__)
          (_pl__ ___x_//_x___Set.range__f__)
          (|_α_2| _α))
   (= (= (_DFunLike.coe (_Equiv.symm |_α_1|) _pl__) |_α_2|)
      (= _pl__ (_DFunLike.coe_1 |_α_1| |_α_2|)))))
-  (define-fun _Set.range__f () _Set_β
-    |_Set_β!val!0|)
+  (define-fun _f () _α___β
+    |_α___β!val!0|)
+  (define-fun valid_fact_4 () Bool
+    true)
+  (define-fun valid_fact_1 () Bool
+    (forall ((|_α_0| _α))
+  (_Membership.mem _Set.range__f (_DFunLike.coe_0 _f |_α_0|))))
+  (define-fun valid_fact_3 () Bool
+    (forall ((_pl___0 ___x_//_x___Set.range__f_____α)
+         (|_α_3| _α)
+         (_pl___1 ___x_//_x___Set.range__f__))
+  (= (= (_DFunLike.coe_1 (_Equiv.symm_0 _pl___0) |_α_3|) _pl___1)
+     (= |_α_3| (_DFunLike.coe _pl___0 _pl___1)))))
   (define-fun _Set.mem_range_self_a () _f_a___Set.range__f
     _f_a___Set.range__f!val!0)
+  (define-fun _Set.range__f () _Set_β
+    |_Set_β!val!0|)
+  (define-fun valid_fact_0 () Bool
+    (not (= (_DFunLike.coe (_Equiv.symm _f.toEquivRange)
+                       (_Subtype.mk_f_a _Set.mem_range_self_a))
+        _a)))
   (define-fun _f.toEquivRange () _α_____x_//_x___Set.range__f__
     |_α_____x_//_x___Set.range__f__!val!0|)
   (define-fun _Equiv.symm ((x!0 _α_____x_//_x___Set.range__f__)) ___x_//_x___Set.range__f_____α
-    (let ((a!1 (ite (and (= x!0 |_α_____x_//_x___Set.range__f__!val!0|)
-                         (not (= x!0 |_α_____x_//_x___Set.range__f__!val!1|)))
-                    |___x_//_x___Set.range__f_____α!val!0|
-                    |___x_//_x___Set.range__f_____α!val!1|)))
-      (ite (and (not (= x!0 |_α_____x_//_x___Set.range__f__!val!3|))
-                (not (= x!0 |_α_____x_//_x___Set.range__f__!val!0|))
-                (not (= x!0 |_α_____x_//_x___Set.range__f__!val!1|)))
-           |___x_//_x___Set.range__f_____α!val!2|
-           a!1)))
+    (ite (and (not (= x!0 |_α_____x_//_x___Set.range__f__!val!3|))
+              (not (= x!0 |_α_____x_//_x___Set.range__f__!val!0|))
+              (not (= x!0 |_α_____x_//_x___Set.range__f__!val!1|)))
+         |___x_//_x___Set.range__f_____α!val!2|
+         (ite (= x!0 |_α_____x_//_x___Set.range__f__!val!1|)
+              |___x_//_x___Set.range__f_____α!val!1|
+              |___x_//_x___Set.range__f_____α!val!0|)))
+  (define-fun _DFunLike.coe_0 ((x!0 _α___β) (x!1 _α)) _β
+    (ite (= x!0 |_α___β!val!0|) |_β!val!0| |_β!val!1|))
   (define-fun _DFunLike.coe ((x!0 ___x_//_x___Set.range__f_____α)
    (x!1 ___x_//_x___Set.range__f__)) _α
     (let ((a!1 (or (and (= x!0 |___x_//_x___Set.range__f_____α!val!0|)
-                        (= x!1 ___x_//_x___Set.range__f__!val!2)
-                        (not (= x!1 ___x_//_x___Set.range__f__!val!0)))
-                   (and (= x!0 |___x_//_x___Set.range__f_____α!val!2|)
-                        (not (= x!0 |___x_//_x___Set.range__f_____α!val!0|))
-                        (= x!1 ___x_//_x___Set.range__f__!val!2)
+                        (not (= x!1 ___x_//_x___Set.range__f__!val!2))
                         (not (= x!1 ___x_//_x___Set.range__f__!val!0)))
                    (and (not (= x!0 |___x_//_x___Set.range__f_____α!val!2|))
                         (not (= x!0 |___x_//_x___Set.range__f_____α!val!0|))
-                        (= x!1 ___x_//_x___Set.range__f__!val!2)
-                        (not (= x!1 ___x_//_x___Set.range__f__!val!0)))))
-          (a!2 (or (and (= x!0 |___x_//_x___Set.range__f_____α!val!0|)
-                        (= x!1 ___x_//_x___Set.range__f__!val!0))
-                   (and (not (= x!0 |___x_//_x___Set.range__f_____α!val!2|))
-                        (not (= x!0 |___x_//_x___Set.range__f_____α!val!0|))
-                        (= x!1 ___x_//_x___Set.range__f__!val!0)))))
+                        (not (= x!1 ___x_//_x___Set.range__f__!val!2))
+                        (not (= x!1 ___x_//_x___Set.range__f__!val!0))))))
+    (let ((a!2 (ite a!1
+                    |_α!val!1|
+                    (ite (and (= x!0 |___x_//_x___Set.range__f_____α!val!0|)
+                              (= x!1 ___x_//_x___Set.range__f__!val!0))
+                         |_α!val!0|
+                         |_α!val!2|))))
+    (let ((a!3 (ite (and (not (= x!0 |___x_//_x___Set.range__f_____α!val!2|))
+                         (not (= x!0 |___x_//_x___Set.range__f_____α!val!0|))
+                         (= x!1 ___x_//_x___Set.range__f__!val!0))
+                    |_α!val!0|
+                    a!2)))
+    (let ((a!4 (ite (and (= x!0 |___x_//_x___Set.range__f_____α!val!2|)
+                         (not (= x!0 |___x_//_x___Set.range__f_____α!val!0|))
+                         (not (= x!1 ___x_//_x___Set.range__f__!val!2))
+                         (not (= x!1 ___x_//_x___Set.range__f__!val!0)))
+                    |_α!val!1|
+                    a!3)))
       (ite (and (= x!0 |___x_//_x___Set.range__f_____α!val!2|)
                 (not (= x!0 |___x_//_x___Set.range__f_____α!val!0|))
                 (= x!1 ___x_//_x___Set.range__f__!val!0))
            |_α!val!0|
-           (ite a!1 |_α!val!2| (ite a!2 |_α!val!0| |_α!val!1|)))))
+           a!4))))))
   (define-fun _Subtype.mk_f_a ((x!0 _f_a___Set.range__f)) ___x_//_x___Set.range__f__
     ___x_//_x___Set.range__f__!val!0)
-  (define-fun _DFunLike.coe_0 ((x!0 _α___β) (x!1 _α)) _β
-    (ite (= x!0 |_α___β!val!0|) |_β!val!0| |_β!val!1|))
   (define-fun _DFunLike.coe_1 ((x!0 _α_____x_//_x___Set.range__f__) (x!1 _α)) ___x_//_x___Set.range__f__
     (let ((a!1 (or (and (= x!0 |_α_____x_//_x___Set.range__f__!val!1|)
-                        (= x!1 |_α!val!2|)
+                        (not (= x!1 |_α!val!1|))
+                        (not (= x!1 |_α!val!0|)))
+                   (and (= x!0 |_α_____x_//_x___Set.range__f__!val!0|)
+                        (not (= x!0 |_α_____x_//_x___Set.range__f__!val!1|))
+                        (not (= x!1 |_α!val!1|))
+                        (not (= x!1 |_α!val!0|)))
+                   (and (= x!0 |_α_____x_//_x___Set.range__f__!val!3|)
+                        (not (= x!0 |_α_____x_//_x___Set.range__f__!val!0|))
+                        (not (= x!0 |_α_____x_//_x___Set.range__f__!val!1|))
+                        (not (= x!1 |_α!val!1|))
                         (not (= x!1 |_α!val!0|)))
                    (and (not (= x!0 |_α_____x_//_x___Set.range__f__!val!3|))
                         (not (= x!0 |_α_____x_//_x___Set.range__f__!val!0|))
                         (not (= x!0 |_α_____x_//_x___Set.range__f__!val!1|))
-                        (= x!1 |_α!val!2|)
-                        (not (= x!1 |_α!val!0|)))
-                   (and (= x!0 |_α_____x_//_x___Set.range__f__!val!0|)
-                        (not (= x!0 |_α_____x_//_x___Set.range__f__!val!1|))
-                        (= x!1 |_α!val!2|)
+                        (not (= x!1 |_α!val!1|))
                         (not (= x!1 |_α!val!0|)))))
           (a!2 (or (and (not (= x!0 |_α_____x_//_x___Set.range__f__!val!3|))
                         (not (= x!0 |_α_____x_//_x___Set.range__f__!val!0|))
                         (not (= x!0 |_α_____x_//_x___Set.range__f__!val!1|))
-                        (not (= x!1 |_α!val!2|))
-                        (not (= x!1 |_α!val!0|)))
+                        (= x!1 |_α!val!0|))
                    (and (= x!0 |_α_____x_//_x___Set.range__f__!val!1|)
-                        (not (= x!1 |_α!val!2|))
-                        (not (= x!1 |_α!val!0|)))
+                        (= x!1 |_α!val!0|))
                    (and (= x!0 |_α_____x_//_x___Set.range__f__!val!0|)
                         (not (= x!0 |_α_____x_//_x___Set.range__f__!val!1|))
-                        (not (= x!1 |_α!val!2|))
-                        (not (= x!1 |_α!val!0|))))))
-    (let ((a!3 (ite (and (= x!0 |_α_____x_//_x___Set.range__f__!val!3|)
-                         (not (= x!0 |_α_____x_//_x___Set.range__f__!val!0|))
-                         (not (= x!0 |_α_____x_//_x___Set.range__f__!val!1|))
-                         (not (= x!1 |_α!val!2|))
-                         (not (= x!1 |_α!val!0|)))
-                    ___x_//_x___Set.range__f__!val!1
-                    (ite a!1
-                         ___x_//_x___Set.range__f__!val!2
-                         (ite a!2
-                              ___x_//_x___Set.range__f__!val!1
-                              ___x_//_x___Set.range__f__!val!0)))))
+                        (= x!1 |_α!val!0|)))))
       (ite (and (= x!0 |_α_____x_//_x___Set.range__f__!val!3|)
                 (not (= x!0 |_α_____x_//_x___Set.range__f__!val!0|))
                 (not (= x!0 |_α_____x_//_x___Set.range__f__!val!1|))
-                (= x!1 |_α!val!2|)
-                (not (= x!1 |_α!val!0|)))
-           ___x_//_x___Set.range__f__!val!2
-           a!3))))
+                (= x!1 |_α!val!0|))
+           ___x_//_x___Set.range__f__!val!0
+           (ite a!1
+                ___x_//_x___Set.range__f__!val!2
+                (ite a!2
+                     ___x_//_x___Set.range__f__!val!0
+                     ___x_//_x___Set.range__f__!val!1)))))
   (define-fun _Membership.mem ((x!0 _Set_β) (x!1 _β)) Bool
     true)
   (define-fun _Equiv.symm_0 ((x!0 ___x_//_x___Set.range__f_____α)) _α_____x_//_x___Set.range__f__
-    (ite (and (= x!0 |___x_//_x___Set.range__f_____α!val!2|)
+    (ite (and (not (= x!0 |___x_//_x___Set.range__f_____α!val!2|))
               (not (= x!0 |___x_//_x___Set.range__f_____α!val!0|)))
-         |_α_____x_//_x___Set.range__f__!val!3|
+         |_α_____x_//_x___Set.range__f__!val!2|
          (ite (= x!0 |___x_//_x___Set.range__f_____α!val!0|)
               |_α_____x_//_x___Set.range__f__!val!1|
-              |_α_____x_//_x___Set.range__f__!val!2|)))
+              |_α_____x_//_x___Set.range__f__!val!3|)))
 )
 
 
 Testing || Matrix.star_dotProduct_star : ∀ {m : Type u_2} {α : Type v} [inst : Fintype m] [inst_1 : NonUnitalSemiring α] [inst_2 : StarRing α] (v w : m → α),
   Matrix.dotProduct (star v) (star w) = star (Matrix.dotProduct w v)
-Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+Result.success
 
 Testing || Finset.singleton_infs_singleton : ∀ {α : Type u_2} [inst : DecidableEq α] [inst_1 : SemilatticeInf α] {a b : α}, {a} ⊼ {b} = {a ⊓ b}
 Result.success
@@ -1427,7 +1367,7 @@ Testing || AffineIndependent.mem_affineSpan_iff : ∀ {k : Type u_1} {V : Type u
   [inst_3 : AddTorsor V P] {ι : Type u_4} [inst_4 : Nontrivial k] {p : ι → P},
   AffineIndependent k p → ∀ (i : ι) (s : Set ι), p i ∈ affineSpan k (p '' s) ↔ i ∈ s
 Result.autoException ::
-Auto failed to find proof
+Auto.LamReif.reifTermCheckType :: LamTerm ((∃ x0 : #2, (!11 (!15 (!5 !6) (λx1 : #2, (∃ x2 : #6, ((!17 (!18 (!5 !6)) x2) ∧ ((!7 !8) = (!19 x2 x1)))))) x0)) = (!3 (!4 (!5 !6)) (!7 !8))) is not type correct
 
 Testing || CategoryTheory.ofTypeMonad_obj : ∀ (m : Type u → Type u) [inst : Monad m] [inst_1 : LawfulMonad m] (a : Type u),
   (CategoryTheory.ofTypeMonad m).obj a = m a
@@ -1792,7 +1732,7 @@ This is because it has subterms possessing at least one of the following feature
 Testing || leibniz_cross : ∀ {R : Type u_1} [inst : CommRing R] (u v w : Fin 3 → R),
   (crossProduct u) ((crossProduct v) w) = (crossProduct ((crossProduct u) v)) w + (crossProduct v) ((crossProduct u) w)
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Real.one_sub_le_exp_neg : ∀ (x : ℝ), 1 - x ≤ Real.exp (-x)
@@ -2002,9 +1942,7 @@ Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
 Testing || ProbabilityTheory.Kernel.fst_comp : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β} {γ : Type u_3} {δ : Type u_4}
   {mγ : MeasurableSpace γ} {mδ : MeasurableSpace δ} (κ : ProbabilityTheory.Kernel α β)
   (η : ProbabilityTheory.Kernel β (γ × δ)), (η.comp κ).fst = η.fst.comp κ
-Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+Result.success
 
 Testing || TypeVec.dropFun_id : ∀ {n : ℕ} {α : TypeVec.{u_1} (n + 1)}, TypeVec.dropFun TypeVec.id = TypeVec.id
 Result.success
@@ -2096,8 +2034,47 @@ This is because it has subterms possessing at least one of the following feature
 Testing || MeasureTheory.withDensity_indicator_one : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ : MeasureTheory.Measure α} {s : Set α},
   MeasurableSet s → μ.withDensity (s.indicator 1) = μ.restrict s
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
+  ;; universe for _Set_α:
+  ;;   |_Set_α!val!0| 
+  ;; -----------
+  ;; definitions for universe elements:
+  (declare-fun |_Set_α!val!0| () _Set_α)
+  ;; cardinality constraint:
+  (forall ((x _Set_α)) (= x |_Set_α!val!0|))
+  ;; -----------
+  ;; universe for _MeasureTheory.Measure_α:
+  ;;   |_MeasureTheory.Measure_α!val!2| |_MeasureTheory.Measure_α!val!0| |_MeasureTheory.Measure_α!val!1| 
+  ;; -----------
+  ;; definitions for universe elements:
+  (declare-fun |_MeasureTheory.Measure_α!val!2| () _MeasureTheory.Measure_α)
+  (declare-fun |_MeasureTheory.Measure_α!val!0| () _MeasureTheory.Measure_α)
+  (declare-fun |_MeasureTheory.Measure_α!val!1| () _MeasureTheory.Measure_α)
+  ;; cardinality constraint:
+  (forall ((x _MeasureTheory.Measure_α))
+          (or (= x |_MeasureTheory.Measure_α!val!2|)
+              (= x |_MeasureTheory.Measure_α!val!0|)
+              (= x |_MeasureTheory.Measure_α!val!1|)))
+  ;; -----------
+  (define-fun valid_fact_0 () Bool
+    (_MeasurableSet _s))
+  (define-fun valid_fact_1 () Bool
+    (not (= (|_fun_μ_=>_μ.withDensity_s.indicator_1_| |_μ|)
+        (_MeasureTheory.Measure.restrict |_μ| _s))))
+  (define-fun _s () _Set_α
+    |_Set_α!val!0|)
+  (define-fun |_μ| () _MeasureTheory.Measure_α
+    |_MeasureTheory.Measure_α!val!0|)
+  (define-fun _MeasurableSet ((x!0 _Set_α)) Bool
+    true)
+  (define-fun _MeasureTheory.Measure.restrict ((x!0 _MeasureTheory.Measure_α)
+   (x!1 _Set_α)) _MeasureTheory.Measure_α
+    |_MeasureTheory.Measure_α!val!2|)
+  (define-fun |_fun_μ_=>_μ.withDensity_s.indicator_1_| ((x!0
+    _MeasureTheory.Measure_α)) _MeasureTheory.Measure_α
+    |_MeasureTheory.Measure_α!val!1|)
+)
+
 
 Testing || add_halves' : ∀ {R : Type u_1} [inst : DivisionSemiring R] [inst_1 : NeZero 2] (a : R), a / 2 + a / 2 = a
 Result.success
@@ -2112,98 +2089,15 @@ Auto failed to find proof
 
 Testing || WithTop.image_coe_Ioi : ∀ {α : Type u_1} [inst : Preorder α] {a : α}, WithTop.some '' Set.Ioi a = Set.Ioo ↑a ⊤
 Result.autoException ::
-Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #3, (∀ x1 : #3, ((!11 (!17 x0) (λx2 : #3, (!17 x2 x1))) = (!3 x0 x1)))) is not type correct
+Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #3, (∀ x1 : #3, ((!14 (!26 x0) (λx2 : #3, (!26 x2 x1))) = (!3 x0 x1)))) is not type correct
 
 Testing || CategoryTheory.forgetEnrichment_id : ∀ {C : Type u₁} (W : Type v) [inst : CategoryTheory.Category.{w, v} W] [inst_1 : CategoryTheory.MonoidalCategory W]
   [inst_2 : CategoryTheory.EnrichedCategory W C] (X : CategoryTheory.ForgetEnrichment W C),
   CategoryTheory.ForgetEnrichment.homTo W (CategoryTheory.CategoryStruct.id X) =
     CategoryTheory.eId W (CategoryTheory.ForgetEnrichment.to W X)
 Result.autoException ::
-Auto.Solver.SMT.getSexp :: Malformed (prefix of) input (
-  ;; universe for ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X:
-  ;;   ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!1 ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!0 
-  ;; -----------
-  ;; definitions for universe elements:
-  (declare-fun ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!1 () ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X)
-  (declare-fun ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!0 () ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X)
-  ;; cardinality constraint:
-  (forall ((x ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X))
-          (or (= x
-                 ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!1)
-              (= x
-                 ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!0)))
-  ;; -----------
-  ;; universe for _C:
-  ;;   _C!val!0 
-  ;; -----------
-  ;; definitions for universe elements:
-  (declare-fun _C!val!0 () _C)
-  ;; cardinality constraint:
-  (forall ((x _C)) (= x _C!val!0))
-  ;; -----------
-  (define-fun _X () _C
-    _C!val!0)
-  (define-fun valid_fact_5 () Bool
-    (= (_CategoryTheory.ForgetEnrichment.homTo_W
-     _CategoryTheory.CategoryStruct.id_X)
-   _CategoryTheory.CategoryStruct.id_X))
-  (define-fun _CategoryTheory.CategoryStruct.id_X () ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X
-    ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!0)
-  (define-fun valid_fact_10 () Bool
-    true)
-  (define-fun valid_fact_3 () Bool
-    true)
-  (define-fun valid_fact_8 () Bool
-    true)
-  (define-fun valid_fact_0 () Bool
-    (not (= (_CategoryTheory.ForgetEnrichment.homTo_W
-          _CategoryTheory.CategoryStruct.id_X)
-        (_CategoryTheory.ForgetEnrichment.homTo_W
-          _CategoryTheory.EnrichedCategory.id_CategoryTheory.ForgetEnrichment.to_W_X))))
-  (define-fun valid_fact_4 () Bool
-    (= (_CategoryTheory.ForgetEnrichment.homTo_W
-     _CategoryTheory.CategoryStruct.id_X)
-   _CategoryTheory.CategoryStruct.id_X))
-  (define-fun valid_fact_11 () Bool
-    (= (_CategoryTheory.ForgetEnrichment.homTo_W
-     _CategoryTheory.EnrichedCategory.id_CategoryTheory.ForgetEnrichment.to_W_X)
-   _CategoryTheory.EnrichedCategory.id_CategoryTheory.ForgetEnrichment.to_W_X))
-  (define-fun valid_fact_9 () Bool
-    true)
-  (define-fun valid_fact_7 () Bool
-    (= (_CategoryTheory.ForgetEnrichment.homTo_W
-     _CategoryTheory.EnrichedCategory.id_CategoryTheory.ForgetEnrichment.to_W_X)
-   _CategoryTheory.EnrichedCategory.id_CategoryTheory.ForgetEnrichment.to_W_X))
-  (define-fun _CategoryTheory.EnrichedCategory.id_CategoryTheory.ForgetEnrichment.to_W_X () ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X
-    ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!1)
-  (define-fun valid_fact_6 () Bool
-    true)
-  (define-fun valid_fact_2 () Bool
-    (= (_CategoryTheory.ForgetEnrichment.to_W _X) _X))
-  (define-fun valid_fact_1 () Bool
-    (= (_CategoryTheory.ForgetEnrichment.to_W _X) _X))
-  (define-fun valid_fact_12 () Bool
-    (= _CategoryTheory.EnrichedCategory.id_CategoryTheory.ForgetEnrichment.to_W_X
-   (_CategoryTheory.ForgetEnrichment.homTo_W
-     _CategoryTheory.EnrichedCategory.id_CategoryTheory.ForgetEnrichment.to_W_X)))
-  (define-fun _CategoryTheory.ForgetEnrichment_W_C () _Type_u₁
-    |_Type_u₁!val!0|)
-  (define-fun ____W () _W
-    _W!val!0)
-  (define-fun _CategoryTheory.ForgetEnrichment.to_W ((x!0 _C)) _C
-    _C!val!0)
-  (define-fun _CategoryTheory.ForgetEnrichment.homTo_W ((x!0
-    ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X)) ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X
-    (ite (= x!0
-            ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!1)
-      ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!1
-      ____W___CategoryTheory.EnrichedCategory.Hom_CategoryTheory.ForgetEnrichment.to_W_X_CategoryTheory.ForgetEnrichment.to_W_X!val!0))
-  (define-fun _Quiver.Hom ((x!0 _W) (x!1 _W)) _Type_w
-    _Type_w!val!0)
-  (define-fun _CategoryTheory.EnrichedCategory.Hom ((x!0 _C) (x!1 _C)) _W
-    _W!val!0)
-)
-
+Auto.Monomorphization.ConstInst.ofExpr? :: 𝟙_ (Type w) ⟶
+  (CategoryTheory.coyoneda.obj (Opposite.op (𝟙_ W))).obj (𝟙_ W) is not a `∀`
 
 Testing || CategoryTheory.Comma.mapLeftComp_inv_app_left : ∀ {A : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} A] {B : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} B]
   {T : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} T] (R : CategoryTheory.Functor B T)
@@ -2278,4 +2172,135 @@ This is because it has subterms possessing at least one of the following feature
 · Other (TODO)
 `set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
-Elapsed time: 142649 ms
+Elapsed time: 132657 ms
+
+Summary:
+
+0 E AEMeasurable.inf
+1 E Std.HashSet.getD_insert
+2 S LinOrd.Iso.mk_inv
+3 E List.sublistsLen_length
+4 E GenContFract.zeroth_contAux_eq_one_zero
+5 E Rat.cast_sub_of_ne_zero
+6 E _private.Mathlib.Combinatorics.SimpleGraph.Triangle.Counting.0.SimpleGraph.edgeDensity_badVertices_le
+7 E _private.Mathlib.Combinatorics.Additive.SmallTripling.0.Finset.small_pos_neg_pos_add
+8 E AddMonoid.exponent_pi_eq_zero
+9 E isLUB_sSup
+10 E Algebra.coe_sInf
+11 E Set.image_mul_left_Ioo
+12 E FirstOrder.Language.ElementaryEmbedding.map_rel
+13 S hnot_le_iff_codisjoint_left
+14 E SemistandardYoungTableau.copy_eq
+15 E CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'
+16 S AlgebraicGeometry.Spec.toSheafedSpace_obj
+17 E Set.image_preimage
+18 E deriv_sinh
+19 E WCovBy.le_of_lt
+20 S Bool.not_eq_not
+21 S CategoryTheory.Limits.coneOfSectionCompYoneda_pt
+22 S WittVector.wittMul_vars
+23 E Real.borel_eq_generateFrom_Ioi_rat
+24 E HomologicalComplex₂.comm_f
+25 E Asymptotics.IsBigO.comp_tendsto
+26 E Filter.Tendsto.cexp
+27 E IsLocalizedModule.fromLocalizedModule'_add
+28 E AffineSubspace.affineSpan_coe
+29 S ENat.mem_nhds_natCast_iff
+30 E HasProd.div
+31 E IsLocalization.coeSubmodule_fg
+32 S CategoryTheory.IsPullback.of_right
+33 E Nat.nonempty_properDivisors
+34 E RingEquiv.map_prod
+35 E dist_smul
+36 E map_mul_right_nhds₀
+37 E Nat.find_le
+38 E Finset.subset_mul_left
+39 S IterateAddAct.ext
+40 S Mathlib.Vector.mem_cons_of_mem
+41 E Measurable.set_lintegral_kernel
+42 E Nat.dvd_zero
+43 E Function.Embedding.toEquivRange_symm_apply_self
+44 S Matrix.star_dotProduct_star
+45 S Finset.singleton_infs_singleton
+46 E IsConjRoot.isIntegral
+47 E SimpleGraph.Walk.transfer_transfer
+48 E CategoryTheory.ofTypeMonad_μ_app
+49 S measure_Ioc_lt_top
+50 E List.takeDTR_go_eq
+51 E Symmetric.iff
+52 E LieModuleEquiv.symm_apply_apply
+53 E AffineIndependent.mem_affineSpan_iff
+54 S CategoryTheory.ofTypeMonad_obj
+55 E Set.center_eq_univ
+56 E LinearIsometryEquiv.differentiableOn
+57 E TwoUniqueSums.of_addHom
+58 E SimpleGraph.Walk.map_toDeleteEdges_eq
+59 E LinearEquiv.symm_apply_apply
+60 S Valuation.IsEquiv.ne_zero
+61 E List.pwFilter_map
+62 E Relator.RightUnique.forall₂
+63 E CFC.quasispectrum_zero_eq
+64 E taylor_mean_remainder_cauchy
+65 S CategoryTheory.Idempotents.DoldKan.N_obj
+66 S HomogeneousLocalization.val_zsmul
+67 E Filter.NeBot.mul_zero_nonneg
+68 E sdiff_sdiff
+69 S Rat.ofInt_eq_cast
+70 E QPF.Fix.ind_rec
+71 E Polynomial.eval_one_cyclotomic_not_prime_pow
+72 E leibniz_cross
+73 S Real.one_sub_le_exp_neg
+74 E Monovary.sum_smul_comp_perm_le_sum_smul
+75 E IndexedPartition.disjoint
+76 E isConjRoot_iff_mem_minpoly_rootSet
+77 E List.Perm.eraseP
+78 E Fin.appendIsometry_symm_apply
+79 E AddUnits.addRight_bijective
+80 E SimpleGraph.Walk.length_transfer
+81 E CliffordAlgebra.forall_mul_self_eq_iff
+82 S Topology.IsQuotientMap.image_connectedComponent
+83 E isPiSystem_iUnion_of_monotone
+84 E Setoid.eq_of_mem_eqv_class
+85 E univLE_max
+86 E hasLineDerivAt_zero
+87 E Complex.polarCoord_apply
+88 S Complex.cosh_sub
+89 S MeasureTheory.Measure.restrict_apply'
+90 S Inseparable.mem_open_iff
+91 S CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_map_base
+92 E UniqueFactorizationMonoid.squarefree_iff_nodup_normalizedFactors
+93 S ContDiffAt.prod_map
+94 E MeasureTheory.isClosed_aeStronglyMeasurable'
+95 S ProbabilityTheory.Kernel.fst_comp
+96 S TypeVec.dropFun_id
+97 S Real.cos_sq_add_sin_sq
+98 S Equiv.addCommSemigroup.proof_1
+99 S Nat.lcm_pos
+100 S PProd.exists'
+101 S div_le_div_left
+102 E Set.Finite.induction_to_univ
+103 E VectorBundleCore.continuous_proj
+104 S CategoryTheory.equivYoneda'_inv_val
+105 E Fintype.decidableEqAddEquivFintype.proof_1
+106 E intervalIntegral.intervalIntegrable_log
+107 S StrictConcaveOn.concaveOn
+108 E ProbabilityTheory.Kernel.ae_compProd_iff
+109 E SMulPosReflectLT.toSMulPosMono
+110 E MeasureTheory.withDensity_indicator_one
+111 S add_halves'
+112 E CategoryTheory.Limits.preservesBiproductsOfShape_of_preservesProductsOfShape
+113 E WithTop.image_coe_Ioi
+114 E CategoryTheory.forgetEnrichment_id
+115 S CategoryTheory.Comma.mapLeftComp_inv_app_left
+116 S Order.pred_lt
+117 S isOfFinAddOrder_zero
+118 E gradient_eq
+119 S padicNorm.int_lt_one_iff
+120 S FiberBundle.mem_baseSet_trivializationAt
+121 E Multiset.map_add_left_Ioc
+122 E IsOpen.div_right
+123 S ZModModule.add_add_add_cancel
+124 E ProbabilityTheory.centralMoment_one'
+125 E CategoryTheory.Functor.relativelyRepresentable.symmetry_fst_assoc
+126 S Duper.rule15bTheorem
+127 E Real.summable_cexp_multipliable

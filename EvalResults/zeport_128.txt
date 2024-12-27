@@ -9,7 +9,13 @@ Auto failed to find proof
 Testing || Std.HashSet.getD_insert : ∀ {α : Type u} {x : BEq α} {x_1 : Hashable α} {m : Std.HashSet α} [inst : EquivBEq α] [inst : LawfulHashable α]
   {k a fallback : α}, (m.insert k).getD a fallback = if (k == a) = true ∧ k ∉ m then k else m.getD a fallback
 Result.autoException ::
-Auto failed to find proof
+Monomorphization failed because currently the procedure cannot deal with expression `Std.DHashMap.insertIfNew.proof_1
+  m✝¹`.
+This is because it has subterms possessing at least one of the following features
+· Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
+· λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
+· Other (TODO)
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
 Testing || LinOrd.Iso.mk_inv : ∀ {α β : LinOrd} (e : ↑α ≃o ↑β), (LinOrd.Iso.mk e).inv = ↑e.symm
 Result.success
@@ -69,7 +75,7 @@ Auto failed to find proof
 Testing || Algebra.coe_sInf : ∀ {R : Type u} {A : Type v} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : Algebra R A]
   (S : Set (Subalgebra R A)), ↑(sInf S) = ⋂ s ∈ S, ↑s
 Result.autoException ::
-Auto failed to find proof
+Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type a ∈ x_0 of λ binder contains bound variables
 
 Testing || Set.image_mul_left_Ioo : ∀ {α : Type u_1} [inst : LinearOrderedField α] {a : α},
   0 < a → ∀ (b c : α), (fun x => a * x) '' Set.Ioo b c = Set.Ioo (a * b) (a * c)
@@ -128,7 +134,7 @@ Auto failed to find proof
 
 Testing || deriv_sinh : ∀ {f : ℝ → ℝ} {x : ℝ}, DifferentiableAt ℝ f x → deriv (fun x => Real.sinh (f x)) x = Real.cosh (f x) * deriv f x
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || WCovBy.le_of_lt : ∀ {α : Type u_1} [inst : LinearOrder α] {a b c : α}, a ⩿ b → c < b → c ≤ a
@@ -144,8 +150,7 @@ Testing || CategoryTheory.Limits.coneOfSectionCompYoneda_pt : ∀ {C : Type u} [
 Result.success
 
 Testing || WittVector.wittMul_vars : ∀ (p : ℕ) [hp : Fact (Nat.Prime p)] (n : ℕ), (WittVector.wittMul p n).vars ⊆ Finset.univ ×ˢ Finset.range (n + 1)
-Result.autoException ::
-Auto failed to find proof
+Result.success
 
 Testing || Real.borel_eq_generateFrom_Ioi_rat : borel ℝ = MeasurableSpace.generateFrom (⋃ a, {Set.Ioi ↑a})
 Result.autoException ::
@@ -172,7 +177,7 @@ Auto failed to find proof
 Testing || Filter.Tendsto.cexp : ∀ {α : Type u_1} {l : Filter α} {f : α → ℂ} {z : ℂ},
   Filter.Tendsto f l (nhds z) → Filter.Tendsto (fun x => Complex.exp (f x)) l (nhds (Complex.exp z))
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || IsLocalizedModule.fromLocalizedModule'_add : ∀ {R : Type u_1} [inst : CommSemiring R] (S : Submonoid R) {M : Type u_2} {M' : Type u_3} [inst_1 : AddCommMonoid M]
@@ -201,7 +206,7 @@ Testing || IsLocalization.coeSubmodule_fg : ∀ {R : Type u_1} [inst : CommSemir
   Function.Injective ⇑(algebraMap R S) → ∀ (I : Ideal R), (IsLocalization.coeSubmodule S I).FG ↔ Submodule.FG I
 Result.autoException ::
 Monomorphization failed because currently the procedure cannot deal with expression `Function.Injective
-  (cifvar_10 x_0)`.
+  (cifvar_11 x_0)`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
@@ -276,7 +281,7 @@ Testing || Measurable.set_lintegral_kernel : ∀ {α : Type u_1} {β : Type u_2}
   [inst : ProbabilityTheory.IsSFiniteKernel κ] {f : β → ENNReal},
   Measurable f → ∀ {s : Set β}, MeasurableSet s → Measurable fun a => ∫⁻ (b : β) in s, f b ∂κ a
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Nat.dvd_zero : ∀ (a : ℕ), a ∣ 0
@@ -290,9 +295,7 @@ Auto failed to find proof
 
 Testing || Matrix.star_dotProduct_star : ∀ {m : Type u_2} {α : Type v} [inst : Fintype m] [inst_1 : NonUnitalSemiring α] [inst_2 : StarRing α] (v w : m → α),
   Matrix.dotProduct (star v) (star w) = star (Matrix.dotProduct w v)
-Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+Result.success
 
 Testing || Finset.singleton_infs_singleton : ∀ {α : Type u_2} [inst : DecidableEq α] [inst_1 : SemilatticeInf α] {a b : α}, {a} ⊼ {b} = {a ⊓ b}
 Result.success
@@ -344,7 +347,8 @@ Auto failed to find proof
 Testing || AffineIndependent.mem_affineSpan_iff : ∀ {k : Type u_1} {V : Type u_2} {P : Type u_3} [inst : Ring k] [inst_1 : AddCommGroup V] [inst_2 : _root_.Module k V]
   [inst_3 : AddTorsor V P] {ι : Type u_4} [inst_4 : Nontrivial k] {p : ι → P},
   AffineIndependent k p → ∀ (i : ι) (s : Set ι), p i ∈ affineSpan k (p '' s) ↔ i ∈ s
-Result.success
+Result.autoException ::
+Auto.LamReif.reifTermCheckType :: LamTerm ((∃ x0 : #2, (!11 (!15 (!5 !6) (λx1 : #2, (∃ x2 : #6, ((!17 (!18 (!5 !6)) x2) ∧ ((!7 !8) = (!19 x2 x1)))))) x0)) = (!3 (!4 (!5 !6)) (!7 !8))) is not type correct
 
 Testing || CategoryTheory.ofTypeMonad_obj : ∀ (m : Type u → Type u) [inst : Monad m] [inst_1 : LawfulMonad m] (a : Type u),
   (CategoryTheory.ofTypeMonad m).obj a = m a
@@ -460,7 +464,7 @@ This is because it has subterms possessing at least one of the following feature
 Testing || leibniz_cross : ∀ {R : Type u_1} [inst : CommRing R] (u v w : Fin 3 → R),
   (crossProduct u) ((crossProduct v) w) = (crossProduct ((crossProduct u) v)) w + (crossProduct v) ((crossProduct u) w)
 Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Real.one_sub_le_exp_neg : ∀ (x : ℝ), 1 - x ≤ Real.exp (-x)
@@ -605,9 +609,7 @@ Auto failed to find proof
 Testing || ProbabilityTheory.Kernel.fst_comp : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β} {γ : Type u_3} {δ : Type u_4}
   {mγ : MeasurableSpace γ} {mδ : MeasurableSpace δ} (κ : ProbabilityTheory.Kernel α β)
   (η : ProbabilityTheory.Kernel β (γ × δ)), (η.comp κ).fst = η.fst.comp κ
-Result.autoException ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+Result.success
 
 Testing || TypeVec.dropFun_id : ∀ {n : ℕ} {α : TypeVec.{u_1} (n + 1)}, TypeVec.dropFun TypeVec.id = TypeVec.id
 Result.success
@@ -700,8 +702,7 @@ This is because it has subterms possessing at least one of the following feature
 Testing || MeasureTheory.withDensity_indicator_one : ∀ {α : Type u_1} {m0 : MeasurableSpace α} {μ : MeasureTheory.Measure α} {s : Set α},
   MeasurableSet s → μ.withDensity (s.indicator 1) = μ.restrict s
 Result.autoException ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
-Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
+Auto failed to find proof
 
 Testing || add_halves' : ∀ {R : Type u_1} [inst : DivisionSemiring R] [inst_1 : NeZero 2] (a : R), a / 2 + a / 2 = a
 Result.success
@@ -716,14 +717,15 @@ Auto failed to find proof
 
 Testing || WithTop.image_coe_Ioi : ∀ {α : Type u_1} [inst : Preorder α] {a : α}, WithTop.some '' Set.Ioi a = Set.Ioo ↑a ⊤
 Result.autoException ::
-Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #3, (∀ x1 : #3, ((!11 (!17 x0) (λx2 : #3, (!17 x2 x1))) = (!3 x0 x1)))) is not type correct
+Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #3, (∀ x1 : #3, ((!14 (!26 x0) (λx2 : #3, (!26 x2 x1))) = (!3 x0 x1)))) is not type correct
 
 Testing || CategoryTheory.forgetEnrichment_id : ∀ {C : Type u₁} (W : Type v) [inst : CategoryTheory.Category.{w, v} W] [inst_1 : CategoryTheory.MonoidalCategory W]
   [inst_2 : CategoryTheory.EnrichedCategory W C] (X : CategoryTheory.ForgetEnrichment W C),
   CategoryTheory.ForgetEnrichment.homTo W (CategoryTheory.CategoryStruct.id X) =
     CategoryTheory.eId W (CategoryTheory.ForgetEnrichment.to W X)
 Result.autoException ::
-Auto failed to find proof
+Auto.Monomorphization.ConstInst.ofExpr? :: 𝟙_ (Type w) ⟶
+  (CategoryTheory.coyoneda.obj (Opposite.op (𝟙_ W))).obj (𝟙_ W) is not a `∀`
 
 Testing || CategoryTheory.Comma.mapLeftComp_inv_app_left : ∀ {A : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} A] {B : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} B]
   {T : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} T] (R : CategoryTheory.Functor B T)
@@ -798,4 +800,135 @@ This is because it has subterms possessing at least one of the following feature
 · Other (TODO)
 `set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
 
-Elapsed time: 550547 ms
+Elapsed time: 526056 ms
+
+Summary:
+
+0 E AEMeasurable.inf
+1 E Std.HashSet.getD_insert
+2 S LinOrd.Iso.mk_inv
+3 E List.sublistsLen_length
+4 E GenContFract.zeroth_contAux_eq_one_zero
+5 E Rat.cast_sub_of_ne_zero
+6 E _private.Mathlib.Combinatorics.SimpleGraph.Triangle.Counting.0.SimpleGraph.edgeDensity_badVertices_le
+7 E _private.Mathlib.Combinatorics.Additive.SmallTripling.0.Finset.small_pos_neg_pos_add
+8 E AddMonoid.exponent_pi_eq_zero
+9 E isLUB_sSup
+10 E Algebra.coe_sInf
+11 E Set.image_mul_left_Ioo
+12 E FirstOrder.Language.ElementaryEmbedding.map_rel
+13 S hnot_le_iff_codisjoint_left
+14 E SemistandardYoungTableau.copy_eq
+15 E CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'
+16 S AlgebraicGeometry.Spec.toSheafedSpace_obj
+17 E Set.image_preimage
+18 E deriv_sinh
+19 E WCovBy.le_of_lt
+20 S Bool.not_eq_not
+21 S CategoryTheory.Limits.coneOfSectionCompYoneda_pt
+22 S WittVector.wittMul_vars
+23 E Real.borel_eq_generateFrom_Ioi_rat
+24 E HomologicalComplex₂.comm_f
+25 E Asymptotics.IsBigO.comp_tendsto
+26 E Filter.Tendsto.cexp
+27 E IsLocalizedModule.fromLocalizedModule'_add
+28 E AffineSubspace.affineSpan_coe
+29 S ENat.mem_nhds_natCast_iff
+30 E HasProd.div
+31 E IsLocalization.coeSubmodule_fg
+32 S CategoryTheory.IsPullback.of_right
+33 E Nat.nonempty_properDivisors
+34 E RingEquiv.map_prod
+35 E dist_smul
+36 E map_mul_right_nhds₀
+37 E Nat.find_le
+38 E Finset.subset_mul_left
+39 E IterateAddAct.ext
+40 S Mathlib.Vector.mem_cons_of_mem
+41 E Measurable.set_lintegral_kernel
+42 E Nat.dvd_zero
+43 E Function.Embedding.toEquivRange_symm_apply_self
+44 S Matrix.star_dotProduct_star
+45 S Finset.singleton_infs_singleton
+46 E IsConjRoot.isIntegral
+47 E SimpleGraph.Walk.transfer_transfer
+48 E CategoryTheory.ofTypeMonad_μ_app
+49 S measure_Ioc_lt_top
+50 E List.takeDTR_go_eq
+51 E Symmetric.iff
+52 E LieModuleEquiv.symm_apply_apply
+53 E AffineIndependent.mem_affineSpan_iff
+54 S CategoryTheory.ofTypeMonad_obj
+55 E Set.center_eq_univ
+56 E LinearIsometryEquiv.differentiableOn
+57 E TwoUniqueSums.of_addHom
+58 E SimpleGraph.Walk.map_toDeleteEdges_eq
+59 E LinearEquiv.symm_apply_apply
+60 S Valuation.IsEquiv.ne_zero
+61 E List.pwFilter_map
+62 E Relator.RightUnique.forall₂
+63 E CFC.quasispectrum_zero_eq
+64 E taylor_mean_remainder_cauchy
+65 S CategoryTheory.Idempotents.DoldKan.N_obj
+66 S HomogeneousLocalization.val_zsmul
+67 E Filter.NeBot.mul_zero_nonneg
+68 S sdiff_sdiff
+69 S Rat.ofInt_eq_cast
+70 E QPF.Fix.ind_rec
+71 E Polynomial.eval_one_cyclotomic_not_prime_pow
+72 E leibniz_cross
+73 S Real.one_sub_le_exp_neg
+74 E Monovary.sum_smul_comp_perm_le_sum_smul
+75 E IndexedPartition.disjoint
+76 E isConjRoot_iff_mem_minpoly_rootSet
+77 E List.Perm.eraseP
+78 S Fin.appendIsometry_symm_apply
+79 E AddUnits.addRight_bijective
+80 E SimpleGraph.Walk.length_transfer
+81 E CliffordAlgebra.forall_mul_self_eq_iff
+82 S Topology.IsQuotientMap.image_connectedComponent
+83 E isPiSystem_iUnion_of_monotone
+84 E Setoid.eq_of_mem_eqv_class
+85 E univLE_max
+86 E hasLineDerivAt_zero
+87 E Complex.polarCoord_apply
+88 S Complex.cosh_sub
+89 S MeasureTheory.Measure.restrict_apply'
+90 S Inseparable.mem_open_iff
+91 S CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_map_base
+92 E UniqueFactorizationMonoid.squarefree_iff_nodup_normalizedFactors
+93 S ContDiffAt.prod_map
+94 E MeasureTheory.isClosed_aeStronglyMeasurable'
+95 S ProbabilityTheory.Kernel.fst_comp
+96 S TypeVec.dropFun_id
+97 S Real.cos_sq_add_sin_sq
+98 S Equiv.addCommSemigroup.proof_1
+99 S Nat.lcm_pos
+100 E PProd.exists'
+101 S div_le_div_left
+102 E Set.Finite.induction_to_univ
+103 E VectorBundleCore.continuous_proj
+104 S CategoryTheory.equivYoneda'_inv_val
+105 E Fintype.decidableEqAddEquivFintype.proof_1
+106 E intervalIntegral.intervalIntegrable_log
+107 S StrictConcaveOn.concaveOn
+108 E ProbabilityTheory.Kernel.ae_compProd_iff
+109 E SMulPosReflectLT.toSMulPosMono
+110 E MeasureTheory.withDensity_indicator_one
+111 S add_halves'
+112 E CategoryTheory.Limits.preservesBiproductsOfShape_of_preservesProductsOfShape
+113 E WithTop.image_coe_Ioi
+114 E CategoryTheory.forgetEnrichment_id
+115 S CategoryTheory.Comma.mapLeftComp_inv_app_left
+116 S Order.pred_lt
+117 S isOfFinAddOrder_zero
+118 E gradient_eq
+119 S padicNorm.int_lt_one_iff
+120 S FiberBundle.mem_baseSet_trivializationAt
+121 E Multiset.map_add_left_Ioc
+122 E IsOpen.div_right
+123 S ZModModule.add_add_add_cancel
+124 E ProbabilityTheory.centralMoment_one'
+125 E CategoryTheory.Functor.relativelyRepresentable.symmetry_fst_assoc
+126 S Duper.rule15bTheorem
+127 E Real.summable_cexp_multipliable

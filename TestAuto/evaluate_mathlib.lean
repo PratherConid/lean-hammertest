@@ -21,9 +21,10 @@ set_option trace.auto.eval.printResult true
 --     logFile := "evalOut.txt" }
 --   "EvalResults/MathlibNames128.txt"
 
+-- set_option auto.mono.ignoreNonQuasiHigherOrder true
 -- set_option maxHeartbeats 200000000
 -- #eval namesFileEval
---   { solverConfig := .native,
+--   { solverConfig := .native, maxHeartbeats := 65536,
 --     logFile := "evalOut.txt" }
 --   "EvalResults/MathlibNames128.txt"
 
@@ -33,16 +34,18 @@ set_option trace.auto.eval.printResult true
 --     logFile := "evalOut.txt" }
 --   "EvalResults/MathlibNames128.txt"
 
-#print finCongr_symm_apply
-
 set_option trace.auto.mono true
 set_option trace.auto.lamReif.printResult true
 
 #check WeierstrassCurve.Affine.Point.map_id
-#check Stream'.WSeq.append_assoc
 #check RingHom.FiniteType.of_finite
-#check MvPolynomial.eval_X
 #check List.map_concat
 #check SuccOrder.nhdsWithin_Ici
+#check isLUB_sSup
+#check Set.image_preimage
+#check WCovBy.le_of_lt
+#check Encodable.axiom_of_choice
 
-#eval runAutoOnConsts { solverConfig := .native } #[``MvPolynomial.eval_X]
+#eval runAutoOnConsts { solverConfig := .native }
+  #[``AlgebraicGeometry.Spec.locallyRingedSpaceObj_sheaf']
+#check AlgebraicGeometry.Spec.locallyRingedSpaceObj_sheaf'
