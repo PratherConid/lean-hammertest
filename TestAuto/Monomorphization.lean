@@ -82,11 +82,9 @@ example (a e : ℝ) (h1 : a < e) : (∃ b c d, a < b ∧ b < c ∧ c < d ∧ d <
 example (m n : Nat) (mlt : m < n) (heq : n = m * (n / m)) : m * 1 < m * (n / m) := by
   auto [mul_one, heq, mlt, lt_of_mul_lt_mul_left]
 
--- **TODO** Why can't we set both `auto.mono.ciInstDefEq.mode` and
---   `auto.mono.tyCan.mode` to `default`?
+set_option trace.auto.mono true
 set_option auto.native false in
 set_option trace.auto.printLemmas true in
-set_option auto.mono.ciInstDefEq.mode "reducible" in
 example (a b c d : ℝ) (h1 : a < b) :
   Set.Icc a b ⊆ Set.Ico c d ↔ c ≤ a ∧ b < d := by
   rw [Set.subset_def]
