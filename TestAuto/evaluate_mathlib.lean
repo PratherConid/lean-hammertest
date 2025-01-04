@@ -1,6 +1,7 @@
 import Mathlib
 import Hammertest.DuperInterface
-import Auto.EvaluateAuto.TestCode
+import Auto.EvaluateAuto.TestAuto
+import Auto.EvaluateAuto.TestTactics
 
 open Lean Meta Elab Auto EvalAuto
 
@@ -18,20 +19,20 @@ set_option trace.auto.eval.printResult true
 -- set_option maxHeartbeats 200000000
 -- #eval runAutoOnNamesFile
 --   { solverConfig := .tptp (.zeport .lams) "/home/indprinciples/Programs/zipperposition/portfolio",
---     logFile := "evalOut.txt" }
+--     logFile := "evalAutoOut.txt" }
 --   "EvalResults/MathlibNames128.txt"
 
 -- set_option auto.mono.ignoreNonQuasiHigherOrder true
 -- set_option maxHeartbeats 200000000
 -- #eval runAutoOnNamesFile
 --   { solverConfig := .native, maxHeartbeats := 65536,
---     logFile := "evalOut.txt" }
---   "EvalResults/MathlibNames512.txt"
+--     logFile := "evalAutoOut.txt" }
+--   "EvalResults/MathlibNames128.txt"
 
 -- set_option maxHeartbeats 200000000
 -- #eval runAutoOnNamesFile
 --   { solverConfig := .smt .z3,
---     logFile := "evalOut.txt" }
+--     logFile := "evalAutoOut.txt" }
 --   "EvalResults/MathlibNames128.txt"
 
 set_option trace.auto.mono true
@@ -46,11 +47,25 @@ set_option trace.auto.lamReif.printResult true
 #check Set.image_preimage
 #check WCovBy.le_of_lt
 
+set_option auto.evalAuto.ensureAesop true
 
--- **TODO:** `aesop` behavior on `Set.image_preimage` is different!!
-open EvalAuto in
-#eval @id (CoreM _) do
-  let p ← initSrcSearchPath
-  let r ← runTacticsAtConstantDeclaration ``UInt32.toUInt16_toNat p
-    #[fun _ => useSimpAll, useSimpAllWithPremises, fun _ => useAesop]
-  trace[auto.tactic] "{r}"
+-- open EvalAuto in
+-- #eval @id (CoreM _) do
+--   let p ← initSrcSearchPath
+--   let r ← runTacticsAtConstantDeclaration ``UInt32.toUInt16_toNat p
+--     #[fun _ => useSimpAll, useSimpAllWithPremises, fun _ => useAesop, useAesopWithPremises]
+--   trace[auto.tactic] "{r}"
+
+-- open EvalAuto in
+-- #eval @id (CoreM _) do
+--   let p ← initSrcSearchPath
+--   let r ← evalAtModule `Mathlib.RingTheory.FiniteType p (fun ci => ci.name == ``AddMonoidAlgebra.mem_adjoin_support)
+--     { tactics := #[.useRfl, .useSimp, .useAesop, .useAesopWithPremises], logFile := "evalTacticOut.txt" }
+--   trace[auto.tactic] "{r}"
+
+#check AddMonoidAlgebra.mem_adjoin_support
+
+-- set_option maxHeartbeats 2000
+-- theorem mem_adjoin_support.{u_1, u_2} {R : Type u_1} {M : Type u_2} [CommSemiring R] [AddMonoid M]
+--   (f : AddMonoidAlgebra R M) : f ∈ Algebra.adjoin R (AddMonoidAlgebra.of' R M '' ↑f.support) := by
+--   aesop
