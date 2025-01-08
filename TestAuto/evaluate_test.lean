@@ -35,6 +35,12 @@ set_option trace.auto.eval.printResult true
 --     logFile := "evalAutoLog.txt", resultFile := "evalAutoResult.txt" }
 --   "EvalResults/MathlibNames128.txt"
 
+-- set_option maxHeartbeats 200000000
+-- #eval runAutoOnNamesFile
+--   { solverConfig := .rawNative,
+--     logFile := "evalAutoLog.txt", resultFile := "evalAutoResult.txt" }
+--   "EvalResults/MathlibNames128.txt"
+
 set_option trace.auto.mono true
 set_option trace.auto.lamReif.printResult true
 
@@ -67,5 +73,3 @@ set_option auto.evalAuto.ensureAesop true
 -- #eval evalTacticsAtMathlibHumanTheorems
 --   { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 4096, .useAesopWithPremises 4096], resultFolder := "./Eval",
 --     nonterminates := #[], nthreads := 8 }
-
-#check neg_eq_of_add_eq_zero_right

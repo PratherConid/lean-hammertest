@@ -5,4 +5,5 @@
 /lakefile.olean
 /.zeport_ignore
 /.lake
-/Eval
+/EvalTactics
+/EvalAuto*
