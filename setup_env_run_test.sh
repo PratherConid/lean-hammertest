@@ -7,7 +7,7 @@ git clone https://github.com/leanprover-community/lean-auto
 # TODO: Use up-to-date version
 cd lean-auto; git checkout 26d9cb3da795010b3e4e2110e155e8b13ed2c2c0; cd ..
 git clone https://github.com/leanprover-community/duper
-cd duper; git checkout a41cc06670aee9d4762a12a11574532c4077f52f; cd ..
+cd duper; git checkout 9cd4d4d1d71034d456d06aef2e4d07c911b88c65; cd ..
 git clone https://github.com/PratherConid/lean-hammertest
 cd lean-hammertest
 source $HOME/.elan/env
