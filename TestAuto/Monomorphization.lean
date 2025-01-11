@@ -85,6 +85,7 @@ example (m n : Nat) (mlt : m < n) (heq : n = m * (n / m)) : m * 1 < m * (n / m) 
 set_option trace.auto.mono true
 set_option auto.native false in
 set_option trace.auto.printLemmas true in
+set_option auto.mono.ciInstDefEq.mode "reducible" in
 example (a b c d : ℝ) (h1 : a < b) :
   Set.Icc a b ⊆ Set.Ico c d ↔ c ≤ a ∧ b < d := by
   rw [Set.subset_def]
