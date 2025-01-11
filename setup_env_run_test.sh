@@ -1,4 +1,6 @@
-curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf
+#! Please run this script using `bash`
+
+wget https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh
 bash elan-init.sh -y
 rm elan-init.sh
 git clone https://github.com/leanprover-community/lean-auto
