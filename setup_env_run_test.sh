@@ -23,10 +23,10 @@ open EvalAuto
     resultFolder  := \"./EvalAuto\",
     nthreads := 32, batchSize := 512,
     nonterminates := #[
-      ``Differentiable.exists_const_forall_eq_of_bounded,
-      ``uniformContinuous_of_const,
-      ``mem_pairSelfAdjointMatricesSubmodule',
-      ``mem_selfAdjointMatricesSubmodule
+      \`\`Differentiable.exists_const_forall_eq_of_bounded,
+      \`\`uniformContinuous_of_const,
+      \`\`mem_pairSelfAdjointMatricesSubmodule',
+      \`\`mem_selfAdjointMatricesSubmodule
     ] }" | lake env lean --stdin
 
 echo "import Mathlib
