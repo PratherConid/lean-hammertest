@@ -21,7 +21,13 @@ open EvalAuto
 #eval evalAutoAtMathlibHumanTheorems
   { maxHeartbeats := 65536, timeout := 10, solverConfig := .native,
     resultFolder  := \"./EvalAuto\",
-    nthreads := 32, batchSize := 512 }" | lake env lean --stdin
+    nthreads := 32, batchSize := 512,
+    nonterminates := #[
+      ``Differentiable.exists_const_forall_eq_of_bounded,
+      ``uniformContinuous_of_const,
+      ``mem_pairSelfAdjointMatricesSubmodule',
+      ``mem_selfAdjointMatricesSubmodule
+    ] }" | lake env lean --stdin
 
 echo "import Mathlib
 import Auto.EvaluateAuto.TestTactics

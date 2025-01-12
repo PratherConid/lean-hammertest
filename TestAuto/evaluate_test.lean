@@ -73,3 +73,8 @@ set_option auto.evalAuto.ensureAesop true
 -- #eval evalTacticsAtMathlibHumanTheorems
 --   { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 4096, .useAesopWithPremises 4096], resultFolder := "./Eval",
 --     nonterminates := #[], nthreads := 8 }
+
+-- Differentiable.exists_const_forall_eq_of_bounded
+-- uniformContinuous_of_const
+-- mem_pairSelfAdjointMatricesSubmodule'
+-- mem_selfAdjointMatricesSubmodule
