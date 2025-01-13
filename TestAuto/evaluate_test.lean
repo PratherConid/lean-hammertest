@@ -19,26 +19,37 @@ set_option trace.auto.eval.printResult true
 -- set_option maxHeartbeats 200000000
 -- #eval runAutoOnNamesFile
 --   { solverConfig := .tptp (.zeport .lams) "/home/indprinciples/Programs/zipperposition/portfolio",
---     logFile := "evalAutoLog.txt", resultFile := "evalAutoResult.txt" }
+--     logFile := "evalAutoLog.txt", resultFile := "evalAutoResult.txt",
+--     nonterminates := #[] }
+--   "EvalResults/MathlibNames128.txt"
+
+-- set_option maxHeartbeats 200000000
+-- #eval runAutoOnNamesFile
+--   { solverConfig := .tptp .zipperposition "/home/indprinciples/.opam/zipper/bin/zipperposition",
+--     logFile := "evalAutoLog.txt", resultFile := "evalAutoResult.txt",
+--     nonterminates := #[] }
 --   "EvalResults/MathlibNames128.txt"
 
 -- set_option auto.mono.ignoreNonQuasiHigherOrder true
 -- set_option maxHeartbeats 200000000
 -- #eval runAutoOnNamesFile
 --   { solverConfig := .native, maxHeartbeats := 65536,
---     logFile := "evalAutoLog.txt", resultFile := "evalAutoResult.txt" }
---   "EvalResults/MathlibNames128.txt"
+--     logFile := "evalAutoLog.txt", resultFile := "evalAutoResult.txt",
+--     nonterminates := #[] }
+--   "EvalResults/MathlibNames512.txt"
 
 -- set_option maxHeartbeats 200000000
 -- #eval runAutoOnNamesFile
 --   { solverConfig := .smt .z3,
---     logFile := "evalAutoLog.txt", resultFile := "evalAutoResult.txt" }
+--     logFile := "evalAutoLog.txt", resultFile := "evalAutoResult.txt",
+--     nonterminates := #[] }
 --   "EvalResults/MathlibNames128.txt"
 
 -- set_option maxHeartbeats 200000000
 -- #eval runAutoOnNamesFile
 --   { solverConfig := .rawNative,
---     logFile := "evalAutoLog.txt", resultFile := "evalAutoResult.txt" }
+--     logFile := "evalAutoLog.txt", resultFile := "evalAutoResult.txt",
+--     nonterminates := #[] }
 --   "EvalResults/MathlibNames128.txt"
 
 set_option trace.auto.mono true
@@ -46,26 +57,27 @@ set_option trace.auto.lamReif.printResult true
 
 -- Incompleteness
 #check WeierstrassCurve.Affine.Point.map_id
-#check RingHom.FiniteType.of_finite
 #check List.map_concat
-#check SuccOrder.nhdsWithin_Ici
 #check isLUB_sSup
 #check Set.image_preimage
 #check WCovBy.le_of_lt
+
+-- Monomorphization
+#check BoxIntegral.Box.dist_le_distortion_mul
 
 set_option auto.evalAuto.ensureAesop true
 
 -- #check @id (CoreM _) do
 --   let p ← initSrcSearchPath
 --   let r ← runTacticsAtConstantDeclaration ``UInt32.toUInt16_toNat p
---     #[fun _ => useSimpAll, useSimpAllWithPremises, fun _ => useAesop 4096, useAesopWithPremises 4096]
+--     #[fun _ => useSimpAll, useSimpAllWithPremises, fun _ => useAesop 16384, useAesopWithPremises 16384]
 --   trace[auto.tactic] "{r}"
 
 -- #eval @id (CoreM _) do
 --   let p ← initSrcSearchPath
 --   let m := Std.HashSet.ofList (← allHumanTheorems).toList
 --   let r ← evalAtModule `Mathlib.Algebra.Group.Defs p (fun ci => m.contains ci.name)
---     { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 4096, .useAesopWithPremises 4096],
+--     { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 16384, .useAesopWithPremises 16384],
 --       logFile := "evalTacticLog.txt", resultFile := "evalTacticResult.txt"
 --       nonterminates := #[] }
 --   trace[auto.tactic] "{r}"
@@ -74,7 +86,16 @@ set_option auto.evalAuto.ensureAesop true
 --   { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 4096, .useAesopWithPremises 4096], resultFolder := "./Eval",
 --     nonterminates := #[], nthreads := 8 }
 
--- Differentiable.exists_const_forall_eq_of_bounded
--- uniformContinuous_of_const
--- mem_pairSelfAdjointMatricesSubmodule'
--- mem_selfAdjointMatricesSubmodule
+-- set_option trace.auto.runAuto.printLemmas true
+-- #eval runAutoOnConsts
+--   { solverConfig := .native, maxHeartbeats := 65536,
+--     logFile := .none, resultFile := .none,
+--     nonterminates := #[] }
+--   #[``StarSubalgebra.top_toSubalgebra]
+
+-- set_option maxHeartbeats 200000000
+-- #eval runAutoOnNamesFile
+--   { solverConfig := .native, maxHeartbeats := 65536,
+--     logFile := "evalAutoLog.txt", resultFile := "evalAutoResult.txt",
+--     nonterminates := #[``Subalgebra.restrictScalars_top] }
+--   "EvalAuto/83.names"

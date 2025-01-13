@@ -1,61 +1,75 @@
-Config = {maxHeartbeats := 65536, timeout := 10, solverConfig := tptp zeport-lams /home/indprinciples/Programs/zipperposition/portfolio, logFile := evalAutoOut.txt}
+Config = {
+  maxHeartbeats := 65536, timeout := 10, solverConfig := tptp zipperposition /home/indprinciples/.opam/zipper/bin/zipperposition, logFile := evalAutoLog.txt, resultFile := evalAutoResult.txt
+  nonterminates := #[
+  ]
+}
+Start time : 1736732197438
 
 Testing || Bornology.isBounded_sUnion : ∀ {α : Type u_2} [inst : Bornology α] {S : Set (Set α)},
   S.Finite → (Bornology.IsBounded (⋃₀ S) ↔ ∀ s ∈ S, Bornology.IsBounded s)
+Timestamp : 1736732197439
 Result.exception ::
 Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type i ∈ x_0 of λ binder contains bound variables
 
 Testing || iSup_eq_iSup_finset' : ∀ {α : Type u_2} {ι' : Sort u_7} [inst : CompleteLattice α] (s : ι' → α), ⨆ i, s i = ⨆ t, ⨆ i ∈ t, s i.down
+Timestamp : 1736732197507
 Result.exception ::
 Auto failed to find proof
 
 Testing || Nat.le_add_one_of_avg_eq_left : ∀ {a b : ℕ}, a.avg b = a → b ≤ a + 1
+Timestamp : 1736732197693
 Result.exception ::
 Auto failed to find proof
 
 Testing || LieModule.ofAssociativeModule : ∀ {A : Type v} [inst : Ring A] {R : Type u} [inst_1 : CommRing R] [inst_2 : Algebra R A] {M : Type w}
   [inst_3 : AddCommGroup M] [inst_4 : _root_.Module R M] [inst_5 : _root_.Module A M] [inst_6 : IsScalarTower R A M],
   LieModule R A M
+Timestamp : 1736732207612
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `instHSMul`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || LinearMap.ker_noncommProd_eq_of_supIndep_ker : ∀ {K : Type u} {V : Type v} [inst : DivisionRing K] [inst_1 : AddCommGroup V] [inst_2 : _root_.Module K V]
   [inst_3 : FiniteDimensional K V] {ι : Type u_1} {f : ι → V →ₗ[K] V} (s : Finset ι)
   (comm : (↑s).Pairwise (Commute on f)),
   (s.SupIndep fun i => LinearMap.ker (f i)) → LinearMap.ker (s.noncommProd f comm) = ⨆ i ∈ s, LinearMap.ker (f i)
+Timestamp : 1736732208642
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `LinearMap.instFunLike`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || AddSubgroup.coe_center : ∀ (G : Type u_1) [inst : AddGroup G], ↑(AddSubgroup.center G) = Set.addCenter G
+Timestamp : 1736732209494
 Result.success
 
 Testing || NonUnitalSubalgebra.toNonUnitalSubsemiring_injective : ∀ {R : Type u} {A : Type v} [inst : CommSemiring R] [inst_1 : NonUnitalNonAssocSemiring A] [inst_2 : _root_.Module R A],
   Function.Injective NonUnitalSubalgebra.toNonUnitalSubsemiring
+Timestamp : 1736732209516
 Result.exception ::
 Auto failed to find proof
 
 Testing || CochainComplex.HomComplex.Cochain.ext₀ : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]
   {F G : CochainComplex C ℤ} (z₁ z₂ : CochainComplex.HomComplex.Cochain F G 0),
   (∀ (p : ℤ), z₁.v p p ⋯ = z₂.v p p ⋯) → z₁ = z₂
+Timestamp : 1736732209570
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `add_zero x_0`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || Multiset.mem_of_mem_nsmul : ∀ {α : Type u_1} {a : α} {s : Multiset α} {n : ℕ}, a ∈ n • s → a ∈ s
+Timestamp : 1736732209674
 Result.exception ::
 Auto failed to find proof
 
@@ -64,6 +78,7 @@ Testing || CategoryTheory.StructuredArrow.IsUniversal.fac_assoc : ∀ {C : Type 
   (g : CategoryTheory.StructuredArrow S T) {Z : D} (h_1 : T.obj g.right ⟶ Z),
   CategoryTheory.CategoryStruct.comp f.hom (CategoryTheory.CategoryStruct.comp (T.map (h.desc g)) h_1) =
     CategoryTheory.CategoryStruct.comp g.hom h_1
+Timestamp : 1736732219745
 Result.exception ::
 Auto failed to find proof
 
@@ -71,11 +86,13 @@ Testing || ContractingWith.fixedPoint_lipschitz_in_map : ∀ {α : Type u_1} [in
   [inst_2 : CompleteSpace α] {g : α → α} (hg : ContractingWith K g) {C : ℝ},
   (∀ (z : α), dist (f z) (g z) ≤ C) →
     dist (ContractingWith.fixedPoint f hf) (ContractingWith.fixedPoint g hg) ≤ C / (1 - ↑K)
+Timestamp : 1736732220523
 Result.exception ::
 Auto failed to find proof
 
 Testing || CategoryTheory.Functor.closedSieves_obj : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J₁ : CategoryTheory.GrothendieckTopology C) (X : Cᵒᵖ),
   (CategoryTheory.Functor.closedSieves J₁).obj X = { S // J₁.IsClosed S }
+Timestamp : 1736732220608
 Result.success
 
 Testing || MeasureTheory.Measure.haar.le_index_mul : ∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : TopologicalGroup G]
@@ -83,11 +100,13 @@ Testing || MeasureTheory.Measure.haar.le_index_mul : ∀ {G : Type u_1} [inst : 
   (interior V).Nonempty →
     MeasureTheory.Measure.haar.index (↑K) V ≤
       MeasureTheory.Measure.haar.index ↑K ↑K₀ * MeasureTheory.Measure.haar.index (↑K₀) V
+Timestamp : 1736732220641
 Result.exception ::
 Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type g ∈ t of λ binder contains bound variables
 
 Testing || MvPolynomial.mapAlgEquiv_refl : ∀ {R : Type u} (σ : Type u_1) [inst : CommSemiring R] {A₁ : Type u_2} [inst_1 : CommSemiring A₁]
   [inst_2 : Algebra R A₁], MvPolynomial.mapAlgEquiv σ AlgEquiv.refl = AlgEquiv.refl
+Timestamp : 1736732220760
 Result.exception ::
 Auto failed to find proof
 
@@ -97,31 +116,37 @@ Testing || PartialHomeomorph.MDifferentiable.mfderiv_bijective : ∀ {𝕜 : Typ
   [inst_7 : NormedSpace 𝕜 E'] {H' : Type u_6} [inst_8 : TopologicalSpace H'] {I' : ModelWithCorners 𝕜 E' H'}
   {M' : Type u_7} [inst_9 : TopologicalSpace M'] [inst_10 : ChartedSpace H' M'] {e : PartialHomeomorph M M'},
   PartialHomeomorph.MDifferentiable I I' e → ∀ {x : M}, x ∈ e.source → Function.Bijective ⇑(mfderiv I I' (↑e) x)
+Timestamp : 1736732220820
 Result.exception ::
 Auto failed to find proof
 
 Testing || List.prod_ne_zero : ∀ {M₀ : Type u_4} [inst : MonoidWithZero M₀] {l : List M₀} [inst_1 : Nontrivial M₀] [inst_2 : NoZeroDivisors M₀],
   0 ∉ l → l.prod ≠ 0
+Timestamp : 1736732220933
 Result.success
 
 Testing || Ring.ne_bot_of_isMaximal_of_not_isField : ∀ {R : Type u_1} [inst : CommSemiring R] [inst_1 : Nontrivial R] {M : Ideal R}, M.IsMaximal → ¬IsField R → M ≠ ⊥
+Timestamp : 1736732220972
 Result.exception ::
 Auto failed to find proof
 
 Testing || MonovaryOn.pow_left : ∀ {ι : Type u_1} {α : Type u_2} {β : Type u_3} [inst : OrderedCommGroup α] [inst_1 : OrderedCommGroup β] {s : Set ι}
   {f : ι → α} {g : ι → β}, MonovaryOn f g s → ∀ (n : ℕ), MonovaryOn (f ^ n) g s
+Timestamp : 1736732221033
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `cifvar_7 i✝ ≤ cifvar_7 i✝`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || Complex.arg_coe_angle_eq_iff : ∀ {x y : ℂ}, ↑x.arg = ↑y.arg ↔ x.arg = y.arg
+Timestamp : 1736732221195
 Result.success
 
 Testing || Dynamics.dynEntourage_monotone : ∀ {X : Type u_1} (T : X → X) (n : ℕ), Monotone fun U => Dynamics.dynEntourage T U n
+Timestamp : 1736732221229
 Result.exception ::
 Auto failed to find proof
 
@@ -131,58 +156,67 @@ Testing || HomologicalComplex.cycles_left_exact : ∀ {C : Type u_1} {ι : Type 
     ∀ [inst_2 : CategoryTheory.Mono S.f] (i : ι) [inst_3 : S.X₁.HasHomology i] [inst_4 : S.X₂.HasHomology i]
       [inst_5 : S.X₃.HasHomology i],
       (CategoryTheory.ShortComplex.mk (HomologicalComplex.cyclesMap S.f i) (HomologicalComplex.cyclesMap S.g i) ⋯).Exact
+Timestamp : 1736732221253
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `HomologicalComplex.instCategory`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || instHasFiniteLimitsLightCondMod : ∀ (R : Type u) [inst : Ring R], CategoryTheory.Limits.HasFiniteLimits (LightCondMod R)
+Timestamp : 1736732221860
 Result.success
 
 Testing || List.getLast?_drop : ∀ {α : Type u_1} {n : ℕ} {l : List α}, (List.drop n l).getLast? = if l.length ≤ n then none else l.getLast?
+Timestamp : 1736732221881
 Result.exception ::
 Auto failed to find proof
 
 Testing || AddGroup.fintypeOfKerEqRange.proof_1 : ∀ {F G H : Type u_1} [inst : AddGroup F] [inst_1 : AddGroup G] [inst_2 : AddGroup H] (f : F →+ G) (g : G →+ H),
   g.ker = f.range → g.ker ≤ f.range
+Timestamp : 1736732231884
 Result.success
 
 Testing || List.dedup_cons_of_mem' : ∀ {α : Type u_1} [inst : DecidableEq α] {a : α} {l : List α}, a ∈ l.dedup → (a :: l).dedup = l.dedup
+Timestamp : 1736732231916
 Result.success
 
 Testing || stronglyMeasurable_bot_iff : ∀ {α : Type u_1} {β : Type u_2} {f : α → β} [inst : TopologicalSpace β] [inst_1 : Nonempty β] [inst_2 : T2Space β],
   MeasureTheory.StronglyMeasurable f ↔ ∃ c, f = fun x => c
+Timestamp : 1736732231960
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `cifvar_7 = fun x => c`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || PrimeSpectrum.vanishingIdeal_anti_mono : ∀ {R : Type u} [inst : CommSemiring R] {s t : Set (PrimeSpectrum R)},
   s ⊆ t → PrimeSpectrum.vanishingIdeal t ≤ PrimeSpectrum.vanishingIdeal s
+Timestamp : 1736732231999
 Result.exception ::
 Auto.Monomorphization.FVarRep.replacePolyWithFVar :: In α →
   Prop, type of ∀ bound variable is not of sort `Prop`, and depends on bound variables
 
 Testing || IsFractionRing.isDomain : ∀ (A : Type u_4) [inst : CommRing A] {K : Type u_5} [inst_1 : CommRing K] [inst_2 : Algebra A K]
   [inst_3 : IsFractionRing A K] [inst : IsDomain A], IsDomain K
+Timestamp : 1736732232027
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `IsLocalization x_2 cifvar_11`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || Finset.inj_on_of_surj_on_of_card_le : ∀ {α : Type u_1} {β : Type u_2} {s : Finset α} {t : Finset β} (f : (a : α) → a ∈ s → β),
   (∀ (a : α) (ha : a ∈ s), f a ha ∈ t) →
     (∀ b ∈ t, ∃ a, ∃ (ha : a ∈ s), f a ha = b) →
       s.card ≤ t.card → ∀ ⦃a₁ : α⦄ (ha₁ : a₁ ∈ s) ⦃a₂ : α⦄ (ha₂ : a₂ ∈ s), f a₁ ha₁ = f a₂ ha₂ → a₁ = a₂
+Timestamp : 1736732232161
 Result.exception ::
 Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type a ∈ s of λ binder contains bound variables
 
@@ -192,9 +226,11 @@ Testing || CategoryTheory.Pretriangulated.productTriangle_obj₁ : ∀ {C : Type
   [inst_4 : CategoryTheory.Limits.HasProduct fun j => (T j).obj₃]
   [inst_5 : CategoryTheory.Limits.HasProduct fun j => (CategoryTheory.shiftFunctor C 1).obj (T j).obj₁],
   (CategoryTheory.Pretriangulated.productTriangle T).obj₁ = ∏ᶜ fun j => (T j).obj₁
+Timestamp : 1736732232242
 Result.success
 
 Testing || lt_div_iff_of_neg' : ∀ {α : Type u_2} [inst : LinearOrderedField α] {a b c : α}, c < 0 → (a < b / c ↔ b < c * a)
+Timestamp : 1736732232293
 Result.success
 
 Testing || CochainComplex.mappingCone.inr_f_descCochain_v : ∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_3, u_1} C] [inst_1 : CategoryTheory.Preadditive C]
@@ -204,16 +240,19 @@ Testing || CochainComplex.mappingCone.inr_f_descCochain_v : ∀ {C : Type u_1} [
   CategoryTheory.CategoryStruct.comp ((CochainComplex.mappingCone.inr φ).f p₁)
       ((CochainComplex.mappingCone.descCochain φ α β h).v p₁ p₂ h₁₂) =
     β.v p₁ p₂ h₁₂
+Timestamp : 1736732232399
 Result.exception ::
 Auto failed to find proof
 
 Testing || Cubic.natDegree_of_c_ne_zero : ∀ {R : Type u_1} {P : Cubic R} [inst : Semiring R], P.a = 0 → P.b = 0 → P.c ≠ 0 → P.toPoly.natDegree = 1
+Timestamp : 1736732242720
 Result.success
 
 Testing || Unitization.norm_splitMul_snd_sq : ∀ (𝕜 : Type u_1) {E : Type u_2} [inst : DenselyNormedField 𝕜] [inst_1 : NonUnitalNormedRing E] [inst_2 : StarRing E]
   [inst_3 : CStarRing E] [inst_4 : NormedSpace 𝕜 E] [inst_5 : IsScalarTower 𝕜 E E] [inst_6 : SMulCommClass 𝕜 E E]
   [inst_7 : StarRing 𝕜] [inst_8 : StarModule 𝕜 E] (x : Unitization 𝕜 E),
   ‖((Unitization.splitMul 𝕜 E) x).2‖ ^ 2 ≤ ‖((Unitization.splitMul 𝕜 E) (star x * x)).2‖
+Timestamp : 1736732242944
 Result.exception ::
 (deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
@@ -221,6 +260,7 @@ Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy,
 Testing || LinearMap.BilinForm.linMulLin_compLeft : ∀ {R : Type u_1} {M : Type u_2} [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : _root_.Module R M]
   {f g : M →ₗ[R] R} (l : M →ₗ[R] M),
   (LinearMap.BilinForm.linMulLin f g).compLeft l = LinearMap.BilinForm.linMulLin (f ∘ₗ l) g
+Timestamp : 1736732244766
 Result.success
 
 Testing || CategoryTheory.MorphismProperty.Comma.mapRight_obj_hom : ∀ {A : Type u_1} [inst : CategoryTheory.Category.{u_4, u_1} A] {B : Type u_2}
@@ -234,72 +274,90 @@ Testing || CategoryTheory.MorphismProperty.Comma.mapRight_obj_hom : ∀ {A : Typ
   (X : CategoryTheory.MorphismProperty.Comma L R₁ P Q W),
   ((CategoryTheory.MorphismProperty.Comma.mapRight L r hr).obj X).hom =
     CategoryTheory.CategoryStruct.comp X.hom (r.app X.right)
+Timestamp : 1736732244971
 Result.exception ::
 Auto.Monomorphization.ConstInst.ofExpr? :: CategoryTheory.MorphismProperty T is not a `∀`
 
 Testing || IsPrimitiveRoot.ne_zero : ∀ {k : ℕ} {M₀ : Type u_7} [inst : CommMonoidWithZero M₀] [inst_1 : Nontrivial M₀] {ζ : M₀},
   IsPrimitiveRoot ζ k → k ≠ 0 → ζ ≠ 0
+Timestamp : 1736732244991
 Result.success
 
 Testing || _private.Mathlib.Topology.MetricSpace.Gluing.0.Metric.eq_of_glueDist_eq_zero : ∀ {X : Type u} {Y : Type v} {Z : Type w} [inst : MetricSpace X] [inst_1 : MetricSpace Y] (Φ : Z → X) (Ψ : Z → Y)
   (ε : ℝ), 0 < ε → ∀ (p q : X ⊕ Y), Metric.glueDist Φ Ψ ε p q = 0 → p = q
+Timestamp : 1736732245027
 Result.exception ::
 Auto failed to find proof
 
 Testing || WeierstrassCurve.Affine.eval_negPolynomial : ∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve.Affine R) (x y : R),
   Polynomial.evalEval x y W.negPolynomial = W.negY x y
-Result.success
+Timestamp : 1736732255279
+Result.exception ::
+Auto failed to find proof
 
 Testing || Rat.cast_lt_zero : ∀ {q : ℚ} {K : Type u_5} [inst : LinearOrderedField K], ↑q < 0 ↔ q < 0
+Timestamp : 1736732265299
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `Rat.ofInt.proof_2 num`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || CompositionAsSet.card_boundaries_eq_succ_length : ∀ {n : ℕ} (c : CompositionAsSet n), c.boundaries.card = c.length + 1
-Result.success
+Timestamp : 1736732265422
+Result.exception ::
+Auto failed to find proof
 
 Testing || Finset.prod_le_one' : ∀ {ι : Type u_1} {N : Type u_5} [inst : OrderedCommMonoid N] {f : ι → N} {s : Finset ι},
   (∀ i ∈ s, f i ≤ 1) → ∏ i ∈ s, f i ≤ 1
+Timestamp : 1736732265529
 Result.exception ::
 Auto failed to find proof
 
 Testing || SlashInvariantForm.coeHom_injective : ∀ {Γ : Subgroup (Matrix.SpecialLinearGroup (Fin 2) ℤ)} {k : ℤ}, Function.Injective ⇑SlashInvariantForm.coeHom
+Timestamp : 1736732265583
 Result.success
 
 Testing || CategoryTheory.StructuredArrow.toUnder_obj_left : ∀ {T : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} T] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]
   (X : T) (F : CategoryTheory.Functor D T)
   (X_1 : CategoryTheory.Comma (CategoryTheory.Functor.fromPUnit X) (F.comp (CategoryTheory.Functor.id T))),
   ((CategoryTheory.StructuredArrow.toUnder X F).obj X_1).left = X_1.left
+Timestamp : 1736732265619
 Result.success
 
 Testing || ContinuousWithinAt.mono_of_mem_nhdsWithin : ∀ {α : Type u_1} {β : Type u_2} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β] {f : α → β} {s t : Set α}
   {x : α}, ContinuousWithinAt f t x → t ∈ nhdsWithin x s → ContinuousWithinAt f s x
+Timestamp : 1736732265678
 Result.success
 
 Testing || AddSubmonoid.closure_singleton_le_iff_mem : ∀ {M : Type u_1} [inst : AddZeroClass M] (m : M) (p : AddSubmonoid M), AddSubmonoid.closure {m} ≤ p ↔ m ∈ p
+Timestamp : 1736732265764
 Result.exception ::
 Auto.LamReif.reifTermCheckType :: LamTerm ((!11 (!0 (!1 (!2 !3))) !4) = (!0 (!1 (!2 !3)) !4)) is not type correct
 
 Testing || Set.biUnion_of_singleton : ∀ {α : Type u_1} (s : Set α), ⋃ x ∈ s, {x} = s
+Timestamp : 1736732265839
 Result.exception ::
 Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type i ∈ s of λ binder contains bound variables
 
 Testing || ULift.down_ratCast : ∀ {α : Type u} [inst : RatCast α] (q : ℚ), (↑q).down = ↑q
+Timestamp : 1736732265855
 Result.success
 
 Testing || Set.smul_set_eq_empty : ∀ {α : Type u_2} {β : Type u_3} [inst : SMul α β] {s : Set β} {a : α}, a • s = ∅ ↔ s = ∅
+Timestamp : 1736732265880
 Result.success
 
 Testing || MeasurableSet.coe_sdiff : ∀ {α : Type u_1} [inst : MeasurableSpace α] (s t : Subtype MeasurableSet), ↑(s \ t) = ↑s \ ↑t
+Timestamp : 1736732265914
 Result.success
 
 Testing || Matrix.charpoly_fromBlocks_zero₁₂ : ∀ {R : Type u_1} [inst : CommRing R] {m : Type u_3} {n : Type u_4} [inst_1 : DecidableEq m] [inst_2 : DecidableEq n]
   [inst_3 : Fintype m] [inst_4 : Fintype n] (M₁₁ : Matrix m m R) (M₂₁ : Matrix n m R) (M₂₂ : Matrix n n R),
   (Matrix.fromBlocks M₁₁ 0 M₂₁ M₂₂).charpoly = M₁₁.charpoly * M₂₂.charpoly
+Timestamp : 1736732265943
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `cifvar_55
   (cifvar_3 x_0 cifvar_5 x_1 x_2)`.
@@ -307,23 +365,25 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || CategoryTheory.Limits.PullbackCone.IsLimit.equivPullbackObj_symm_apply_fst : ∀ {X Y S : Type v} {f : X ⟶ S} {g : Y ⟶ S} {c : CategoryTheory.Limits.PullbackCone f g}
   (hc : CategoryTheory.Limits.IsLimit c) (x : CategoryTheory.Limits.Types.PullbackObj f g),
   c.fst ((CategoryTheory.Limits.PullbackCone.IsLimit.equivPullbackObj hc).symm x) = (↑x).1
+Timestamp : 1736732266738
 Result.exception ::
 Auto.Monomorphization.ConstInst.ofExpr? :: X ⟶ S is not a `∀`
 
 Testing || IsLocalization.isAlgebraic : ∀ {R : Type u} (S : Type u_1) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [inst_3 : Nontrivial R]
   (M : Submonoid R) [inst_4 : IsLocalization M S], Algebra.IsAlgebraic R S
+Timestamp : 1736732266754
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `{ x // cifvar_7 x_0 x }`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || Finset.addEnergy_eq_sum_sq' : ∀ {α : Type u_1} [inst : DecidableEq α] [inst_1 : Add α] (s t : Finset α),
   s.addEnergy t =
@@ -334,11 +394,13 @@ Testing || Finset.addEnergy_eq_sum_sq' : ∀ {α : Type u_1} [inst : DecidableEq
               | (x, y) => x + y = a)
             (s ×ˢ t)).card ^
         2
+Timestamp : 1736732267159
 Result.exception ::
 Auto failed to find proof
 
 Testing || AddMonoidHom.addCommMonoid.proof_1 : ∀ {M : Type u_1} {N : Type u_2} [inst : AddZeroClass M] [inst_1 : AddCommMonoid N] (a b c : M →+ N),
   a + b + c = a + (b + c)
+Timestamp : 1736732267422
 Result.success
 
 Testing || ContinuousLinearEquiv.symm_trans_apply : ∀ {R₁ : Type u_3} {R₂ : Type u_4} {R₃ : Type u_5} [inst : Semiring R₁] [inst_1 : Semiring R₂] [inst_2 : Semiring R₃]
@@ -350,10 +412,12 @@ Testing || ContinuousLinearEquiv.symm_trans_apply : ∀ {R₁ : Type u_3} {R₂ 
   [inst_14 : AddCommMonoid M₂] {M₃ : Type u_8} [inst_15 : TopologicalSpace M₃] [inst_16 : AddCommMonoid M₃]
   [inst_17 : _root_.Module R₁ M₁] [inst_18 : _root_.Module R₂ M₂] [inst_19 : _root_.Module R₃ M₃] (e₁ : M₂ ≃SL[σ₂₁] M₁)
   (e₂ : M₃ ≃SL[σ₃₂] M₂) (c : M₁), (e₂.trans e₁).symm c = e₂.symm (e₁.symm c)
+Timestamp : 1736732267561
 Result.success
 
 Testing || CategoryTheory.Coverage.eq_top_pullback : ∀ {C : Type u_2} [inst : CategoryTheory.Category.{u_1, u_2} C] {X Y : C} {S T : CategoryTheory.Sieve X},
   S ≤ T → ∀ (f : Y ⟶ X), S.arrows f → CategoryTheory.Sieve.pullback f T = ⊤
+Timestamp : 1736732267723
 Result.exception ::
 Auto.Monomorphization.ConstInst.ofExpr? :: CategoryTheory.Presieve X is not a `∀`
 
@@ -365,11 +429,13 @@ Testing || TopCat.stalkToFiber_injective : ∀ {X : TopCat} {T : ↑X → Type v
             fU ⟨x, ⋯⟩ = fV ⟨x, ⋯⟩ →
               ∃ W iU iV, ∀ (w : ↥W.obj), fU ((fun x_4 => ⟨↑x_4, ⋯⟩) w) = fV ((fun x_4 => ⟨↑x_4, ⋯⟩) w)) →
     Function.Injective (TopCat.stalkToFiber P x)
+Timestamp : 1736732267736
 Result.exception ::
 (deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || Complex.equivRealProdCLM_symm_apply : ∀ (p : ℝ × ℝ), Complex.equivRealProdCLM.symm p = ↑p.1 + ↑p.2 * Complex.I
+Timestamp : 1736732268851
 Result.success
 
 Testing || tendstoLocallyUniformlyOn_TFAE : ∀ {α : Type u} {β : Type v} {ι : Type x} [inst : UniformSpace β] {s : Set α} [inst_1 : TopologicalSpace α]
@@ -377,6 +443,7 @@ Testing || tendstoLocallyUniformlyOn_TFAE : ∀ {α : Type u} {β : Type v} {ι 
   IsOpen s →
     [TendstoLocallyUniformlyOn G g p s, ∀ K ⊆ s, IsCompact K → TendstoUniformlyOn G g p K,
         ∀ x ∈ s, ∃ v ∈ nhdsWithin x s, TendstoUniformlyOn G g p v].TFAE
+Timestamp : 1736732268926
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `(cifvar_23 x_0).HasBasis
   (fun s => cifvar_13 (cifvar_14 (cifvar_23 x_0) s) (cifvar_9 s)) fun s => s`.
@@ -384,65 +451,74 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || nhdsWithin_Ici_neBot : ∀ {α : Type u_1} [inst : TopologicalSpace α] [inst_1 : Preorder α] {a b : α}, a ≤ b → (nhdsWithin b (Set.Ici a)).NeBot
+Timestamp : 1736732268971
 Result.exception ::
 Auto.LamReif.reifTermCheckType :: LamTerm ((!6 (!0 !1) !2) = (!0 !1 !2)) is not type correct
 
 Testing || Multiset.Nat.antidiagonalTuple_zero_right : ∀ (k : ℕ), Multiset.Nat.antidiagonalTuple k 0 = {0}
+Timestamp : 1736732268989
 Result.exception ::
 Auto.Monomorphization.FVarRep.replacePolyWithFVar :: In Fin x_0 →
   ℕ, type of ∀ bound variable is not of sort `Prop`, and depends on bound variables
 
 Testing || Part.instLawfulMonad : LawfulMonad Part
+Timestamp : 1736732269003
 Result.exception ::
 Auto.Monomorphization.FVarRep.replacePolyWithFVar :: Type x_1 of λ binder contains bound variables
 
 Testing || List.naturality : ∀ {F G : Type u → Type u} [inst : Applicative F] [inst_1 : Applicative G] [inst_2 : LawfulApplicative G]
   [inst_3 : LawfulApplicative F] (η : ApplicativeTransformation F G) {α : Type u_1} {β : Type u} (f : α → F β)
   (x : List α), (fun {α} => η.app α) (List.traverse f x) = List.traverse ((fun {α} => η.app α) ∘ f) x
+Timestamp : 1736732269014
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `x_1 <*> x_2`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || CategoryTheory.instIsSplitMonoComp : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {X Y Z : C} {f : X ⟶ Y} {g : Y ⟶ Z}
   [hf : CategoryTheory.IsSplitMono f] [hg : CategoryTheory.IsSplitMono g],
   CategoryTheory.IsSplitMono (CategoryTheory.CategoryStruct.comp f g)
+Timestamp : 1736732269121
 Result.exception ::
 Auto failed to find proof
 
 Testing || CategoryTheory.ShortComplex.leftHomologyFunctor_additive : ∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_2, u_1} C] [inst_1 : CategoryTheory.Preadditive C]
   [inst_2 : CategoryTheory.Limits.HasKernels C] [inst_3 : CategoryTheory.Limits.HasCokernels C],
   (CategoryTheory.ShortComplex.leftHomologyFunctor C).Additive
+Timestamp : 1736732269171
 Result.exception ::
 Auto failed to find proof
 
 Testing || MvPowerSeries.coeff_eq_zero_of_lt_lexOrder : ∀ {σ : Type u_1} {R : Type u_2} [inst : Semiring R] [inst_1 : LinearOrder σ] [inst_2 : WellFoundedGT σ]
   {φ : MvPowerSeries σ R} {d : σ →₀ ℕ}, ↑(toLex d) < φ.lexOrder → (MvPowerSeries.coeff R d) φ = 0
+Timestamp : 1736732269256
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `LinearMap.instFunLike`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || ULift.addRightCancelMonoid.proof_1 : ∀ {α : Type u_1}, Function.Injective ⇑Equiv.ulift
+Timestamp : 1736732269760
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `Function.Injective (cifvar_4 x_0)`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || instHasCountableSeparatingOnIsOpenOfT0SpaceOfSecondCountableTopologyElem : ∀ {X : Type u_1} [inst : TopologicalSpace X] {s : Set X} [inst_1 : T0Space ↑s] [inst_2 : SecondCountableTopology ↑s],
   HasCountableSeparatingOn X IsOpen s
+Timestamp : 1736732269766
 Result.exception ::
 Auto.LamReif.reifTermCheckType :: LamTerm ((!12 !25 !26) = !0) is not type correct
 
@@ -452,6 +528,7 @@ Testing || CategoryTheory.Functor.lanCompColimIso_hom_app : ∀ {C : Type u_1} {
   [inst_4 : CategoryTheory.Limits.HasColimitsOfShape C H] [inst_5 : CategoryTheory.Limits.HasColimitsOfShape D H]
   (X : CategoryTheory.Functor C H),
   L.lanCompColimIso.hom.app X = ((L.lan.obj X).colimitIsoOfIsLeftKanExtension (L.lanUnit.app X)).hom
+Timestamp : 1736732269859
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `CategoryTheory.instCategoryStructuredArrow
   x_0 (cifvar_3 (cifvar_4 cifvar_5) cifvar_6)`.
@@ -459,7 +536,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || MeasureTheory.exists_upperSemicontinuous_le_integral_le : ∀ {α : Type u_1} [inst : TopologicalSpace α] [inst_1 : MeasurableSpace α] [inst_2 : BorelSpace α]
   {μ : MeasureTheory.Measure α} [inst_3 : μ.WeaklyRegular] (f : α → NNReal),
@@ -470,19 +547,22 @@ Testing || MeasureTheory.exists_upperSemicontinuous_le_integral_le : ∀ {α : T
           (∀ (x : α), g x ≤ f x) ∧
             UpperSemicontinuous g ∧
               MeasureTheory.Integrable (fun x => ↑(g x)) μ ∧ ∫ (x : α), ↑(f x) ∂μ - ε ≤ ∫ (x : α), ↑(g x) ∂μ
+Timestamp : 1736732270042
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `UpperSemicontinuous g`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || pathConnectedSpace_iff_univ : ∀ {X : Type u_1} [inst : TopologicalSpace X], PathConnectedSpace X ↔ IsPathConnected Set.univ
+Timestamp : 1736732270181
 Result.exception ::
 Auto.LamReif.reifTermCheckType :: LamTerm ((!11 !18 !14) = !0) is not type correct
 
 Testing || Ordinal.derivFamily_isNormal : ∀ {ι : Type u_1} [inst : Small.{u, u_1} ι] (f : ι → Ordinal.{u} → Ordinal.{u}), Ordinal.IsNormal (Ordinal.derivFamily f)
+Timestamp : 1736732270235
 Result.success
 
 Testing || CochainComplex.mappingCone.inr_f_d : ∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_3, u_1} C] [inst_1 : CategoryTheory.Preadditive C]
@@ -490,28 +570,31 @@ Testing || CochainComplex.mappingCone.inr_f_d : ∀ {C : Type u_1} [inst : Categ
   CategoryTheory.CategoryStruct.comp ((CochainComplex.mappingCone.inr φ).f n₁)
       ((CochainComplex.mappingCone φ).d n₁ n₂) =
     CategoryTheory.CategoryStruct.comp (G.d n₁ n₂) ((CochainComplex.mappingCone.inr φ).f n₂)
+Timestamp : 1736732270263
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `cifvar_16.d cifvar_15 x_1`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || AddMonoidHom.isCentralScalar : ∀ {R : Type u_1} {A : Type u_4} {B : Type u_5} [inst : Monoid R] [inst_1 : AddMonoid A] [inst_2 : AddCommMonoid B]
   [inst_3 : DistribMulAction R B] [inst_4 : DistribMulAction Rᵐᵒᵖ B] [inst_5 : IsCentralScalar R B],
   IsCentralScalar R (A →+ B)
+Timestamp : 1736732271020
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `instHSMul`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || CategoryTheory.prod_preservesConnectedLimits : ∀ {C : Type u₂} [inst : CategoryTheory.Category.{v₂, u₂} C] [inst_1 : CategoryTheory.Limits.HasBinaryProducts C]
   {J : Type v₂} [inst_2 : CategoryTheory.SmallCategory J] [inst_3 : CategoryTheory.IsConnected J] (X : C),
   CategoryTheory.Limits.PreservesLimitsOfShape J (CategoryTheory.Limits.prod.functor.obj X)
+Timestamp : 1736732271353
 Result.exception ::
 Auto failed to find proof
 
@@ -519,31 +602,38 @@ Testing || CategoryTheory.Limits.reflectsLimit_of_reflectsIsomorphisms : ∀ {C 
   {J : Type w} [inst_2 : CategoryTheory.Category.{w', w} J] (F : CategoryTheory.Functor J C)
   (G : CategoryTheory.Functor C D) [inst_3 : G.ReflectsIsomorphisms] [inst_4 : CategoryTheory.Limits.HasLimit F]
   [inst_5 : CategoryTheory.Limits.PreservesLimit F G], CategoryTheory.Limits.ReflectsLimit F G
+Timestamp : 1736732272307
 Result.exception ::
 Auto failed to find proof
 
 Testing || BialgHom.coe_coe : ∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : Algebra R A]
   [inst_3 : Semiring B] [inst_4 : Algebra R B] [inst_5 : CoalgebraStruct R A] [inst_6 : CoalgebraStruct R B]
   {F : Type u_6} [inst_7 : FunLike F A B] [inst_8 : BialgHomClass F R A B] (f : F), ⇑↑f = ⇑f
+Timestamp : 1736732272359
 Result.exception ::
 Auto failed to find proof
 
 Testing || Int.div_def : ∀ (a b : ℤ), a / b = a.ediv b
+Timestamp : 1736732272394
 Result.success
 
 Testing || Subgroup.center.smulCommClass_left : ∀ {G : Type u_1} [inst : Group G], SMulCommClass (↥(Subgroup.center G)) G G
+Timestamp : 1736732272418
 Result.success
 
 Testing || Matrix.SpecialLinearGroup.coe_mul : ∀ {n : Type u} [inst : DecidableEq n] [inst_1 : Fintype n] {R : Type v} [inst_2 : CommRing R]
   (A B : Matrix.SpecialLinearGroup n R), ↑(A * B) = ↑A * ↑B
+Timestamp : 1736732272462
 Result.success
 
 Testing || IsMinFilter.undual : ∀ {α : Type u} {β : Type v} [inst : Preorder β] {f : α → β} {l : Filter α} {a : α},
   IsMinFilter (⇑OrderDual.toDual ∘ f) l a → IsMaxFilter f l a
+Timestamp : 1736732272506
 Result.success
 
 Testing || Batteries.TransCmp.cmp_congr_left' : ∀ {x : Sort u_1} {cmp : x → x → Ordering} [inst : Batteries.TransCmp cmp] {x_1 y : x},
   cmp x_1 y = Ordering.eq → cmp x_1 = cmp y
+Timestamp : 1736732272545
 Result.exception ::
 Auto failed to find proof
 
@@ -554,19 +644,22 @@ Testing || CategoryTheory.Pi.sum_obj_obj : ∀ {I : Type w₀} (C : I → Type u
     match s with
     | Sum.inl i => X i
     | Sum.inr j => Y j
+Timestamp : 1736732272570
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `X i`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || List.eraseP_cons : ∀ {α : Type u_1} {p : α → Bool} (a : α) (l : List α), List.eraseP p (a :: l) = bif p a then l else a :: List.eraseP p l
+Timestamp : 1736732272605
 Result.exception ::
 Auto failed to find proof
 
 Testing || Ordinal.sup_add_nat : ∀ (o : Ordinal.{u_1}), (Ordinal.sup fun n => o + ↑n) = o + Ordinal.omega0
+Timestamp : 1736732272630
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `Ordinal.IsNormal fun x =>
   cifvar_3 x_0 x`.
@@ -574,36 +667,43 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || CategoryTheory.Square.fromArrowArrowFunctor_obj_f₃₄ : ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (f : CategoryTheory.Arrow (CategoryTheory.Arrow C)),
   (CategoryTheory.Square.fromArrowArrowFunctor.obj f).f₃₄ = f.hom.right
+Timestamp : 1736732272661
 Result.success
 
 Testing || CategoryTheory.Pi.ext : ∀ {I : Type w₀} (C : I → Type u₁) [inst : (i : I) → CategoryTheory.Category.{v₁, u₁} (C i)] {X Y : (i : I) → C i}
   {f g : X ⟶ Y}, (∀ (i : I), f i = g i) → f = g
+Timestamp : 1736732272790
 Result.exception ::
 Auto.Monomorphization.ConstInst.ofExpr? :: X ⟶ Y is not a `∀`
 
 Testing || AddSubgroup.op.proof_1 : ∀ {G : Type u_1} [inst : AddGroup G] (H : AddSubgroup G) {a b : Gᵃᵒᵖ},
   a ∈ AddOpposite.unop ⁻¹' ↑H → b ∈ AddOpposite.unop ⁻¹' ↑H → AddOpposite.unop b + AddOpposite.unop a ∈ H
+Timestamp : 1736732272792
 Result.exception ::
 Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #1, (∀ x1 : #1, ((!0 (x0 =) x1) = (x0 = x1)))) is not type correct
 
 Testing || InnerProductGeometry.norm_add_sq_eq_norm_sq_add_norm_sq' : ∀ {V : Type u_1} [inst : NormedAddCommGroup V] [inst_1 : InnerProductSpace ℝ V] (x y : V),
   InnerProductGeometry.angle x y = Real.pi / 2 → ‖x + y‖ * ‖x + y‖ = ‖x‖ * ‖x‖ + ‖y‖ * ‖y‖
+Timestamp : 1736732272840
 Result.exception ::
 Auto.LamReif.reifTermCheckType :: LamTerm (∀ x0 : #0, (∀ x1 : #0, ((!22 (x0 =) x1) = (x0 = x1)))) is not type correct
 
 Testing || Polynomial.ofFinsupp_nsmul : ∀ {R : Type u} [inst : Semiring R] (a : ℕ) (b : AddMonoidAlgebra R ℕ), { toFinsupp := a • b } = a • { toFinsupp := b }
+Timestamp : 1736732273608
 Result.success
 
 Testing || Finset.Colex.initSeg_nonempty : ∀ {α : Type u_1} [inst : LinearOrder α] {s : Finset α} [inst_1 : Fintype α], (Finset.Colex.initSeg s).Nonempty
+Timestamp : 1736732273644
 Result.exception ::
 Auto failed to find proof
 
 Testing || Choose.choose_modEq_prod_range_choose : ∀ {n k p : ℕ} [inst : Fact (Nat.Prime p)] {a : ℕ},
   n < p ^ a → k < p ^ a → ↑(n.choose k) ≡ ∏ i ∈ Finset.range a, ↑((n / p ^ i % p).choose (k / p ^ i % p)) [ZMOD ↑p]
+Timestamp : 1736732273669
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `∏ i ∈ cifvar_13 x_4,
   cifvar_11 (cifvar_18 (cifvar_16 x_0 (cifvar_5 x_2 i)) x_2) (cifvar_18 (cifvar_16 x_1 (cifvar_5 x_2 i)) x_2)`.
@@ -611,16 +711,18 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || MeasureTheory.VectorMeasure.map_zero : ∀ {α : Type u_1} {β : Type u_2} [inst : MeasurableSpace α] [inst_1 : MeasurableSpace β] {M : Type u_3}
   [inst_2 : AddCommMonoid M] [inst_3 : TopologicalSpace M] (f : α → β), MeasureTheory.VectorMeasure.map 0 f = 0
+Timestamp : 1736732273775
 Result.exception ::
 Auto failed to find proof
 
 Testing || Matrix.updateCol_submatrix_equiv : ∀ {l : Type u_1} {m : Type u_2} {n : Type u_3} {o : Type u_4} {α : Type v} [inst : DecidableEq o]
   [inst_1 : DecidableEq n] (A : Matrix m n α) (j : o) (c : l → α) (e : l ≃ m) (f : o ≃ n),
   (A.submatrix ⇑e ⇑f).updateCol j c = (A.updateCol (f j) fun i => c (e.symm i)).submatrix ⇑e ⇑f
+Timestamp : 1736732274289
 Result.exception ::
 Auto.Monomorphization.ConstInst.ofExpr? :: Matrix m n α is not a `∀`
 
@@ -639,6 +741,7 @@ Testing || CategoryTheory.MonoidalCategory.pentagon_inv_hom_hom_hom_hom_assoc : 
       (CategoryTheory.MonoidalCategory.associator W (CategoryTheory.MonoidalCategory.tensorObj X Y) Z).hom
       (CategoryTheory.CategoryStruct.comp
         (CategoryTheory.MonoidalCategory.whiskerLeft W (CategoryTheory.MonoidalCategory.associator X Y Z).hom) h)
+Timestamp : 1736732274325
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `CategoryTheory.MonoidalCategory.whiskerRight
   x_0 x_1`.
@@ -646,25 +749,30 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || MeasureTheory.L1.SimpleFunc.coe_posPart : ∀ {α : Type u_1} {m : MeasurableSpace α} {μ : MeasureTheory.Measure α} (f : ↥(MeasureTheory.Lp.simpleFunc ℝ 1 μ)),
   ↑(MeasureTheory.L1.SimpleFunc.posPart f) = MeasureTheory.Lp.posPart ↑f
+Timestamp : 1736732274907
 Result.success
 
 Testing || Multiset.disjoint_union_right : ∀ {α : Type u_1} [inst : DecidableEq α] {s t u : Multiset α}, Disjoint s (t ∪ u) ↔ Disjoint s t ∧ Disjoint s u
+Timestamp : 1736732275037
 Result.success
 
 Testing || NatOrdinal.toOrdinal_max : ∀ (a b : NatOrdinal), NatOrdinal.toOrdinal (a ⊔ b) = NatOrdinal.toOrdinal a ⊔ NatOrdinal.toOrdinal b
+Timestamp : 1736732275110
 Result.success
 
 Testing || SimpleGraph.Path.cons_isCycle : ∀ {V : Type u} {G : SimpleGraph V} {u v : V} (p : G.Path v u) (h : G.Adj u v),
   s(u, v) ∉ (↑p).edges → (SimpleGraph.Walk.cons h ↑p).IsCycle
+Timestamp : 1736732275147
 Result.exception ::
 Auto failed to find proof
 
 Testing || AddChar.wInner_cWeight_eq_one_iff_eq : ∀ {G : Type u_1} {R : Type u_3} [inst : AddCommGroup G] [inst_1 : RCLike R] {ψ₁ ψ₂ : AddChar G R} [inst_2 : Fintype G],
   RCLike.wInner RCLike.cWeight ⇑ψ₁ ⇑ψ₂ = 1 ↔ ψ₁ = ψ₂
+Timestamp : 1736732275250
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `RCLike.wInner
   (cifvar_10 (cifvar_11 (cifvar_12 cifvar_13))) (cifvar_14 x_0) (cifvar_14 x_1)`.
@@ -672,14 +780,16 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || min_sub_sub_left : ∀ {α : Type u_1} [inst : LinearOrderedAddCommGroup α] (a b c : α), (a - b) ⊓ (a - c) = a - b ⊔ c
+Timestamp : 1736732275467
 Result.success
 
 Testing || CategoryTheory.Endofunctor.algebraPreadditive_homGroup_add_f : ∀ (C : Type u₁) [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Preadditive C]
   (F : CategoryTheory.Functor C C) [inst_2 : F.Additive] (A₁ A₂ : CategoryTheory.Endofunctor.Algebra F) (α β : A₁ ⟶ A₂),
   (α + β).f = α.f + β.f
+Timestamp : 1736732275618
 Result.success
 
 Testing || AlgebraicGeometry.Scheme.toSpecΓ_naturality_assoc : ∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme}
@@ -687,12 +797,14 @@ Testing || AlgebraicGeometry.Scheme.toSpecΓ_naturality_assoc : ∀ {X Y : Algeb
   CategoryTheory.CategoryStruct.comp f (CategoryTheory.CategoryStruct.comp Y.toSpecΓ h) =
     CategoryTheory.CategoryStruct.comp X.toSpecΓ
       (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.appTop f)) h)
+Timestamp : 1736732275681
 Result.exception ::
-(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || DirichletCharacter.LSeries.mul_mu_eq_one : ∀ {N : ℕ} (χ : DirichletCharacter ℂ N) {s : ℂ},
   1 < s.re → LSeries (fun n => χ ↑n) s * LSeries ((fun n => χ ↑n) * fun n => ↑(ArithmeticFunction.moebius n)) s = 1
+Timestamp : 1736732277181
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `LSeriesSummable
   (fun n => cifvar_24 x_0 (cifvar_25 n)) x_1`.
@@ -700,46 +812,55 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || IsPrimitiveRoot.pow_ne_one_of_pos_of_lt : ∀ {M : Type u_1} [inst : CommMonoid M] {k l : ℕ} {ζ : M}, IsPrimitiveRoot ζ k → 0 < l → l < k → ζ ^ l ≠ 1
+Timestamp : 1736732279383
 Result.success
 
 Testing || tsum_setElem_eq_tsum_setElem_diff : ∀ {α : Type u_1} {β : Type u_2} [inst : AddCommMonoid α] [inst_1 : TopologicalSpace α] {f : β → α} (s t : Set β),
   (∀ b ∈ t, f b = 0) → ∑' (a : ↑s), f ↑a = ∑' (a : ↑(s \ t)), f ↑a
+Timestamp : 1736732279437
 Result.exception ::
 Auto failed to find proof
 
 Testing || Set.piMap_image_pi : ∀ {ι : Type u_1} {α : ι → Type u_2} {β : ι → Type u_3} {s : Set ι} {f : (i : ι) → α i → β i},
   (∀ i ∉ s, Function.Surjective (f i)) → ∀ (t : (i : ι) → Set (α i)), Pi.map f '' s.pi t = s.pi fun i => f i '' t i
+Timestamp : 1736732289387
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `f x_0`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || fermatLastTheoremFor_iff_rat : ∀ {n : ℕ}, FermatLastTheoremFor n ↔ FermatLastTheoremWith ℚ n
+Timestamp : 1736732289443
 Result.exception ::
 Auto failed to find proof
 
 Testing || MeasureTheory.FinMeasAdditive.smul_measure : ∀ {α : Type u_1} {m : MeasurableSpace α} {μ : MeasureTheory.Measure α} {β : Type u_7} [inst : AddCommMonoid β]
   {T : Set α → β} (c : ENNReal), c ≠ 0 → MeasureTheory.FinMeasAdditive μ T → MeasureTheory.FinMeasAdditive (c • μ) T
-Result.success
+Timestamp : 1736732289488
+Result.exception ::
+Auto failed to find proof
 
 Testing || Finset.mulETransformRight_snd : ∀ {α : Type u_1} [inst : DecidableEq α] [inst_1 : Group α] (e : α) (x : Finset α × Finset α),
   (Finset.mulETransformRight e x).2 = x.2 ∩ e⁻¹ • x.2
+Timestamp : 1736732299432
 Result.success
 
 Testing || Associates.eq_pow_of_mul_eq_pow : ∀ {α : Type u_1} [inst : CancelCommMonoidWithZero α] [inst_1 : UniqueFactorizationMonoid α] {a b c : Associates α},
   a ≠ 0 → b ≠ 0 → (∀ (d : Associates α), d ∣ a → d ∣ b → ¬Prime d) → ∀ {k : ℕ}, a * b = c ^ k → ∃ d, a = d ^ k
+Timestamp : 1736732299463
 Result.exception ::
 Auto failed to find proof
 
 Testing || Sigma.card_Ioo : ∀ {ι : Type u_1} {α : ι → Type u_2} [inst : DecidableEq ι] [inst_1 : (i : ι) → Preorder (α i)]
   [inst_2 : (i : ι) → LocallyFiniteOrder (α i)] (a b : (i : ι) × α i),
   (Finset.Ioo a b).card = if h : a.fst = b.fst then (Finset.Ioo (h ▸ a.snd) b.snd).card else 0
+Timestamp : 1736732299686
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `if h :
     cifvar_9 (cifvar_10 cifvar_4) (cifvar_10 cifvar_5) then cifvar_11 (x_0 (cifvar_12 cifvar_13 h) cifvar_14)
@@ -748,7 +869,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || CategoryTheory.Limits.colimit.ι_coconeMorphism : ∀ {J : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} J] {C : Type u} [inst_1 : CategoryTheory.Category.{v, u} C]
   {F : CategoryTheory.Functor J C} [inst_2 : CategoryTheory.Limits.HasColimit F] (c : CategoryTheory.Limits.Cocone F)
@@ -756,6 +877,7 @@ Testing || CategoryTheory.Limits.colimit.ι_coconeMorphism : ∀ {J : Type u₁}
   CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.colimit.ι F j)
       (CategoryTheory.Limits.colimit.coconeMorphism c).hom =
     c.ι.app j
+Timestamp : 1736732300045
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `CategoryTheory.Limits.colimit.ι
   cifvar_1 x_1`.
@@ -763,9 +885,10 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || Real.continuousOn_logb : ∀ {b : ℝ}, ContinuousOn (Real.logb b) {0}ᶜ
+Timestamp : 1736732300232
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `ContinuousOn
   (fun x => cifvar_6 (cifvar_7 cifvar_8 x) y) x_0`.
@@ -773,7 +896,7 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd : ∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (𝒜 : ℕ → Submodule R A)
   [inst_3 : GradedAlgebra 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')
@@ -782,14 +905,16 @@ Testing || AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd : ∀ {R : Type u_1}
       (CategoryTheory.Limits.pullback.snd (AlgebraicGeometry.Proj.awayι 𝒜 f f_deg hm)
         (AlgebraicGeometry.Proj.awayι 𝒜 g g_deg hm')) =
     AlgebraicGeometry.Spec.map (CommRingCat.ofHom (HomogeneousLocalization.awayMap 𝒜 f_deg ⋯))
+Timestamp : 1736732300306
 Result.exception ::
-(deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
+(deterministic) timeout at `isDefEq`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
 
 Testing || ProbabilityTheory.IsCondKernelCDF.integral : ∀ {α : Type u_1} {β : Type u_2} {mα : MeasurableSpace α} {mβ : MeasurableSpace β}
   {κ : ProbabilityTheory.Kernel α (β × ℝ)} {ν : ProbabilityTheory.Kernel α β} {f : α × β → StieltjesFunction},
   ProbabilityTheory.IsCondKernelCDF f κ ν →
     ∀ (a : α) (x : ℝ), ∫ (b : β), ↑(f (a, b)) x ∂ν a = ((κ a) (Set.univ ×ˢ Set.Iic x)).toReal
+Timestamp : 1736732302235
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `∫ (b : β),
   cifvar_18 (cifvar_19 (cifvar_20 a b)) x ∂cifvar_17 (cifvar_6 x_1 a) s`.
@@ -797,23 +922,25 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || BoundedContinuousFunction.integrable_of_nnreal : ∀ {X : Type u_1} [inst : MeasurableSpace X] [inst_1 : TopologicalSpace X] (μ : MeasureTheory.Measure X)
   [inst_2 : MeasureTheory.IsFiniteMeasure μ] [inst_3 : OpensMeasurableSpace X] (f : BoundedContinuousFunction X NNReal),
   MeasureTheory.Integrable (NNReal.toReal ∘ ⇑f) μ
+Timestamp : 1736732302405
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `Continuous (cifvar_17 x_0)`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || AlgebraicGeometry.Scheme.Opens.fromSpecStalkOfMem_ι_assoc : ∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens) (x : ↑↑X.toPresheafedSpace) (hxU : x ∈ U) {Z : AlgebraicGeometry.Scheme}
   (h : X ⟶ Z),
   CategoryTheory.CategoryStruct.comp (U.fromSpecStalkOfMem x hxU) (CategoryTheory.CategoryStruct.comp U.ι h) =
     CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) h
+Timestamp : 1736732302526
 Result.exception ::
 (deterministic) timeout at `whnf`, maximum number of heartbeats (65536) has been reached
 Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy, missing context)
@@ -821,23 +948,27 @@ Use `set_option maxHeartbeats <num>` to set the limit.(invalid MessageData.lazy,
 Testing || CategoryTheory.wideSubcategoryInclusion.map : ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (P : CategoryTheory.MorphismProperty C)
   [inst_1 : P.IsMultiplicative] {X Y : CategoryTheory.WideSubcategory P} {f : X ⟶ Y},
   (CategoryTheory.wideSubcategoryInclusion P).map f = ↑f
+Timestamp : 1736732304155
 Result.exception ::
 Auto.Monomorphization.ConstInst.ofExpr? :: CategoryTheory.MorphismProperty C is not a `∀`
 
 Testing || IntervalIntegrable.mono : ∀ {E : Type u_3} [inst : NormedAddCommGroup E] {f : ℝ → E} {a b c d : ℝ} {μ ν : MeasureTheory.Measure ℝ},
   IntervalIntegrable f ν a b → Set.uIcc c d ⊆ Set.uIcc a b → μ ≤ ν → IntervalIntegrable f μ c d
+Timestamp : 1736732304161
 Result.success
 
 Testing || Cardinal.aleph_max : ∀ (o₁ o₂ : Ordinal.{u_1}), Cardinal.aleph (o₁ ⊔ o₂) = Cardinal.aleph o₁ ⊔ Cardinal.aleph o₂
+Timestamp : 1736732304318
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `Monotone (cifvar_2 x_0)`.
 This is because it has subterms possessing at least one of the following features
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || Filter.pure_vadd_pure : ∀ {α : Type u_2} {β : Type u_3} [inst : VAdd α β] {a : α} {b : β}, pure a +ᵥ pure b = pure (a +ᵥ b)
+Timestamp : 1736732304467
 Result.exception ::
 Monomorphization failed because currently the procedure cannot deal with expression `Filter.map
   (fun x => cifvar_2 x x_1) x_0`.
@@ -845,157 +976,29 @@ This is because it has subterms possessing at least one of the following feature
 · Type argument with bound variables, e.g. `@Fin.add (n + 2) a b` where `n` is a bound variable
 · λ binders whose type contain bound variables, e.g. `fun (x : a) => x` where `a` is a bound variable
 · Other (TODO)
-`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handeled by the current procedure
+`set_option auto.mono.ignoreNonQuasiHigherOrder true` will instruct Lean-auto to ignore all the `LemmaInst`s which contain expressions that cannot be handled by the current procedure
 
 Testing || Equiv.Perm.IsSwap.isCycle : ∀ {α : Type u_2} {f : Equiv.Perm α} [inst : DecidableEq α], f.IsSwap → f.IsCycle
+Timestamp : 1736732304594
 Result.exception ::
 Auto failed to find proof
 
 Testing || legendreSym.at_zero : ∀ (p : ℕ) [inst : Fact (Nat.Prime p)], legendreSym p 0 = 0
+Timestamp : 1736732304621
 Result.success
 
 Testing || PowerSeries.rescale_mk : ∀ {R : Type u_1} [inst : CommSemiring R] (f : ℕ → R) (a : R),
   (PowerSeries.rescale a) (PowerSeries.mk f) = PowerSeries.mk fun n => a ^ n * f n
+Timestamp : 1736732304781
 Result.success
 
 Testing || Tropical.untrop_lt_iff : ∀ {R : Type u} [inst : LT R] {x y : Tropical R}, Tropical.untrop x < Tropical.untrop y ↔ x < y
+Timestamp : 1736732304903
 Result.success
 
 Testing || Orientation.oangle_add_right_smul_rotation_pi_div_two : ∀ {V : Type u_1} [inst : NormedAddCommGroup V] [inst_1 : InnerProductSpace ℝ V] [hd2 : Fact (Module.finrank ℝ V = 2)]
   (o : Orientation ℝ V (Fin 2)) {x : V},
   x ≠ 0 → ∀ (r : ℝ), o.oangle x (x + r • (o.rotation ↑(Real.pi / 2)) x) = ↑(Real.arctan r)
+Timestamp : 1736732304932
 Result.exception ::
 Auto failed to find proof
-
-Elapsed time: 426391 ms
-
-Summary:
-
-0 E Bornology.isBounded_sUnion
-1 E iSup_eq_iSup_finset'
-2 E Nat.le_add_one_of_avg_eq_left
-3 E LieModule.ofAssociativeModule
-4 E LinearMap.ker_noncommProd_eq_of_supIndep_ker
-5 S AddSubgroup.coe_center
-6 E NonUnitalSubalgebra.toNonUnitalSubsemiring_injective
-7 E CochainComplex.HomComplex.Cochain.ext₀
-8 E Multiset.mem_of_mem_nsmul
-9 E CategoryTheory.StructuredArrow.IsUniversal.fac_assoc
-10 E ContractingWith.fixedPoint_lipschitz_in_map
-11 S CategoryTheory.Functor.closedSieves_obj
-12 E MeasureTheory.Measure.haar.le_index_mul
-13 E MvPolynomial.mapAlgEquiv_refl
-14 E PartialHomeomorph.MDifferentiable.mfderiv_bijective
-15 S List.prod_ne_zero
-16 E Ring.ne_bot_of_isMaximal_of_not_isField
-17 E MonovaryOn.pow_left
-18 S Complex.arg_coe_angle_eq_iff
-19 E Dynamics.dynEntourage_monotone
-20 E HomologicalComplex.cycles_left_exact
-21 S instHasFiniteLimitsLightCondMod
-22 E List.getLast?_drop
-23 S AddGroup.fintypeOfKerEqRange.proof_1
-24 S List.dedup_cons_of_mem'
-25 E stronglyMeasurable_bot_iff
-26 E PrimeSpectrum.vanishingIdeal_anti_mono
-27 E IsFractionRing.isDomain
-28 E Finset.inj_on_of_surj_on_of_card_le
-29 S CategoryTheory.Pretriangulated.productTriangle_obj₁
-30 S lt_div_iff_of_neg'
-31 E CochainComplex.mappingCone.inr_f_descCochain_v
-32 S Cubic.natDegree_of_c_ne_zero
-33 E Unitization.norm_splitMul_snd_sq
-34 S LinearMap.BilinForm.linMulLin_compLeft
-35 E CategoryTheory.MorphismProperty.Comma.mapRight_obj_hom
-36 S IsPrimitiveRoot.ne_zero
-37 E _private.Mathlib.Topology.MetricSpace.Gluing.0.Metric.eq_of_glueDist_eq_zero
-38 S WeierstrassCurve.Affine.eval_negPolynomial
-39 E Rat.cast_lt_zero
-40 S CompositionAsSet.card_boundaries_eq_succ_length
-41 E Finset.prod_le_one'
-42 S SlashInvariantForm.coeHom_injective
-43 S CategoryTheory.StructuredArrow.toUnder_obj_left
-44 S ContinuousWithinAt.mono_of_mem_nhdsWithin
-45 E AddSubmonoid.closure_singleton_le_iff_mem
-46 E Set.biUnion_of_singleton
-47 S ULift.down_ratCast
-48 S Set.smul_set_eq_empty
-49 S MeasurableSet.coe_sdiff
-50 E Matrix.charpoly_fromBlocks_zero₁₂
-51 E CategoryTheory.Limits.PullbackCone.IsLimit.equivPullbackObj_symm_apply_fst
-52 E IsLocalization.isAlgebraic
-53 E Finset.addEnergy_eq_sum_sq'
-54 S AddMonoidHom.addCommMonoid.proof_1
-55 S ContinuousLinearEquiv.symm_trans_apply
-56 E CategoryTheory.Coverage.eq_top_pullback
-57 E TopCat.stalkToFiber_injective
-58 S Complex.equivRealProdCLM_symm_apply
-59 E tendstoLocallyUniformlyOn_TFAE
-60 E nhdsWithin_Ici_neBot
-61 E Multiset.Nat.antidiagonalTuple_zero_right
-62 E Part.instLawfulMonad
-63 E List.naturality
-64 E CategoryTheory.instIsSplitMonoComp
-65 E CategoryTheory.ShortComplex.leftHomologyFunctor_additive
-66 E MvPowerSeries.coeff_eq_zero_of_lt_lexOrder
-67 E ULift.addRightCancelMonoid.proof_1
-68 E instHasCountableSeparatingOnIsOpenOfT0SpaceOfSecondCountableTopologyElem
-69 E CategoryTheory.Functor.lanCompColimIso_hom_app
-70 E MeasureTheory.exists_upperSemicontinuous_le_integral_le
-71 E pathConnectedSpace_iff_univ
-72 S Ordinal.derivFamily_isNormal
-73 E CochainComplex.mappingCone.inr_f_d
-74 E AddMonoidHom.isCentralScalar
-75 E CategoryTheory.prod_preservesConnectedLimits
-76 E CategoryTheory.Limits.reflectsLimit_of_reflectsIsomorphisms
-77 E BialgHom.coe_coe
-78 S Int.div_def
-79 S Subgroup.center.smulCommClass_left
-80 S Matrix.SpecialLinearGroup.coe_mul
-81 S IsMinFilter.undual
-82 E Batteries.TransCmp.cmp_congr_left'
-83 E CategoryTheory.Pi.sum_obj_obj
-84 E List.eraseP_cons
-85 E Ordinal.sup_add_nat
-86 S CategoryTheory.Square.fromArrowArrowFunctor_obj_f₃₄
-87 E CategoryTheory.Pi.ext
-88 E AddSubgroup.op.proof_1
-89 E InnerProductGeometry.norm_add_sq_eq_norm_sq_add_norm_sq'
-90 S Polynomial.ofFinsupp_nsmul
-91 E Finset.Colex.initSeg_nonempty
-92 E Choose.choose_modEq_prod_range_choose
-93 E MeasureTheory.VectorMeasure.map_zero
-94 E Matrix.updateCol_submatrix_equiv
-95 E CategoryTheory.MonoidalCategory.pentagon_inv_hom_hom_hom_hom_assoc
-96 S MeasureTheory.L1.SimpleFunc.coe_posPart
-97 S Multiset.disjoint_union_right
-98 S NatOrdinal.toOrdinal_max
-99 E SimpleGraph.Path.cons_isCycle
-100 E AddChar.wInner_cWeight_eq_one_iff_eq
-101 S min_sub_sub_left
-102 S CategoryTheory.Endofunctor.algebraPreadditive_homGroup_add_f
-103 E AlgebraicGeometry.Scheme.toSpecΓ_naturality_assoc
-104 E DirichletCharacter.LSeries.mul_mu_eq_one
-105 S IsPrimitiveRoot.pow_ne_one_of_pos_of_lt
-106 E tsum_setElem_eq_tsum_setElem_diff
-107 E Set.piMap_image_pi
-108 E fermatLastTheoremFor_iff_rat
-109 S MeasureTheory.FinMeasAdditive.smul_measure
-110 S Finset.mulETransformRight_snd
-111 E Associates.eq_pow_of_mul_eq_pow
-112 E Sigma.card_Ioo
-113 E CategoryTheory.Limits.colimit.ι_coconeMorphism
-114 E Real.continuousOn_logb
-115 E AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd
-116 E ProbabilityTheory.IsCondKernelCDF.integral
-117 E BoundedContinuousFunction.integrable_of_nnreal
-118 E AlgebraicGeometry.Scheme.Opens.fromSpecStalkOfMem_ι_assoc
-119 E CategoryTheory.wideSubcategoryInclusion.map
-120 S IntervalIntegrable.mono
-121 E Cardinal.aleph_max
-122 E Filter.pure_vadd_pure
-123 E Equiv.Perm.IsSwap.isCycle
-124 S legendreSym.at_zero
-125 S PowerSeries.rescale_mk
-126 S Tropical.untrop_lt_iff
-127 E Orientation.oangle_add_right_smul_rotation_pi_div_two
