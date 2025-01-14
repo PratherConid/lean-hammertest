@@ -77,7 +77,7 @@ set_option auto.evalAuto.ensureAesop true
 -- #eval @id (CoreM _) do
 --   let p ← initSrcSearchPath
 --   let m := Std.HashSet.ofList (← allHumanTheorems).toList
---   let r ← evalAtModule `Mathlib.Algebra.Group.Defs p (fun ci => m.contains ci.name)
+--   let r ← evalTacticsAtModule `Mathlib.Algebra.Group.Defs p (fun ci => m.contains ci.name)
 --     { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 16384, .useAesopWithPremises 16384],
 --       logFile := "evalTacticLog.txt", resultFile := "evalTacticResult.txt"
 --       nonterminates := #[] }
@@ -116,3 +116,15 @@ set_option auto.evalAuto.ensureAesop true
 --   let cumulative := cumulative.map (fun b : Bool => if b then 1 else 0)
 --   let t := cumulative.foldl Nat.add 0
 --   IO.println s!"cul : {t}"
+
+--- #eval do
+---   let r ← readAutoEvalResult
+---     { solverConfig := .native, batchSize := 512
+---       resultFolder := "/mnt/d/3_Tmp/EvalAuto", nonterminates := #[], nthreads := 4 }
+---   let r := r.map Prod.snd
+---   IO.println s!"Total : {r.size}"
+---   let cumulative : Array Bool := r.map (fun r =>
+---     match r with | Result.success => true | _ => false)
+---   let cumulative := cumulative.map (fun b : Bool => if b then 1 else 0)
+---   let t := cumulative.foldl Nat.add 0
+---   IO.println s!"cul : {t}"

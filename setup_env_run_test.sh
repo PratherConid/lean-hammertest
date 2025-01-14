@@ -47,4 +47,4 @@ open EvalAuto
 #eval evalTacticsAtMathlibHumanTheorems
   { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 16384, .useAesopWithPremises 16384],
     resultFolder := \"./EvalTactics\",
-    nonterminates := #[], nthreads := 32 }" | lake env lean --stdin
+    nonterminates := #[], nthreads := 16 }" | lake env lean --stdin
