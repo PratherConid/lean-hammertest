@@ -7,7 +7,7 @@ bash elan-init.sh -y
 rm elan-init.sh
 git clone https://github.com/leanprover-community/lean-auto
 # TODO: Use up-to-date version
-cd lean-auto; git checkout 75bebcff8c76fe2c2cf49bee3d4e7f5e04a18ffe; cd ..
+cd lean-auto; git checkout 8607f94a173a956486696df88822b37fc219bd1a; cd ..
 git clone https://github.com/leanprover-community/duper
 cd duper; git checkout 9cd4d4d1d71034d456d06aef2e4d07c911b88c65; cd ..
 git clone https://github.com/PratherConid/lean-hammertest
@@ -46,5 +46,5 @@ open EvalAuto
 
 #eval evalTacticsAtMathlibHumanTheorems
   { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 16384, .useAesopWithPremises 16384],
-    resultFolder := "./EvalTactics",
+    resultFolder := \"./EvalTactics\",
     nonterminates := #[], nthreads := 32 }" | lake env lean --stdin

@@ -2,6 +2,7 @@ import Mathlib
 import Hammertest.DuperInterface
 import Auto.EvaluateAuto.TestAuto
 import Auto.EvaluateAuto.TestTactics
+import Auto.EvaluateAuto.TestTranslation
 
 open Lean Meta Elab Auto EvalAuto
 
@@ -12,7 +13,7 @@ set_option trace.auto.eval.printResult true
 --set_option trace.auto.tptp.printProof true
 
 -- #eval @id (CoreM _) do
---   let all ← allHumanTheorems
+--   let all ← allHumanTheoremsFromPackage "Mathlib"
 --   let n := 512
 --   NameArray.save (← Array.randPick all n) s!"MathlibNames{n}.txt"
 
@@ -86,7 +87,6 @@ set_option auto.evalAuto.ensureAesop true
 --   { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 4096, .useAesopWithPremises 4096], resultFolder := "./Eval",
 --     nonterminates := #[], nthreads := 8 }
 
--- set_option trace.auto.runAuto.printLemmas true
 -- #eval runAutoOnConsts
 --   { solverConfig := .native, maxHeartbeats := 65536,
 --     logFile := .none, resultFile := .none,
@@ -99,3 +99,20 @@ set_option auto.evalAuto.ensureAesop true
 --     logFile := "evalAutoLog.txt", resultFile := "evalAutoResult.txt",
 --     nonterminates := #[``Subalgebra.restrictScalars_top] }
 --   "EvalAuto/83.names"
+
+-- #eval do
+--   let r ← readTacticEvalResult
+--     { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 4096, .useAesopWithPremises 4096],
+--       resultFolder := "/mnt/d/3_Tmp/EvalTactics", nonterminates := #[], nthreads := 4 }
+--   let r := (r.map Prod.snd).flatMap id
+--   let r := r.map Prod.snd
+--   IO.println s!"Total : {r.size}"
+--   for idx in [0:5] do
+--     let t := r.map (fun r => match r[idx]! with | Result.success => 1 | _ => 0)
+--     let t := t.foldl Nat.add 0
+--     IO.println s!"{idx} : {t}"
+--   let cumulative : Array Bool := r.map (fun s => Array.any s (
+--      fun r => match r with | Result.success => true | _ => false))
+--   let cumulative := cumulative.map (fun b : Bool => if b then 1 else 0)
+--   let t := cumulative.foldl Nat.add 0
+--   IO.println s!"cul : {t}"
