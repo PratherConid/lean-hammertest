@@ -1,7 +1,7 @@
 #! Please run this script using `bash`
 #! This script is only compatible with Lean v4.15.0
 #! This script is only compatible with Mathlib4 29f9a66d622d9bab7f419120e22bb0d2598676ab, due to 'nonterminates'
-#! The number of processes chosen by this script is compatible with Amazon EC2 g4ad.16xlarge
+#! The number of processes chosen by this script is compatible with Amazon EC2 c5a.16xlarge
 
 wget https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh
 bash elan-init.sh -y
@@ -48,4 +48,4 @@ open EvalAuto
 #eval evalTacticsAtMathlibHumanTheorems
   { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 16384, .useAesopWithPremises 16384],
     resultFolder := \"./EvalTactics\",
-    nonterminates := #[], nthreads := 64 }" | lake env lean --stdin
+    nonterminates := #[], nthreads := 32 }" | lake env lean --stdin
