@@ -49,15 +49,15 @@ open EvalAuto
   { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 16384, .useAesopWithPremises 16384],
     resultFolder := \"./EvalTactics\",
     nonterminates := #[
-      (.useRfl, ``IntermediateField.extendScalars_top),
-      (.useAesop 16384, ``IntermediateField.extendScalars_top),
-      (.useAesopWithPremises 16384, ``IntermediateField.extendScalars_top),
-      (.useRfl, ``IntermediateField.extendScalars_inf),
-      (.useAesop 16384, ``IntermediateField.extendScalars_inf),
-      (.useAesopWithPremises 16384, ``IntermediateField.extendScalars_inf)
-      (.useRfl, ``Field.Emb.Cardinal.succEquiv_coherence),
-      (.useAesop 16384, ``Field.Emb.Cardinal.succEquiv_coherence),
-      (.useAesopWithPremises 16384, ``Field.Emb.Cardinal.succEquiv_coherence),
-      (.useAesop 16384, ``UniformConvergenceCLM.uniformSpace_eq),
-      (.useAesopWithPremises 16384, ``UniformConvergenceCLM.uniformSpace_eq)
+      (.useRfl, \`\`IntermediateField.extendScalars_top),
+      (.useAesop 16384, \`\`IntermediateField.extendScalars_top),
+      (.useAesopWithPremises 16384, \`\`IntermediateField.extendScalars_top),
+      (.useRfl, \`\`IntermediateField.extendScalars_inf),
+      (.useAesop 16384, \`\`IntermediateField.extendScalars_inf),
+      (.useAesopWithPremises 16384, \`\`IntermediateField.extendScalars_inf)
+      (.useRfl, \`\`Field.Emb.Cardinal.succEquiv_coherence),
+      (.useAesop 16384, \`\`Field.Emb.Cardinal.succEquiv_coherence),
+      (.useAesopWithPremises 16384, \`\`Field.Emb.Cardinal.succEquiv_coherence),
+      (.useAesop 16384, \`\`UniformConvergenceCLM.uniformSpace_eq),
+      (.useAesopWithPremises 16384, \`\`UniformConvergenceCLM.uniformSpace_eq)
     ], nthreads := 32 }" | lake env lean --stdin
