@@ -8,7 +8,7 @@ bash elan-init.sh -y
 rm elan-init.sh
 git clone https://github.com/leanprover-community/lean-auto
 # TODO: Use up-to-date version
-cd lean-auto; git checkout 8607f94a173a956486696df88822b37fc219bd1a; cd ..
+cd lean-auto; git checkout 44d9c8a3b89bfe633c6e519bb4f142724be637b8; cd ..
 git clone https://github.com/leanprover-community/duper
 cd duper; git checkout 9cd4d4d1d71034d456d06aef2e4d07c911b88c65; cd ..
 git clone https://github.com/PratherConid/lean-hammertest
@@ -54,7 +54,7 @@ open EvalAuto
       (.useAesopWithPremises 16384, \`\`IntermediateField.extendScalars_top),
       (.useRfl, \`\`IntermediateField.extendScalars_inf),
       (.useAesop 16384, \`\`IntermediateField.extendScalars_inf),
-      (.useAesopWithPremises 16384, \`\`IntermediateField.extendScalars_inf)
+      (.useAesopWithPremises 16384, \`\`IntermediateField.extendScalars_inf),
       (.useRfl, \`\`Field.Emb.Cardinal.succEquiv_coherence),
       (.useAesop 16384, \`\`Field.Emb.Cardinal.succEquiv_coherence),
       (.useAesopWithPremises 16384, \`\`Field.Emb.Cardinal.succEquiv_coherence),
