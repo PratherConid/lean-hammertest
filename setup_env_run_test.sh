@@ -46,7 +46,7 @@ import Auto.EvaluateAuto.TestTactics
 open EvalAuto
 
 #eval evalTacticsAtMathlibHumanTheorems
-  { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 16384, .useAesopWithPremises 16384],
+  { tactics := #[.testUnknownConstant, .useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 16384, .useAesopWithPremises 16384],
     resultFolder := \"./EvalTactics\",
     nonterminates := #[
       (.useRfl, \`\`IntermediateField.extendScalars_top),
