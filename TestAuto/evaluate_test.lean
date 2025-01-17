@@ -123,16 +123,6 @@ set_option auto.evalAuto.ensureAesop true
 ---   let t := cumulative.foldl Nat.add 0
 ---   IO.println s!"cul : {t}"
 
-def testUnknown : CoreM (Array (Name × Bool)) := do
-  let r ← readETMHTResult
-    { tactics := #[.testUnknownConstant],
-      resultFolder := "/mnt/d/3_Tmp/EvalUnknown", nonterminates := #[], nprocs := 4 }
-  let r := (r.map Prod.snd).flatMap id
-  return r.map (fun (n, rs) =>
-    match rs with
-    | #[(Result.success, _)] => (n, true)
-    | _ => (n, false))
-
 def tactics : CoreM (Array (Name × Array Result)) := do
   let r ← readETMHTResult
     { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 4096, .useAesopWithPremises 4096],
@@ -146,14 +136,13 @@ def auto : CoreM (Array (Name × Result)) := do
       resultFolder := "/mnt/d/3_Tmp/EvalAuto", nonterminates := #[], nprocs := 4 }
   return r.map (fun (n, r, _) => (n, r))
 
--- #eval do
+-- #eval @id (CoreM _) do
 --   let aAll : Array (Name × Result) ← auto
 --   let tcAll : Array (Name × Array Result) ← tactics
---   let tu : Array (Name × Bool) ← testUnknown
---   let htu := Std.HashSet.ofArray (tu.filterMap (fun nb =>
---     match Prod.snd nb with
---     | true => .some (Prod.fst nb)
---     | false => .none))
+--   let tcAll := tcAll.map (fun (n, rs) => (n, rs[1:].toArray))
+--   let tu : Array Name := (tcAll.filter (fun (_, rs) =>
+--     match rs[0]? with | .some Result.success => true | _ => false)).map Prod.fst
+--   let htu := Std.HashSet.ofArray tu
 --   let aPre := aAll.filter (fun w => htu.contains (Prod.fst w))
 --   let htu := Std.HashSet.ofArray (aPre.map Prod.fst)
 --   let tc := tcAll.filter (fun w => htu.contains (Prod.fst w))
