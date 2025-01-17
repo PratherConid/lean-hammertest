@@ -8,7 +8,7 @@ bash elan-init.sh -y
 rm elan-init.sh
 git clone https://github.com/leanprover-community/lean-auto
 # TODO: Use up-to-date version
-cd lean-auto; git checkout 44d9c8a3b89bfe633c6e519bb4f142724be637b8; cd ..
+cd lean-auto; git checkout 65c7d3da52dbd877b97b98573d47d14e222aefeb; cd ..
 git clone https://github.com/leanprover-community/duper
 cd duper; git checkout 9cd4d4d1d71034d456d06aef2e4d07c911b88c65; cd ..
 git clone https://github.com/PratherConid/lean-hammertest
@@ -24,7 +24,7 @@ open EvalAuto
 #eval evalAutoAtMathlibHumanTheorems
   { maxHeartbeats := 65536, timeout := 10, solverConfig := .native,
     resultFolder  := \"./EvalAuto\",
-    nthreads := 64, batchSize := 512,
+    nprocs := 64, batchSize := 512,
     nonterminates := #[
       \`\`Differentiable.exists_const_forall_eq_of_bounded,
       \`\`uniformContinuous_of_const,
@@ -60,4 +60,4 @@ open EvalAuto
       (.useAesopWithPremises 16384, \`\`Field.Emb.Cardinal.succEquiv_coherence),
       (.useAesop 16384, \`\`UniformConvergenceCLM.uniformSpace_eq),
       (.useAesopWithPremises 16384, \`\`UniformConvergenceCLM.uniformSpace_eq)
-    ], nthreads := 32 }" | lake env lean --stdin
+    ], nprocs := 32 }" | lake env lean --stdin

@@ -68,12 +68,6 @@ set_option trace.auto.lamReif.printResult true
 
 set_option auto.evalAuto.ensureAesop true
 
--- #check @id (CoreM _) do
---   let p ← initSrcSearchPath
---   let r ← runTacticsAtConstantDeclaration ``UInt32.toUInt16_toNat p
---     #[fun _ => useSimpAll, useSimpAllWithPremises, fun _ => useAesop 16384, useAesopWithPremises 16384]
---   trace[auto.tactic] "{r}"
-
 -- #eval @id (CoreM _) do
 --   let p ← initSrcSearchPath
 --   let m := Std.HashSet.ofList (← allHumanTheorems).toList
@@ -85,7 +79,7 @@ set_option auto.evalAuto.ensureAesop true
 
 -- #eval evalTacticsAtMathlibHumanTheorems
 --   { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 4096, .useAesopWithPremises 4096], resultFolder := "./Eval",
---     nonterminates := #[], nthreads := 8 }
+--     nonterminates := #[], nprocs := 8 }
 
 -- #eval runAutoOnConsts
 --   { solverConfig := .native, maxHeartbeats := 65536,
@@ -103,7 +97,7 @@ set_option auto.evalAuto.ensureAesop true
 -- #eval do
 --   let r ← readETMHTResult
 --     { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 4096, .useAesopWithPremises 4096],
---       resultFolder := "/mnt/d/3_Tmp/EvalTactics", nonterminates := #[], nthreads := 4 }
+--       resultFolder := "/mnt/d/3_Tmp/EvalTactics", nonterminates := #[], nprocs := 4 }
 --   let r := (r.map Prod.snd).flatMap id
 --   let r := r.map Prod.snd
 --   IO.println s!"Total : {r.size}"
@@ -120,7 +114,7 @@ set_option auto.evalAuto.ensureAesop true
 --- #eval do
 ---   let r ← readEAMHTResult
 ---     { solverConfig := .native, batchSize := 512
----       resultFolder := "/mnt/d/3_Tmp/EvalAuto", nonterminates := #[], nthreads := 4 }
+---       resultFolder := "/mnt/d/3_Tmp/EvalAuto", nonterminates := #[], nprocs := 4 }
 ---   let r := r.map Prod.snd
 ---   IO.println s!"Total : {r.size}"
 ---   let cumulative : Array Bool := r.map (fun r =>
@@ -132,7 +126,7 @@ set_option auto.evalAuto.ensureAesop true
 def testUnknown : CoreM (Array (Name × Bool)) := do
   let r ← readETMHTResult
     { tactics := #[.testUnknownConstant],
-      resultFolder := "/mnt/d/3_Tmp/EvalUnknown", nonterminates := #[], nthreads := 4 }
+      resultFolder := "/mnt/d/3_Tmp/EvalUnknown", nonterminates := #[], nprocs := 4 }
   let r := (r.map Prod.snd).flatMap id
   return r.map (fun (n, rs) =>
     match rs with
@@ -142,14 +136,14 @@ def testUnknown : CoreM (Array (Name × Bool)) := do
 def tactics : CoreM (Array (Name × Array Result)) := do
   let r ← readETMHTResult
     { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 4096, .useAesopWithPremises 4096],
-      resultFolder := "/mnt/d/3_Tmp/EvalTactics", nonterminates := #[], nthreads := 4 }
+      resultFolder := "/mnt/d/3_Tmp/EvalTactics", nonterminates := #[], nprocs := 4 }
   let r := (r.map Prod.snd).flatMap id
   return r.map (fun (n, arr) => (n, arr.map Prod.fst))
 
 def auto : CoreM (Array (Name × Result)) := do
-  let r ← readEAMHTResult
+  let r ← readEATAResult
     { solverConfig := .native, batchSize := 512
-      resultFolder := "/mnt/d/3_Tmp/EvalAuto", nonterminates := #[], nthreads := 4 }
+      resultFolder := "/mnt/d/3_Tmp/EvalAuto", nonterminates := #[], nprocs := 4 }
   return r.map (fun (n, r, _) => (n, r))
 
 -- #eval do
@@ -190,4 +184,19 @@ def auto : CoreM (Array (Name × Result)) := do
 --   let auniq := a.filter (fun w => Result.concise (Prod.snd w) == "S" && !hcumulative.contains (Prod.fst w))
 --   IO.println s!"auniq : {auniq.size}"
 
-#check 2
+-- #eval @id (CoreM _) do
+--   let names ← NameArray.load "EvalResults/MathlibNames128.txt"
+--   evalReduceSize names "EvalReduceSize" 4 (8 * 1024 * 1024) 60
+
+-- #eval @id (CoreM _) do
+--   let names ← NameArray.load "EvalResults/MathlibNames128.txt"
+--   evalAutoAtTheoremsAsync
+--     { maxHeartbeats := 65535, timeout := 10,
+--       solverConfig := .native, resultFolder := "EvalAutoDResult",
+--       nprocs := 4, batchSize := 1,
+--       memoryLimitKb := .some (8 * 1024 * 1024), timeLimitS := .some 60,
+--       nonterminates := #[] }
+--     names #[`Mathlib] #[
+--       "set_option auto.mono.ignoreNonQuasiHigherOrder true",
+--       "set_option auto.redMode \"default\""
+--     ]

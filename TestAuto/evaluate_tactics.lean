@@ -6,12 +6,12 @@ open EvalAuto
 #eval evalTacticsAtMathlibHumanTheorems
   { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 4096, .useAesopWithPremises 4096],
     resultFolder := "./EvalTactics",
-    nonterminates := #[], nthreads := 4 }
+    nonterminates := #[], nprocs := 4 }
 
 -- #eval do
 --   let r ← readTacticEvalResult
 --     { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 4096, .useAesopWithPremises 4096], resultFolder := "./Eval",
---       nonterminates := #[], nthreads := 4 }
+--       nonterminates := #[], nprocs := 4 }
 --   let r := (r.map Prod.snd).flatMap id
 --   let r := r.map Prod.snd
 --   IO.println s!"Total : {r.size}"
