@@ -8,7 +8,7 @@ bash elan-init.sh -y
 rm elan-init.sh
 git clone https://github.com/leanprover-community/lean-auto
 # TODO: Use up-to-date version
-cd lean-auto; git checkout 1686968f879f24d312d07ccff7c451871ef1ed4e; cd ..
+cd lean-auto; git checkout ab05ddb590090bcd44a40eeebf42f4d839c84a9c; cd ..
 git clone https://github.com/leanprover-community/duper
 cd duper; git checkout 9cd4d4d1d71034d456d06aef2e4d07c911b88c65; cd ..
 git clone https://github.com/PratherConid/lean-hammertest
@@ -23,7 +23,7 @@ open EvalAuto
 
 #eval evalAutoAtMathlibHumanTheorems
   { maxHeartbeats := 65536, timeout := 10, solverConfig := .native,
-    resultFolder  := \"./EvalAuto\",
+    resultFolder  := \"./EvalAutoNative\",
     nprocs := 64, batchSize := 512,
     nonterminates := #[
       \`\`Differentiable.exists_const_forall_eq_of_bounded,
