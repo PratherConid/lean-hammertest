@@ -58,7 +58,7 @@ import Auto.EvaluateAuto.TestAuto
 open EvalAuto
 
 #eval evalAutoAtMathlibHumanTheorems
-  { maxHeartbeats := 65536, timeout := 10, solverConfig := .tptp .zipperposition "zipperposition",
+  { maxHeartbeats := 65536, timeout := 10, solverConfig := .tptp .zipperposition \"zipperposition\",
     resultFolder  := \"./EvalAutoZipperpn\",
     nprocs := 64, batchSize := 512,
     nonterminates := #[
