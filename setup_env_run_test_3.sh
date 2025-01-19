@@ -2,22 +2,39 @@
 # This script is only compatible with Lean v4.15.0
 # This script is only compatible with Mathlib4 29f9a66d622d9bab7f419120e22bb0d2598676ab, due to 'nonterminates'
 # The number of processes chosen by this script is compatible with Amazon EC2 c5ad.16xlarge
+# This scripts might break when `opam` releases new versions
 
 # Prerequisites
 sudo apt-get update
-yes | sudo apt-get install unzip
+yes | sudo apt-get install unzip build-essential make cmake bubblewrap libgmp3-dev expect pkg-config
 
-# Install z3
-wget https://github.com/Z3Prover/z3/releases/download/z3-4.13.4/z3-4.13.4-x64-glibc-2.35.zip
-unzip -q z3-4.13.4-x64-glibc-2.35.zip -d .
-rm z3-4.13.4-x64-glibc-2.35.zip
-sudo cp ~/z3-4.13.4-x64-glibc-2.35/bin/z3 /usr/bin/z3
-
-# Install cvc5
-wget https://github.com/cvc5/cvc5/releases/download/latest/cvc5-Linux-x86_64-static-2025-01-17-6e83633.zip
-unzip -q cvc5-Linux-x86_64-static-2025-01-17-6e83633.zip -d .
-rm cvc5-Linux-x86_64-static-2025-01-17-6e83633.zip
-sudo cp ~/cvc5-Linux-x86_64-static/bin/cvc5 /usr/bin/cvc5
+# Install zipperposition
+printf "\n" | sudo bash -c "sh <(curl -fsSL https://opam.ocaml.org/install.sh)"
+echo "set timeout -1
+spawn opam init
+expect {
+    \"Sandboxing is not working\"      {send "y"; exp_continue}
+    \"Do you want opam to configure\"  {send "5"}
+}
+expect eof
+" | expect
+opam switch create zipperpn 4.14.0
+opam switch zipperpn
+eval $(opam env)
+echo "set timeout -1
+spawn opam install zipperposition
+expect \"Proceed with\"
+send "y"
+expect eof
+" | expect
+echo "set timeout -1
+spawn opam pin -k git https://github.com/sneeuwballen/zipperposition.git#050072e01d8539f9126993482b595e09f921f66a
+expect \"This will pin the following packages\"
+send "y"
+expect \"Proceed with\"
+send "y"
+expect eof
+" | expect
 
 # Install Lean and Lean libraries
 wget https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh
@@ -33,29 +50,7 @@ cd lean-hammertest
 source $HOME/.elan/env
 lake build
 
-echo "import Mathlib
-import Auto.EvaluateAuto.TestAuto
-
-open EvalAuto
-
-#eval evalAutoAtMathlibHumanTheorems
-  { maxHeartbeats := 65536, timeout := 10, solverConfig := .smt .z3,
-    resultFolder  := \"./EvalAutoZ3\",
-    nprocs := 64, batchSize := 512,
-    nonterminates := #[
-      \`\`Differentiable.exists_const_forall_eq_of_bounded,
-      \`\`uniformContinuous_of_const,
-      \`\`mem_pairSelfAdjointMatricesSubmodule',
-      \`\`mem_selfAdjointMatricesSubmodule,
-      \`\`Equiv.Perm.cycleFactorsFinset_eq_list_toFinset,
-      \`\`Polynomial.IsSplittingField.of_algEquiv,
-      \`\`AffineMap.lineMap_injective,
-      \`\`Subalgebra.restrictScalars_top,
-      \`\`NonUnitalStarAlgebra.inf_toNonUnitalSubalgebra,
-      \`\`StarSubalgebra.inf_toSubalgebra,
-      \`\`NonUnitalStarAlgebra.top_toNonUnitalSubalgebra,
-      \`\`StarSubalgebra.top_toSubalgebra
-    ] }" | lake env lean --stdin
+eval $(opam env)
 
 echo "import Mathlib
 import Auto.EvaluateAuto.TestAuto
@@ -63,8 +58,8 @@ import Auto.EvaluateAuto.TestAuto
 open EvalAuto
 
 #eval evalAutoAtMathlibHumanTheorems
-  { maxHeartbeats := 65536, timeout := 10, solverConfig := .smt .cvc5,
-    resultFolder  := \"./EvalAutoCVC5\",
+  { maxHeartbeats := 65536, timeout := 10, solverConfig := .tptp .zipperposition "zipperposition",
+    resultFolder  := \"./EvalAutoZipperpn\",
     nprocs := 64, batchSize := 512,
     nonterminates := #[
       \`\`Differentiable.exists_const_forall_eq_of_bounded,
