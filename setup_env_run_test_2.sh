@@ -7,17 +7,17 @@
 sudo apt-get update
 yes | sudo apt-get install unzip
 
-# Install cvc5
-wget https://github.com/cvc5/cvc5/releases/download/latest/cvc5-Linux-x86_64-static-2025-01-17-6e83633.zip
-unzip -q cvc5-Linux-x86_64-static-2025-01-17-6e83633.zip -d .
-rm cvc5-Linux-x86_64-static-2025-01-17-6e83633.zip
-sudo cp ~/cvc5-Linux-x86_64-static/bin/cvc5 /usr/bin/cvc5
-
 # Install z3
 wget https://github.com/Z3Prover/z3/releases/download/z3-4.13.4/z3-4.13.4-x64-glibc-2.35.zip
 unzip -q z3-4.13.4-x64-glibc-2.35.zip -d .
 rm z3-4.13.4-x64-glibc-2.35.zip
 sudo cp ~/z3-4.13.4-x64-glibc-2.35/bin/z3 /usr/bin/z3
+
+# Install cvc5
+wget https://github.com/cvc5/cvc5/releases/download/latest/cvc5-Linux-x86_64-static-2025-01-17-6e83633.zip
+unzip -q cvc5-Linux-x86_64-static-2025-01-17-6e83633.zip -d .
+rm cvc5-Linux-x86_64-static-2025-01-17-6e83633.zip
+sudo cp ~/cvc5-Linux-x86_64-static/bin/cvc5 /usr/bin/cvc5
 
 # Install Lean and Lean libraries
 wget https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh
@@ -64,7 +64,7 @@ open EvalAuto
 
 #eval evalAutoAtMathlibHumanTheorems
   { maxHeartbeats := 65536, timeout := 10, solverConfig := .smt .cvc5,
-    resultFolder  := \"./EvalAutoZ3\",
+    resultFolder  := \"./EvalAutoCVC5\",
     nprocs := 64, batchSize := 512,
     nonterminates := #[
       \`\`Differentiable.exists_const_forall_eq_of_bounded,
