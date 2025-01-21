@@ -24,7 +24,7 @@ open EvalAuto
 
 set_option auto.testTactics.ensureAesop true
 set_option auto.testTactics.ensureAuto true
-set_option auto.testTactics.rebindNativeModuleName "Hammertest.DuperInterfaceRebindRaw"
+set_option auto.testTactics.rebindNativeModuleName \"Hammertest.DuperInterfaceRebindRaw\"
 
 #eval evalTacticsAtMathlibHumanTheorems
   { tactics := #[.testUnknownConstant, .useAesopWithPremises 16384, .useAuto .native 10],
