@@ -91,7 +91,7 @@ set_option auto.testTactics.ensureAesop true
 --   let p ← initSrcSearchPath
 --   let m := Std.HashSet.ofList (← allHumanTheorems).toList
 --   let r ← evalTacticsAtModule `Mathlib.Algebra.Group.Defs p (fun ci => m.contains ci.name)
---     { tactics := #[.testUnknownConstant, .useAesopWithPremises 16384, .useAuto .native 10],
+--     { tactics := #[.testUnknownConstant, .useAesopWithPremises 16384, .useAuto true .native 10],
 --       logFile := "evalTacticLog.txt", resultFile := "evalTacticResult.txt"
 --       nonterminates := #[] }
 --   trace[auto.tactic] "{r}"
@@ -103,7 +103,7 @@ set_option auto.testTactics.ensureAesop true
 -- set_option auto.testTactics.ensureAuto true
 -- set_option auto.testTactics.rebindNativeModuleName "Hammertest.DuperInterfaceRebindRaw"
 -- #eval evalTacticsAtMathlibHumanTheorems
---   { tactics := #[.testUnknownConstant, .useAesopWithPremises 16384, .useAuto .native 10], resultFolder := "./Eval",
+--   { tactics := #[.testUnknownConstant, .useAesopWithPremises 16384, .useAuto true .native 10], resultFolder := "./Eval",
 --     nonterminates := #[], nprocs := 8 }
 
 -- #eval runAutoOnConsts
