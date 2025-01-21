@@ -28,17 +28,22 @@ set_option auto.testTactics.rebindNativeModuleName \"Hammertest.DuperInterfaceRe
 
 #eval evalTacticsAtMathlibHumanTheorems
   { tactics := #[.testUnknownConstant, .useAesopWithPremises 16384, .useAuto .native 10],
-    resultFolder := \"./EvalTactics\",
+    resultFolder := \"./EvalAutoAsTactic\",
     nonterminates := #[
-      (.useRfl, \`\`IntermediateField.extendScalars_top),
-      (.useAesop 16384, \`\`IntermediateField.extendScalars_top),
+      (.useAuto .native 10, \`\`Differentiable.exists_const_forall_eq_of_bounded),
+      (.useAuto .native 10, \`\`uniformContinuous_of_const),
+      (.useAuto .native 10, \`\`mem_pairSelfAdjointMatricesSubmodule'),
+      (.useAuto .native 10, \`\`mem_selfAdjointMatricesSubmodule),
+      (.useAuto .native 10, \`\`Equiv.Perm.cycleFactorsFinset_eq_list_toFinset),
+      (.useAuto .native 10, \`\`Polynomial.IsSplittingField.of_algEquiv),
+      (.useAuto .native 10, \`\`AffineMap.lineMap_injective),
+      (.useAuto .native 10, \`\`Subalgebra.restrictScalars_top),
+      (.useAuto .native 10, \`\`NonUnitalStarAlgebra.inf_toNonUnitalSubalgebra),
+      (.useAuto .native 10, \`\`StarSubalgebra.inf_toSubalgebra),
+      (.useAuto .native 10, \`\`NonUnitalStarAlgebra.top_toNonUnitalSubalgebra),
+      (.useAuto .native 10, \`\`StarSubalgebra.top_toSubalgebra),
       (.useAesopWithPremises 16384, \`\`IntermediateField.extendScalars_top),
-      (.useRfl, \`\`IntermediateField.extendScalars_inf),
-      (.useAesop 16384, \`\`IntermediateField.extendScalars_inf),
       (.useAesopWithPremises 16384, \`\`IntermediateField.extendScalars_inf),
-      (.useRfl, \`\`Field.Emb.Cardinal.succEquiv_coherence),
-      (.useAesop 16384, \`\`Field.Emb.Cardinal.succEquiv_coherence),
       (.useAesopWithPremises 16384, \`\`Field.Emb.Cardinal.succEquiv_coherence),
-      (.useAesop 16384, \`\`UniformConvergenceCLM.uniformSpace_eq),
       (.useAesopWithPremises 16384, \`\`UniformConvergenceCLM.uniformSpace_eq)
     ], nprocs := 32 }" | lake env lean --stdin
