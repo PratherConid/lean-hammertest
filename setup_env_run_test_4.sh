@@ -17,37 +17,17 @@ source $HOME/.elan/env
 lake build
 
 echo "import Mathlib
-import Auto.EvaluateAuto.TestAuto
-
-open EvalAuto
-
-#eval evalAutoAtMathlibHumanTheorems
-  { maxHeartbeats := 65536, timeout := 10, solverConfig := .native,
-    resultFolder  := \"./EvalAutoNative\",
-    nprocs := 64, batchSize := 512,
-    nonterminates := #[
-      \`\`Differentiable.exists_const_forall_eq_of_bounded,
-      \`\`uniformContinuous_of_const,
-      \`\`mem_pairSelfAdjointMatricesSubmodule',
-      \`\`mem_selfAdjointMatricesSubmodule,
-      \`\`Equiv.Perm.cycleFactorsFinset_eq_list_toFinset,
-      \`\`Polynomial.IsSplittingField.of_algEquiv,
-      \`\`AffineMap.lineMap_injective,
-      \`\`Subalgebra.restrictScalars_top,
-      \`\`NonUnitalStarAlgebra.inf_toNonUnitalSubalgebra,
-      \`\`StarSubalgebra.inf_toSubalgebra,
-      \`\`NonUnitalStarAlgebra.top_toNonUnitalSubalgebra,
-      \`\`StarSubalgebra.top_toSubalgebra
-    ] }" | lake env lean --stdin
-
-echo "import Mathlib
 import Auto.EvaluateAuto.TestTactics
+import Hammertest.DuperInterfaceRebindRaw
 
 open EvalAuto
 
 set_option auto.testTactics.ensureAesop true
+set_option auto.testTactics.ensureAuto true
+set_option auto.testTactics.rebindNativeModuleName "Hammertest.DuperInterfaceRebindRaw"
+
 #eval evalTacticsAtMathlibHumanTheorems
-  { tactics := #[.testUnknownConstant, .useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 16384, .useAesopWithPremises 16384],
+  { tactics := #[.testUnknownConstant, .useAesopWithPremises 16384, .useAuto .native 10],
     resultFolder := \"./EvalTactics\",
     nonterminates := #[
       (.useRfl, \`\`IntermediateField.extendScalars_top),

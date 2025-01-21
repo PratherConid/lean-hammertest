@@ -1,5 +1,6 @@
 import Mathlib
 import Hammertest.DuperInterface
+import Hammertest.DuperInterfaceRebindRaw
 import Auto.EvaluateAuto.TestAuto
 import Auto.EvaluateAuto.TestTactics
 import Auto.EvaluateAuto.TestTranslation
@@ -48,6 +49,13 @@ set_option trace.auto.eval.printResult true
 
 -- set_option maxHeartbeats 200000000
 -- #eval runAutoOnNamesFile
+--   { solverConfig := .smt .cvc5,
+--     logFile := "evalAutoLog.txt", resultFile := "evalAutoResult.txt",
+--     nonterminates := #[] }
+--   "EvalResults/MathlibNames128.txt"
+
+-- set_option maxHeartbeats 200000000
+-- #eval runAutoOnNamesFile
 --   { solverConfig := .rawNative,
 --     logFile := "evalAutoLog.txt", resultFile := "evalAutoResult.txt",
 --     nonterminates := #[] }
@@ -66,7 +74,7 @@ set_option trace.auto.lamReif.printResult true
 -- Monomorphization
 #check BoxIntegral.Box.dist_le_distortion_mul
 
-set_option auto.evalAuto.ensureAesop true
+set_option auto.testTactics.ensureAesop true
 
 -- #eval @id (CoreM _) do
 --   let p ← initSrcSearchPath
@@ -77,8 +85,25 @@ set_option auto.evalAuto.ensureAesop true
 --       nonterminates := #[] }
 --   trace[auto.tactic] "{r}"
 
+-- set_option auto.testTactics.ensureAuto true
+-- set_option auto.testTactics.rebindNativeModuleName "Hammertest.DuperInterfaceRebindRaw"
+-- #eval @id (CoreM _) do
+--   let p ← initSrcSearchPath
+--   let m := Std.HashSet.ofList (← allHumanTheorems).toList
+--   let r ← evalTacticsAtModule `Mathlib.Algebra.Group.Defs p (fun ci => m.contains ci.name)
+--     { tactics := #[.testUnknownConstant, .useAesopWithPremises 16384, .useAuto .native 10],
+--       logFile := "evalTacticLog.txt", resultFile := "evalTacticResult.txt"
+--       nonterminates := #[] }
+--   trace[auto.tactic] "{r}"
+
 -- #eval evalTacticsAtMathlibHumanTheorems
 --   { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 4096, .useAesopWithPremises 4096], resultFolder := "./Eval",
+--     nonterminates := #[], nprocs := 8 }
+
+-- set_option auto.testTactics.ensureAuto true
+-- set_option auto.testTactics.rebindNativeModuleName "Hammertest.DuperInterfaceRebindRaw"
+-- #eval evalTacticsAtMathlibHumanTheorems
+--   { tactics := #[.testUnknownConstant, .useAesopWithPremises 16384, .useAuto .native 10], resultFolder := "./Eval",
 --     nonterminates := #[], nprocs := 8 }
 
 -- #eval runAutoOnConsts

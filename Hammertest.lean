@@ -1,4 +1,4 @@
 import Mathlib
-import Hammertest.DuperInterface
+import Hammertest.DuperInterfaceRebindRaw
 import Auto.EvaluateAuto.TestAuto
 import Auto.EvaluateAuto.TestTactics
