@@ -136,17 +136,17 @@ set_option auto.testTactics.ensureAesop true
 --   let t := cumulative.foldl Nat.add 0
 --   IO.println s!"cul : {t}"
 
---- #eval do
----   let r ← readEAMHTResult
----     { solverConfig := .native, batchSize := 512
----       resultFolder := "/mnt/d/3_Tmp/EvalAuto", nonterminates := #[], nprocs := 4 }
----   let r := r.map Prod.snd
----   IO.println s!"Total : {r.size}"
----   let cumulative : Array Bool := r.map (fun r =>
----     match r with | Result.success => true | _ => false)
----   let cumulative := cumulative.map (fun b : Bool => if b then 1 else 0)
----   let t := cumulative.foldl Nat.add 0
----   IO.println s!"cul : {t}"
+-- #eval do
+--   let r ← readEAMHTResult
+--     { solverConfig := .native, batchSize := 512
+--       resultFolder := "/mnt/d/3_Tmp/EvalAuto", nonterminates := #[], nprocs := 4 }
+--   let r := r.map Prod.snd
+--   IO.println s!"Total : {r.size}"
+--   let cumulative : Array Bool := r.map (fun r =>
+--     match r with | Result.success => true | _ => false)
+--   let cumulative := cumulative.map (fun b : Bool => if b then 1 else 0)
+--   let t := cumulative.foldl Nat.add 0
+--   IO.println s!"cul : {t}"
 
 -- #eval @id (CoreM _) do
 --   let names ← NameArray.load "EvalResults/MathlibNames128.txt"
@@ -164,3 +164,13 @@ set_option auto.testTactics.ensureAesop true
 --       "set_option auto.mono.ignoreNonQuasiHigherOrder true",
 --       "set_option auto.redMode \"default\""
 --     ]
+
+-- Matroid.Base.insert_dep
+-- Matroid.basis_iff_basis'_subset_ground
+-- Matroid.Basis.basis_subset
+-- Matroid.Basis.dep_of_ssubset
+-- Matroid.Indep.subset_basis'_of_subset
+-- Matroid.Indep.exists_base_subset_union_base
+
+-- TODO: When elaborating identifier `Matroid.not_indep_iff` when proving
+-- `Matroid.Base.insert_dep`, got `unknown level metavariable` error

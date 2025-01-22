@@ -3,29 +3,12 @@
 # This script is only compatible with Mathlib4 29f9a66d622d9bab7f419120e22bb0d2598676ab, due to 'nonterminates'
 # The number of processes chosen by this script is compatible with Amazon EC2 c5ad.16xlarge
 
-# Prerequisites
-sudo apt-get update
-yes | sudo apt-get install unzip
-
-# Install z3
-wget https://github.com/Z3Prover/z3/releases/download/z3-4.13.4/z3-4.13.4-x64-glibc-2.35.zip
-unzip -q z3-4.13.4-x64-glibc-2.35.zip -d .
-rm z3-4.13.4-x64-glibc-2.35.zip
-sudo cp ~/z3-4.13.4-x64-glibc-2.35/bin/z3 /usr/bin/z3
-
-# Install cvc5
-wget https://github.com/cvc5/cvc5/releases/download/latest/cvc5-Linux-x86_64-static-2025-01-17-6e83633.zip
-unzip -q cvc5-Linux-x86_64-static-2025-01-17-6e83633.zip -d .
-rm cvc5-Linux-x86_64-static-2025-01-17-6e83633.zip
-sudo cp ~/cvc5-Linux-x86_64-static/bin/cvc5 /usr/bin/cvc5
-
-# Install Lean and Lean libraries
 wget https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh
 bash elan-init.sh -y
 rm elan-init.sh
 git clone https://github.com/leanprover-community/lean-auto
 # TODO: Use up-to-date version
-cd lean-auto; git checkout b04b3f6c598e12cf6bf16c0076d8d889779e6a1b; cd ..
+cd lean-auto; git checkout 712a38fdf6b4b4567552a356144fd506131cfece; cd ..
 git clone https://github.com/leanprover-community/duper
 cd duper; git checkout 9cd4d4d1d71034d456d06aef2e4d07c911b88c65; cd ..
 git clone https://github.com/PratherConid/lean-hammertest
@@ -34,49 +17,65 @@ source $HOME/.elan/env
 lake build
 
 echo "import Mathlib
-import Auto.EvaluateAuto.TestAuto
+import Auto.EvaluateAuto.TestTactics
+import Hammertest.DuperInterfaceRebindRaw
 
 open EvalAuto
 
-#eval evalAutoAtMathlibHumanTheorems
-  { maxHeartbeats := 65536, timeout := 10, solverConfig := .smt .z3,
-    resultFolder  := \"./EvalAutoZ3\",
-    nprocs := 64, batchSize := 512,
+set_option auto.testTactics.ensureAesop true
+set_option auto.testTactics.ensureAuto true
+set_option auto.testTactics.rebindNativeModuleName \"Hammertest.DuperInterfaceRebindRaw\"
+
+#eval evalTacticsAtMathlibHumanTheorems
+  { tactics := #[.testUnknownConstant, .useAuto true .native 10],
+    resultFolder := \"./EvalAutoAsTactic\",
     nonterminates := #[
-      \`\`Differentiable.exists_const_forall_eq_of_bounded,
-      \`\`uniformContinuous_of_const,
-      \`\`mem_pairSelfAdjointMatricesSubmodule',
-      \`\`mem_selfAdjointMatricesSubmodule,
-      \`\`Equiv.Perm.cycleFactorsFinset_eq_list_toFinset,
-      \`\`Polynomial.IsSplittingField.of_algEquiv,
-      \`\`AffineMap.lineMap_injective,
-      \`\`Subalgebra.restrictScalars_top,
-      \`\`NonUnitalStarAlgebra.inf_toNonUnitalSubalgebra,
-      \`\`StarSubalgebra.inf_toSubalgebra,
-      \`\`NonUnitalStarAlgebra.top_toNonUnitalSubalgebra,
-      \`\`StarSubalgebra.top_toSubalgebra
-    ] }" | lake env lean --stdin
+      (.useAuto true .native 10, \`\`Differentiable.exists_const_forall_eq_of_bounded),
+      (.useAuto true .native 10, \`\`uniformContinuous_of_const),
+      (.useAuto true .native 10, \`\`mem_pairSelfAdjointMatricesSubmodule'),
+      (.useAuto true .native 10, \`\`mem_selfAdjointMatricesSubmodule),
+      (.useAuto true .native 10, \`\`Equiv.Perm.cycleFactorsFinset_eq_list_toFinset),
+      (.useAuto true .native 10, \`\`Polynomial.IsSplittingField.of_algEquiv),
+      (.useAuto true .native 10, \`\`AffineMap.lineMap_injective),
+      (.useAuto true .native 10, \`\`Subalgebra.restrictScalars_top),
+      (.useAuto true .native 10, \`\`NonUnitalStarAlgebra.inf_toNonUnitalSubalgebra),
+      (.useAuto true .native 10, \`\`StarSubalgebra.inf_toSubalgebra),
+      (.useAuto true .native 10, \`\`NonUnitalStarAlgebra.top_toNonUnitalSubalgebra),
+      (.useAuto true .native 10, \`\`StarSubalgebra.top_toSubalgebra)
+    ], nprocs := 32 }" | lake env lean --stdin
 
 echo "import Mathlib
-import Auto.EvaluateAuto.TestAuto
+import Auto.EvaluateAuto.TestTactics
+import Hammertest.DuperInterfaceRebindRaw
 
 open EvalAuto
 
-#eval evalAutoAtMathlibHumanTheorems
-  { maxHeartbeats := 65536, timeout := 10, solverConfig := .smt .cvc5,
-    resultFolder  := \"./EvalAutoCVC5\",
-    nprocs := 64, batchSize := 512,
+set_option auto.testTactics.ensureAesop true
+
+#eval evalTacticsAtMathlibHumanTheorems
+  { tactics := #[.useAesop 16384],
+    resultFolder := \"./EvalAesop\",
     nonterminates := #[
-      \`\`Differentiable.exists_const_forall_eq_of_bounded,
-      \`\`uniformContinuous_of_const,
-      \`\`mem_pairSelfAdjointMatricesSubmodule',
-      \`\`mem_selfAdjointMatricesSubmodule,
-      \`\`Equiv.Perm.cycleFactorsFinset_eq_list_toFinset,
-      \`\`Polynomial.IsSplittingField.of_algEquiv,
-      \`\`AffineMap.lineMap_injective,
-      \`\`Subalgebra.restrictScalars_top,
-      \`\`NonUnitalStarAlgebra.inf_toNonUnitalSubalgebra,
-      \`\`StarSubalgebra.inf_toSubalgebra,
-      \`\`NonUnitalStarAlgebra.top_toNonUnitalSubalgebra,
-      \`\`StarSubalgebra.top_toSubalgebra
-    ] }" | lake env lean --stdin
+      (.useAesop 16384, \`\`IntermediateField.extendScalars_top),
+      (.useAesop 16384, \`\`IntermediateField.extendScalars_inf),
+      (.useAesop 16384, \`\`Field.Emb.Cardinal.succEquiv_coherence),
+      (.useAesop 16384, \`\`UniformConvergenceCLM.uniformSpace_eq)
+    ], nprocs := 32 }" | lake env lean --stdin
+
+echo "import Mathlib
+import Auto.EvaluateAuto.TestTactics
+import Hammertest.DuperInterfaceRebindRaw
+
+open EvalAuto
+
+set_option auto.testTactics.ensureAesop true
+
+#eval evalTacticsAtMathlibHumanTheorems
+  { tactics := #[.useAesopWithPremises 16384],
+    resultFolder := \"./EvalAesopWithPremises\",
+    nonterminates := #[
+      (.useAesopWithPremises 16384, \`\`IntermediateField.extendScalars_top),
+      (.useAesopWithPremises 16384, \`\`IntermediateField.extendScalars_inf),
+      (.useAesopWithPremises 16384, \`\`Field.Emb.Cardinal.succEquiv_coherence),
+      (.useAesopWithPremises 16384, \`\`UniformConvergenceCLM.uniformSpace_eq)
+    ], nprocs := 32 }" | lake env lean --stdin
