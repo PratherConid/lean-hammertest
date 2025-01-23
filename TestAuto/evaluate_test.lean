@@ -150,7 +150,7 @@ set_option auto.testTactics.ensureAesop true
 
 -- #eval @id (CoreM _) do
 --   let names ← NameArray.load "EvalResults/MathlibNames128.txt"
---   evalReduceSize names "EvalReduceSize" 4 (8 * 1024 * 1024) 60
+--   evalReduceSize names .default "EvalReduceDSize" 4 (8 * 1024 * 1024) 60
 
 -- #eval @id (CoreM _) do
 --   let names ← NameArray.load "EvalResults/MathlibNames128.txt"
