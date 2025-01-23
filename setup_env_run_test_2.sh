@@ -93,7 +93,7 @@ set_option auto.testTactics.rebindNativeModuleName \"Hammertest.DuperInterfaceRe
 
 #eval evalTacticsAtMathlibHumanTheorems
   { tactics := #[.testUnknownConstant, .useDuper],
-    resultFolder := \"./EvalAutoNativeAsTactic\",
+    resultFolder := \"./EvalDuperAsTactic\",
     nonterminates := #[
       (.useAuto true .native 10, \`\`Differentiable.exists_const_forall_eq_of_bounded),
       (.useAuto true .native 10, \`\`uniformContinuous_of_const),
