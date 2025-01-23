@@ -8,7 +8,7 @@ bash elan-init.sh -y
 rm elan-init.sh
 git clone https://github.com/leanprover-community/lean-auto
 # TODO: Use up-to-date version
-cd lean-auto; git checkout 712a38fdf6b4b4567552a356144fd506131cfece; cd ..
+cd lean-auto; git checkout b8e7e01bfc7c6a14606f3a3a52808c59bb21426c; cd ..
 git clone https://github.com/leanprover-community/duper
 cd duper; git checkout 9cd4d4d1d71034d456d06aef2e4d07c911b88c65; cd ..
 git clone https://github.com/PratherConid/lean-hammertest
@@ -41,7 +41,12 @@ set_option auto.testTactics.rebindNativeModuleName \"Hammertest.DuperInterfaceRe
       (.useAuto true .native 10, \`\`NonUnitalStarAlgebra.inf_toNonUnitalSubalgebra),
       (.useAuto true .native 10, \`\`StarSubalgebra.inf_toSubalgebra),
       (.useAuto true .native 10, \`\`NonUnitalStarAlgebra.top_toNonUnitalSubalgebra),
-      (.useAuto true .native 10, \`\`StarSubalgebra.top_toSubalgebra)
+      (.useAuto true .native 10, \`\`StarSubalgebra.top_toSubalgebra),
+      (.useAuto true .native 10, \`\`IntermediateField.extendScalars_top),
+      (.useAuto true .native 10, \`\`continuous_of_const),
+      (.useAuto true .native 10, \`\`Polynomial.exists_separable_of_irreducible),
+      (.useAuto true .native 10, \`\`IntermediateField.extendScalars_inf),
+      (.useAuto true .native 10, \`\`IsLocallyConstant.of_constant)
     ], nprocs := 32 }" | lake env lean --stdin
 
 echo "import Mathlib
@@ -53,13 +58,13 @@ open EvalAuto
 set_option auto.testTactics.ensureAesop true
 
 #eval evalTacticsAtMathlibHumanTheorems
-  { tactics := #[.useAesop 16384],
+  { tactics := #[.useAesop 65536],
     resultFolder := \"./EvalAesop\",
     nonterminates := #[
-      (.useAesop 16384, \`\`IntermediateField.extendScalars_top),
-      (.useAesop 16384, \`\`IntermediateField.extendScalars_inf),
-      (.useAesop 16384, \`\`Field.Emb.Cardinal.succEquiv_coherence),
-      (.useAesop 16384, \`\`UniformConvergenceCLM.uniformSpace_eq)
+      (.useAesop 65536, \`\`IntermediateField.extendScalars_top),
+      (.useAesop 65536, \`\`IntermediateField.extendScalars_inf),
+      (.useAesop 65536, \`\`Field.Emb.Cardinal.succEquiv_coherence),
+      (.useAesop 65536, \`\`UniformConvergenceCLM.uniformSpace_eq)
     ], nprocs := 32 }" | lake env lean --stdin
 
 echo "import Mathlib
@@ -71,11 +76,11 @@ open EvalAuto
 set_option auto.testTactics.ensureAesop true
 
 #eval evalTacticsAtMathlibHumanTheorems
-  { tactics := #[.useAesopWithPremises 16384],
+  { tactics := #[.useAesopWithPremises 65536],
     resultFolder := \"./EvalAesopWithPremises\",
     nonterminates := #[
-      (.useAesopWithPremises 16384, \`\`IntermediateField.extendScalars_top),
-      (.useAesopWithPremises 16384, \`\`IntermediateField.extendScalars_inf),
-      (.useAesopWithPremises 16384, \`\`Field.Emb.Cardinal.succEquiv_coherence),
-      (.useAesopWithPremises 16384, \`\`UniformConvergenceCLM.uniformSpace_eq)
+      (.useAesopWithPremises 65536, \`\`IntermediateField.extendScalars_top),
+      (.useAesopWithPremises 65536, \`\`IntermediateField.extendScalars_inf),
+      (.useAesopWithPremises 65536, \`\`Field.Emb.Cardinal.succEquiv_coherence),
+      (.useAesopWithPremises 65536, \`\`UniformConvergenceCLM.uniformSpace_eq)
     ], nprocs := 32 }" | lake env lean --stdin
