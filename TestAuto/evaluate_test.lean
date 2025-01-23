@@ -165,12 +165,20 @@ set_option auto.testTactics.ensureAesop true
 --       "set_option auto.redMode \"default\""
 --     ]
 
--- Matroid.Base.insert_dep
--- Matroid.basis_iff_basis'_subset_ground
--- Matroid.Basis.basis_subset
--- Matroid.Basis.dep_of_ssubset
--- Matroid.Indep.subset_basis'_of_subset
--- Matroid.Indep.exists_base_subset_union_base
-
 -- TODO: When elaborating identifier `Matroid.not_indep_iff` when proving
 -- `Matroid.Base.insert_dep`, got `unknown level metavariable` error
+
+-- Nonterminates when supplying auto with result of Term.exprToSyntax
+-- (.useAuto true .native 10, \`\`IntermediateField.extendScalars_top),
+-- (.useAuto true .native 10, \`\`continuous_of_const),
+-- (.useAuto true .native 10, \`\`Polynomial.exists_separable_of_irreducible),
+-- (.useAuto true .native 10, \`\`IntermediateField.extendScalars_inf),
+-- (.useAuto true .native 10, \`\`IsLocallyConstant.of_constant)
+
+-- #eval do
+--   let w1 ← readETMHTEvaluateFiles
+--       { tactics := #[.useRfl, .useAesopWithPremises 4096, .useAuto true .native 10],
+--         resultFolder := "/mnt/d/3_Tmp/Eval_3/EvalAutoAsTactic", nonterminates := #[], nprocs := 4 }
+--   let hs := Std.HashSet.ofArray (w1.snd.map Prod.fst)
+--   let q := w1.fst.filter (fun n => !hs.contains n)
+--   IO.println q
