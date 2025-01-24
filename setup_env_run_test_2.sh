@@ -95,9 +95,19 @@ set_option auto.testTactics.rebindNativeModuleName \"Hammertest.DuperInterfaceRe
   { tactics := #[.testUnknownConstant, .useDuper],
     resultFolder := \"./EvalDuperAsTactic\",
     nonterminates := #[
-      (.useDuper, \`\`AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred),
-      (.useDuper, \`\`VectorFourier.fourierPowSMulRight_eq_comp),
-      (.useDuper, \`\`cross_cross)
+      (.useDuper, \`\`Differentiable.exists_const_forall_eq_of_bounded),
+      (.useDuper, \`\`uniformContinuous_of_const),
+      (.useDuper, \`\`mem_pairSelfAdjointMatricesSubmodule'),
+      (.useDuper, \`\`mem_selfAdjointMatricesSubmodule),
+      (.useDuper, \`\`Equiv.Perm.cycleFactorsFinset_eq_list_toFinset),
+      (.useDuper, \`\`Polynomial.IsSplittingField.of_algEquiv),
+      (.useDuper, \`\`AffineMap.lineMap_injective),
+      (.useDuper, \`\`Subalgebra.restrictScalars_top),
+      (.useDuper, \`\`NonUnitalStarAlgebra.inf_toNonUnitalSubalgebra),
+      (.useDuper, \`\`StarSubalgebra.inf_toSubalgebra),
+      (.useDuper, \`\`NonUnitalStarAlgebra.top_toNonUnitalSubalgebra),
+      (.useDuper, \`\`StarSubalgebra.top_toSubalgebra)
     ],
-    timeLimitS := .some 7200,
+    timeLimitS := .some (4 * 3600),
+    memoryLimitKb := .some (16 * 1024 * 1024),
     nprocs := 32 }" | lake env lean --stdin
