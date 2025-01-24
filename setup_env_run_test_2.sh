@@ -8,7 +8,7 @@ bash elan-init.sh -y
 rm elan-init.sh
 git clone https://github.com/leanprover-community/lean-auto
 # TODO: Use up-to-date version
-cd lean-auto; git checkout 5d1ff250315010b9380acf6f39202c6e2dbd1855; cd ..
+cd lean-auto; git checkout 3da660f5762242b94413ff2967f488dd8a3aefe1; cd ..
 git clone https://github.com/leanprover-community/duper
 cd duper; git checkout 9cd4d4d1d71034d456d06aef2e4d07c911b88c65; cd ..
 git clone https://github.com/PratherConid/lean-hammertest
@@ -95,16 +95,9 @@ set_option auto.testTactics.rebindNativeModuleName \"Hammertest.DuperInterfaceRe
   { tactics := #[.testUnknownConstant, .useDuper],
     resultFolder := \"./EvalDuperAsTactic\",
     nonterminates := #[
-      (.useAuto true .native 10, \`\`Differentiable.exists_const_forall_eq_of_bounded),
-      (.useAuto true .native 10, \`\`uniformContinuous_of_const),
-      (.useAuto true .native 10, \`\`mem_pairSelfAdjointMatricesSubmodule'),
-      (.useAuto true .native 10, \`\`mem_selfAdjointMatricesSubmodule),
-      (.useAuto true .native 10, \`\`Equiv.Perm.cycleFactorsFinset_eq_list_toFinset),
-      (.useAuto true .native 10, \`\`Polynomial.IsSplittingField.of_algEquiv),
-      (.useAuto true .native 10, \`\`AffineMap.lineMap_injective),
-      (.useAuto true .native 10, \`\`Subalgebra.restrictScalars_top),
-      (.useAuto true .native 10, \`\`NonUnitalStarAlgebra.inf_toNonUnitalSubalgebra),
-      (.useAuto true .native 10, \`\`StarSubalgebra.inf_toSubalgebra),
-      (.useAuto true .native 10, \`\`NonUnitalStarAlgebra.top_toNonUnitalSubalgebra),
-      (.useAuto true .native 10, \`\`StarSubalgebra.top_toSubalgebra)
-    ], nprocs := 32 }" | lake env lean --stdin
+      (.useDuper, \`\`AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred),
+      (.useDuper, \`\`VectorFourier.fourierPowSMulRight_eq_comp),
+      (.useDuper, \`\`cross_cross)
+    ],
+    timeLimitS := .some 7200,
+    nprocs := 32 }" | lake env lean --stdin
