@@ -149,8 +149,8 @@ set_option auto.testTactics.ensureAesop true
 --   IO.println s!"cul : {t}"
 
 -- #eval @id (CoreM _) do
---   let names ← NameArray.load "EvalResults/MathlibNames128.txt"
---   evalReduceSize names .default "EvalReduceDSize" 4 (8 * 1024 * 1024) 60
+--   let names ← NameArray.load "EvalResults/MathlibNames512.txt"
+--   evalReduceSize names .default "EvalReduceDSize" 16 (8 * 1024 * 1024) 120
 
 -- #eval @id (CoreM _) do
 --   let names ← NameArray.load "EvalResults/MathlibNames128.txt"
@@ -182,3 +182,24 @@ set_option auto.testTactics.ensureAesop true
 --   let hs := Std.HashSet.ofArray (w1.snd.map Prod.fst)
 --   let q := w1.fst.filter (fun n => !hs.contains n)
 --   IO.println q
+
+/-
+
+import Mathlib
+import Hammertest.DuperInterface
+import Hammertest.DuperInterfaceRebindRaw
+import Auto.EvaluateAuto.TestAuto
+import Auto.EvaluateAuto.TestTactics
+import Auto.EvaluateAuto.TestTranslation
+
+open Lean Meta Elab Auto EvalAuto
+
+attribute [rebind Auto.Native.solverFunc] Auto.duperRaw
+set_option trace.auto.tactic true
+set_option trace.auto.eval.printResult true
+
+#eval @id (CoreM _) do
+  let names ← NameArray.load "EvalResults/MathlibNames512.txt"
+  evalReduceSize names .default "EvalReduceDSize" 16 (8 * 1024 * 1024) 120
+
+-/
