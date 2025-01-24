@@ -25,7 +25,7 @@ bash elan-init.sh -y
 rm elan-init.sh
 git clone https://github.com/leanprover-community/lean-auto
 # TODO: Use up-to-date version
-cd lean-auto; git checkout 3da660f5762242b94413ff2967f488dd8a3aefe1; cd ..
+cd lean-auto; git checkout 6716ae96fb5a9489f1bff29cbc82b81e8f8afd7e; cd ..
 git clone https://github.com/leanprover-community/duper
 cd duper; git checkout 9cd4d4d1d71034d456d06aef2e4d07c911b88c65; cd ..
 git clone https://github.com/PratherConid/lean-hammertest
