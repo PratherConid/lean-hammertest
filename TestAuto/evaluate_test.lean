@@ -204,25 +204,15 @@ set_option trace.auto.eval.printResult true
 
 -/
 
--- #eval @id (CoreM _) do
---   let result ← readEvalReduceSizeResult "/mnt/d/3_Tmp/Eval_2/EvalReduceDSize"
---   let fails := result.filterMap (fun (_, r) =>
---     match r with
---     | Except.error e => .some e
---     | _ => .none)
---   let failsTally := Auto.tallyArrayHashable fails
---   IO.println s!"#Fails: {fails.size}"
---   IO.println failsTally
---   let sizeCmp := result.filterMap (fun (name, e) =>
---     match e with
---     | Except.ok n => .some (name, n)
---     | _ => .none)
---   let sizeCmp ← sizeCmp.mapM (fun (name, n) => do
---     let .some ci := (← getEnv).find? name
---       | throwError "Unexpected error"
---     return (Expr.sizeWithoutSharing ci.type, n))
---   let sumArr (arr : Array Nat) : Nat := Array.foldl Nat.add 0 arr
---   let avgBefore := Float.ofNat (sumArr (sizeCmp.map Prod.fst)) / (Float.ofNat sizeCmp.size)
---   let avgAfter := Float.ofNat (sumArr (sizeCmp.map Prod.snd)) / (Float.ofNat sizeCmp.size)
---   IO.println s!"Successes : {sizeCmp.size}"
---   IO.println s!"Avg size, before : {avgBefore}, after : {avgAfter}"
+/-
+
+import Mathlib
+import Auto
+
+open Lean Auto EvalAuto
+
+#eval @id (CoreM _) do
+  let names ← NameArray.load "EvalResults/MathlibNames512.txt"
+  evalReduceSize names .default "EvalReduceDSize" 16 (8 * 1024 * 1024) 120
+
+-/

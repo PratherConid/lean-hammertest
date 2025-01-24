@@ -1,4 +1,5 @@
 import Lean
+import Mathlib
 import Auto.EvaluateAuto.TestAuto
 import Auto.EvaluateAuto.TestTactics
 import Auto.EvaluateAuto.TestTranslation
@@ -54,3 +55,33 @@ def auto : CoreM (Array (Name × Result)) := do
 --   let hcumulative := Std.HashSet.ofArray cumulative
 --   let auniq := a.filter (fun w => Result.concise (Prod.snd w) == "S" && !hcumulative.contains (Prod.fst w))
 --   IO.println s!"auniq : {auniq.size}"
+
+
+def analyzeEvalReduceResult (path : String) : CoreM Unit := do
+  let result ← readEvalReduceSizeResult path
+  let fails := result.filterMap (fun (_, r) =>
+    match r with
+    | Except.error e => .some e
+    | _ => .none)
+  let failsTally := Auto.tallyArrayHashable fails
+  IO.println s!"#Fails: {fails.size}"
+  IO.println failsTally
+  let sizeCmp := result.filterMap (fun (name, e) =>
+    match e with
+    | Except.ok n => .some (name, n)
+    | _ => .none)
+  let sizeCmp ← sizeCmp.mapM (fun (name, n) => do
+    let .some ci := (← getEnv).find? name
+      | throwError "Unexpected error"
+    return (Expr.sizeWithoutSharing ci.type, n))
+  let sumArr (arr : Array Nat) : Nat := Array.foldl Nat.add 0 arr
+  let avgArr (arr : Array Nat) : Float := Float.ofNat (sumArr arr) / (Float.ofNat arr.size)
+  let avgBefore := avgArr (sizeCmp.map Prod.fst)
+  let avgAfter := avgArr (sizeCmp.map Prod.snd)
+  let incTimes := sizeCmp.map (fun (before, after) => Float.ofNat after / Float.ofNat before)
+  let avgInc := (Array.foldl Float.add 0 incTimes) / Float.ofNat incTimes.size
+  IO.println s!"Successes : {sizeCmp.size}"
+  IO.println s!"Avg size, before : {avgBefore}, after : {avgAfter}, inc : {avgInc}"
+
+#eval analyzeEvalReduceResult "/mnt/d/3_Tmp/Eval_2/EvalReduceRSize"
+#eval analyzeEvalReduceResult "/mnt/d/3_Tmp/Eval_2/EvalReduceDSize"
