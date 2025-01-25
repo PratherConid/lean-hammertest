@@ -42,7 +42,7 @@ bash elan-init.sh -y
 rm elan-init.sh
 git clone https://github.com/leanprover-community/lean-auto
 # TODO: Use up-to-date version
-cd lean-auto; git checkout b7c37539d335c80ca10f288750e31519292bc430; cd ..
+cd lean-auto; git checkout 480cdddd328861561dd452e68396291055b968f3; cd ..
 git clone https://github.com/leanprover-community/duper
 cd duper; git checkout 9cd4d4d1d71034d456d06aef2e4d07c911b88c65; cd ..
 git clone https://github.com/PratherConid/lean-hammertest
@@ -51,30 +51,6 @@ source $HOME/.elan/env
 lake build
 
 eval $(opam env)
-
-echo "import Mathlib
-import Auto.EvaluateAuto.TestAuto
-
-open EvalAuto
-
-#eval evalAutoAtMathlibHumanTheorems
-  { maxHeartbeats := 65536, timeout := 10, solverConfig := .tptp .zipperposition \"zipperposition\",
-    resultFolder  := \"./EvalAutoZipperpn\",
-    nprocs := 64, batchSize := 512,
-    nonterminates := #[
-      \`\`Differentiable.exists_const_forall_eq_of_bounded,
-      \`\`uniformContinuous_of_const,
-      \`\`mem_pairSelfAdjointMatricesSubmodule',
-      \`\`mem_selfAdjointMatricesSubmodule,
-      \`\`Equiv.Perm.cycleFactorsFinset_eq_list_toFinset,
-      \`\`Polynomial.IsSplittingField.of_algEquiv,
-      \`\`AffineMap.lineMap_injective,
-      \`\`Subalgebra.restrictScalars_top,
-      \`\`NonUnitalStarAlgebra.inf_toNonUnitalSubalgebra,
-      \`\`StarSubalgebra.inf_toSubalgebra,
-      \`\`NonUnitalStarAlgebra.top_toNonUnitalSubalgebra,
-      \`\`StarSubalgebra.top_toSubalgebra
-    ] }" | lake env lean --stdin
 
 echo "import Mathlib
 import Auto.EvaluateAuto.TestTactics

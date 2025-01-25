@@ -205,14 +205,18 @@ set_option trace.auto.eval.printResult true
 -/
 
 /-
+#eval gatherETMHTResult
+  { tactics := #[.testUnknownConstant, .useAuto true (.smt .z3) 10],
+    resultFolder := "/mnt/d/3_Tmp/Eval_2/EvalTactics",
+    nonterminates := #[],
+    nprocs := 32 }
+-/
 
-import Mathlib
-import Auto
-
-open Lean Auto EvalAuto
-
+/-
 #eval @id (CoreM _) do
-  let names ← NameArray.load "EvalResults/MathlibNames512.txt"
-  evalReduceSize names .default "EvalReduceDSize" 16 (8 * 1024 * 1024) 120
-
+  let w ← readEvalTacticsAtModuleResult "/mnt/d/3_Tmp/Eval_2/EvalTactics/gatheredResult"
+  let ae := w.filter (fun (name, r) =>
+    (Prod.fst (r.get! 0)).concise == "S" && (Prod.fst (r.get! 0)).concise == "S")
+  IO.println w.size
+  IO.println ae.size
 -/
