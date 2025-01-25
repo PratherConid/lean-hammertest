@@ -15,8 +15,8 @@ sudo cp ~/z3-4.13.4-x64-glibc-2.35/bin/z3 /usr/bin/z3
 
 # Install cvc5
 wget https://github.com/cvc5/cvc5/releases/download/cvc5-1.2.0/cvc5-Linux-x86_64-static.zip
-unzip -q cvc5-Linux-x86_64-static-2025-01-17-6e83633.zip -d .
-rm cvc5-Linux-x86_64-static-2025-01-17-6e83633.zip
+unzip -q cvc5-Linux-x86_64-static.zip -d .
+rm cvc5-Linux-x86_64-static.zip
 sudo cp ~/cvc5-Linux-x86_64-static/bin/cvc5 /usr/bin/cvc5
 
 # Install Lean and Lean libraries
