@@ -78,45 +78,6 @@ def saveAllResults (path : String) : CoreM Unit := do
     let resultStrs := result.map (fun (r, time, hb) => s!"{r.concise} {time} {hb}")
     fhandle.putStrLn s!"{idx} {resultStrs} {Name.uniqRepr name}"
 
--- #eval saveAllResults "/mnt/d/3_Tmp/Eval_2/allResults"
-
--- #eval @id (CoreM _) do
---   let aAll : Array (Name × Result) ← auto
---   let tcAll : Array (Name × Array Result) ← tactics
---   let tu : Array Name := (tcAll.filter (fun (_, rs) =>
---     match rs[0]? with | .some Result.success => true | _ => false)).map Prod.fst
---   let tcAll := tcAll.map (fun (n, rs) => (n, rs[1:].toArray))
---   let htu := Std.HashSet.ofArray tu
---   let aPre := aAll.filter (fun w => htu.contains (Prod.fst w))
---   let htu := Std.HashSet.ofArray (aPre.map Prod.fst)
---   let tc := tcAll.filter (fun w => htu.contains (Prod.fst w))
---   let htu := Std.HashSet.ofArray (tc.map Prod.fst)
---   let a := aPre.filter (fun w => htu.contains (Prod.fst w))
---   IO.println "EvalAutoResult"
---   IO.println aAll.size
---   IO.println a.size
---   IO.println (a.filter (fun w => Result.concise (Prod.snd w) == "S")).size
---   IO.println "EvalTacticsResult"
---   IO.println tcAll.size
---   let tc := tcAll.filter (fun w => htu.contains (Prod.fst w))
---   IO.println tc.size
---   for idx in [0:5] do
---     let t := tc.map (fun r => match (Prod.snd r)[idx]! with | Result.success => 1 | _ => 0)
---     let t := t.foldl Nat.add 0
---     IO.println s!"{idx} : {t}"
---   let cumulative : Array Name := (tc.filter (fun s => Array.any (Prod.snd s) (
---      fun r => match r with | Result.success => true | _ => false))).map Prod.fst
---   IO.println s!"cul : {cumulative.size}"
---   let culaesop : Array Name := (tc.filter (fun s =>
---     match (Prod.snd s)[3]?, (Prod.snd s)[4]? with
---     | .some Result.success, _ => true
---     | _, .some Result.success => true
---     | _, _ => false)).map Prod.fst
---   IO.println s!"culaesop : {culaesop.size}"
---   let hcumulative := Std.HashSet.ofArray cumulative
---   let auniq := a.filter (fun w => Result.concise (Prod.snd w) == "S" && !hcumulative.contains (Prod.fst w))
---   IO.println s!"auniq : {auniq.size}"
-
 def sumNatArr (arr : Array Nat) : Nat := Array.foldl Nat.add 0 arr
 
 def sumFloatArr (arr : Array Float) : Float := Array.foldl Float.add 0 arr
@@ -197,3 +158,11 @@ def analyzeEvalMonoSizeResult (path : String) := do
 --     if (Prod.fst (r.get! 1)).concise == "S" then .some n else .none)
 --   let hs := hs.insertMany successes
 --   IO.println hs.size
+
+-- #eval @id (CoreM _) do
+--   let (names, all) ← allResults
+--   let mut ret := #[]
+--   for (name, res) in all do
+--     if (Prod.fst (res.get! 6)).concise == "S" && (Prod.fst (res.get! 9)).concise != "S" then
+--       ret := ret.push name
+--   IO.println ret.size
