@@ -58,8 +58,16 @@ set_option trace.auto.eval.printResult true
 -- #eval runAutoOnNamesFile
 --   { solverConfig := .rawNative,
 --     logFile := "evalAutoLog.txt", resultFile := "evalAutoResult.txt",
---     nonterminates := #[] }
---   "EvalResults/MathlibNames128.txt"
+--     nonterminates := #[
+--      ``CategoryTheory.Functor.RightExtension.precomp_obj_hom_app,
+--      ``NormedSpace.dual_def,
+--      ``MeasureTheory.condexpL1CLM_lpMeas,
+--      ``AlgebraicGeometry.Scheme.app_eq,
+--      ``EuclideanGeometry.eq_orthogonalProjection_of_eq_subspace,
+--      ``Sym.instSubsingleton,
+--      ``LinearMap.IsSymm.tmul
+--     ] }
+--   "EvalResults/MathlibNames512.txt"
 
 set_option trace.auto.mono true
 set_option trace.auto.lamReif.printResult true

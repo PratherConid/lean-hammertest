@@ -78,6 +78,8 @@ def saveAllResults (path : String) : CoreM Unit := do
     let resultStrs := result.map (fun (r, time, hb) => s!"{r.concise} {time} {hb}")
     fhandle.putStrLn s!"{idx} {resultStrs} {Name.uniqRepr name}"
 
+-- #eval saveAllResults "/mnt/d/3_Tmp/Eval_2/allResults"
+
 def sumNatArr (arr : Array Nat) : Nat := Array.foldl Nat.add 0 arr
 
 def sumFloatArr (arr : Array Float) : Float := Array.foldl Float.add 0 arr
