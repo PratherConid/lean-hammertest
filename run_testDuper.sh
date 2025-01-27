@@ -14,7 +14,7 @@ set_option auto.mono.ignoreNonQuasiHigherOrder true
 set_option maxHeartbeats 200000000
 #eval runAutoOnNamesFile
   { solverConfig := .native, maxHeartbeats := 65536,
-    logFile := \"evalAutoNativeSS.log\", resultFile := \"evalAutoNativeSS.result\",
+    logFile := \"EvalDuperSS/evalAutoNativeSS.log\", resultFile := \"EvalDuperSS/evalAutoNativeSS.result\",
     nonterminates := #[] }
   \"EvalResults/MathlibNames512.txt\"" | lake env lean --stdin
 
@@ -31,7 +31,7 @@ set_option trace.auto.eval.printResult true
 set_option maxHeartbeats 200000000
 #eval runAutoOnNamesFile
   { solverConfig := .rawNative,
-    logFile := \"evalAutoRawNativeSS.log\", resultFile := \"evalAutoRawNativeSS.result\",
+    logFile := \"EvalDuperSS/evalAutoRawNativeSS.log\", resultFile := \"EvalDuperSS/evalAutoRawNativeSS.result\",
     nonterminates := #[
       \`\`CategoryTheory.Functor.RightExtension.precomp_obj_hom_app,
       \`\`NormedSpace.dual_def,
