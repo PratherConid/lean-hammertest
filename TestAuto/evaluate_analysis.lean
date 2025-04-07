@@ -47,20 +47,21 @@ def allResults : CoreM (Array String × Array (Name × Array (Result × Nat × N
   let az := Std.HashMap.ofList (← autoZ3AsTactic).toList
   let ac := Std.HashMap.ofList (← autoCVC5AsTactic).toList
   let azp := Std.HashMap.ofList (← autoZipperpnAsTactic).toList
-  let names := Array.foldl
-    (fun a b => a.filter b.contains)
-    (tt.toArray.map Prod.fst) #[an, az, ac, azp]
+  let namesets := #[tt, an, az, ac, azp].map (fun hmap => Std.HashSet.ofArray (hmap.toArray.map Prod.fst))
+  let names := Array.foldl (fun a b => Auto.mergeHashSet a b) Std.HashSet.empty namesets
+  let names := names.toArray
   let mut ret := #[]
+  let missingException : Exception := .error .missing m!"Not found in result file"
+  let mR := (.exception missingException, 0, 0)
   for name in names do
-    let .some ntt := tt.get? name
+    let ntt := tt.getD name #[mR, mR, mR, mR, mR, mR]
+    let #[_, nan] := an.getD name #[mR, mR]
       | throwError "{decl_name%} :: Unexpected result"
-    let .some #[_, nan] := an.get? name
+    let #[_, naz] := az.getD name #[mR, mR]
       | throwError "{decl_name%} :: Unexpected result"
-    let .some #[_, naz] := az.get? name
+    let #[_, nac] := ac.getD name #[mR, mR]
       | throwError "{decl_name%} :: Unexpected result"
-    let .some #[_, nac] := ac.get? name
-      | throwError "{decl_name%} :: Unexpected result"
-    let .some #[_, nazp] := azp.get? name
+    let #[_, nazp] := azp.getD name #[mR, mR]
       | throwError "{decl_name%} :: Unexpected result"
     ret := ret.push (name, ntt ++ #[nan, naz, nac, nazp])
   let tactics := #[
