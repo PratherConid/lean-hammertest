@@ -111,8 +111,8 @@ set_option auto.testTactics.ensureAesop true
 -- set_option auto.testTactics.ensureAuto true
 -- set_option auto.testTactics.rebindNativeModuleName "Hammertest.DuperInterfaceRebindRaw"
 -- #eval evalTacticsAtMathlibHumanTheorems
---   { tactics := #[.testUnknownConstant, .useAesopWithPremises 65536, .useAuto true .native 10], resultFolder := "./Eval",
---     nonterminates := #[], nprocs := 8 }
+--   { tactics := #[.testUnknownConstant, .useAuto true (.smt .z3) 10], resultFolder := "./EvalAutoZ3AsTactic",
+--     nonterminates := #[], nprocs := 4 }
 
 -- #eval runAutoOnConsts
 --   { solverConfig := .native, maxHeartbeats := 65536,
