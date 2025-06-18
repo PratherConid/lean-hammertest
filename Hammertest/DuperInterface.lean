@@ -1,5 +1,5 @@
-import Auto.Tactic
 import Duper.Tactic
+import Auto.Tactic
 
 open Lean Auto
 
