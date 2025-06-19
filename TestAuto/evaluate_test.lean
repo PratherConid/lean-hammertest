@@ -85,9 +85,8 @@ set_option trace.auto.lamReif.printResult true
 set_option auto.testTactics.ensureAesop true
 
 -- #eval @id (CoreM _) do
---   let p ← initSrcSearchPath
 --   let m := Std.HashSet.ofList (← allHumanTheorems).toList
---   let r ← evalTacticsAtModule `Mathlib.Algebra.Group.Defs p (fun ci => m.contains ci.name)
+--   let r ← evalTacticsAtModule `Mathlib.Algebra.Group.Defs (fun ci => m.contains ci.name)
 --     { tactics := #[.useRfl, .useSimpAll, .useSimpAllWithPremises, .useAesop 65536, .useAesopWithPremises 65536],
 --       logFile := "evalTacticLog.txt", resultFile := "evalTacticResult.txt"
 --       nonterminates := #[] }
@@ -96,9 +95,8 @@ set_option auto.testTactics.ensureAesop true
 -- set_option auto.testTactics.ensureAuto true
 -- set_option auto.testTactics.rebindNativeModuleName "Hammertest.DuperInterfaceRebindRaw"
 -- #eval @id (CoreM _) do
---   let p ← initSrcSearchPath
 --   let m := Std.HashSet.ofList (← allHumanTheorems).toList
---   let r ← evalTacticsAtModule `Mathlib.Algebra.Group.Defs p (fun ci => m.contains ci.name)
+--   let r ← evalTacticsAtModule `Mathlib.Algebra.Group.Defs (fun ci => m.contains ci.name)
 --     { tactics := #[.testUnknownConstant, .useAesopWithPremises 65536, .useAuto true .native 10],
 --       logFile := "evalTacticLog.txt", resultFile := "evalTacticResult.txt"
 --       nonterminates := #[] }
