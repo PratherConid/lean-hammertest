@@ -1,4 +1,5 @@
 import Mathlib.Data.Complex.Exponential
+import Mathlib.Data.Complex.Trigonometric
 import Mathlib.Data.Complex.Module
 import Mathlib.Data.Real.Basic
 import Mathlib.Data.Set.Lattice
@@ -89,14 +90,14 @@ set_option auto.mono.ciInstDefEq.mode "reducible" in
 example (a b c d : ℝ) (h1 : a < b) :
   Set.Icc a b ⊆ Set.Ico c d ↔ c ≤ a ∧ b < d := by
   rw [Set.subset_def]
-  auto [Set.mem_Icc, Set.mem_Ico, @le_trans, @le_total, @lt_iff_not_le, h1]
+  auto [Set.mem_Icc, Set.mem_Ico, @le_trans, @le_total, @lt_iff_not_ge, h1]
 
 set_option auto.native false in
 set_option trace.auto.smt.result true in
 set_option auto.mono.ciInstDefEq.mode "reducible" in
 example (a b c d : ℝ) (h1 : a < b) : Set.Icc a b ⊆ Set.Ico c d ↔ c ≤ a ∧ b < d := by
   rw [Set.subset_def]
-  auto [Set.mem_Icc, Set.mem_Ico, @le_trans, @le_total, @lt_iff_not_le, h1]
+  auto [Set.mem_Icc, Set.mem_Ico, @le_trans, @le_total, @lt_iff_not_ge, h1]
 
 set_option auto.native false in
 set_option trace.auto.lamReif.printValuation true in
@@ -214,7 +215,7 @@ section ShortFive
 open Function
 
 structure is_short_exact {A B C : Type _} [AddCommGroup A] [AddCommGroup B] [AddCommGroup C]
-    (f : A → B) (g : B → C) :=
+    (f : A → B) (g : B → C) where
   (inj       : Injective f)
   (im_in_ker : ∀ a : A, g (f a) = 0)
   (ker_in_im : ∀ b : B, g b = 0 → ∃ a : A, f a = b)
