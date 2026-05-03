@@ -1,4 +1,5 @@
 import Hammertest.DuperInterface
+import Mathlib
 import Duper.TPTP
 
 -- Standard Preprocessing Configs

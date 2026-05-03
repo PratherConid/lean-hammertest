@@ -9,7 +9,6 @@ attribute [rebind Auto.Native.solverFunc] Auto.duperRaw
 
 set_option profiler true
 set_option auto.optimizeCheckerProof false
-set_option compiler.enableNew false
 
 set_option auto.native true
 

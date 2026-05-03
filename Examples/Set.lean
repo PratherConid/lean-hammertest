@@ -4,7 +4,6 @@ and then using first-order logic.
 
 These are adapted from Mathematics in Lean. The relevant definitions are in the #check commands.
 -/
-import Mathlib.Data.Nat.Prime
 import Mathlib.Data.Set.Lattice
 import Hammertest.DuperInterface
 
@@ -14,7 +13,7 @@ open Set
 set_option trace.auto.tptp.printQuery true
 set_option trace.auto.tptp.result true
 set_option auto.tptp.solver.name "zeport-fo"
-set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio"
+set_option auto.tptp.zeport.path "/home/indprinciples/Programs/zipperposition/portfolio"
 -- Standard SMT Configs
 set_option trace.auto.smt.printCommands true
 set_option trace.auto.smt.result true
@@ -268,3 +267,4 @@ example : ⋂₀ s = ⋂ t ∈ s, t := by
   sorry
 
 end
+-/

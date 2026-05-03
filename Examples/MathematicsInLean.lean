@@ -1,6 +1,5 @@
 import Mathlib.Tactic
 import Mathlib.Util.Delaborators
-import Mathlib.Data.Nat.Parity
 import Hammertest.DuperInterface
 
 set_option warningAsError false
@@ -11,7 +10,7 @@ set_option auto.redMode "reducible"
 set_option trace.auto.tptp.printQuery true
 set_option trace.auto.tptp.result true
 set_option auto.tptp.solver.name "zeport-lams"
-set_option auto.tptp.zeport.path "/home/indprinciple/Programs/zipperposition/portfolio"
+set_option auto.tptp.zeport.path "/home/indprinciples/Programs/zipperposition/portfolio"
 -- Standard SMT Configs
 set_option trace.auto.smt.printCommands true
 set_option trace.auto.smt.result true
@@ -185,9 +184,9 @@ namespace Basics
 
   theorem add_zero.auto (a : R) : a + 0 = a := by auto [add_comm, zero_add]
 
-  theorem add_right_neg (a : R) : a + -a = 0 := by rw [add_comm, add_left_neg]
+  theorem add_right_neg (a : R) : a + -a = 0 := by rw [add_neg_cancel]
 
-  theorem add_right_neg.auto (a : R) : a + -a = 0 := by auto [add_comm, add_left_neg]
+  theorem add_right_neg.auto (a : R) : a + -a = 0 := by auto [add_neg_cancel]
 
   end MyRing
 
@@ -195,10 +194,10 @@ namespace Basics
   variable {R : Type*} [Ring R]
 
   theorem neg_add_cancel_left (a b : R) : -a + (a + b) = b := by
-    rw [← add_assoc, add_left_neg, zero_add]
+    rw [← add_assoc, add_comm _ a, add_neg_cancel, zero_add]
 
   theorem neg_add_cancel_left.auto (a b : R) : -a + (a + b) = b := by
-    auto [add_assoc, add_left_neg, zero_add]
+    auto [add_assoc, add_neg_cancel, zero_add]
 
   theorem add_neg_cancel_right (a b : R) : a + b + -b = a := by
     rw [add_assoc, add_right_neg, add_zero]
@@ -256,10 +255,10 @@ namespace Basics
 
   theorem neg_neg (a : R) : - -a = a := by
     apply neg_eq_of_add_eq_zero
-    rw [add_left_neg]
+    rw [add_comm, add_neg_cancel]
 
   theorem neg_neg.auto (a : R) : - -a = a := by
-    auto [neg_eq_of_add_eq_zero, add_left_neg]
+    auto [neg_eq_of_add_eq_zero, add_comm, add_neg_cancel]
 
   end MyRing
 
@@ -275,7 +274,7 @@ namespace Basics
   theorem one_add_one_eq_two : 1 + 1 = (2 : R) := by
     norm_num
 
-  theorem one_add_one_eq_two.auto : 1 + 1 = (2 : R) := autoFailSorry _
+  theorem one_add_one_eq_two.auto : 1 + 1 = (2 : R) := autoFailSorry _ true
 
   theorem two_mul (a : R) : 2 * a = a + a := by
     rw [← one_add_one_eq_two, add_mul, one_mul]
@@ -292,25 +291,25 @@ namespace Basics
 
   theorem mul_right_inv (a : G) : a * a⁻¹ = 1 := by
     have h : (a * a⁻¹)⁻¹ * (a * a⁻¹ * (a * a⁻¹)) = 1 := by
-      rw [mul_assoc, ← mul_assoc a⁻¹ a, mul_left_inv, one_mul, mul_left_inv]
-    rw [← h, ← mul_assoc, mul_left_inv, one_mul]
+      rw [mul_assoc, ← mul_assoc a⁻¹ a, inv_mul_cancel, one_mul, inv_mul_cancel]
+    rw [← h, ← mul_assoc, inv_mul_cancel, one_mul]
 
   theorem mul_right_inv.auto (a : G) : a * a⁻¹ = 1 := by
-    auto [mul_assoc, mul_left_inv, one_mul]
+    auto [mul_assoc, inv_mul_cancel, one_mul]
 
   theorem mul_one (a : G) : a * 1 = a := by
-    rw [← mul_left_inv a, ← mul_assoc, mul_right_inv, one_mul]
+    rw [← inv_mul_cancel a, ← mul_assoc, mul_right_inv, one_mul]
 
   theorem mul_one.auto (a : G) : a * 1 = a := by
-    auto [mul_left_inv, mul_assoc, mul_right_inv, one_mul]
+    auto [inv_mul_cancel, mul_assoc, mul_right_inv, one_mul]
 
   theorem mul_inv_rev (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ := by
-    rw [← one_mul (b⁻¹ * a⁻¹), ← mul_left_inv (a * b), mul_assoc, mul_assoc, ← mul_assoc b b⁻¹,
+    rw [← one_mul (b⁻¹ * a⁻¹), ← inv_mul_cancel (a * b), mul_assoc, mul_assoc, ← mul_assoc b b⁻¹,
       mul_right_inv, one_mul, mul_right_inv, mul_one]
 
   set_option auto.smt true in
   theorem mul_inv_rev.auto (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ := by
-    auto [one_mul, mul_left_inv, mul_right_inv, mul_assoc]
+    auto [one_mul, inv_mul_cancel, mul_right_inv, mul_assoc]
 
   end MyGroup
 
@@ -360,7 +359,7 @@ namespace Basics
       _ ≥ 0 := by apply pow_two_nonneg
     linarith
 
-  theorem thm19.auto : a * b * 2 ≤ a ^ 2 + b ^ 2 := autoFailSorry _
+  theorem thm19.auto : a * b * 2 ≤ a ^ 2 + b ^ 2 := autoFailSorry _ true
 
   theorem thm20 : -(a * b) * 2 ≤ a ^ 2 + b ^ 2 := by
     have h : 0 ≤ a ^ 2 + 2 * a * b + b ^ 2
@@ -369,20 +368,20 @@ namespace Basics
       _ ≥ 0 := by apply pow_two_nonneg
     linarith
 
-  theorem thm20.auto : -(a * b) * 2 ≤ a ^ 2 + b ^ 2 := autoFailSorry _
+  theorem thm20.auto : -(a * b) * 2 ≤ a ^ 2 + b ^ 2 := autoFailSorry _ true
 
   theorem thm21 : |a * b| ≤ (a ^ 2 + b ^ 2) / 2 := by
     have h : (0 : ℝ) < 2 := by norm_num
     apply abs_le'.mpr
     constructor
-    · rw [le_div_iff h]
+    · rw [le_div_iff_mul_le']
       apply thm19
-    rw [le_div_iff h]
+    rw [le_div_iff_mul_le h]
     apply thm20
 
   theorem thm21.auto : |a * b| ≤ (a ^ 2 + b ^ 2) / 2 := by
     have h : (0 : ℝ) < 2 := by norm_num
-    auto [abs_le', le_div_iff, thm19, thm20, h]
+    auto [abs_le', le_div_iff_mul_le, thm19, thm20, h]
 
   end UsingThmsAndLemmas
 
@@ -468,10 +467,10 @@ namespace Basics
       _ ≤ |a - b| + |b| - |b| := by
         apply sub_le_sub_right
         apply abs_add
-      _ ≤ |a - b| := by rw [add_sub_cancel]
+      _ ≤ |a - b| := by rw [add_sub_cancel_right]
 
   theorem thm26.auto : |a| - |b| ≤ |a - b| := by
-    auto [sub_add_cancel, sub_le_sub_right, abs_add, add_sub_cancel]
+    auto [sub_add_cancel, sub_le_sub_right, abs_add, add_sub_cancel_right]
 
   end
 
@@ -635,7 +634,7 @@ namespace Basics
   end
 
   section
-  variable {R : Type*} [StrictOrderedRing R]
+  variable {R : Type*} [Ring R] [PartialOrder R] [IsStrictOrderedRing R]
   variable (a b c : R)
 
   theorem aux1 (h : a ≤ b) : 0 ≤ b - a := by
@@ -2529,7 +2528,7 @@ namespace SetAndFunction
   theorem thm55.auto : Injective f ↔ LeftInverse (inverse f) f := by
     dsimp [Injective, LeftInverse]
     try auto [inverse_spec]
-    exact tptpSuccessSorry _
+    exact tptpSuccessSorry _ true
 
   theorem thm56 : Surjective f ↔ RightInverse (inverse f) f := by
     constructor
@@ -2545,7 +2544,7 @@ namespace SetAndFunction
   theorem thm56.auto : Surjective f ↔ RightInverse (inverse f) f := by
     dsimp [Surjective, Function.RightInverse, LeftInverse]
     try auto [inverse_spec]
-    exact tptpSuccessSorry _
+    exact tptpSuccessSorry _ true
 
   end
 
