@@ -1,6 +1,4 @@
-import Mathlib.Data.Complex.Exponential
-import Mathlib.Data.Complex.Trigonometric
-import Mathlib.Data.Complex.Module
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 import Mathlib.Data.Real.Basic
 import Mathlib.Data.Set.Lattice
 import Mathlib.Data.Set.Function
@@ -32,7 +30,7 @@ section Bug
     intro n
     rw [mem_inter_iff]
     have h₂ : ¬ 2 < 2 := by linarith
-    auto [mem_inter_iff, mem_setOf, Nat.Prime.eq_two_or_odd, Nat.even_iff, *]
+    auto [mem_inter_iff, mem_ofPred, Nat.Prime.eq_two_or_odd, Nat.even_iff, *]
 
 end Bug
 
@@ -189,10 +187,11 @@ set_option auto.lamReif.prep.def false in
 value `sin ((n + 1) * θ) / sin θ`. -/
 @[simp]
 theorem U_complex_cos (n : ℕ) : (U ℂ n).eval (cos θ) * sin θ = sin ((n + 1) * θ) := by
-  induction' n with d hd
+  induction n
   -- `auto` fails if we provide `CharP.cast_eq_zero` instead of `CharP.cast_eq_zero _ Nat.zero`
-  · auto [U_zero, eval_one, zero_add, one_mul, Nat.zero_eq, CharP.cast_eq_zero _ Nat.zero]
-  · have u_norm : U ℂ ↑(d + 1) = U ℂ (↑d + 1) := rfl
+  case zero => auto [U_zero, eval_one, zero_add, one_mul, Nat.zero_eq, CharP.cast_eq_zero _ Nat.zero]
+  case succ d hd =>
+    have u_norm : U ℂ ↑(d + 1) = U ℂ (↑d + 1) := rfl
     rw [u_norm, U_eq_X_mul_U_add_T]
     have t_norm : T ℂ (↑d + 1) = T ℂ ↑(d + 1) := rfl
     simp only [t_norm, eval_add, T_complex_cos, eval_mul, eval_X,
