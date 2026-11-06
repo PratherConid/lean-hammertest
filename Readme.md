@@ -1,0 +1,5 @@
+## Setting Up
+Let `.` denote the root folder of this repo (i.e., the folder that this `Readme.md` is in). This repo requires `lean-auto` in the folder `../lean-auto` and `duper` in the folder `../duper`.
+
+## Updating Lean Version
+To make sure this repo works after updating Lean, you first need `lean-auto`, `duper` to have matching Lean versions. You may need to wait for the developers of `lean-auto` and `duper` to update their Lean versions if any of their Lean versions is not the version you want. Then, you need to update the `rev` hashes of `mathlib4` and other relevant packages in `lake-manifest.json`. To get the correct `rev` hashes, find the `mathlib4` commit that matches the updated `lean-toolchain` (most likely named "bump toolchain to ...", but any commit with matching `lean-toolchain` works), copy the `mathlib4` commit hash to the `rev` of `mathlib4` in this project's `lake-manifest.json`, then copy the other `rev` hashes in the `lake-manifest.json` of the `mathlib4` commit to the `lake-manifest.json` of this project's `lake-manifest.json`.
